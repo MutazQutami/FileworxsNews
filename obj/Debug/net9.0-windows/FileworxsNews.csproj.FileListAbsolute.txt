@@ -1,0 +1,73 @@
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.UserForm.resources
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.csproj.GenerateResource.cache
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.AssemblyInfo.cs
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\FileworxsNews.exe
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\FileworxsNews.deps.json
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\FileworxsNews.runtimeconfig.json
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\FileworxsNews.dll
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\FileworxsNews.pdb
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\Newtonsoft.Json.dll
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\Fileworx.BCCB96DB.Up2Date
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.dll
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\refint\FileworxsNews.dll
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.pdb
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.genruntimeconfig.cache
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\ref\FileworxsNews.dll
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.PhotoForm.resources
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.FileWorx.resources
+C:\Users\user\Desktop\C#\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.Properties.Resources.resources
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.csproj.AssemblyReference.cache
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.dll
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\refint\FileworxsNews.dll
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.pdb
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\FileworxsNews.exe
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\FileworxsNews.deps.json
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\FileworxsNews.runtimeconfig.json
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\FileworxsNews.dll
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\FileworxsNews.pdb
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\Newtonsoft.Json.dll
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.FileWorx.resources
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.PhotoForm.resources
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.Properties.Resources.resources
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.UserForm.resources
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.csproj.GenerateResource.cache
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.AssemblyInfoInputs.cache
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.AssemblyInfo.cs
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.csproj.CoreCompileInputs.cache
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\Fileworx.BCCB96DB.Up2Date
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.genruntimeconfig.cache
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\ref\FileworxsNews.dll
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.sourcelink.json
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.NewsForm.resources
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.LogInForm.resources
+C:\Users\mutaz\Desktop\C#\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.UsersListForm.resources
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.dll
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\refint\FileworxsNews.dll
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.pdb
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\FileworxsNews.exe
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\FileworxsNews.deps.json
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\FileworxsNews.runtimeconfig.json
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\FileworxsNews.dll
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\FileworxsNews.pdb
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\bin\Debug\net9.0-windows\Newtonsoft.Json.dll
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.FileWorx.resources
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.NewsForm.resources
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.PhotoForm.resources
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.Properties.Resources.resources
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.UserForm.resources
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.UsersListForm.resources
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.csproj.GenerateResource.cache
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.AssemblyInfo.cs
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\Fileworx.BCCB96DB.Up2Date
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.genruntimeconfig.cache
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\ref\FileworxsNews.dll
+C:\Users\user\Desktop\WindowsFormProjects 2\WindowsFormProjects\WindowsFormProjects\FileworxsNews\obj\Debug\net9.0-windows\FileworxsNews.Dashboard.resources
