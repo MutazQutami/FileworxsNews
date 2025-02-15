@@ -4,35 +4,6 @@
     {
 
 
-        public static Guid GuidValue;
-
-        public static DateTime Date;
-
-        public static bool editForm = false;
-        public NewsForm()
-        {
-            InitializeComponent();
-            nullFieldsWarnning.Hide();
-
-        }
-        public NewsForm(News n)
-        {
-
-            InitializeComponent();
-            this.titleField.Text = n.Title;
-            this.descriptionField.Text = n.Description;
-            this.categoryList.Text = n.Category;
-            this.bodyField.Text = n.Body;
-
-            GuidValue = n.GuidValue;
-            Date = n.Date;
-            editForm = true;
-
-            nullFieldsWarnning.Hide();
-        }
-
-
-
         private void saveButton_Click(object sender, EventArgs e)
         {
 
@@ -47,28 +18,28 @@
             {
                 nullFieldsWarnning.Hide();
 
-                News n = new News();
-                n.Title = titleField.Text;
-                n.Description = descriptionField.Text;
-                n.Category = categoryList.Text;
-                n.Body = bodyField.Text;
+                 New _new = new New();
+                _new.Title = titleField.Text;
+                _new.Description = descriptionField.Text;
+                _new.Category = categoryList.Text;
+                _new.Body = bodyField.Text;
 
-                if (editForm)
+                if (EditForm)
                 {
-                    n.GuidValue = GuidValue;
-                    n.Date = Date;
+                    _new.GuidValue = GuidValue;
+                    _new.Date = Date;
                 }
 
 
 
                 try
                 {
-                    FileHandler.JsonSerialization(n);
+                    FileHandler.JsonSerialization(_new);
                 }
-                catch (Exception)
+                catch (Exception _ex)
                 {
 
-                    return;
+                    MessageBox.Show($"An unexpected error occurred: {_ex.Message}");
                 }
 
                 this.Close();
@@ -82,5 +53,39 @@
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+
+
+        public static Guid GuidValue;
+
+        public static DateTime Date;
+
+        public static bool EditForm = false;
+
+        public NewsForm()
+        {
+            InitializeComponent();
+            nullFieldsWarnning.Hide();
+
+        }
+        public NewsForm(New _new)
+        {
+
+            InitializeComponent();
+            this.titleField.Text = _new.Title;
+            this.descriptionField.Text = _new.Description;
+            this.categoryList.Text = _new.Category;
+            this.bodyField.Text = _new.Body;
+
+            GuidValue = _new.GuidValue;
+            Date = _new.Date;
+            EditForm = true;
+
+            nullFieldsWarnning.Hide();
+        }
+
+
+
+      
     }
 }

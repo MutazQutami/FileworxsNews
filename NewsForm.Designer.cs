@@ -48,7 +48,7 @@
             label1.Location = new Point(49, 50);
             label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(49, 28);
+            label1.Size = new Size(61, 35);
             label1.TabIndex = 0;
             label1.Text = "Title";
             // 
@@ -59,7 +59,7 @@
             label2.Location = new Point(49, 110);
             label2.Margin = new Padding(5, 0, 5, 0);
             label2.Name = "label2";
-            label2.Size = new Size(112, 28);
+            label2.Size = new Size(142, 35);
             label2.TabIndex = 1;
             label2.Text = "Description";
             // 
@@ -70,7 +70,7 @@
             label3.Location = new Point(49, 167);
             label3.Margin = new Padding(5, 0, 5, 0);
             label3.Name = "label3";
-            label3.Size = new Size(97, 28);
+            label3.Size = new Size(122, 35);
             label3.TabIndex = 2;
             label3.Text = "Category ";
             // 
@@ -81,7 +81,7 @@
             label4.Location = new Point(49, 223);
             label4.Margin = new Padding(5, 0, 5, 0);
             label4.Name = "label4";
-            label4.Size = new Size(57, 28);
+            label4.Size = new Size(71, 35);
             label4.TabIndex = 3;
             label4.Text = "Body";
             // 
@@ -92,7 +92,7 @@
             titleField.Location = new Point(194, 50);
             titleField.Margin = new Padding(5, 6, 5, 6);
             titleField.Name = "titleField";
-            titleField.Size = new Size(467, 34);
+            titleField.Size = new Size(467, 41);
             titleField.TabIndex = 4;
             // 
             // descriptionField
@@ -102,7 +102,7 @@
             descriptionField.Location = new Point(194, 110);
             descriptionField.Margin = new Padding(5, 6, 5, 6);
             descriptionField.Name = "descriptionField";
-            descriptionField.Size = new Size(467, 34);
+            descriptionField.Size = new Size(467, 41);
             descriptionField.TabIndex = 5;
             // 
             // categoryList
@@ -116,7 +116,7 @@
             categoryList.Location = new Point(194, 167);
             categoryList.Margin = new Padding(5, 6, 5, 6);
             categoryList.Name = "categoryList";
-            categoryList.Size = new Size(467, 36);
+            categoryList.Size = new Size(467, 43);
             categoryList.TabIndex = 6;
             // 
             // bodyField
@@ -171,13 +171,13 @@
             nullFieldsWarnning.ForeColor = Color.Red;
             nullFieldsWarnning.Location = new Point(690, 515);
             nullFieldsWarnning.Name = "nullFieldsWarnning";
-            nullFieldsWarnning.Size = new Size(155, 15);
+            nullFieldsWarnning.Size = new Size(196, 20);
             nullFieldsWarnning.TabIndex = 10;
             nullFieldsWarnning.Text = "All Fields Shoud Not Be Null";
             // 
             // NewsForm
             // 
-            AutoScaleDimensions = new SizeF(11F, 28F);
+            AutoScaleDimensions = new SizeF(14F, 35F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1211, 649);
@@ -195,7 +195,7 @@
             Font = new Font("Segoe UI", 15F);
             Margin = new Padding(5, 6, 5, 6);
             Name = "NewsForm";
-            Text = "NewsForm";
+            Text = "Add New";
             ResumeLayout(false);
             PerformLayout();
         }

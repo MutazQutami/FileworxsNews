@@ -1,77 +1,57 @@
-﻿using Newtonsoft.Json;
+﻿using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace FileworxsNews
 {
     public partial class UsersListForm : Form
     {
-        public UsersListForm()
-        {
-            InitializeComponent();
-            resizeUsersTable();
-            retreiveUsers();
-        }
-
-        public void resizeUsersTable()
-        {
-            int columnWidth = userList.Width;
-
-            //for (int i = 0; i < userList.Columns.Count; i++) {
-            //    userList.Columns[0].Width = (int)(columnWidth * 0.25);
-
-            //}
-
-            userList.Columns[0].Width = (int)(columnWidth * 0.25);
-            userList.Columns[1].Width = (int)(columnWidth * 0.25);
-            userList.Columns[2].Width = (int)(columnWidth * 0.25);
-            userList.Columns[3].Width = (int)(columnWidth * 0.25);
-
-
-        }
 
         private void UsersList_Resize(object sender, EventArgs e)
         {
-            resizeUsersTable();
+            ResizeUsersTable();
         }
 
-        public void retreiveUsers()
+        public UsersListForm()
         {
+            InitializeComponent();
+            ResizeUsersTable();
+            RetreiveUsers();
+        }
 
-            userList.Items.Clear();
 
-            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string photosPath = Path.Combine(baseDirectory, "Users");
+        public void ResizeUsersTable()
+        {
+            int _columnWidth = userList.Width;
 
-            if (Directory.Exists(photosPath))
+
+            for (int i = 0; i < userList.Columns.Count; i++)
             {
-                foreach (var file in Directory.GetFiles(photosPath, "*.json"))
-                {
-                    try
-                    {
-                        string fileContent = File.ReadAllText(file);
-                        var deserializedUser = JsonConvert.DeserializeObject<User>(fileContent);
-
-                        if (deserializedUser != null)
-                        {
-                            ListViewItem listItem = new ListViewItem(deserializedUser.Name);
-
-
-                            listItem.SubItems.Add(deserializedUser.LogInName);
-                            listItem.SubItems.Add(deserializedUser.Date.ToString());
-                            listItem.SubItems.Add(deserializedUser.last_modifier);
-
-
-                            listItem.Tag = deserializedUser;
-                            userList.Items.Add(listItem);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Error reading file {file}: {ex.Message}");
-                    }
-                }
+                userList.Columns[i].Width = (int)(_columnWidth * 0.25);
             }
 
 
         }
+
+        public void RetreiveUsers()
+        {
+
+            userList.Items.Clear();
+
+            List<User> _users = FileHandler.JsonDeserializationObjects(new User()).Cast<User>().ToList();
+
+            foreach (var item in _users)
+            {
+                ListViewItem listItem = new ListViewItem(item.Name);
+                listItem.SubItems.Add(item.LogInName);
+                listItem.SubItems.Add(item.Date.ToString());
+                listItem.SubItems.Add(item.Last_modifier);
+
+                listItem.Tag = item;
+                userList.Items.Add(listItem);
+
+            }
+        }
+      
+
     }
 }

@@ -130,7 +130,7 @@
             saveButton.TabIndex = 6;
             saveButton.Text = "Save";
             saveButton.UseVisualStyleBackColor = false;
-            saveButton.Click += saveButton_Click;
+            saveButton.Click += SaveButton_Click;
             // 
             // cancleButton
             // 
@@ -147,7 +147,7 @@
             cancleButton.TabIndex = 7;
             cancleButton.Text = "Cancle";
             cancleButton.UseVisualStyleBackColor = false;
-            cancleButton.Click += cancleButton_Click;
+            cancleButton.Click += CancleButton_Click;
             // 
             // label4
             // 
@@ -180,7 +180,7 @@
             panel1.Controls.Add(label6);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(4, 4, 4, 4);
+            panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
             panel1.Size = new Size(291, 850);
             panel1.TabIndex = 10;

@@ -2,17 +2,10 @@ namespace FileworxsNews
 {
     public partial class UserForm : Form
     {
-        public UserForm()
-        {
-            InitializeComponent();
-
-            //hide warning masseges
-            passMatchWarning.Hide();
-            nullFieldsWarnning.Hide();
-        }
 
 
-        private void saveButton_Click(object sender, EventArgs e)
+
+        private void SaveButton_Click(object sender, EventArgs e)
         {
             // Fields Validations
 
@@ -39,27 +32,37 @@ namespace FileworxsNews
             {
 
                 //Creation of new user
-                User n = new User();
+                User _user = new User();
 
 
-                n.Name = nameField.Text;
-                n.LogInName = loginNameField.Text;
-                n.Password = passwordField.Text;
+               _user.Name = nameField.Text;
+               _user.LogInName = loginNameField.Text;
+               _user.Password = passwordField.Text;
 
-                FileHandler.JsonSerialization(n);
+                FileHandler.JsonSerialization(_user);
 
                 MessageBox.Show("The User Added Successfully!");
 
-         
+
                 this.Close();
 
             }
         }
 
-        private void cancleButton_Click(object sender, EventArgs e)
+        private void CancleButton_Click(object sender, EventArgs e)
         {
             this.Close();
-           
+
+        }
+
+
+        public UserForm()
+        {
+            InitializeComponent();
+
+            //hide warning masseges
+            passMatchWarning.Hide();
+            nullFieldsWarnning.Hide();
         }
 
        

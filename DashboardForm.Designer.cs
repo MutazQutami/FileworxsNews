@@ -31,7 +31,7 @@
             panel1 = new Panel();
             label2 = new Label();
             label1 = new Label();
-            Contentpanel = new Button();
+            ContentPanel = new Button();
             label4 = new Label();
             label5 = new Label();
             AddNew = new Button();
@@ -80,23 +80,23 @@
             label1.TabIndex = 1;
             label1.Text = "Welcome";
             // 
-            // Contentpanel
+            // ContentPanel
             // 
-            Contentpanel.Anchor = AnchorStyles.None;
-            Contentpanel.BackColor = Color.Silver;
-            Contentpanel.Cursor = Cursors.Hand;
-            Contentpanel.FlatAppearance.BorderSize = 0;
-            Contentpanel.FlatStyle = FlatStyle.Flat;
-            Contentpanel.Font = new Font("Segoe UI Emoji", 20F);
-            Contentpanel.ForeColor = Color.Black;
-            Contentpanel.Location = new Point(539, 244);
-            Contentpanel.Margin = new Padding(4);
-            Contentpanel.Name = "Contentpanel";
-            Contentpanel.Size = new Size(185, 235);
-            Contentpanel.TabIndex = 3;
-            Contentpanel.Text = "Content Panel";
-            Contentpanel.UseVisualStyleBackColor = false;
-            Contentpanel.Click += Contentpanel_Click;
+            ContentPanel.Anchor = AnchorStyles.None;
+            ContentPanel.BackColor = Color.Silver;
+            ContentPanel.Cursor = Cursors.Hand;
+            ContentPanel.FlatAppearance.BorderSize = 0;
+            ContentPanel.FlatStyle = FlatStyle.Flat;
+            ContentPanel.Font = new Font("Segoe UI Emoji", 20F);
+            ContentPanel.ForeColor = Color.Black;
+            ContentPanel.Location = new Point(539, 244);
+            ContentPanel.Margin = new Padding(4);
+            ContentPanel.Name = "ContentPanel";
+            ContentPanel.Size = new Size(185, 235);
+            ContentPanel.TabIndex = 3;
+            ContentPanel.Text = "Content Panel";
+            ContentPanel.UseVisualStyleBackColor = false;
+            ContentPanel.Click += ContentPanel_Click;
             // 
             // label4
             // 
@@ -208,7 +208,7 @@
             Controls.Add(AddNew);
             Controls.Add(label5);
             Controls.Add(label4);
-            Controls.Add(Contentpanel);
+            Controls.Add(ContentPanel);
             Controls.Add(panel1);
             ForeColor = Color.Black;
             Margin = new Padding(4);
@@ -227,7 +227,7 @@
         private Label label1;
         private TextBox userNameField;
         private TextBox passwordField;
-        private Button Contentpanel;
+        private Button ContentPanel;
         private Label userNameLabel;
         private Label label3;
         private Label label4;

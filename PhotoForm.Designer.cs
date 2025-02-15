@@ -59,10 +59,9 @@
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Font = new Font("Segoe UI", 15F);
             tabControl1.Location = new Point(0, 0);
-            tabControl1.Margin = new Padding(2);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1002, 571);
+            tabControl1.Size = new Size(1288, 799);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -78,11 +77,10 @@
             tabPage1.Controls.Add(label1);
             tabPage1.Controls.Add(descriptionField);
             tabPage1.Controls.Add(titleField);
-            tabPage1.Location = new Point(4, 37);
-            tabPage1.Margin = new Padding(2);
+            tabPage1.Location = new Point(4, 44);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(2);
-            tabPage1.Size = new Size(994, 530);
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(1280, 751);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "File Description ";
             // 
@@ -92,9 +90,10 @@
             checkUploadPhotoWarning.BackColor = Color.White;
             checkUploadPhotoWarning.Font = new Font("Segoe UI", 9F);
             checkUploadPhotoWarning.ForeColor = Color.Red;
-            checkUploadPhotoWarning.Location = new Point(633, 344);
+            checkUploadPhotoWarning.Location = new Point(814, 482);
+            checkUploadPhotoWarning.Margin = new Padding(4, 0, 4, 0);
             checkUploadPhotoWarning.Name = "checkUploadPhotoWarning";
-            checkUploadPhotoWarning.Size = new Size(149, 15);
+            checkUploadPhotoWarning.Size = new Size(188, 20);
             checkUploadPhotoWarning.TabIndex = 9;
             checkUploadPhotoWarning.Text = "A photo must be uploaded";
             // 
@@ -103,9 +102,10 @@
             nullFieldsWarnning.AutoSize = true;
             nullFieldsWarnning.Font = new Font("Segoe UI", 9F);
             nullFieldsWarnning.ForeColor = Color.Red;
-            nullFieldsWarnning.Location = new Point(633, 372);
+            nullFieldsWarnning.Location = new Point(814, 521);
+            nullFieldsWarnning.Margin = new Padding(4, 0, 4, 0);
             nullFieldsWarnning.Name = "nullFieldsWarnning";
-            nullFieldsWarnning.Size = new Size(155, 15);
+            nullFieldsWarnning.Size = new Size(196, 20);
             nullFieldsWarnning.TabIndex = 8;
             nullFieldsWarnning.Text = "All Fields Shoud Not Be Null";
             // 
@@ -116,14 +116,12 @@
             cancleButton.FlatAppearance.BorderSize = 0;
             cancleButton.FlatStyle = FlatStyle.Flat;
             cancleButton.ForeColor = Color.White;
-            cancleButton.Location = new Point(716, 415);
-            cancleButton.Margin = new Padding(2);
+            cancleButton.Location = new Point(921, 581);
             cancleButton.Name = "cancleButton";
-            cancleButton.Size = new Size(109, 54);
+            cancleButton.Size = new Size(140, 76);
             cancleButton.TabIndex = 7;
             cancleButton.Text = "Cancle";
             cancleButton.UseVisualStyleBackColor = false;
-            cancleButton.Click += cancleButton_Click;
             // 
             // saveButton
             // 
@@ -132,82 +130,73 @@
             saveButton.FlatAppearance.BorderSize = 0;
             saveButton.FlatStyle = FlatStyle.Flat;
             saveButton.ForeColor = Color.White;
-            saveButton.Location = new Point(593, 415);
-            saveButton.Margin = new Padding(2);
+            saveButton.Location = new Point(762, 581);
             saveButton.Name = "saveButton";
-            saveButton.Size = new Size(109, 54);
+            saveButton.Size = new Size(140, 76);
             saveButton.TabIndex = 6;
             saveButton.Text = "Save";
             saveButton.UseVisualStyleBackColor = false;
-            saveButton.Click += saveButton_Click;
             // 
             // bodyField
             // 
             bodyField.BorderStyle = BorderStyle.FixedSingle;
-            bodyField.Location = new Point(189, 166);
-            bodyField.Margin = new Padding(2);
+            bodyField.Location = new Point(243, 232);
             bodyField.Name = "bodyField";
-            bodyField.Size = new Size(402, 221);
+            bodyField.Size = new Size(516, 308);
             bodyField.TabIndex = 5;
             bodyField.Text = "";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(59, 166);
-            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Location = new Point(76, 232);
             label3.Name = "label3";
-            label3.Size = new Size(57, 28);
+            label3.Size = new Size(71, 35);
             label3.TabIndex = 4;
             label3.Text = "Body";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(59, 107);
-            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Location = new Point(76, 150);
             label2.Name = "label2";
-            label2.Size = new Size(117, 28);
+            label2.Size = new Size(149, 35);
             label2.TabIndex = 3;
             label2.Text = "Description ";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(59, 48);
-            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Location = new Point(76, 67);
             label1.Name = "label1";
-            label1.Size = new Size(49, 28);
+            label1.Size = new Size(61, 35);
             label1.TabIndex = 2;
             label1.Text = "Title";
             // 
             // descriptionField
             // 
             descriptionField.BorderStyle = BorderStyle.FixedSingle;
-            descriptionField.Location = new Point(189, 107);
-            descriptionField.Margin = new Padding(2);
+            descriptionField.Location = new Point(243, 150);
             descriptionField.Name = "descriptionField";
-            descriptionField.Size = new Size(402, 34);
+            descriptionField.Size = new Size(516, 41);
             descriptionField.TabIndex = 1;
             // 
             // titleField
             // 
             titleField.BorderStyle = BorderStyle.FixedSingle;
-            titleField.Location = new Point(189, 48);
-            titleField.Margin = new Padding(2);
+            titleField.Location = new Point(243, 67);
             titleField.Name = "titleField";
-            titleField.Size = new Size(402, 34);
+            titleField.Size = new Size(516, 41);
             titleField.TabIndex = 0;
             // 
             // tabPage2
             // 
             tabPage2.Controls.Add(panel1);
             tabPage2.Controls.Add(pictureBox1);
-            tabPage2.Location = new Point(4, 37);
-            tabPage2.Margin = new Padding(2);
+            tabPage2.Location = new Point(4, 44);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(2);
-            tabPage2.Size = new Size(994, 530);
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(1280, 751);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Image";
             tabPage2.UseVisualStyleBackColor = true;
@@ -217,19 +206,17 @@
             panel1.Controls.Add(filePath);
             panel1.Controls.Add(browsePhoto);
             panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(2, 2);
-            panel1.Margin = new Padding(2);
+            panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(990, 77);
+            panel1.Size = new Size(1274, 108);
             panel1.TabIndex = 2;
             // 
             // filePath
             // 
             filePath.AutoSize = true;
-            filePath.Location = new Point(244, 25);
-            filePath.Margin = new Padding(2, 0, 2, 0);
+            filePath.Location = new Point(314, 35);
             filePath.Name = "filePath";
-            filePath.Size = new Size(189, 28);
+            filePath.Size = new Size(243, 35);
             filePath.TabIndex = 1;
             filePath.Text = "Picture Location is :  ";
             // 
@@ -240,34 +227,31 @@
             browsePhoto.FlatAppearance.BorderSize = 0;
             browsePhoto.FlatStyle = FlatStyle.Flat;
             browsePhoto.ForeColor = Color.White;
-            browsePhoto.Location = new Point(38, 16);
-            browsePhoto.Margin = new Padding(2);
+            browsePhoto.Location = new Point(49, 22);
             browsePhoto.Name = "browsePhoto";
-            browsePhoto.Size = new Size(112, 47);
+            browsePhoto.Size = new Size(144, 66);
             browsePhoto.TabIndex = 0;
             browsePhoto.Text = "Browse";
             browsePhoto.UseVisualStyleBackColor = false;
-            browsePhoto.Click += browsePhoto_Click;
+            browsePhoto.Click += BrowsePhoto_Click;
             // 
             // pictureBox1
             // 
             pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Location = new Point(2, 2);
-            pictureBox1.Margin = new Padding(2);
+            pictureBox1.Location = new Point(3, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(990, 526);
+            pictureBox1.Size = new Size(1274, 745);
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
             // 
             // PhotoForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1002, 571);
+            ClientSize = new Size(1288, 799);
             Controls.Add(tabControl1);
-            Margin = new Padding(2);
             Name = "PhotoForm";
-            Text = "NewPhoto";
+            Text = "New Photo";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();

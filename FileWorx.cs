@@ -2,145 +2,56 @@
 {
     public partial class FileWorx : Form
     {
-        public FileWorx()
-        {
 
-            InitializeComponent();
-            inisializeForm();
-            ResizeObjects();
-
-        }
-
-        private void ResizeObjects()
-        {
-
-            //full view Form
-            this.WindowState = FormWindowState.Maximized;
-            AutoScroll = true;
-
-            if (contentList.Columns.Count == 3)
-            {
-                int columnWidth = contentList.Width;
-
-                contentList.Columns[0].Width = (int)(columnWidth * 0.25);
-                contentList.Columns[1].Width = (int)(columnWidth * 0.25);
-                contentList.Columns[2].Width = contentList.Width - (contentList.Columns[0].Width + contentList.Columns[1].Width);
-
-                tabPreviewContainer.SplitterDistance = this.Height / 3;  // the preview with third of the screen height 
-
-
-                panel3.Width = contentList.Width;
-
-
-            }
-        }
-
-        public void inisializeForm()
-        {
-            contentList.Items.Clear();
-            if (tabPreview.TabPages.Contains(tabPage2))
-            {
-                tabPreview.TabPages.Remove(tabPage2);
-            }
-
-            List<Photo> photoList = FileHandler.JsonDeserializationObjects(new Photo())
-            .Cast<Photo>()
-            .ToList();
-
-            List<News> newsList = FileHandler.JsonDeserializationObjects(new News()).Cast<News>().ToList();
-
-
-
-
-            foreach (var item in photoList)
-            {
-                ListViewItem listItem = new ListViewItem(item.Title);
-
-
-                listItem.SubItems.Add(item.Date.ToString());
-                listItem.SubItems.Add(item.Description);
-                listItem.SubItems.Add(item.photoPath);
-                listItem.SubItems.Add(item.GuidValue.ToString());
-                listItem.SubItems.Add(item.Body);
-
-                listItem.Tag = item;
-                contentList.Items.Add(listItem);
-
-
-            }
-
-
-            foreach (var item in newsList)
-            {
-                ListViewItem listItem = new ListViewItem(item.Title);
-
-
-                listItem.SubItems.Add(item.Date.ToString());
-                listItem.SubItems.Add(item.Description);
-                listItem.SubItems.Add(item.Category);
-                listItem.SubItems.Add(item.GuidValue.ToString());
-                listItem.SubItems.Add(item.Category);
-                listItem.Tag = item;
-                contentList.Items.Add(listItem);
-
-
-            }
-
-
-
-
-        }
-
-
-        private void contentList_MouseClick(object sender, MouseEventArgs e)
+        private void ContentList_MouseClick(object sender, MouseEventArgs e)
         {
             if (contentList.SelectedItems.Count > 0)
             {
-                ListViewItem selectedItem = contentList.SelectedItems[0];
-                object selectedObject = selectedItem.Tag;
+                ListViewItem _selectedItem = contentList.SelectedItems[0];
+                object _selectedObject = _selectedItem.Tag;
 
                 if (e.Button == MouseButtons.Right)
                 {
 
-                    FileHandler.deleteObject((FileWorxEntity)selectedObject);
-                    inisializeForm();
+                    FileHandler.DeleteObject((IFileWorxEntity)_selectedObject);
+                    InisializeForm();
                     return;
 
                 }
 
 
-                if (selectedObject is Photo selectedPhoto)
+                if (_selectedObject is Photo _selectedPhoto)
                 {
                     categoryField.Hide();
-                    titleField.Text = selectedPhoto.Title;
-                    creationDateField.Text = selectedPhoto.Date.ToString();
-                    categoryField.Text = selectedPhoto.photoPath;
+                    titleField.Text = _selectedPhoto.Title;
+                    creationDateField.Text = _selectedPhoto.Date.ToString();
+                    categoryField.Text = _selectedPhoto.photoPath;
 
 
 
                     label3.Hide();
                     categoryField.Hide();
 
-                    previewContent.Text = selectedPhoto.Body;
+                    previewContent.Text = _selectedPhoto.Body;
                     if (!tabPreview.TabPages.Contains(tabPage2))
                     {
                         tabPreview.TabPages.Add(tabPage2);
                     }
 
-                    string sourcePath = selectedPhoto.photoPath;
+                    string _sourcePath = _selectedPhoto.photoPath;
 
 
-                    if (!string.IsNullOrEmpty(selectedPhoto.photoPath))
+                    if (!string.IsNullOrEmpty(_selectedPhoto.photoPath))
                     {
 
 
 
-                        string fileName = Path.GetFileName(sourcePath);
+                        string _fileName = Path.GetFileName(_sourcePath);
 
 
-                        if (!string.IsNullOrEmpty(fileName))
+                        if (!string.IsNullOrEmpty(_fileName))
                         {
-                            pictureBox1.ImageLocation = sourcePath;
+                            pictureBox1.ImageLocation = _sourcePath;
                         }
                         else
                         {
@@ -156,18 +67,18 @@
 
 
                 }
-                else if (selectedObject is News selectedNews)
+                else if (_selectedObject is New _selectedNews)
                 {
-                    titleField.Text = selectedNews.Title;
-                    creationDateField.Text = selectedNews.Date.ToString();
-                    categoryField.Text = selectedNews.Category;
+                    titleField.Text = _selectedNews.Title;
+                    creationDateField.Text = _selectedNews.Date.ToString();
+                    categoryField.Text = _selectedNews.Category;
 
-                    previewContent.Text = selectedNews.Body;
+                    previewContent.Text = _selectedNews.Body;
 
                     label3.Show();
                     categoryField.Show();
 
-                    categoryField.Text = selectedNews.Category;
+                    categoryField.Text = _selectedNews.Category;
                     if (tabPreview.TabPages.Contains(tabPage2))
                     {
                         tabPreview.TabPages.Remove(tabPage2);
@@ -187,45 +98,48 @@
         }
 
 
-        private void contentList_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void ContentList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
 
 
             if (contentList.SelectedItems.Count > 0)
             {
-                ListViewItem selectedItem = contentList.SelectedItems[0];
+                ListViewItem _selectedItem = contentList.SelectedItems[0];
 
-                object selectedObject = selectedItem.Tag;
+                object _selectedObject = _selectedItem.Tag;
 
-                if (selectedObject is News selectedNews)
+                if (_selectedObject is New _selectedNews)
                 {
 
-                    NewsForm n = new NewsForm(selectedNews);
+                    NewsForm _newsForm = new NewsForm(_selectedNews);
 
 
 
-                    n.FormClosed += delegate
+                    _newsForm.Text = "Edit New";
+                    _newsForm.ShowDialog();
+                    
+                    _newsForm.FormClosed += delegate
                     {
-                        inisializeForm();
+                        InisializeForm();
                     };
 
-                    n.ShowDialog();
-                    n.Text = "Edit New";
 
 
                 }
-                else if (selectedObject is Photo selectedPhoto)
+                else if (_selectedObject is Photo _selectedPhoto)
                 {
-                    PhotoForm ph = new PhotoForm(selectedPhoto);
+                    PhotoForm _photoForm = new PhotoForm(_selectedPhoto);
 
+                    _photoForm.Text = "Edit Photo";
+                    _photoForm.ShowDialog();
 
-                    ph.FormClosed += delegate
+                    _photoForm.FormClosed += delegate
                     {
-                        inisializeForm();
+                        InisializeForm();
                     };
 
-                    ph.ShowDialog();
-                    ph.Text = "Edit Photo";
+                    
+                   
                 }
 
 
@@ -233,49 +147,99 @@
         }
 
 
-        private void addPhoto_Click(object sender, EventArgs e)
-        {
-            PhotoForm n = new PhotoForm();
-
-            n.FormClosed += delegate
-            {
-                inisializeForm();
-            };
-
-            n.ShowDialog();
-
-
-
-        }
-
-
-        private void addNews_Click(object sender, EventArgs e)
-        {
-            NewsForm n = new NewsForm();
-            n.FormClosed += delegate
-            {
-                inisializeForm();
-            };
-            n.ShowDialog();
-        }
-
-        private void contentList_Resize(object sender, EventArgs e)
+        private void ContentList_Resize(object sender, EventArgs e)
         {
             ResizeObjects();
         }
 
-        private void FileWorx_SizeChanged(object sender, EventArgs e)
+
+
+
+        public FileWorx()
         {
-            //this.AutoScrollMinSize = new Size(this.ClientSize.Width, this.ClientSize.Height + 10);
-            secondHalfContainer.Orientation = Orientation.Vertical;
+
+            InitializeComponent();
+            InisializeForm();
+            ResizeObjects();
+
         }
 
-        private void backToDashboard_Click(object sender, EventArgs e)
+        private void InisializeForm()
         {
-            Dashboard dashboard = new Dashboard();
-           
-            dashboard.ShowDialog();
-           
+            contentList.Items.Clear();
+            if (tabPreview.TabPages.Contains(tabPage2))
+            {
+                tabPreview.TabPages.Remove(tabPage2);
+            }
+
+            List<Photo> _photoList = FileHandler.JsonDeserializationObjects(new Photo()).Cast<Photo>().ToList();
+
+            List<New> _newsList = FileHandler.JsonDeserializationObjects(new New()).Cast<New>().ToList();
+
+
+
+
+            foreach (var item in _photoList)
+            {
+                ListViewItem _listItem = new ListViewItem(item.Title);
+
+
+                _listItem.SubItems.Add(item.Date.ToString());
+                _listItem.SubItems.Add(item.Description);
+                _listItem.SubItems.Add(item.photoPath);
+                _listItem.SubItems.Add(item.GuidValue.ToString());
+                _listItem.SubItems.Add(item.Body);
+
+                _listItem.Tag = item;
+                contentList.Items.Add(_listItem);
+
+
+            }
+
+
+            foreach (var item in _newsList)
+            {
+                ListViewItem _listItem = new ListViewItem(item.Title);
+
+
+                _listItem.SubItems.Add(item.Date.ToString());
+                _listItem.SubItems.Add(item.Description);
+                _listItem.SubItems.Add(item.Category);
+                _listItem.SubItems.Add(item.GuidValue.ToString());
+                _listItem.SubItems.Add(item.Category);
+                _listItem.Tag = item;
+                contentList.Items.Add(_listItem);
+
+
+            }
+
+
+
+
+        }
+
+        private void ResizeObjects()
+        {
+
+            //full view Form
+            this.WindowState = FormWindowState.Maximized;
+            AutoScroll = true;
+
+            if (contentList.Columns.Count == 3)
+            {
+                int _columnWidth = contentList.Width;
+
+                contentList.Columns[0].Width = (int)(_columnWidth * 0.25);
+                contentList.Columns[1].Width = (int)(_columnWidth * 0.25);
+                contentList.Columns[2].Width = contentList.Width - (contentList.Columns[0].Width + contentList.Columns[1].Width);
+
+                tabPreviewContainer.SplitterDistance = this.Height / 3;  // the preview with third of the screen height 
+
+
+                panel3.Width = contentList.Width;
+
+
+            }
         }
     }
 }

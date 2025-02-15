@@ -13,44 +13,8 @@ namespace FileworxsNews
     public partial class PhotoForm : Form
     {
 
-        public static Guid GuidValue;
 
-        public static DateTime Date;
-
-        public static bool editForm = false;
-
-        public PhotoForm()
-        {
-            InitializeComponent();
-            nullFieldsWarnning.Hide();
-            checkUploadPhotoWarning.Hide();
-
-
-
-        }
-
-        public PhotoForm(Photo ph)
-        {
-            InitializeComponent();
-            this.titleField.Text = ph.Title;
-            this.descriptionField.Text = ph.Description;
-            this.bodyField.Text = ph.Body;
-            this.pictureBox1.ImageLocation = ph.photoPath;
-            this.filePath.Text += ph.photoPath;
-            this.photoPath = ph.photoPath;
-
-            GuidValue = ph.GuidValue;
-            Date = ph.Date;
-            editForm = true;
-
-            nullFieldsWarnning.Hide();
-            checkUploadPhotoWarning.Hide();
-
-        }
-
-        public string photoPath;
-
-        private void saveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
 
             if (string.IsNullOrEmpty(titleField.Text) || string.IsNullOrEmpty(descriptionField.Text) || string.IsNullOrEmpty(bodyField.Text))
@@ -64,22 +28,22 @@ namespace FileworxsNews
 
 
 
-                Photo ph = new Photo();
-                ph.Title = titleField.Text;
-                ph.Description = descriptionField.Text;
-                ph.Body = bodyField.Text;
-                ph.photoPath = photoPath;
+                Photo _photo = new Photo();
+                _photo.Title = titleField.Text;
+                _photo.Description = descriptionField.Text;
+                _photo.Body = bodyField.Text;
+                _photo.photoPath = photoPath;
 
 
-                if (editForm)
+                if (EditForm)
                 {
-                    ph.GuidValue = GuidValue;
-                    ph.Date = Date;
+                    _photo.GuidValue = GuidValue;
+                    _photo.Date = Date;
                 }
 
 
 
-                FileHandler.JsonSerialization(ph);
+                FileHandler.JsonSerialization(_photo);
                 this.Close();
                 return;
             }
@@ -96,7 +60,7 @@ namespace FileworxsNews
 
         }
 
-        private void browsePhoto_Click(object sender, EventArgs e)
+        private void BrowsePhoto_Click(object sender, EventArgs e)
         {
 
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -108,13 +72,13 @@ namespace FileworxsNews
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string sourcePath = openFileDialog.FileName;
-                string fileName = Path.GetFileName(sourcePath);
+                string _sourcePath = openFileDialog.FileName;
+                string _fileName = Path.GetFileName(_sourcePath);
 
-                photoPath = sourcePath;
+                photoPath = _sourcePath;
 
-                pictureBox1.ImageLocation = sourcePath;
-                filePath.Text += sourcePath;
+                pictureBox1.ImageLocation = _sourcePath;
+                filePath.Text += _sourcePath;
                 filePath.Show();
 
 
@@ -122,10 +86,50 @@ namespace FileworxsNews
 
         }
 
-        private void cancleButton_Click(object sender, EventArgs e)
+        private void CancleButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+
+        public static Guid GuidValue;
+
+        public static DateTime Date;
+
+        public static bool EditForm = false;
+
+        public string photoPath;
+
+        public PhotoForm()
+        {
+            InitializeComponent();
+            nullFieldsWarnning.Hide();
+            checkUploadPhotoWarning.Hide();
+
+
+
+        }
+
+        public PhotoForm(Photo _photo)
+        {
+            InitializeComponent();
+            this.titleField.Text = _photo.Title;
+            this.descriptionField.Text = _photo.Description;
+            this.bodyField.Text = _photo.Body;
+            this.pictureBox1.ImageLocation = _photo.photoPath;
+            this.filePath.Text += _photo.photoPath;
+            this.photoPath = _photo.photoPath;
+
+
+
+            GuidValue = _photo.GuidValue;
+            Date = _photo.Date;
+            EditForm = true;
+
+            nullFieldsWarnning.Hide();
+            checkUploadPhotoWarning.Hide();
+
         }
     }
 }

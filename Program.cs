@@ -4,25 +4,10 @@ using Newtonsoft.Json;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace FileworxsNews
 {
-    internal static class Program
-    {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        static void Main()
-        {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new Dashboard());
 
 
 
-        }
-    }
-
-    public interface FileWorxEntity
+    public interface IFileWorxEntity
 
     {
         Guid GuidValue { get; set; }
@@ -32,7 +17,7 @@ namespace FileworxsNews
     }
 
 
-    public class Content : FileWorxEntity
+    public class Content : IFileWorxEntity
     {
         public string Title { get; set; }
 
@@ -40,20 +25,20 @@ namespace FileworxsNews
 
         public string Body { get; set; }
 
-        public Guid GuidValue { get;  set; }
+        public Guid GuidValue { get; set; }
 
         public DateTime Date { get; set; }
         public Content()
         {
-            
-              GuidValue = Guid.NewGuid();
 
-              Date = DateTime.Now;
+            GuidValue = Guid.NewGuid();
+
+            Date = DateTime.Now;
         }
 
     }
 
-    public class User : FileWorxEntity
+    public class User : IFileWorxEntity
 
     {
 
@@ -63,16 +48,16 @@ namespace FileworxsNews
 
         public string Password { get; set; }
 
-        public string last_modifier { get; set; }
+        public string Last_modifier { get; set; }
 
 
 
         public DateTime Date { get; set; }
 
-        public Guid GuidValue { get;  set; }
+        public Guid GuidValue { get; set; }
 
 
-     
+
 
         public User()
 
@@ -100,7 +85,7 @@ namespace FileworxsNews
 
 
 
-    public class News : Content
+    public class New : Content
     {
 
         //public  enum Category { General, Sports, Health, Politics }
@@ -115,90 +100,68 @@ namespace FileworxsNews
 
     {
 
-        private static string findPath(FileWorxEntity obj)
+        public static string FindPath(IFileWorxEntity _obj)
 
         {
 
-            string projectPath = AppDomain.CurrentDomain.BaseDirectory;
-
-
-            string folderType = string.Empty;
+            string _projectPath = AppDomain.CurrentDomain.BaseDirectory;
+            string _folderType = string.Empty;
 
 
 
-            if (obj is User) 
-                folderType = "Users";
+            _folderType = _obj switch
+            {
+                User => "Users",
+                Photo => "Photos",
+                _ => "News"
+            };
 
-            else if (obj is Photo)
+            string _targetFolder = Path.Combine(_projectPath, _folderType);
+
+            if (!Directory.Exists(_targetFolder))
 
             {
 
-                folderType = "Photos";
-            }
-
-            else
-
-            {
-
-                folderType = "News";
+                Directory.CreateDirectory(_targetFolder);
 
             }
 
-
-
-            string targetFolder = Path.Combine(projectPath, folderType);
-
-
-
-
-
-            if (!Directory.Exists(targetFolder))
-
-            {
-
-                Directory.CreateDirectory(targetFolder);
-
-            }
-
-
-            return targetFolder;
+            return _targetFolder;
 
         }
 
-        public static void JsonSerialization(FileWorxEntity obj)
+        public static void JsonSerialization(IFileWorxEntity _obj)
 
         {
 
 
-            string folderPath = findPath(obj);
+            string _folderPath = FindPath(_obj);
 
-            string finalPath = Path.Combine(folderPath, $"{obj.GuidValue}.json");
+            string _finalPath = Path.Combine(_folderPath, $"{_obj.GuidValue}.json");
 
 
-            if (File.Exists(finalPath))
+            if (File.Exists(_finalPath))
             {
-                File.Delete(finalPath); 
+                File.Delete(_finalPath);
             }
 
 
-            string jsonObject = JsonConvert.SerializeObject(obj, Newtonsoft.Json.Formatting.Indented);
+            string _jsonObject = JsonConvert.SerializeObject(_obj, Newtonsoft.Json.Formatting.Indented);
 
             try
 
             {
 
-                File.WriteAllText(finalPath, jsonObject);
+                File.WriteAllText(_finalPath, _jsonObject);
 
 
             }
 
             catch (Exception ex)
-
             {
-
-                MessageBox.Show("Can't Store the file.");
-
+                MessageBox.Show($"Can't Store the file. Error: {ex.Message}");
             }
+
 
 
 
@@ -207,40 +170,44 @@ namespace FileworxsNews
 
 
 
-        public static List<FileWorxEntity> JsonDeserializationObjects(FileWorxEntity obj)
+        public static List<IFileWorxEntity> JsonDeserializationObjects(IFileWorxEntity _obj)
         {
-            
-            
-            List<FileWorxEntity> objectList = new List<FileWorxEntity>();
 
-            string objectsPath = findPath(obj);
 
-            if (!Directory.Exists(objectsPath))
+            List<IFileWorxEntity> _objectList = new List<IFileWorxEntity>();
+
+            string _objectsPath = FindPath(_obj);
+
+            if (!Directory.Exists(_objectsPath))
             {
                 MessageBox.Show("Error: Directory does not exist.");
-                return objectList; 
+                return _objectList;
             }
 
-            foreach (var file in Directory.GetFiles(objectsPath, "*.json"))
+            foreach (var file in Directory.GetFiles(_objectsPath, "*.json"))
             {
                 try
                 {
                     string fileContent = File.ReadAllText(file);
 
-                    FileWorxEntity deserializedObject = null;
+                    IFileWorxEntity deserializedObject = null;
 
-                    if (obj is Photo)
+                    if (_obj is Photo)
                     {
                         deserializedObject = JsonConvert.DeserializeObject<Photo>(fileContent);
                     }
-                    else if (obj is News)
+                    else if (_obj is New)
                     {
-                        deserializedObject = JsonConvert.DeserializeObject<News>(fileContent);
+                        deserializedObject = JsonConvert.DeserializeObject<New>(fileContent);
+                    }
+                    else if (_obj is User)
+                    {
+                        deserializedObject = JsonConvert.DeserializeObject<User>(fileContent);
                     }
 
                     if (deserializedObject != null)
                     {
-                        objectList.Add(deserializedObject);
+                        _objectList.Add(deserializedObject);
                     }
                 }
                 catch (Exception ex)
@@ -249,42 +216,68 @@ namespace FileworxsNews
                 }
             }
 
-            return objectList;
+            return _objectList;
         }
 
 
-        public static void deleteObject(FileWorxEntity obj)
+        public static void DeleteObject(IFileWorxEntity _obj)
         {
-       
-            string path = findPath(obj);
-            path = Path.Combine(path, obj.GuidValue.ToString() + ".json");
 
-            DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            string _path = FindPath(_obj);
+            _path = Path.Combine(_path, _obj.GuidValue.ToString() + ".json");
 
-
-           if (result==DialogResult.Yes)
+            if (File.Exists(_path))
             {
-                if (File.Exists(path))
+                DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
+
+                if (result == DialogResult.Yes)
                 {
+                    if (File.Exists(_path))
 
-                    File.Delete(path);
-                    //MessageBox.Show("File deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                 
-                }
-                else
-                {
-                    MessageBox.Show($"Error deleting the file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                    {
 
+                        File.Delete(_path);
+
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Error deleting the file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
             }
 
-            
+
+
+
+
+
 
 
         }
 
     }
+
+
+    internal static class Program
+    {
+        /// <summary>
+        ///  The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            // To customize application configuration such as set high DPI settings or default font,
+            // see https://aka.ms/applicationconfiguration.
+            ApplicationConfiguration.Initialize();
+            Application.Run(new Dashboard());
+
+
+
+        }
+    }
+
 
 }
 

@@ -137,7 +137,7 @@
             pictureBox1.Location = new Point(3, 3);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(988, 266);
-            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
             // 
@@ -285,9 +285,9 @@
             contentList.TileSize = new Size(100, 100);
             contentList.UseCompatibleStateImageBehavior = false;
             contentList.View = View.Details;
-            contentList.MouseClick += contentList_MouseClick;
-            contentList.MouseDoubleClick += contentList_MouseDoubleClick;
-            contentList.Resize += contentList_Resize;
+            contentList.MouseClick += ContentList_MouseClick;
+            contentList.MouseDoubleClick += ContentList_MouseDoubleClick;
+            contentList.Resize += ContentList_Resize;
             // 
             // columnHeader1
             // 
@@ -345,7 +345,6 @@
             tabPreview.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
-            tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();

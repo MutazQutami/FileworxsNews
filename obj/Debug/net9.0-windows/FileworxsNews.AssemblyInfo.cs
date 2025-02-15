@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FileworxsNews")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+abbdc5429852d2e6efab751d2ba39c672a841e9a")]
 [assembly: System.Reflection.AssemblyProductAttribute("FileworxsNews")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FileworxsNews")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
