@@ -10,7 +10,7 @@
                 ListViewItem _selectedItem = contentList.SelectedItems[0];
                 object _selectedObject = _selectedItem.Tag;
 
-                if (e.Button == MouseButtons.Right)
+                if (e.Button == MouseButtons.Right) // right click , delete object
                 {
 
                     FileHandler.DeleteObject((IFileWorxEntity)_selectedObject);
@@ -20,7 +20,7 @@
                 }
 
 
-                if (_selectedObject is Photo _selectedPhoto)
+                if (_selectedObject is Photo _selectedPhoto)   // normal click , show preview
                 {
                     categoryField.Hide();
                     titleField.Text = _selectedPhoto.Title;
@@ -98,7 +98,7 @@
         }
 
 
-        private void ContentList_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void ContentList_MouseDoubleClick(object sender, MouseEventArgs e) // double click , edit object
         {
 
 
@@ -117,7 +117,7 @@
 
                     _newsForm.Text = "Edit New";
                     _newsForm.ShowDialog();
-                    
+
                     _newsForm.FormClosed += delegate
                     {
                         InisializeForm();
@@ -138,8 +138,8 @@
                         InisializeForm();
                     };
 
-                    
-                   
+
+
                 }
 
 
@@ -166,6 +166,9 @@
 
         private void InisializeForm()
         {
+
+            // retrieving photos and news
+
             contentList.Items.Clear();
             if (tabPreview.TabPages.Contains(tabPage2))
             {
@@ -221,9 +224,13 @@
         private void ResizeObjects()
         {
 
-            //full view Form
+            //Full view Form
             this.WindowState = FormWindowState.Maximized;
             AutoScroll = true;
+
+         
+
+
 
             if (contentList.Columns.Count == 3)
             {
@@ -236,10 +243,16 @@
                 tabPreviewContainer.SplitterDistance = this.Height / 3;  // the preview with third of the screen height 
 
 
-                panel3.Width = contentList.Width;
+                lowerPart.Width = upperPart.Width - 2;
+             
+
+                lowerPart.Height = (int)(this.Height / 1.8);
+
 
 
             }
         }
+
+      
     }
 }

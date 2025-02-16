@@ -104,10 +104,11 @@ namespace FileworxsNews
 
         {
 
-            string _projectPath = AppDomain.CurrentDomain.BaseDirectory;
+            string _projectPath = AppDomain.CurrentDomain.BaseDirectory; // Path of the current project
+
+
+
             string _folderType = string.Empty;
-
-
 
             _folderType = _obj switch
             {
@@ -116,13 +117,13 @@ namespace FileworxsNews
                 _ => "News"
             };
 
-            string _targetFolder = Path.Combine(_projectPath, _folderType);
+            string _targetFolder = Path.Combine(_projectPath, _folderType);  // Path according to object type
 
             if (!Directory.Exists(_targetFolder))
 
             {
 
-                Directory.CreateDirectory(_targetFolder);
+                Directory.CreateDirectory(_targetFolder); // Create the directory if it does not exist
 
             }
 
@@ -135,12 +136,13 @@ namespace FileworxsNews
         {
 
 
-            string _folderPath = FindPath(_obj);
-
-            string _finalPath = Path.Combine(_folderPath, $"{_obj.GuidValue}.json");
+            string _folderPath = FindPath(_obj); // Find the appropriate directory
 
 
-            if (File.Exists(_finalPath))
+            string _finalPath = Path.Combine(_folderPath, $"{_obj.GuidValue}.json");  // json file with GUID naming
+
+
+            if (File.Exists(_finalPath))  // duplicate avoidance
             {
                 File.Delete(_finalPath);
             }
@@ -184,7 +186,7 @@ namespace FileworxsNews
                 return _objectList;
             }
 
-            foreach (var file in Directory.GetFiles(_objectsPath, "*.json"))
+            foreach (var file in Directory.GetFiles(_objectsPath, "*.json")) 
             {
                 try
                 {
@@ -205,6 +207,8 @@ namespace FileworxsNews
                         deserializedObject = JsonConvert.DeserializeObject<User>(fileContent);
                     }
 
+
+
                     if (deserializedObject != null)
                     {
                         _objectList.Add(deserializedObject);
@@ -216,7 +220,7 @@ namespace FileworxsNews
                 }
             }
 
-            return _objectList;
+            return _objectList; 
         }
 
 

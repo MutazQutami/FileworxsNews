@@ -7,7 +7,7 @@
         private void saveButton_Click(object sender, EventArgs e)
         {
 
-            if (string.IsNullOrEmpty(titleField.Text) || string.IsNullOrEmpty(descriptionField.Text)
+            if (string.IsNullOrEmpty(titleField.Text) || string.IsNullOrEmpty(descriptionField.Text) // nullField Validations
                 || string.IsNullOrEmpty(categoryList.Text) || string.IsNullOrEmpty(bodyField.Text))
             {
 
@@ -70,6 +70,7 @@
         }
         public NewsForm(New _new)
         {
+            
 
             InitializeComponent();
             this.titleField.Text = _new.Title;
