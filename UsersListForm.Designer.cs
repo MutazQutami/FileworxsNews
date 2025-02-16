@@ -32,21 +32,27 @@
             columnHeader1 = new ColumnHeader();
             columnHeader2 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
+            columnHeader5 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
+            btnAddUser = new Button();
             SuspendLayout();
             // 
             // userList
             // 
             userList.BackColor = Color.FromArgb(224, 224, 224);
-            userList.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
+            userList.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader5, columnHeader4 });
+            userList.Cursor = Cursors.Hand;
             userList.Dock = DockStyle.Fill;
+            userList.FullRowSelect = true;
             userList.GridLines = true;
-            userList.Location = new Point(0, 0);
+            userList.Location = new Point(15, 15);
+            userList.MinimumSize = new Size(700, 0);
             userList.Name = "userList";
-            userList.Size = new Size(922, 585);
+            userList.Size = new Size(892, 555);
             userList.TabIndex = 0;
             userList.UseCompatibleStateImageBehavior = false;
             userList.View = View.Details;
+            userList.DoubleClick += userList_DoubleClick;
             // 
             // columnHeader1
             // 
@@ -60,20 +66,36 @@
             // 
             columnHeader3.Text = "Creation Date";
             // 
+            // columnHeader5
+            // 
+            columnHeader5.Text = "Password";
+            // 
             // columnHeader4
             // 
             columnHeader4.Text = "Last Modifier";
             // 
+            // btnAddUser
+            // 
+            btnAddUser.Location = new Point(747, 31);
+            btnAddUser.Name = "btnAddUser";
+            btnAddUser.Size = new Size(126, 53);
+            btnAddUser.TabIndex = 1;
+            btnAddUser.Text = "Add User";
+            btnAddUser.UseVisualStyleBackColor = true;
+            btnAddUser.Click += btnAddUser_Click;
+            // 
             // UsersListForm
             // 
-            AutoScaleDimensions = new SizeF(14F, 35F);
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLight;
+            BackColor = Color.White;
             ClientSize = new Size(922, 585);
+            Controls.Add(btnAddUser);
             Controls.Add(userList);
             Font = new Font("Segoe UI", 15F);
             Margin = new Padding(5, 6, 5, 6);
             Name = "UsersListForm";
+            Padding = new Padding(15);
             Text = "UsersForm";
             Resize += UsersList_Resize;
             ResumeLayout(false);
@@ -86,5 +108,7 @@
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
+        private ColumnHeader columnHeader5;
+        private Button btnAddUser;
     }
 }

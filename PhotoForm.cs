@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,6 +14,8 @@ namespace FileworxsNews
     public partial class PhotoForm : Form
     {
 
+        public Photo formPhoto;
+        public bool editForm;
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
@@ -28,22 +31,27 @@ namespace FileworxsNews
 
 
 
-                Photo _photo = new Photo();
-                _photo.Title = titleField.Text;
-                _photo.Description = descriptionField.Text;
-                _photo.Body = bodyField.Text;
-                _photo.photoPath = photoPath;
-
-
-                if (EditForm)
+                if (!editForm)
                 {
-                    _photo.GuidValue = GuidValue;
-                    _photo.Date = Date;
+                    formPhoto = new Photo();
+
                 }
 
+                formPhoto.Title = titleField.Text;
+                formPhoto.Description = descriptionField.Text;
+                formPhoto.Body = bodyField.Text;
+                formPhoto.photoPath = photoPath;
 
 
-                FileHandler.JsonSerialization(_photo);
+
+
+
+
+                FileHandler.JsonSerialization(formPhoto);
+
+                this.DialogResult = DialogResult.OK;
+
+
                 this.Close();
                 return;
             }
@@ -88,7 +96,7 @@ namespace FileworxsNews
 
         private void CancleButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -106,7 +114,7 @@ namespace FileworxsNews
             InitializeComponent();
             nullFieldsWarnning.Hide();
             checkUploadPhotoWarning.Hide();
-
+            editForm = false;
 
 
         }
@@ -121,6 +129,7 @@ namespace FileworxsNews
             this.filePath.Text += _photo.photoPath;
             this.photoPath = _photo.photoPath;
 
+            formPhoto = _photo;
 
 
             GuidValue = _photo.GuidValue;
@@ -129,7 +138,14 @@ namespace FileworxsNews
 
             nullFieldsWarnning.Hide();
             checkUploadPhotoWarning.Hide();
+            editForm = true;
 
+        }
+
+        private void cancleButton_Click_1(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

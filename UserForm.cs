@@ -1,77 +1,86 @@
 namespace FileworxsNews
 {
-    public partial class UserForm : Form
+
+  public partial class UserForm : Form
     {
 
+        public User formUser;
+        private bool IsEditform;
 
-
-        private void SaveButton_Click(object sender, EventArgs e)
-        {
-            // Fields Validations
-
-            if (String.IsNullOrEmpty(nameField.Text) || String.IsNullOrEmpty(loginNameField.Text)
-                || String.IsNullOrEmpty(passwordField.Text) || String.IsNullOrEmpty(confirmPassField.Text))
-
-            {
-                passMatchWarning.Hide();
-                nullFieldsWarnning.Show();
-                return;
-            }
-            else if (!String.IsNullOrEmpty(passwordField.Text) &&
-                     !String.IsNullOrEmpty(confirmPassField.Text) &&
-                     !passwordField.Text.Equals(confirmPassField.Text))
-            {
-
-                nullFieldsWarnning.Hide();
-                passMatchWarning.Show();
-
-                return;
-
-            }
-            else
-            {
-
-                //Creation of new user
-                User _user = new User();
-
-
-               _user.Name = nameField.Text;
-               _user.LogInName = loginNameField.Text;
-               _user.Password = passwordField.Text;
-
-                FileHandler.JsonSerialization(_user);
-
-                MessageBox.Show("The User Added Successfully!");
-
-
-                this.Close();
-
-            }
-        }
-
-        private void CancleButton_Click(object sender, EventArgs e)
-        {
-            this.Close();
-
-        }
-
-
-        public UserForm()
+        public UserForm(User user)
         {
             InitializeComponent();
+            this.txtPassword.Text=user.Password; 
+            this.txtLoginName.Text = user.LogInName;
+            this.txtName.Text = user.Name;
+            IsEditform = true;
+            lblNullWarnning.Hide();
+            formUser = user;
 
-            //hide warning masseges
-            passMatchWarning.Hide();
-            nullFieldsWarnning.Hide();
+
         }
 
-       
+        private void OnCancelButtonClick(object sender, EventArgs e) { 
+
+            this.Close();
+        }
+
+    private void OnSaveButtonClick(object sender, EventArgs e) {
+             
+      if (String.IsNullOrEmpty(txtName.Text) ||
+          String.IsNullOrEmpty(txtLoginName.Text) ||
+          String.IsNullOrEmpty(txtPassword.Text)) {
+
+          lblNullWarnning.Show();
+          return;
+      } 
+      
+      else
+      {
+      lblNullWarnning.Hide();
+
+                if (!IsEditform)
+                {
+
+                    formUser = new User();
+
+                }
+
+              
+
+
+
+                formUser.Name = txtName.Text;
+                formUser.LogInName = txtLoginName.Text;
+                formUser.Password = txtPassword.Text;
+
+
+                FileHandler.JsonSerialization(formUser);
+
+                if (!IsEditform)
+                {
+
+                    MessageBox.Show("The User Added Successfully!");
+
+                }
+              
+                this.DialogResult = DialogResult.OK;
+
+                this.Close();
+                return;
+
+            }
+        }
+
+     public UserForm() {
+        InitializeComponent();
+
+        // Hide password match warning and null value warning
+
+        lblNullWarnning.Hide();
+            IsEditform = false;
+
+        }
+
     }
 }
-
-
-
-
-
-
-

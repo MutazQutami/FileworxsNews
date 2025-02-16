@@ -1,7 +1,12 @@
-﻿namespace FileworxsNews
+﻿using System.DirectoryServices.ActiveDirectory;
+
+namespace FileworxsNews
 {
     public partial class NewsForm : Form
     {
+
+        public  New _formNew;
+
 
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -18,23 +23,21 @@
             {
                 nullFieldsWarnning.Hide();
 
-                 New _new = new New();
-                _new.Title = titleField.Text;
-                _new.Description = descriptionField.Text;
-                _new.Category = categoryList.Text;
-                _new.Body = bodyField.Text;
 
-                if (EditForm)
+                if (!EditForm)
                 {
-                    _new.GuidValue = GuidValue;
-                    _new.Date = Date;
+                    _formNew = new New();
                 }
+                
+                _formNew.Title = titleField.Text;
+                _formNew.Description = descriptionField.Text;
+                _formNew.Category = categoryList.Text;
+                _formNew.Body = bodyField.Text;
 
-
-
+              
                 try
                 {
-                    FileHandler.JsonSerialization(_new);
+                    FileHandler.JsonSerialization(_formNew);
                 }
                 catch (Exception _ex)
                 {
@@ -42,15 +45,18 @@
                     MessageBox.Show($"An unexpected error occurred: {_ex.Message}");
                 }
 
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+
+            
 
         }
 
 
         private void cancleButton_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
 
@@ -66,6 +72,7 @@
         {
             InitializeComponent();
             nullFieldsWarnning.Hide();
+            EditForm = false;
 
         }
         public NewsForm(New _new)
@@ -78,6 +85,7 @@
             this.categoryList.Text = _new.Category;
             this.bodyField.Text = _new.Body;
 
+            _formNew = _new;
             GuidValue = _new.GuidValue;
             Date = _new.Date;
             EditForm = true;

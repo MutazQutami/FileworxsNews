@@ -13,7 +13,7 @@
                 if (e.Button == MouseButtons.Right) // right click , delete object
                 {
 
-                    FileHandler.DeleteObject((IFileWorxEntity)_selectedObject);
+                    FileHandler.DeleteObject((FileWorxEntity)_selectedObject);
                     InisializeForm();
                     return;
 
@@ -32,10 +32,10 @@
                     label3.Hide();
                     categoryField.Hide();
 
-                    previewContent.Text = _selectedPhoto.Body;
-                    if (!tabPreview.TabPages.Contains(tabPage2))
+                    pnlPreviewContent.Text = _selectedPhoto.Body;
+                    if (!pnltabPreview.TabPages.Contains(tabPage2))
                     {
-                        tabPreview.TabPages.Add(tabPage2);
+                        pnltabPreview.TabPages.Add(tabPage2);
                     }
 
                     string _sourcePath = _selectedPhoto.photoPath;
@@ -73,15 +73,15 @@
                     creationDateField.Text = _selectedNews.Date.ToString();
                     categoryField.Text = _selectedNews.Category;
 
-                    previewContent.Text = _selectedNews.Body;
+                    pnlPreviewContent.Text = _selectedNews.Body;
 
                     label3.Show();
                     categoryField.Show();
 
                     categoryField.Text = _selectedNews.Category;
-                    if (tabPreview.TabPages.Contains(tabPage2))
+                    if (pnltabPreview.TabPages.Contains(tabPage2))
                     {
-                        tabPreview.TabPages.Remove(tabPage2);
+                        pnltabPreview.TabPages.Remove(tabPage2);
                     }
 
 
@@ -118,38 +118,56 @@
                     _newsForm.Text = "Edit New";
                     _newsForm.ShowDialog();
 
-                    _newsForm.FormClosed += delegate
+                    if (_newsForm.DialogResult == DialogResult.OK)       // The Save button was clicked
                     {
-                        InisializeForm();
-                    };
+                        New new1 = new New();
 
+                        new1 = _newsForm._formNew;
+
+                        _selectedItem.Text = new1.Title;  // Update the first column
+                        _selectedItem.SubItems[1].Text = new1.Date.ToString();
+                        _selectedItem.SubItems[2].Text = new1.Description;
+                        _selectedItem.SubItems[3].Text = new1.GuidValue.ToString();
+                        _selectedItem.SubItems[4].Text = new1.Body;
+
+                        _selectedItem.Tag = new1;
+
+
+                    }
 
 
                 }
+
+
+
                 else if (_selectedObject is Photo _selectedPhoto)
                 {
                     PhotoForm _photoForm = new PhotoForm(_selectedPhoto);
 
                     _photoForm.Text = "Edit Photo";
-                    _photoForm.ShowDialog();
+                    
 
-                    _photoForm.FormClosed += delegate
+                    if (_photoForm.DialogResult == DialogResult.OK)
                     {
-                        InisializeForm();
-                    };
 
+                         
+
+                        Photo photo1 = _photoForm.formPhoto;
+
+                        _selectedItem.Text = photo1.Title;  // Update the first column
+                        _selectedItem.SubItems[1].Text = photo1.Date.ToString();
+                        _selectedItem.SubItems[2].Text = photo1.Description;
+                        _selectedItem.SubItems[3].Text = photo1.GuidValue.ToString();
+                        _selectedItem.SubItems[4].Text = photo1.Body;
+
+                        _selectedItem.Tag = photo1;
+                    }
 
 
                 }
 
 
             }
-        }
-
-
-        private void ContentList_Resize(object sender, EventArgs e)
-        {
-            ResizeObjects();
         }
 
 
@@ -170,9 +188,9 @@
             // retrieving photos and news
 
             contentList.Items.Clear();
-            if (tabPreview.TabPages.Contains(tabPage2))
+            if (pnltabPreview.TabPages.Contains(tabPage2))
             {
-                tabPreview.TabPages.Remove(tabPage2);
+                pnltabPreview.TabPages.Remove(tabPage2);
             }
 
             List<Photo> _photoList = FileHandler.JsonDeserializationObjects(new Photo()).Cast<Photo>().ToList();
@@ -211,6 +229,7 @@
                 _listItem.SubItems.Add(item.GuidValue.ToString());
                 _listItem.SubItems.Add(item.Category);
                 _listItem.Tag = item;
+
                 contentList.Items.Add(_listItem);
 
 
@@ -221,38 +240,85 @@
 
         }
 
+
         private void ResizeObjects()
         {
-
-            //Full view Form
-            this.WindowState = FormWindowState.Maximized;
-            AutoScroll = true;
-
-         
-
 
 
             if (contentList.Columns.Count == 3)
             {
+
                 int _columnWidth = contentList.Width;
 
                 contentList.Columns[0].Width = (int)(_columnWidth * 0.25);
                 contentList.Columns[1].Width = (int)(_columnWidth * 0.25);
-                contentList.Columns[2].Width = contentList.Width - (contentList.Columns[0].Width + contentList.Columns[1].Width);
-
-                tabPreviewContainer.SplitterDistance = this.Height / 3;  // the preview with third of the screen height 
-
-
-                lowerPart.Width = upperPart.Width - 2;
-             
-
-                lowerPart.Height = (int)(this.Height / 1.8);
-
-
-
+                contentList.Columns[2].Width = (int)(_columnWidth * 0.50);
             }
         }
 
-      
+        private void FileWorx_Load(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Maximized;
+            //contentList.Height = (int)(this.Height * 2/3);
+            mainSplitContainer.SplitterDistance = this.Height * 2 / 3;
+            ResizeObjects();
+        }
+
+        private void FileWorx_Resize(object sender, EventArgs e)
+        {
+            ResizeObjects();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            PhotoForm photoForm = new PhotoForm();
+ 
+            if (photoForm.ShowDialog() == DialogResult.OK)
+            {
+                Photo ph1 = photoForm.formPhoto;
+                ListViewItem _listItem = new ListViewItem(ph1.Title);
+
+
+                _listItem.SubItems.Add(ph1.Date.ToString());
+                _listItem.SubItems.Add(ph1.Description);
+                _listItem.SubItems.Add(ph1.photoPath);
+                _listItem.SubItems.Add(ph1.GuidValue.ToString());
+                _listItem.SubItems.Add(ph1.Body);
+                _listItem.Tag = ph1;
+                contentList.Items.Add(_listItem);
+
+                return;
+            }
+
+
+        }
+
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+
+            NewsForm new1 = new NewsForm();
+
+            if (new1.ShowDialog() == DialogResult.OK)
+            {
+                New new2 = new1._formNew;
+                ListViewItem _listItem = new ListViewItem(new2.Title);
+
+
+                _listItem.SubItems.Add(new2.Date.ToString());
+                _listItem.SubItems.Add(new2.Description);
+                _listItem.SubItems.Add(new2.Category);
+                _listItem.SubItems.Add(new2.GuidValue.ToString());
+                _listItem.SubItems.Add(new2.Category);
+                _listItem.Tag = new2;
+
+                contentList.Items.Insert(0, _listItem);
+
+
+                return;
+            }
+
+        }
     }
 }
+
