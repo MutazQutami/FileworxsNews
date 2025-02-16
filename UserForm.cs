@@ -4,40 +4,29 @@ namespace FileworxsNews
   public partial class UserForm : Form
     {
 
-        public User formUser;
-        private bool IsEditform;
+       
 
-        public UserForm(User user)
+        private void OnCancelButtonClick(object sender, EventArgs e)
         {
-            InitializeComponent();
-            this.txtPassword.Text=user.Password; 
-            this.txtLoginName.Text = user.LogInName;
-            this.txtName.Text = user.Name;
-            IsEditform = true;
-            lblNullWarnning.Hide();
-            formUser = user;
-
-
-        }
-
-        private void OnCancelButtonClick(object sender, EventArgs e) { 
 
             this.Close();
         }
 
-    private void OnSaveButtonClick(object sender, EventArgs e) {
-             
-      if (String.IsNullOrEmpty(txtName.Text) ||
-          String.IsNullOrEmpty(txtLoginName.Text) ||
-          String.IsNullOrEmpty(txtPassword.Text)) {
+        private void OnSaveButtonClick(object sender, EventArgs e)
+        {
 
-          lblNullWarnning.Show();
-          return;
-      } 
-      
-      else
-      {
-      lblNullWarnning.Hide();
+            if (String.IsNullOrEmpty(txtName.Text) ||
+                String.IsNullOrEmpty(txtLoginName.Text) ||
+                String.IsNullOrEmpty(txtPassword.Text))
+            {
+
+                lblNullWarnning.Show();
+                return;
+            }
+
+            else
+            {
+                lblNullWarnning.Hide();
 
                 if (!IsEditform)
                 {
@@ -46,7 +35,7 @@ namespace FileworxsNews
 
                 }
 
-              
+
 
 
 
@@ -63,7 +52,7 @@ namespace FileworxsNews
                     MessageBox.Show("The User Added Successfully!");
 
                 }
-              
+
                 this.DialogResult = DialogResult.OK;
 
                 this.Close();
@@ -72,15 +61,32 @@ namespace FileworxsNews
             }
         }
 
-     public UserForm() {
-        InitializeComponent();
 
-        // Hide password match warning and null value warning
+        public User formUser;
+        private bool IsEditform;
+      
 
-        lblNullWarnning.Hide();
-            IsEditform = false;
+        public UserForm(User user)
+        {
+            InitializeComponent();
+            this.txtPassword.Text=user.Password; 
+            this.txtLoginName.Text = user.LogInName;
+            this.txtName.Text = user.Name;
+            IsEditform = true;
+            lblNullWarnning.Hide();
+            formUser = user;
+
 
         }
+        public UserForm() {
+            InitializeComponent();
+
+            // Hide password match warning and null value warning
+
+            lblNullWarnning.Hide();
+                IsEditform = false;
+
+         }
 
     }
 }

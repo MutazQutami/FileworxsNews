@@ -138,11 +138,8 @@ namespace FileworxsNews
 
             if (File.Exists(_path))
             {
-                DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-
-                if (result == DialogResult.Yes)
-                {
+                
                     if (File.Exists(_path))
 
                     {
@@ -154,8 +151,7 @@ namespace FileworxsNews
                     {
                         MessageBox.Show($"Error deleting the file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
-                }
+                
             }
 
 

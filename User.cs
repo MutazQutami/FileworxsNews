@@ -16,11 +16,13 @@ namespace FileworxsNews
 
         public string Password { get; set; }
 
-        public string Last_modifier { get; set; }
+        public string lastModifier { get; set; }
 
         public bool IsEqual(User? other)
         {
-            if (other == null || string.IsNullOrEmpty(LogInName) || string.IsNullOrEmpty(Password))
+            if (other == null ||
+                string.IsNullOrEmpty(LogInName) ||
+                string.IsNullOrEmpty(Password))
                 return false;
 
             return LogInName == other.LogInName && Password == other.Password;

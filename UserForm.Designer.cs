@@ -36,9 +36,9 @@
             lblTitle = new Label();
             lblNullWarnning = new Label();
             pnlContainer = new Panel();
-            txtName = new TextBox();
             txtPassword = new TextBox();
             txtLoginName = new TextBox();
+            txtName = new TextBox();
             pnlContainer.SuspendLayout();
             SuspendLayout();
             // 
@@ -48,10 +48,9 @@
             lblName.AutoSize = true;
             lblName.Font = new Font("Segoe UI", 15F);
             lblName.ForeColor = SystemColors.ButtonShadow;
-            lblName.Location = new Point(72, 123);
-            lblName.Margin = new Padding(2, 0, 2, 0);
+            lblName.Location = new Point(93, 172);
             lblName.Name = "lblName";
-            lblName.Size = new Size(64, 28);
+            lblName.Size = new Size(82, 35);
             lblName.TabIndex = 3;
             lblName.Text = "Name";
             // 
@@ -61,10 +60,9 @@
             lblLoginName.AutoSize = true;
             lblLoginName.Font = new Font("Segoe UI", 15F);
             lblLoginName.ForeColor = SystemColors.ButtonShadow;
-            lblLoginName.Location = new Point(72, 175);
-            lblLoginName.Margin = new Padding(2, 0, 2, 0);
+            lblLoginName.Location = new Point(93, 245);
             lblLoginName.Name = "lblLoginName";
-            lblLoginName.Size = new Size(118, 28);
+            lblLoginName.Size = new Size(151, 35);
             lblLoginName.TabIndex = 4;
             lblLoginName.Text = "Login Name";
             // 
@@ -74,10 +72,9 @@
             lblPassword.AutoSize = true;
             lblPassword.Font = new Font("Segoe UI", 15F);
             lblPassword.ForeColor = SystemColors.ButtonShadow;
-            lblPassword.Location = new Point(72, 235);
-            lblPassword.Margin = new Padding(2, 0, 2, 0);
+            lblPassword.Location = new Point(93, 329);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(93, 28);
+            lblPassword.Size = new Size(120, 35);
             lblPassword.TabIndex = 5;
             lblPassword.Text = "Password";
             // 
@@ -90,10 +87,9 @@
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.Font = new Font("Segoe UI", 15F);
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(354, 334);
-            btnSave.Margin = new Padding(2);
+            btnSave.Location = new Point(351, 468);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(103, 44);
+            btnSave.Size = new Size(132, 62);
             btnSave.TabIndex = 6;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = false;
@@ -108,10 +104,9 @@
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.Font = new Font("Segoe UI", 15F);
             btnCancel.ForeColor = Color.White;
-            btnCancel.Location = new Point(479, 334);
-            btnCancel.Margin = new Padding(2);
+            btnCancel.Location = new Point(512, 468);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(96, 44);
+            btnCancel.Size = new Size(123, 62);
             btnCancel.TabIndex = 7;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = false;
@@ -123,9 +118,10 @@
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
             lblTitle.ForeColor = Color.FromArgb(0, 130, 200);
-            lblTitle.Location = new Point(320, 43);
+            lblTitle.Location = new Point(411, 60);
+            lblTitle.Margin = new Padding(4, 0, 4, 0);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(98, 28);
+            lblTitle.Size = new Size(123, 35);
             lblTitle.TabIndex = 11;
             lblTitle.Text = "Add User";
             // 
@@ -135,9 +131,10 @@
             lblNullWarnning.AutoSize = true;
             lblNullWarnning.Font = new Font("Segoe UI", 9F);
             lblNullWarnning.ForeColor = Color.Red;
-            lblNullWarnning.Location = new Point(519, 283);
+            lblNullWarnning.Location = new Point(667, 396);
+            lblNullWarnning.Margin = new Padding(4, 0, 4, 0);
             lblNullWarnning.Name = "lblNullWarnning";
-            lblNullWarnning.Size = new Size(155, 15);
+            lblNullWarnning.Size = new Size(196, 20);
             lblNullWarnning.TabIndex = 12;
             lblNullWarnning.Text = "All Fields Shoud Not Be Null";
             // 
@@ -155,33 +152,21 @@
             pnlContainer.Controls.Add(txtName);
             pnlContainer.Dock = DockStyle.Fill;
             pnlContainer.Location = new Point(0, 0);
+            pnlContainer.Margin = new Padding(4, 4, 4, 4);
             pnlContainer.Name = "pnlContainer";
-            pnlContainer.Size = new Size(899, 528);
+            pnlContainer.Size = new Size(1156, 739);
             pnlContainer.TabIndex = 14;
-            // 
-            // txtName
-            // 
-            txtName.Anchor = AnchorStyles.None;
-            txtName.BorderStyle = BorderStyle.FixedSingle;
-            txtName.Font = new Font("Segoe UI", 18F);
-            txtName.Location = new Point(266, 123);
-            txtName.Margin = new Padding(2);
-            txtName.MaxLength = 255;
-            txtName.Name = "txtName";
-            txtName.Size = new Size(232, 39);
-            txtName.TabIndex = 0;
             // 
             // txtPassword
             // 
             txtPassword.Anchor = AnchorStyles.None;
             txtPassword.BorderStyle = BorderStyle.FixedSingle;
             txtPassword.Font = new Font("Segoe UI", 18F);
-            txtPassword.Location = new Point(266, 235);
-            txtPassword.Margin = new Padding(2);
+            txtPassword.Location = new Point(342, 329);
             txtPassword.MaxLength = 255;
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(232, 39);
+            txtPassword.Size = new Size(298, 47);
             txtPassword.TabIndex = 2;
             txtPassword.UseSystemPasswordChar = true;
             // 
@@ -190,21 +175,30 @@
             txtLoginName.Anchor = AnchorStyles.None;
             txtLoginName.BorderStyle = BorderStyle.FixedSingle;
             txtLoginName.Font = new Font("Segoe UI", 18F);
-            txtLoginName.Location = new Point(266, 175);
-            txtLoginName.Margin = new Padding(2);
+            txtLoginName.Location = new Point(342, 245);
             txtLoginName.MaxLength = 255;
             txtLoginName.Name = "txtLoginName";
-            txtLoginName.Size = new Size(232, 39);
+            txtLoginName.Size = new Size(298, 47);
             txtLoginName.TabIndex = 1;
+            // 
+            // txtName
+            // 
+            txtName.Anchor = AnchorStyles.None;
+            txtName.BorderStyle = BorderStyle.FixedSingle;
+            txtName.Font = new Font("Segoe UI", 18F);
+            txtName.Location = new Point(342, 172);
+            txtName.MaxLength = 255;
+            txtName.Name = "txtName";
+            txtName.Size = new Size(298, 47);
+            txtName.TabIndex = 0;
             // 
             // UserForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(899, 528);
+            ClientSize = new Size(1156, 739);
             Controls.Add(pnlContainer);
-            Margin = new Padding(2);
             Name = "UserForm";
             Text = "New User";
             pnlContainer.ResumeLayout(false);

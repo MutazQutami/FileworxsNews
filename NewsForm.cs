@@ -5,15 +5,11 @@ namespace FileworxsNews
     public partial class NewsForm : Form
     {
 
-        public  New _formNew;
-
-
-
         private void saveButton_Click(object sender, EventArgs e)
         {
 
-            if (string.IsNullOrEmpty(titleField.Text) || string.IsNullOrEmpty(descriptionField.Text) // nullField Validations
-                || string.IsNullOrEmpty(categoryList.Text) || string.IsNullOrEmpty(bodyField.Text))
+            if (string.IsNullOrEmpty(txtTitleField.Text) || string.IsNullOrEmpty(txtDescriptionField.Text) // nullField Validations
+                || string.IsNullOrEmpty(categoryList.Text) || string.IsNullOrEmpty(txtBodyField.Text))
             {
 
 
@@ -28,13 +24,13 @@ namespace FileworxsNews
                 {
                     _formNew = new New();
                 }
-                
-                _formNew.Title = titleField.Text;
-                _formNew.Description = descriptionField.Text;
-                _formNew.Category = categoryList.Text;
-                _formNew.Body = bodyField.Text;
 
-              
+                _formNew.Title = txtTitleField.Text;
+                _formNew.Description = txtDescriptionField.Text;
+                _formNew.Category = categoryList.Text;
+                _formNew.Body = txtBodyField.Text;
+
+
                 try
                 {
                     FileHandler.JsonSerialization(_formNew);
@@ -49,7 +45,7 @@ namespace FileworxsNews
                 this.Close();
             }
 
-            
+
 
         }
 
@@ -60,11 +56,7 @@ namespace FileworxsNews
             this.Close();
         }
 
-
-
-        public static Guid GuidValue;
-
-        public static DateTime Date;
+        public  New _formNew;
 
         public static bool EditForm = false;
 
@@ -80,14 +72,12 @@ namespace FileworxsNews
             
 
             InitializeComponent();
-            this.titleField.Text = _new.Title;
-            this.descriptionField.Text = _new.Description;
+            this.txtTitleField.Text = _new.Title;
+            this.txtDescriptionField.Text = _new.Description;
             this.categoryList.Text = _new.Category;
-            this.bodyField.Text = _new.Body;
+            this.txtBodyField.Text = _new.Body;
 
             _formNew = _new;
-            GuidValue = _new.GuidValue;
-            Date = _new.Date;
             EditForm = true;
 
             nullFieldsWarnning.Hide();

@@ -78,7 +78,6 @@ C:\Users\user\Desktop\GitHup\FileworxNews\bin\Debug\net9.0-windows\FileworxsNews
 C:\Users\user\Desktop\GitHup\FileworxNews\bin\Debug\net9.0-windows\FileworxsNews.pdb
 C:\Users\user\Desktop\GitHup\FileworxNews\bin\Debug\net9.0-windows\Newtonsoft.Json.dll
 C:\Users\user\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\FileworxsNews.csproj.AssemblyReference.cache
-C:\Users\user\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\FileworxsNews.Dashboard.resources
 C:\Users\user\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\FileworxsNews.FileWorx.resources
 C:\Users\user\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\FileworxsNews.NewsForm.resources
 C:\Users\user\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\FileworxsNews.PhotoForm.resources
@@ -123,3 +122,4 @@ C:\Users\mutaz\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\FileworxsNew
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\FileworxsNews.genruntimeconfig.cache
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\ref\FileworxsNews.dll
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\FileworxsNews.LogInForm.resources
+C:\Users\user\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\FileworxsNews.LogInForm.resources

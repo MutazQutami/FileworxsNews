@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ikk5HKMwllY=",
+  "dgSpecHash": "0BWnfOZa9oM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\mutaz\\Desktop\\GitHup\\FileworxNews\\FileworxsNews.csproj",
+  "projectFilePath": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\FileworxsNews.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\mutaz\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\user\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

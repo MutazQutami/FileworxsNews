@@ -14,20 +14,10 @@ namespace FileworxsNews
 {
     public partial class LogInForm : Form
     {
-        public LogInForm()
-        {
-            InitializeComponent();
-
-            nullFieldWarning.Hide();
-            wrongCredentials.Hide();
-        }
-
-
-
-        private void signUpLable_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void SignUp(object sender, LinkLabelLinkClickedEventArgs e)
         {
 
-            this.Hide();
+            //this.Hide();
 
 
             UserForm user = new UserForm();
@@ -38,11 +28,10 @@ namespace FileworxsNews
 
         }
 
-
-
-        private void logInButton_Click(object sender, EventArgs e)
+        private void LogIn(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(userNameField.Text) || String.IsNullOrEmpty(passwordField.Text))
+            if (String.IsNullOrEmpty(userNameField.Text) ||
+                String.IsNullOrEmpty(passwordField.Text))
             {
                 wrongCredentials.Hide();
                 nullFieldWarning.Show();
@@ -79,7 +68,7 @@ namespace FileworxsNews
                     {
 
                         FileWorx filewors = new FileWorx();   // success 
-                        this.Hide();
+
                         filewors.Show();
                         return;
 
@@ -89,12 +78,20 @@ namespace FileworxsNews
                     }
 
 
-
-
                 }
                 wrongCredentials.Show(); // fail
             }
         }
+
+        public LogInForm()
+        {
+            InitializeComponent();
+
+            nullFieldWarning.Hide();
+            wrongCredentials.Hide();
+        }
+
+       
     }
 }
 
