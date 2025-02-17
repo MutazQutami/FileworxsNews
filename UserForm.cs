@@ -18,7 +18,7 @@ namespace FileworxsNews
 
             lblNullWarnning.Hide();
 
-            if (!Is_editForm)
+            if (!isEditForm)
             {
                 formUser = new User();
             }
@@ -29,7 +29,7 @@ namespace FileworxsNews
 
             FileHandler.JsonSerialization(formUser);
 
-            if (!Is_editForm)
+            if (!isEditForm)
             {
                 MessageBox.Show("The User Added Successfully!");
             }
@@ -39,14 +39,14 @@ namespace FileworxsNews
         }
 
         public User formUser;
-        private bool Is_editForm;
+        private bool isEditForm;
         public UserForm(User user)
         {
             InitializeComponent();
             txtPassword.Text = user.Password;
             txtLoginName.Text = user.LogInName;
             txtName.Text = user.Name;
-            Is_editForm = true;
+            isEditForm = true;
             lblNullWarnning.Hide();
             formUser = user;
         }
@@ -54,7 +54,7 @@ namespace FileworxsNews
         {
             InitializeComponent();
             lblNullWarnning.Hide();
-            Is_editForm = false;
+            isEditForm = false;
         }
     }
 }

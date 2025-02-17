@@ -52,15 +52,15 @@
 
             if (photoForm.ShowDialog() == DialogResult.OK)
             {
-                Photo ph1 = photoForm.formPhoto;
-                ListViewItem _listItem = new ListViewItem(ph1.Title);
+                Photo _photo = photoForm.formPhoto;
+                ListViewItem _listItem = new ListViewItem(_photo.Title);
 
-                _listItem.SubItems.Add(ph1.Date.ToString());
-                _listItem.SubItems.Add(ph1.Description);
-                _listItem.SubItems.Add(ph1.photoPath);
-                _listItem.SubItems.Add(ph1.GuidValue.ToString());
-                _listItem.SubItems.Add(ph1.Body);
-                _listItem.Tag = ph1;
+                _listItem.SubItems.Add(_photo.Date.ToString());
+                _listItem.SubItems.Add(_photo.Description);
+                _listItem.SubItems.Add(_photo.photoPath);
+                _listItem.SubItems.Add(_photo.GuidValue.ToString());
+                _listItem.SubItems.Add(_photo.Body);
+                _listItem.Tag = _photo;
                 contentList.Items.Add(_listItem);
 
                 return;
@@ -70,20 +70,20 @@
 
         private void OnAddNewButtonClick(object sender, EventArgs e)
         {
-            NewsForm new1 = new NewsForm();
+            NewsForm _newsForm = new NewsForm();
 
-            if (new1.ShowDialog() == DialogResult.OK)
+            if (_newsForm.ShowDialog() == DialogResult.OK)
             {
-                New new2 = new1._formNew;
-                ListViewItem _listItem = new ListViewItem(new2.Title);
+                New _new = _newsForm._formNew;
+                ListViewItem _listItem = new ListViewItem(_new.Title);
 
 
-                _listItem.SubItems.Add(new2.Date.ToString());
-                _listItem.SubItems.Add(new2.Description);
-                _listItem.SubItems.Add(new2.Category);
-                _listItem.SubItems.Add(new2.GuidValue.ToString());
-                _listItem.SubItems.Add(new2.Category);
-                _listItem.Tag = new2;
+                _listItem.SubItems.Add(_new.Date.ToString());
+                _listItem.SubItems.Add(_new.Description);
+                _listItem.SubItems.Add(_new.Category);
+                _listItem.SubItems.Add(_new.GuidValue.ToString());
+                _listItem.SubItems.Add(_new.Category);
+                _listItem.Tag = _new;
 
                 contentList.Items.Insert(0, _listItem);
 
@@ -112,31 +112,31 @@
             List<New> _newsList = FileHandler.JsonDeserializationObjects(new New())
             .Cast<New>().ToList();
 
-            List<Content> mergedList = new List<Content>();
-            mergedList.AddRange(_photoList);
-            mergedList.AddRange(_newsList);
+            List<Content> _mergedList = new List<Content>();
+            _mergedList.AddRange(_photoList);
+            _mergedList.AddRange(_newsList);
 
             // Sort by Date in descending order
-            mergedList = mergedList.OrderByDescending(item => item.Date).ToList();
+            _mergedList = _mergedList.OrderByDescending(item => item.Date).ToList();
 
             // Add sorted items to contentList
-            foreach (var item in mergedList)
+            foreach (var item in _mergedList)
             {
                 ListViewItem _listItem = new ListViewItem(item.Title);
                 _listItem.SubItems.Add(item.Date.ToString());
                 _listItem.SubItems.Add(item.Description);
 
-                if (item is Photo photo)
+                if (item is Photo _photo)
                 {
-                    _listItem.SubItems.Add(photo.photoPath);
-                    _listItem.SubItems.Add(photo.GuidValue.ToString());
-                    _listItem.SubItems.Add(photo.Body);
+                    _listItem.SubItems.Add(_photo.photoPath);
+                    _listItem.SubItems.Add(_photo.GuidValue.ToString());
+                    _listItem.SubItems.Add(_photo.Body);
                 }
-                else if (item is New news)
+                else if (item is New _newItem)
                 {
-                    _listItem.SubItems.Add(news.Category);
-                    _listItem.SubItems.Add(news.GuidValue.ToString());
-                    _listItem.SubItems.Add(news.Category);
+                    _listItem.SubItems.Add(_newItem.Category);
+                    _listItem.SubItems.Add(_newItem.GuidValue.ToString());
+                    _listItem.SubItems.Add(_newItem.Category);
                 }
 
                 _listItem.Tag = item;
@@ -252,17 +252,17 @@
 
                 if (_newsForm.DialogResult == DialogResult.OK)       // The Save button was clicked
                 {
-                    New new1 = new New();
+                    New _new = new New();
 
-                    new1 = _newsForm._formNew;
+                    _new = _newsForm._formNew;
 
-                    _selectedItem.Text = new1.Title;  // Update the first column
-                    _selectedItem.SubItems[1].Text = new1.Date.ToString();
-                    _selectedItem.SubItems[2].Text = new1.Description;
-                    _selectedItem.SubItems[3].Text = new1.GuidValue.ToString();
-                    _selectedItem.SubItems[4].Text = new1.Body;
+                    _selectedItem.Text = _new.Title;  // Update the first column
+                    _selectedItem.SubItems[1].Text = _new.Date.ToString();
+                    _selectedItem.SubItems[2].Text = _new.Description;
+                    _selectedItem.SubItems[3].Text = _new.GuidValue.ToString();
+                    _selectedItem.SubItems[4].Text = _new.Body;
 
-                    _selectedItem.Tag = new1;
+                    _selectedItem.Tag = _new;
 
                 }
 
@@ -280,15 +280,15 @@
 
 
 
-                    Photo photo1 = _photoForm.formPhoto;
+                    Photo _photo = _photoForm.formPhoto;
 
-                    _selectedItem.Text = photo1.Title;  // Update the first column
-                    _selectedItem.SubItems[1].Text = photo1.Date.ToString();
-                    _selectedItem.SubItems[2].Text = photo1.Description;
-                    _selectedItem.SubItems[3].Text = photo1.GuidValue.ToString();
-                    _selectedItem.SubItems[4].Text = photo1.Body;
+                    _selectedItem.Text = _photo.Title;  // Update the first column
+                    _selectedItem.SubItems[1].Text = _photo.Date.ToString();
+                    _selectedItem.SubItems[2].Text = _photo.Description;
+                    _selectedItem.SubItems[3].Text = _photo.GuidValue.ToString();
+                    _selectedItem.SubItems[4].Text = _photo.Body;
 
-                    _selectedItem.Tag = photo1;
+                    _selectedItem.Tag = _photo;
                 }
 
 

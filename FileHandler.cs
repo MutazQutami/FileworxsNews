@@ -10,90 +10,90 @@ namespace FileworxsNews
     public static class FileHandler
     {
         public static string FindPath(FileWorxEntity obj){
-            string projectPath = AppDomain.CurrentDomain.BaseDirectory;
-            string folderType = obj switch
+            string _projectPath = AppDomain.CurrentDomain.BaseDirectory;
+            string _folderType = obj switch
             {
                 User => "Users",
                 Photo => "Photos",
                 _ => "News"
             };
 
-            string targetFolder = Path.Combine(projectPath, folderType);
+            string _targetFolder = Path.Combine(_projectPath, _folderType);
 
-            if (!Directory.Exists(targetFolder))
+            if (!Directory.Exists(_targetFolder))
             {
-                Directory.CreateDirectory(targetFolder);
+                Directory.CreateDirectory(_targetFolder);
             }
 
-            return targetFolder;
+            return _targetFolder;
         }
 
-        public static void JsonSerialization(FileWorxEntity obj){
-            string folderPath = FindPath(obj);
-            string finalPath = Path.Combine(folderPath, $"{obj.GuidValue}.json");
+        public static void JsonSerialization(FileWorxEntity _obj){
+            string _folderPath = FindPath(_obj);
+            string _finalPath = Path.Combine(_folderPath, $"{_obj.GuidValue}.json");
 
-            if (File.Exists(finalPath))
+            if (File.Exists(_finalPath))
             {
-                File.Delete(finalPath);
+                File.Delete(_finalPath);
             }
 
-            string jsonObject = JsonConvert.SerializeObject(obj, Formatting.Indented);
+            string _jsonObject = JsonConvert.SerializeObject(_obj, Formatting.Indented);
 
             try
             {
-                File.WriteAllText(finalPath, jsonObject);
+                File.WriteAllText(_finalPath, _jsonObject);
             }
-            catch (Exception ex)
+            catch (Exception _ex)
             {
-                MessageBox.Show($"Can't store the file. Error: {ex.Message}");
+                MessageBox.Show($"Can't store the file. Error: {_ex.Message}");
             }
         }
 
-        public static List<FileWorxEntity> JsonDeserializationObjects(FileWorxEntity obj){
-            List<FileWorxEntity> objectList = new List<FileWorxEntity>();
-            string objectsPath = FindPath(obj);
+        public static List<FileWorxEntity> JsonDeserializationObjects(FileWorxEntity _obj){
+            List<FileWorxEntity> _objectList = new List<FileWorxEntity>();
+            string _objectsPath = FindPath(_obj);
 
-            if (!Directory.Exists(objectsPath))
+            if (!Directory.Exists(_objectsPath))
             {
                 MessageBox.Show("Error: Directory does not exist.");
-                return objectList;
+                return _objectList;
             }
 
-            foreach (var file in Directory.GetFiles(objectsPath, "*.json"))
+            foreach (var _file in Directory.GetFiles(_objectsPath, "*.json"))
             {
                 try
                 {
-                    string fileContent = File.ReadAllText(file);
-                    FileWorxEntity deserializedObject = obj switch
+                    string _fileContent = File.ReadAllText(_file);
+                    FileWorxEntity _deserializedObject = _obj switch
                     {
-                        Photo => JsonConvert.DeserializeObject<Photo>(fileContent),
-                        New => JsonConvert.DeserializeObject<New>(fileContent),
-                        User => JsonConvert.DeserializeObject<User>(fileContent),
+                        Photo => JsonConvert.DeserializeObject<Photo>(_fileContent),
+                        New => JsonConvert.DeserializeObject<New>(_fileContent),
+                        User => JsonConvert.DeserializeObject<User>(_fileContent),
                         _ => null
                     };
 
-                    if (deserializedObject != null)
+                    if (_deserializedObject != null)
                     {
-                        objectList.Add(deserializedObject);
+                        _objectList.Add(_deserializedObject);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error reading file {file}: {ex.Message}");
+                    MessageBox.Show($"Error reading file {_file}: {ex.Message}");
                 }
             }
 
-            return objectList;
+            return _objectList;
         }
 
-        public static void DeleteObject(FileWorxEntity obj){
-            string path = Path.Combine(FindPath(obj), $"{obj.GuidValue}.json");
+        public static void DeleteObject(FileWorxEntity _obj){
+            string _path = Path.Combine(FindPath(_obj), $"{_obj.GuidValue}.json");
 
-            if (File.Exists(path))
+            if (File.Exists(_path))
             {
                 try
                 {
-                    File.Delete(path);
+                    File.Delete(_path);
                 }
                 catch (Exception)
                 {

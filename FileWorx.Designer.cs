@@ -149,7 +149,7 @@
             btnAddPhoto.Anchor = AnchorStyles.Right;
             btnAddPhoto.Cursor = Cursors.Hand;
             btnAddPhoto.ForeColor = Color.Black;
-            btnAddPhoto.Location = new Point(1287, 2);
+            btnAddPhoto.Location = new Point(1287, 7);
             btnAddPhoto.Name = "btnAddPhoto";
             btnAddPhoto.Size = new Size(133, 50);
             btnAddPhoto.TabIndex = 7;
@@ -162,7 +162,7 @@
             btnAddNew.Anchor = AnchorStyles.Right;
             btnAddNew.Cursor = Cursors.Hand;
             btnAddNew.ForeColor = Color.Black;
-            btnAddNew.Location = new Point(1289, 59);
+            btnAddNew.Location = new Point(1289, 64);
             btnAddNew.Name = "btnAddNew";
             btnAddNew.Size = new Size(131, 50);
             btnAddNew.TabIndex = 6;
