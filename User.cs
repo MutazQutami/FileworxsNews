@@ -16,7 +16,7 @@ namespace FileworxsNews
 
         public string Password { get; set; }
 
-        public string lastModifier { get; set; }
+        public string LastModifier { get; set; }
 
         public bool IsEqual(User? other)
         {

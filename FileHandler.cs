@@ -1,125 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 
 namespace FileworxsNews
 {
     public static class FileHandler
-
     {
-
-        public static string FindPath(FileWorxEntity _obj)
-
+        public static string FindPath(FileWorxEntity obj)
         {
-
-            string _projectPath = AppDomain.CurrentDomain.BaseDirectory; // Path of the current project
-
-
-
-            string _folderType = string.Empty;
-
-            _folderType = _obj switch
+            string projectPath = AppDomain.CurrentDomain.BaseDirectory;
+            string folderType = obj switch
             {
                 User => "Users",
                 Photo => "Photos",
                 _ => "News"
             };
 
-            string _targetFolder = Path.Combine(_projectPath, _folderType);  // Path according to object type
+            string targetFolder = Path.Combine(projectPath, folderType);
 
-            if (!Directory.Exists(_targetFolder))
-
+            if (!Directory.Exists(targetFolder))
             {
-
-                Directory.CreateDirectory(_targetFolder); // Create the directory if it does not exist
-
+                Directory.CreateDirectory(targetFolder);
             }
 
-            return _targetFolder;
-
+            return targetFolder;
         }
 
-        public static void JsonSerialization(FileWorxEntity _obj)
-
+        public static void JsonSerialization(FileWorxEntity obj)
         {
+            string folderPath = FindPath(obj);
+            string finalPath = Path.Combine(folderPath, $"{obj.GuidValue}.json");
 
-
-            string _folderPath = FindPath(_obj); // Find the appropriate directory
-
-
-            string _finalPath = Path.Combine(_folderPath, $"{_obj.GuidValue}.json");  // json file with GUID naming
-
-
-            if (File.Exists(_finalPath))  // duplicate avoidance
+            if (File.Exists(finalPath))
             {
-                File.Delete(_finalPath);
+                File.Delete(finalPath);
             }
 
-
-            string _jsonObject = JsonConvert.SerializeObject(_obj, Newtonsoft.Json.Formatting.Indented);
+            string jsonObject = JsonConvert.SerializeObject(obj, Formatting.Indented);
 
             try
-
             {
-
-                File.WriteAllText(_finalPath, _jsonObject);
-
-
+                File.WriteAllText(finalPath, jsonObject);
             }
-
             catch (Exception ex)
             {
-                MessageBox.Show($"Can't Store the file. Error: {ex.Message}");
+                MessageBox.Show($"Can't store the file. Error: {ex.Message}");
             }
-
-
-
-
         }
 
-        public static List<FileWorxEntity> JsonDeserializationObjects(FileWorxEntity _obj)
+        public static List<FileWorxEntity> JsonDeserializationObjects(FileWorxEntity obj)
         {
+            List<FileWorxEntity> objectList = new List<FileWorxEntity>();
+            string objectsPath = FindPath(obj);
 
-
-            List<FileWorxEntity> _objectList = new List<FileWorxEntity>();
-
-            string _objectsPath = FindPath(_obj);
-
-            if (!Directory.Exists(_objectsPath))
+            if (!Directory.Exists(objectsPath))
             {
                 MessageBox.Show("Error: Directory does not exist.");
-                return _objectList;
+                return objectList;
             }
 
-            foreach (var file in Directory.GetFiles(_objectsPath, "*.json"))
+            foreach (var file in Directory.GetFiles(objectsPath, "*.json"))
             {
                 try
                 {
                     string fileContent = File.ReadAllText(file);
-
-                    FileWorxEntity deserializedObject = null;
-
-                    if (_obj is Photo)
+                    FileWorxEntity deserializedObject = obj switch
                     {
-                        deserializedObject = JsonConvert.DeserializeObject<Photo>(fileContent);
-                    }
-                    else if (_obj is New)
-                    {
-                        deserializedObject = JsonConvert.DeserializeObject<New>(fileContent);
-                    }
-                    else if (_obj is User)
-                    {
-                        deserializedObject = JsonConvert.DeserializeObject<User>(fileContent);
-                    }
-
-
+                        Photo => JsonConvert.DeserializeObject<Photo>(fileContent),
+                        New => JsonConvert.DeserializeObject<New>(fileContent),
+                        User => JsonConvert.DeserializeObject<User>(fileContent),
+                        _ => null
+                    };
 
                     if (deserializedObject != null)
                     {
-                        _objectList.Add(deserializedObject);
+                        objectList.Add(deserializedObject);
                     }
                 }
                 catch (Exception ex)
@@ -128,34 +86,24 @@ namespace FileworxsNews
                 }
             }
 
-            return _objectList;
+            return objectList;
         }
 
-        public static void DeleteObject(FileWorxEntity _obj)
+        public static void DeleteObject(FileWorxEntity obj)
         {
-            string _path = FindPath(_obj);
-            _path = Path.Combine(_path, _obj.GuidValue.ToString() + ".json");
+            string path = Path.Combine(FindPath(obj), $"{obj.GuidValue}.json");
 
-            if (File.Exists(_path))
+            if (File.Exists(path))
             {
-
-                
-                    if (File.Exists(_path))
-
-                    {
-
-                        File.Delete(_path);
-
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Error deleting the file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                
+                try
+                {
+                    File.Delete(path);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error deleting the file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-
-
         }
-
     }
 }

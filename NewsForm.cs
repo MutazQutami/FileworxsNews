@@ -4,23 +4,21 @@ namespace FileworxsNews
 {
     public partial class NewsForm : Form
     {
-
         private void saveButton_Click(object sender, EventArgs e)
         {
-
-            if (string.IsNullOrEmpty(txtTitleField.Text) || string.IsNullOrEmpty(txtDescriptionField.Text) // nullField Validations
-                || string.IsNullOrEmpty(categoryList.Text) || string.IsNullOrEmpty(txtBodyField.Text))
+            // Null field validations
+            if (string.IsNullOrEmpty(txtTitleField.Text) ||
+                string.IsNullOrEmpty(txtDescriptionField.Text) ||
+                string.IsNullOrEmpty(categoryList.Text) ||
+                string.IsNullOrEmpty(txtBodyField.Text))
             {
-
-
                 nullFieldsWarnning.Show();
             }
             else
             {
                 nullFieldsWarnning.Hide();
 
-
-                if (!EditForm)
+                if (!_editForm)
                 {
                     _formNew = new New();
                 }
@@ -30,25 +28,19 @@ namespace FileworxsNews
                 _formNew.Category = categoryList.Text;
                 _formNew.Body = txtBodyField.Text;
 
-
                 try
                 {
                     FileHandler.JsonSerialization(_formNew);
                 }
                 catch (Exception _ex)
                 {
-
                     MessageBox.Show($"An unexpected error occurred: {_ex.Message}");
                 }
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-
-
-
         }
-
 
         private void cancleButton_Click(object sender, EventArgs e)
         {
@@ -56,35 +48,28 @@ namespace FileworxsNews
             this.Close();
         }
 
-        public  New _formNew;
-
-        public static bool EditForm = false;
+        public New _formNew;
+        public static bool _editForm = false;
 
         public NewsForm()
         {
             InitializeComponent();
             nullFieldsWarnning.Hide();
-            EditForm = false;
-
+            _editForm = false;
         }
+
         public NewsForm(New _new)
         {
-            
-
             InitializeComponent();
-            this.txtTitleField.Text = _new.Title;
-            this.txtDescriptionField.Text = _new.Description;
-            this.categoryList.Text = _new.Category;
-            this.txtBodyField.Text = _new.Body;
+            txtTitleField.Text = _new.Title;
+            txtDescriptionField.Text = _new.Description;
+            categoryList.Text = _new.Category;
+            txtBodyField.Text = _new.Body;
 
             _formNew = _new;
-            EditForm = true;
+            _editForm = true;
 
             nullFieldsWarnning.Hide();
         }
-
-
-
-      
     }
 }

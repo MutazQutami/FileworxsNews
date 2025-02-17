@@ -143,6 +143,7 @@
             // btnAddPhoto
             // 
             btnAddPhoto.Anchor = AnchorStyles.Right;
+            btnAddPhoto.Cursor = Cursors.Hand;
             btnAddPhoto.ForeColor = Color.Black;
             btnAddPhoto.Location = new Point(1657, 3);
             btnAddPhoto.Margin = new Padding(4);
@@ -156,6 +157,7 @@
             // btnAddNew
             // 
             btnAddNew.Anchor = AnchorStyles.Right;
+            btnAddNew.Cursor = Cursors.Hand;
             btnAddNew.ForeColor = Color.Black;
             btnAddNew.Location = new Point(1660, 83);
             btnAddNew.Margin = new Padding(4);

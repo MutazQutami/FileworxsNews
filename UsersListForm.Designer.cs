@@ -32,7 +32,7 @@
             nameColumnHeader = new ColumnHeader();
             logInColumnHeader = new ColumnHeader();
             creationDateColumnHeader = new ColumnHeader();
-            lastModifierColumnHeader = new ColumnHeader();
+            LastModifierColumnHeader = new ColumnHeader();
             passwordColumnHeader4 = new ColumnHeader();
             btnAddUser = new Button();
             pnlTop = new Panel();
@@ -44,7 +44,7 @@
             // userList
             // 
             userList.BackColor = Color.FromArgb(224, 224, 224);
-            userList.Columns.AddRange(new ColumnHeader[] { nameColumnHeader, logInColumnHeader, creationDateColumnHeader, lastModifierColumnHeader, passwordColumnHeader4 });
+            userList.Columns.AddRange(new ColumnHeader[] { nameColumnHeader, logInColumnHeader, creationDateColumnHeader, LastModifierColumnHeader, passwordColumnHeader4 });
             userList.Cursor = Cursors.Hand;
             userList.Dock = DockStyle.Fill;
             userList.FullRowSelect = true;
@@ -70,9 +70,9 @@
             // 
             creationDateColumnHeader.Text = "Creation Date";
             // 
-            // lastModifierColumnHeader
+            // LastModifierColumnHeader
             // 
-            lastModifierColumnHeader.Text = "Password";
+            LastModifierColumnHeader.Text = "Password";
             // 
             // passwordColumnHeader4
             // 
@@ -134,7 +134,7 @@
         private ColumnHeader logInColumnHeader;
         private ColumnHeader creationDateColumnHeader;
         private ColumnHeader passwordColumnHeader4;
-        private ColumnHeader lastModifierColumnHeader;
+        private ColumnHeader LastModifierColumnHeader;
         private Button btnAddUser;
         private Panel pnlTop;
         private Panel pnlBody;

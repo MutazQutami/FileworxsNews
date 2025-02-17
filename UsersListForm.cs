@@ -1,11 +1,14 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 
 namespace FileworxsNews
 {
     public partial class UsersListForm : Form
     {
-
+      
         private void UsersListResize(object sender, EventArgs e)
         {
             ResizeUsersTable();
@@ -13,143 +16,103 @@ namespace FileworxsNews
 
         private void userListDoubleClick(object sender, EventArgs e)
         {
-
-
-
-
             if (userList.SelectedItems.Count > 0)
             {
-                ListViewItem _selectedItem = userList.SelectedItems[0];
-                var _selectedObject = _selectedItem.Tag;
+                ListViewItem selectedItem = userList.SelectedItems[0];
+                var selectedObject = selectedItem.Tag;
 
-                if (_selectedObject is User _selectedUser)
+                if (selectedObject is User selectedUser)
                 {
-
-                    UserForm form = new UserForm(_selectedUser);
+                    UserForm form = new UserForm(selectedUser);
                     this.Enabled = false;
                     form.ShowDialog();
                     this.Enabled = true; // Re-enable when done
 
                     if (form.DialogResult == DialogResult.OK)
                     {
-
-                        User user1 = new User();
-
-                        user1 = form.formUser;
-
-                        _selectedItem.Text = user1.Name;  // Update the first column
-                        _selectedItem.SubItems[1].Text = user1.LogInName;
-                        //_selectedItem.SubItems[2].Text = user1.Name;
-                        _selectedItem.SubItems[3].Text = user1.Password;
-                        _selectedItem.SubItems[4].Text = user1.lastModifier;
-
+                        User updatedUser = form.formUser;
+                        selectedItem.Text = updatedUser.Name;  // Update the first column
+                        selectedItem.SubItems[1].Text = updatedUser.LogInName;
+                        selectedItem.SubItems[3].Text = updatedUser.Password;
+                        selectedItem.SubItems[4].Text = updatedUser.LastModifier;
                     }
-
                 }
-
-
             }
         }
 
         private void OnAddUserButtonClick(object sender, EventArgs e)
         {
-            UserForm new1 = new UserForm();
+            UserForm newUserForm = new UserForm();
 
-            if (new1.ShowDialog() == DialogResult.OK)
+            if (newUserForm.ShowDialog() == DialogResult.OK)
             {
-                User new2 = new1.formUser;
-                ListViewItem _listItem = new ListViewItem(new2.Name);
+                User newUser = newUserForm.formUser;
+                ListViewItem listItem = new ListViewItem(newUser.Name)
+                {
+                    Tag = newUser
+                };
 
+                listItem.SubItems.Add(newUser.LogInName);
+                listItem.SubItems.Add(newUser.Date.ToString());
+                listItem.SubItems.Add(newUser.Password);
+                listItem.SubItems.Add(newUser.LastModifier);
+                listItem.SubItems.Add(newUser.GuidValue.ToString());
 
-                _listItem.SubItems.Add(new2.LogInName);
-                _listItem.SubItems.Add(new2.Date.ToString());
-                _listItem.SubItems.Add(new2.Password);
-                _listItem.SubItems.Add(new2.lastModifier);
-                _listItem.SubItems.Add(new2.GuidValue.ToString());
-
-                _listItem.Tag = new2;
-
-                userList.Items.Insert(0, _listItem);
-
-
-                return;
+                userList.Items.Insert(0, listItem);
             }
         }
 
         private void OnUserListMouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right && userList.FocusedItem != null)
             {
-                if (userList.FocusedItem != null)
+                FileWorxEntity selectedObject = (FileWorxEntity)userList.FocusedItem.Tag;
+                DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
                 {
-                    // Get selected object (assuming it's stored in Tag property)
-                    FileWorxEntity _selectedObject = (FileWorxEntity)userList.FocusedItem.Tag;
-
-
-                    DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                    if (result == DialogResult.Yes)
-                    {
-                        FileHandler.DeleteObject(_selectedObject);
-
-                        userList.Items.Remove(userList.FocusedItem);
-
-                    }
-
-
-
-
-
-
-
-
+                    FileHandler.DeleteObject(selectedObject);
+                    userList.Items.Remove(userList.FocusedItem);
                 }
             }
         }
-
 
         public UsersListForm()
         {
             InitializeComponent();
             ResizeUsersTable();
-            RetreiveUsers();
+            RetrieveUsers();
         }
 
-
-        public void ResizeUsersTable()
+        private void ResizeUsersTable()
         {
-            int _columnWidth = userList.Width;
-
+            int columnWidth = userList.Width;
 
             for (int i = 0; i < userList.Columns.Count; i++)
             {
-                userList.Columns[i].Width = (int)(_columnWidth * 0.20);
+                userList.Columns[i].Width = (int)(columnWidth * 0.20);
             }
-
-
         }
 
-        public void RetreiveUsers()
+        private void RetrieveUsers()
         {
-
             userList.Items.Clear();
+            List<User> users = FileHandler.JsonDeserializationObjects(new User()).Cast<User>().ToList();
 
-            List<User> _users = FileHandler.JsonDeserializationObjects(new User()).Cast<User>().ToList();
-
-            foreach (User item in _users)
+            foreach (User user in users)
             {
-                ListViewItem listItem = new ListViewItem(item.Name);
-                listItem.SubItems.Add(item.LogInName);
-                listItem.SubItems.Add(item.Date.ToString());
-                listItem.SubItems.Add(item.Password.ToString());
-                listItem.SubItems.Add(item.lastModifier);
+                ListViewItem listItem = new ListViewItem(user.Name)
+                {
+                    Tag = user
+                };
 
-                listItem.Tag = item;
+                listItem.SubItems.Add(user.LogInName);
+                listItem.SubItems.Add(user.Date.ToString());
+                listItem.SubItems.Add(user.Password);
+                listItem.SubItems.Add(user.LastModifier);
+
                 userList.Items.Add(listItem);
-
             }
         }
-
-       
     }
 }

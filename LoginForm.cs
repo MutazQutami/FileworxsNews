@@ -16,83 +16,50 @@ namespace FileworxsNews
     {
         private void SignUp(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
-            //this.Hide();
-
-
-            UserForm user = new UserForm();
-            user.Size = this.Size;
-            user.ShowDialog();
-
-
-
+            UserForm userForm = new UserForm();
+            userForm.Size = this.Size;
+            userForm.ShowDialog();
         }
 
         private void LogIn(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(userNameField.Text) ||
-                String.IsNullOrEmpty(passwordField.Text))
+            if (string.IsNullOrEmpty(userNameField.Text) || string.IsNullOrEmpty(passwordField.Text))
             {
                 wrongCredentials.Hide();
                 nullFieldWarning.Show();
+                return;
             }
-            else
+
+            nullFieldWarning.Hide();
+            User loginUser = new User
             {
+                LogInName = userNameField.Text,
+                Password = passwordField.Text
+            };
 
-                nullFieldWarning.Hide();
+            string usersFilePath = FileHandler.FindPath(loginUser);
 
+            foreach (var file in Directory.GetFiles(usersFilePath, "*.json"))
+            {
+                string fileContent = File.ReadAllText(file);
+                User deserializedUser = JsonConvert.DeserializeObject<User>(fileContent);
 
-
-                //search for username and password
-
-
-                User loginUser = new User();
-
-                loginUser.LogInName = userNameField.Text;
-                loginUser.Password = passwordField.Text;
-
-                string UsersFile = FileHandler.FindPath(loginUser);
-
-
-                // compare with all users
-
-                foreach (var file in Directory.GetFiles(UsersFile, "*.json"))
+                if (loginUser.IsEqual(deserializedUser))
                 {
-
-                    // extract the content of the user 
-
-                    string fileContent = File.ReadAllText(file);
-                    User deserializeduser = JsonConvert.DeserializeObject<User>(fileContent);
-
-                    if (loginUser.IsEqual(deserializeduser))
-                    {
-
-                        FileWorx filewors = new FileWorx();   // success 
-
-                        filewors.Show();
-                        return;
-
-
-
-
-                    }
-
-
+                    FileWorx fileWorx = new FileWorx();
+                    fileWorx.Show();
+                    return;
                 }
-                wrongCredentials.Show(); // fail
             }
-        }
 
+            wrongCredentials.Show();
+        }
         public LogInForm()
         {
             InitializeComponent();
-
             nullFieldWarning.Hide();
             wrongCredentials.Hide();
         }
 
-       
     }
 }
-
-

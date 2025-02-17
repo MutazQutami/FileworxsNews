@@ -86,6 +86,7 @@
             // 
             // checkUploadPhotoWarning
             // 
+            checkUploadPhotoWarning.Anchor = AnchorStyles.None;
             checkUploadPhotoWarning.AutoSize = true;
             checkUploadPhotoWarning.BackColor = Color.White;
             checkUploadPhotoWarning.Font = new Font("Segoe UI", 9F);
@@ -99,6 +100,7 @@
             // 
             // nullFieldsWarnning
             // 
+            nullFieldsWarnning.Anchor = AnchorStyles.None;
             nullFieldsWarnning.AutoSize = true;
             nullFieldsWarnning.Font = new Font("Segoe UI", 9F);
             nullFieldsWarnning.ForeColor = Color.Red;
@@ -111,6 +113,7 @@
             // 
             // btnCancel
             // 
+            btnCancel.Anchor = AnchorStyles.None;
             btnCancel.BackColor = Color.Brown;
             btnCancel.Cursor = Cursors.Hand;
             btnCancel.FlatAppearance.BorderSize = 0;
@@ -122,10 +125,11 @@
             btnCancel.TabIndex = 7;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = false;
-            btnCancel.Click += OnCancleButtonClick;
+            btnCancel.Click += OnCancelButtonClick;
             // 
             // btnSave
             // 
+            btnSave.Anchor = AnchorStyles.None;
             btnSave.BackColor = Color.FromArgb(0, 130, 200);
             btnSave.Cursor = Cursors.Hand;
             btnSave.FlatAppearance.BorderSize = 0;
@@ -141,6 +145,7 @@
             // 
             // txtBodyField
             // 
+            txtBodyField.Anchor = AnchorStyles.None;
             txtBodyField.BorderStyle = BorderStyle.FixedSingle;
             txtBodyField.Location = new Point(243, 232);
             txtBodyField.MaxLength = 10000;
@@ -151,6 +156,7 @@
             // 
             // lblBodyField
             // 
+            lblBodyField.Anchor = AnchorStyles.None;
             lblBodyField.AutoSize = true;
             lblBodyField.Location = new Point(76, 232);
             lblBodyField.Name = "lblBodyField";
@@ -160,6 +166,7 @@
             // 
             // lblDescriptionField
             // 
+            lblDescriptionField.Anchor = AnchorStyles.None;
             lblDescriptionField.AutoSize = true;
             lblDescriptionField.Location = new Point(76, 150);
             lblDescriptionField.Name = "lblDescriptionField";
@@ -169,6 +176,7 @@
             // 
             // lblTitleField
             // 
+            lblTitleField.Anchor = AnchorStyles.None;
             lblTitleField.AutoSize = true;
             lblTitleField.Location = new Point(76, 67);
             lblTitleField.Name = "lblTitleField";
@@ -178,6 +186,7 @@
             // 
             // txtDescriptionField
             // 
+            txtDescriptionField.Anchor = AnchorStyles.None;
             txtDescriptionField.BorderStyle = BorderStyle.FixedSingle;
             txtDescriptionField.Location = new Point(243, 150);
             txtDescriptionField.MaxLength = 255;
@@ -187,6 +196,7 @@
             // 
             // txtTitleField
             // 
+            txtTitleField.Anchor = AnchorStyles.None;
             txtTitleField.BorderStyle = BorderStyle.FixedSingle;
             txtTitleField.Location = new Point(243, 67);
             txtTitleField.MaxLength = 255;

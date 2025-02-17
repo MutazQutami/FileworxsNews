@@ -3,12 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|c:\\users\\user\\desktop\\githup\\fileworxnews\\userslistform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:userslistform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\photoform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:photoform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\userslistform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:userslistform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|c:\\users\\user\\desktop\\githup\\fileworxnews\\photoform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:photoform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|c:\\users\\user\\desktop\\githup\\fileworxnews\\photoform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:photoform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|c:\\users\\user\\desktop\\githup\\fileworxnews\\fileworx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:fileworx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\fileworx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:fileworx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|c:\\users\\user\\desktop\\githup\\fileworxnews\\fileworxentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:fileworxentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|c:\\users\\user\\desktop\\githup\\fileworxnews\\userslistform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,18 +43,6 @@
       "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|c:\\users\\user\\desktop\\githup\\fileworxnews\\photoform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:photoform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\photoform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:photoform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|c:\\users\\user\\desktop\\githup\\fileworxnews\\photoform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:photoform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|c:\\users\\user\\desktop\\githup\\fileworxnews\\photo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:photo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -55,18 +59,6 @@
       "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|c:\\users\\user\\desktop\\githup\\fileworxnews\\fileworxentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:fileworxentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|c:\\users\\user\\desktop\\githup\\fileworxnews\\fileworx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:fileworx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|c:\\users\\user\\desktop\\githup\\fileworxnews\\filehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:filehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -75,8 +67,16 @@
       "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:content.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\fileworx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:fileworx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\userslistform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:userslistform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|c:\\users\\user\\desktop\\githup\\fileworxnews\\userslistform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:userslistform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|solutionrelative:loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2836CC42-D295-4987-941F-ED0E292A055F}|FileworxsNews.csproj|c:\\users\\user\\desktop\\githup\\fileworxnews\\fileworx.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -110,17 +110,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 14,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 17,
               "Title": "UsersListForm.Designer.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\UsersListForm.Designer.cs",
               "RelativeDocumentMoniker": "UsersListForm.Designer.cs",
               "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\UsersListForm.Designer.cs",
               "RelativeToolTip": "UsersListForm.Designer.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAlwFcAAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAlwFgAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-16T20:07:40.384Z",
               "EditorCaption": ""
@@ -140,7 +140,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 4,
               "Title": "FileWorx.cs [Design]",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\FileWorx.cs",
               "RelativeDocumentMoniker": "FileWorx.cs",
@@ -152,20 +152,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 15,
               "Title": "Content.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\Content.cs",
               "RelativeDocumentMoniker": "Content.cs",
               "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\Content.cs",
               "RelativeToolTip": "Content.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-16T15:31:35.31Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 16,
               "Title": "UsersListForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\UsersListForm.cs",
               "RelativeDocumentMoniker": "UsersListForm.cs",
@@ -177,26 +177,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "UsersListForm.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\UsersListForm.cs",
               "RelativeDocumentMoniker": "UsersListForm.cs",
               "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\UsersListForm.cs",
               "RelativeToolTip": "UsersListForm.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAjwDUAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-15T20:17:53.917Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "UserForm.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\UserForm.cs",
               "RelativeDocumentMoniker": "UserForm.cs",
               "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\UserForm.cs",
               "RelativeToolTip": "UserForm.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAEEAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAAA/wD4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-15T20:20:06.273Z",
               "EditorCaption": ""
@@ -210,8 +210,7 @@
               "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\UserForm.cs [Design]",
               "RelativeToolTip": "UserForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-15T20:18:41.059Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-02-15T20:18:41.059Z"
             },
             {
               "$type": "Document",
@@ -227,46 +226,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\User.cs",
               "RelativeDocumentMoniker": "User.cs",
               "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\User.cs",
               "RelativeToolTip": "User.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAA8wBQAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-16T15:27:31.405Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "NewsForm.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\NewsForm.cs",
               "RelativeDocumentMoniker": "NewsForm.cs",
               "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\NewsForm.cs",
               "RelativeToolTip": "NewsForm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADoAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-15T21:11:40.248Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 3,
               "Title": "FileWorx.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\FileWorx.cs",
               "RelativeDocumentMoniker": "FileWorx.cs",
               "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\FileWorx.cs*",
               "RelativeToolTip": "FileWorx.cs*",
-              "ViewState": "AgIAAEMAAAAAAAAAAAA7wCgBAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAuwGgBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-15T20:20:42.878Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -279,32 +278,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 14,
               "Title": "FileHandler.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\FileHandler.cs",
               "RelativeDocumentMoniker": "FileHandler.cs",
               "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\FileHandler.cs",
               "RelativeToolTip": "FileHandler.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAkwEMAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-16T15:30:56.861Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
               "Title": "PhotoForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\PhotoForm.cs",
               "RelativeDocumentMoniker": "PhotoForm.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\PhotoForm.cs [Design]",
-              "RelativeToolTip": "PhotoForm.cs [Design]",
+              "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\PhotoForm.cs [Design]*",
+              "RelativeToolTip": "PhotoForm.cs [Design]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-15T21:28:58.743Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Photo.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\Photo.cs",
               "RelativeDocumentMoniker": "Photo.cs",
@@ -317,7 +316,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 18,
               "Title": "LoginForm.cs [Design]",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\LoginForm.cs",
               "RelativeDocumentMoniker": "LoginForm.cs",
@@ -329,7 +328,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 5,
               "Title": "FileWorxEntity.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\FileWorxEntity.cs",
               "RelativeDocumentMoniker": "FileWorxEntity.cs",
@@ -342,7 +341,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "New.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\New.cs",
               "RelativeDocumentMoniker": "New.cs",
@@ -355,39 +354,39 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "LoginForm.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\LoginForm.cs",
               "RelativeDocumentMoniker": "LoginForm.cs",
               "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\LoginForm.cs",
               "RelativeToolTip": "LoginForm.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAIwFwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwD4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-16T08:10:48.926Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "PhotoForm.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\PhotoForm.cs",
               "RelativeDocumentMoniker": "PhotoForm.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\PhotoForm.cs",
-              "RelativeToolTip": "PhotoForm.cs",
-              "ViewState": "AgIAAF8AAAAAAAAAAADgv2sAAAAaAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\PhotoForm.cs*",
+              "RelativeToolTip": "PhotoForm.cs*",
+              "ViewState": "AgIAADAAAAAAAAAAAAAYwDsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-15T21:27:29.754Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 2,
               "Title": "PhotoForm.Designer.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\PhotoForm.Designer.cs",
               "RelativeDocumentMoniker": "PhotoForm.Designer.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\PhotoForm.Designer.cs",
-              "RelativeToolTip": "PhotoForm.Designer.cs",
-              "ViewState": "AgIAAOUAAAAAAAAAAAAAwO8AAAA7AAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\PhotoForm.Designer.cs*",
+              "RelativeToolTip": "PhotoForm.Designer.cs*",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAvwHsAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-15T21:29:36.284Z",
               "EditorCaption": ""
@@ -415,8 +414,7 @@
               "RelativeToolTip": "UserForm.Designer.cs",
               "ViewState": "AgIAAJIAAAAAAAAAAAAswNAAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-15T21:40:30.79Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-15T21:40:30.79Z"
             },
             {
               "$type": "Document",
@@ -426,7 +424,7 @@
               "RelativeDocumentMoniker": "FileWorx.Designer.cs",
               "ToolTip": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\FileWorx.Designer.cs*",
               "RelativeToolTip": "FileWorx.Designer.cs*",
-              "ViewState": "AgIAADEBAAAAAAAAAAASwEEBAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAADMBAAAAAAAAAAASwEMBAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-15T22:02:59.462Z",
               "EditorCaption": ""

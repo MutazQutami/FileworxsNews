@@ -295,7 +295,7 @@
 
             }
         }
-        public void EditContent(FileWorxEntity _selectedObject, ListViewItem _selectedItem)
+        private void EditContent(FileWorxEntity _selectedObject, ListViewItem _selectedItem)
         {
             if (_selectedObject is New _selectedNews)
             {
