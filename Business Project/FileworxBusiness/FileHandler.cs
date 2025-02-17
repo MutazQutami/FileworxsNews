@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Windows.Forms;
+using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace FileworxsNews
+namespace FileworxBusiness
 {
     public static class FileHandler
     {
-        public static string FindPath(FileWorxEntity obj){
+        public static string FindPath(FileWorxEntity obj)
+        {
             string _projectPath = AppDomain.CurrentDomain.BaseDirectory;
             string _folderType = obj switch
             {
@@ -28,7 +29,8 @@ namespace FileworxsNews
             return _targetFolder;
         }
 
-        public static void JsonSerialization(FileWorxEntity _obj){
+        public static void JsonSerialization(FileWorxEntity _obj)
+        {
             string _folderPath = FindPath(_obj);
             string _finalPath = Path.Combine(_folderPath, $"{_obj.GuidValue}.json");
 
@@ -45,17 +47,18 @@ namespace FileworxsNews
             }
             catch (Exception _ex)
             {
-                MessageBox.Show($"Can't store the file. Error: {_ex.Message}");
+                //MessageBox.Show($"Can't store the file. Error: {_ex.Message}");
             }
         }
 
-        public static List<FileWorxEntity> JsonDeserializationObjects(FileWorxEntity _obj){
+        public static List<FileWorxEntity> JsonDeserializationObjects(FileWorxEntity _obj)
+        {
             List<FileWorxEntity> _objectList = new List<FileWorxEntity>();
             string _objectsPath = FindPath(_obj);
 
             if (!Directory.Exists(_objectsPath))
             {
-                MessageBox.Show("Error: Directory does not exist.");
+                //MessageBox.Show("Error: Directory does not exist.");
                 return _objectList;
             }
 
@@ -86,7 +89,8 @@ namespace FileworxsNews
             return _objectList;
         }
 
-        public static void DeleteObject(FileWorxEntity _obj){
+        public static void DeleteObject(FileWorxEntity _obj)
+        {
             string _path = Path.Combine(FindPath(_obj), $"{_obj.GuidValue}.json");
 
             if (File.Exists(_path))

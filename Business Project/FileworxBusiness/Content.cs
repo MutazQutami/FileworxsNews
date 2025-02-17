@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileworxsNews
+namespace FileworxBusiness
 {
     public class Content : FileWorxEntity
     {
@@ -14,5 +14,4 @@ namespace FileworxsNews
 
 
     }
-
 }
