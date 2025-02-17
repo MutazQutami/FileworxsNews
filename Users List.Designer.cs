@@ -44,39 +44,46 @@
             // userList
             // 
             userList.BackColor = Color.FromArgb(224, 224, 224);
+            userList.BorderStyle = BorderStyle.FixedSingle;
             userList.Columns.AddRange(new ColumnHeader[] { nameColumnHeader, logInColumnHeader, creationDateColumnHeader, LastModifierColumnHeader, passwordColumnHeader4 });
             userList.Cursor = Cursors.Hand;
             userList.Dock = DockStyle.Fill;
             userList.FullRowSelect = true;
             userList.GridLines = true;
             userList.Location = new Point(0, 0);
-            userList.MinimumSize = new Size(700, 0);
+            userList.MinimumSize = new Size(400, 0);
             userList.Name = "userList";
             userList.Size = new Size(892, 478);
             userList.TabIndex = 0;
             userList.UseCompatibleStateImageBehavior = false;
             userList.View = View.Details;
+            userList.DoubleClick += userList_DoubleClick;
             userList.MouseClick += OnUserListMouseClick;
             // 
             // nameColumnHeader
             // 
             nameColumnHeader.Text = "Name";
+            nameColumnHeader.Width = 150;
             // 
             // logInColumnHeader
             // 
             logInColumnHeader.Text = "Login Name";
+            logInColumnHeader.Width = 180;
             // 
             // creationDateColumnHeader
             // 
             creationDateColumnHeader.Text = "Creation Date";
+            creationDateColumnHeader.Width = 200;
             // 
             // LastModifierColumnHeader
             // 
             LastModifierColumnHeader.Text = "Password";
+            LastModifierColumnHeader.Width = 160;
             // 
             // passwordColumnHeader4
             // 
             passwordColumnHeader4.Text = "Last Modifier";
+            passwordColumnHeader4.Width = 200;
             // 
             // btnAddUser
             // 
@@ -109,7 +116,7 @@
             // 
             // UsersListForm
             // 
-            AutoScaleDimensions = new SizeF(14F, 35F);
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(922, 585);
@@ -120,7 +127,6 @@
             Name = "UsersListForm";
             Padding = new Padding(15);
             Text = "UsersForm";
-            MouseDoubleClick += userListDoubleClick;
             Resize += UsersListResize;
             pnlTop.ResumeLayout(false);
             pnlBody.ResumeLayout(false);

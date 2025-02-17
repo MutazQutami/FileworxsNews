@@ -121,5 +121,5 @@ C:\Users\mutaz\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\refint\Filew
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\FileworxsNews.pdb
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\FileworxsNews.genruntimeconfig.cache
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\ref\FileworxsNews.dll
-C:\Users\mutaz\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\FileworxsNews.LogInForm.resources
 C:\Users\user\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\FileworxsNews.LogInForm.resources
+C:\Users\mutaz\Desktop\GitHup\FileworxNews\obj\Debug\net9.0-windows\FileworxsNews.Login.resources

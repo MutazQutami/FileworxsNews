@@ -10,32 +10,7 @@ namespace FileworxsNews
     {
         private void UsersListResize(object sender, EventArgs e)
         {
-            ResizeUsersTable();
-        }
-        private void userListDoubleClick(object sender, EventArgs e)
-        {
-            if (userList.SelectedItems.Count > 0)
-            {
-                ListViewItem selectedItem = userList.SelectedItems[0];
-                var selectedObject = selectedItem.Tag;
-
-                if (selectedObject is User selectedUser)
-                {
-                    UserForm form = new UserForm(selectedUser);
-                    this.Enabled = false;
-                    form.ShowDialog();
-                    this.Enabled = true; // Re-enable when done
-
-                    if (form.DialogResult == DialogResult.OK)
-                    {
-                        User updatedUser = form.formUser;
-                        selectedItem.Text = updatedUser.Name;  // Update the first column
-                        selectedItem.SubItems[1].Text = updatedUser.LogInName;
-                        selectedItem.SubItems[3].Text = updatedUser.Password;
-                        selectedItem.SubItems[4].Text = updatedUser.LastModifier;
-                    }
-                }
-            }
+            //ResizeUsersTable();
         }
         private void OnAddUserButtonClick(object sender, EventArgs e)
         {
@@ -54,17 +29,16 @@ namespace FileworxsNews
                 listItem.SubItems.Add(newUser.Password);
                 listItem.SubItems.Add(newUser.LastModifier);
                 listItem.SubItems.Add(newUser.GuidValue.ToString());
+                userList.Items.Insert(0,listItem);
 
-                userList.Items.Insert(0, listItem);
             }
         }
-
         private void OnUserListMouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right && userList.FocusedItem != null)
             {
                 FileWorxEntity selectedObject = (FileWorxEntity)userList.FocusedItem.Tag;
-                DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirm Deletion", 
+                DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirm Deletion",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
@@ -77,18 +51,10 @@ namespace FileworxsNews
         public UsersListForm()
         {
             InitializeComponent();
-            ResizeUsersTable();
+           // ResizeUsersTable();
             RetrieveUsers();
         }
-        private void ResizeUsersTable()
-        {
-            int columnWidth = userList.Width;
-
-            for (int i = 0; i < userList.Columns.Count; i++)
-            {
-                userList.Columns[i].Width = (int)(columnWidth * 0.20);
-            }
-        }
+       
         private void RetrieveUsers()
         {
             userList.Items.Clear();
@@ -106,8 +72,37 @@ namespace FileworxsNews
                 listItem.SubItems.Add(user.Date.ToString());
                 listItem.SubItems.Add(user.Password);
                 listItem.SubItems.Add(user.LastModifier);
-
+                listItem.Tag = user;
                 userList.Items.Add(listItem);
+            }
+        }
+
+        private void userList_DoubleClick(object sender, EventArgs e)
+        {
+
+            if (userList.SelectedItems.Count > 0)
+            {
+
+                ListViewItem selectedItem = userList.SelectedItems[0];
+                var selectedObject = selectedItem.Tag;
+                
+                if (selectedObject is User selectedUser)
+                {
+
+                    UserForm form = new UserForm(selectedUser);
+                    form.ShowDialog();
+
+                    if (form.DialogResult == DialogResult.OK)
+                    {
+                        User updatedUser = form.formUser;
+                        selectedItem.Text = updatedUser.Name;  // Update the first column
+                        selectedItem.SubItems[1].Text = updatedUser.LogInName;
+                        selectedItem.SubItems[3].Text = updatedUser.Password;
+                        selectedItem.SubItems[4].Text = updatedUser.LastModifier;
+
+
+                    }
+                }
             }
         }
     }

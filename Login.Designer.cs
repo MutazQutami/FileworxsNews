@@ -1,6 +1,6 @@
 ﻿namespace FileworxsNews
 {
-    partial class LogInForm
+    partial class Login
     {
         /// <summary>
         /// Required designer variable.
@@ -52,9 +52,8 @@
             pnlLeft.Controls.Add(lblWelcome);
             pnlLeft.Dock = DockStyle.Left;
             pnlLeft.Location = new Point(0, 0);
-            pnlLeft.Margin = new Padding(4);
             pnlLeft.Name = "pnlLeft";
-            pnlLeft.Size = new Size(291, 840);
+            pnlLeft.Size = new Size(226, 600);
             pnlLeft.TabIndex = 0;
             // 
             // lblWelcomText
@@ -63,10 +62,9 @@
             lblWelcomText.AutoSize = true;
             lblWelcomText.Font = new Font("Segoe UI", 15F);
             lblWelcomText.ForeColor = Color.LightGray;
-            lblWelcomText.Location = new Point(15, 412);
-            lblWelcomText.Margin = new Padding(4, 0, 4, 0);
+            lblWelcomText.Location = new Point(12, 294);
             lblWelcomText.Name = "lblWelcomText";
-            lblWelcomText.Size = new Size(220, 35);
+            lblWelcomText.Size = new Size(174, 28);
             lblWelcomText.TabIndex = 2;
             lblWelcomText.Text = "To Fileworx NEWS ";
             lblWelcomText.TextAlign = ContentAlignment.MiddleCenter;
@@ -77,10 +75,9 @@
             lblWelcome.AutoSize = true;
             lblWelcome.Font = new Font("Segoe UI", 25F);
             lblWelcome.ForeColor = Color.White;
-            lblWelcome.Location = new Point(15, 347);
-            lblWelcome.Margin = new Padding(4, 0, 4, 0);
+            lblWelcome.Location = new Point(12, 248);
             lblWelcome.Name = "lblWelcome";
-            lblWelcome.Size = new Size(196, 57);
+            lblWelcome.Size = new Size(160, 46);
             lblWelcome.TabIndex = 1;
             lblWelcome.Text = "Welcome";
             // 
@@ -89,11 +86,10 @@
             userNameField.Anchor = AnchorStyles.None;
             userNameField.BorderStyle = BorderStyle.FixedSingle;
             userNameField.Font = new Font("Segoe UI", 16F);
-            userNameField.Location = new Point(681, 347);
-            userNameField.Margin = new Padding(4);
+            userNameField.Location = new Point(530, 248);
             userNameField.MaxLength = 255;
             userNameField.Name = "userNameField";
-            userNameField.Size = new Size(329, 43);
+            userNameField.Size = new Size(256, 36);
             userNameField.TabIndex = 1;
             // 
             // passwordField
@@ -101,12 +97,11 @@
             passwordField.Anchor = AnchorStyles.None;
             passwordField.BorderStyle = BorderStyle.FixedSingle;
             passwordField.Font = new Font("Segoe UI", 16F);
-            passwordField.Location = new Point(681, 435);
-            passwordField.Margin = new Padding(4);
+            passwordField.Location = new Point(530, 311);
             passwordField.MaxLength = 255;
             passwordField.Name = "passwordField";
             passwordField.PasswordChar = '*';
-            passwordField.Size = new Size(329, 43);
+            passwordField.Size = new Size(256, 36);
             passwordField.TabIndex = 2;
             // 
             // logInButton
@@ -118,10 +113,9 @@
             logInButton.FlatStyle = FlatStyle.Flat;
             logInButton.Font = new Font("Segoe UI Emoji", 20F);
             logInButton.ForeColor = Color.White;
-            logInButton.Location = new Point(681, 524);
-            logInButton.Margin = new Padding(4);
+            logInButton.Location = new Point(530, 374);
             logInButton.Name = "logInButton";
-            logInButton.Size = new Size(329, 73);
+            logInButton.Size = new Size(256, 52);
             logInButton.TabIndex = 3;
             logInButton.Text = "LogIn";
             logInButton.UseVisualStyleBackColor = false;
@@ -132,10 +126,9 @@
             userNameLabel.Anchor = AnchorStyles.None;
             userNameLabel.AutoSize = true;
             userNameLabel.Font = new Font("Segoe UI", 15F);
-            userNameLabel.Location = new Point(519, 347);
-            userNameLabel.Margin = new Padding(4, 0, 4, 0);
+            userNameLabel.Location = new Point(404, 248);
             userNameLabel.Name = "userNameLabel";
-            userNameLabel.Size = new Size(127, 35);
+            userNameLabel.Size = new Size(99, 28);
             userNameLabel.TabIndex = 4;
             userNameLabel.Text = "Username";
             // 
@@ -144,10 +137,9 @@
             lblPassword.Anchor = AnchorStyles.None;
             lblPassword.AutoSize = true;
             lblPassword.Font = new Font("Segoe UI", 15F);
-            lblPassword.Location = new Point(519, 435);
-            lblPassword.Margin = new Padding(4, 0, 4, 0);
+            lblPassword.Location = new Point(404, 311);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(120, 35);
+            lblPassword.Size = new Size(93, 28);
             lblPassword.TabIndex = 5;
             lblPassword.Text = "Password";
             // 
@@ -157,10 +149,9 @@
             lblLogin.AutoSize = true;
             lblLogin.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
             lblLogin.ForeColor = Color.FromArgb(0, 130, 200);
-            lblLogin.Location = new Point(784, 154);
-            lblLogin.Margin = new Padding(4, 0, 4, 0);
+            lblLogin.Location = new Point(610, 110);
             lblLogin.Name = "lblLogin";
-            lblLogin.Size = new Size(99, 37);
+            lblLogin.Size = new Size(80, 30);
             lblLogin.TabIndex = 6;
             lblLogin.Text = "LOGIN";
             // 
@@ -170,10 +161,9 @@
             lblLoginText.AutoSize = true;
             lblLoginText.Font = new Font("Segoe UI", 16F);
             lblLoginText.ForeColor = SystemColors.AppWorkspace;
-            lblLoginText.Location = new Point(609, 218);
-            lblLoginText.Margin = new Padding(4, 0, 4, 0);
+            lblLoginText.Location = new Point(474, 156);
             lblLoginText.Name = "lblLoginText";
-            lblLoginText.Size = new Size(435, 37);
+            lblLoginText.Size = new Size(354, 30);
             lblLoginText.TabIndex = 7;
             lblLoginText.Text = "ENTER YOUR CREDENTIALS BELOW";
             // 
@@ -183,10 +173,9 @@
             lblOr.AutoSize = true;
             lblOr.Font = new Font("Segoe UI", 12F);
             lblOr.ForeColor = Color.Black;
-            lblOr.Location = new Point(831, 624);
-            lblOr.Margin = new Padding(4, 0, 4, 0);
+            lblOr.Location = new Point(646, 446);
             lblOr.Name = "lblOr";
-            lblOr.Size = new Size(31, 28);
+            lblOr.Size = new Size(25, 21);
             lblOr.TabIndex = 8;
             lblOr.Text = "or";
             // 
@@ -196,10 +185,9 @@
             lblSignUp.AutoSize = true;
             lblSignUp.Font = new Font("Segoe UI", 12F);
             lblSignUp.LinkColor = Color.FromArgb(0, 130, 200);
-            lblSignUp.Location = new Point(809, 673);
-            lblSignUp.Margin = new Padding(4, 0, 4, 0);
+            lblSignUp.Location = new Point(629, 481);
             lblSignUp.Name = "lblSignUp";
-            lblSignUp.Size = new Size(76, 28);
+            lblSignUp.Size = new Size(61, 21);
             lblSignUp.TabIndex = 9;
             lblSignUp.TabStop = true;
             lblSignUp.Text = "sign up";
@@ -210,10 +198,9 @@
             nullFieldWarning.Anchor = AnchorStyles.None;
             nullFieldWarning.AutoSize = true;
             nullFieldWarning.ForeColor = Color.Red;
-            nullFieldWarning.Location = new Point(1047, 465);
-            nullFieldWarning.Margin = new Padding(4, 0, 4, 0);
+            nullFieldWarning.Location = new Point(814, 332);
             nullFieldWarning.Name = "nullFieldWarning";
-            nullFieldWarning.Size = new Size(311, 21);
+            nullFieldWarning.Size = new Size(234, 15);
             nullFieldWarning.TabIndex = 10;
             nullFieldWarning.Text = "Username or Password  Should Not Be Null";
             // 
@@ -222,19 +209,18 @@
             wrongCredentials.Anchor = AnchorStyles.None;
             wrongCredentials.AutoSize = true;
             wrongCredentials.ForeColor = Color.Red;
-            wrongCredentials.Location = new Point(1047, 507);
-            wrongCredentials.Margin = new Padding(4, 0, 4, 0);
+            wrongCredentials.Location = new Point(814, 362);
             wrongCredentials.Name = "wrongCredentials";
-            wrongCredentials.Size = new Size(220, 21);
+            wrongCredentials.Size = new Size(165, 15);
             wrongCredentials.TabIndex = 11;
             wrongCredentials.Text = "Invalid Username or Password";
             // 
-            // LogInForm
+            // Login
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1391, 840);
+            ClientSize = new Size(1082, 600);
             Controls.Add(wrongCredentials);
             Controls.Add(nullFieldWarning);
             Controls.Add(lblSignUp);
@@ -247,9 +233,8 @@
             Controls.Add(passwordField);
             Controls.Add(userNameField);
             Controls.Add(pnlLeft);
-            Margin = new Padding(4);
-            Name = "LogInForm";
-            Text = "LogInForm";
+            Name = "Login";
+            Text = "LogIn";
             pnlLeft.ResumeLayout(false);
             pnlLeft.PerformLayout();
             ResumeLayout(false);

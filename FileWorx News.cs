@@ -35,17 +35,14 @@
 
         private void FileWorxLoad(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
 
             mainSplitContainer.SplitterDistance = this.Height * 2 / 3;
 
-            ContentFormat();
+            
         }
 
-        private void FileWorxResize(object sender, EventArgs e)
-        {
-            ContentFormat();
-        }
+       
 
         private void OnAddPhotoButtonClick(object sender, EventArgs e){
             PhotoForm photoForm = new PhotoForm();
@@ -95,7 +92,7 @@
         {
             InitializeComponent();
             InitializeContentList();
-            ContentFormat();
+      
         }
 
         private void InitializeContentList()
@@ -112,6 +109,7 @@
             List<New> _newsList = FileHandler.JsonDeserializationObjects(new New())
             .Cast<New>().ToList();
 
+            //Merge the two lists together
             List<Content> _mergedList = new List<Content>();
             _mergedList.AddRange(_photoList);
             _mergedList.AddRange(_newsList);
@@ -144,19 +142,6 @@
             }
         }
 
-        private void ContentFormat()
-        {
-            titleLabel.Left = (this.ClientSize.Width - titleLabel.Width) / 2;  // center the title label
-
-            if (contentList.Columns.Count == 3) // format column Titles
-            {
-                int _columnWidth = contentList.Width;
-
-                contentList.Columns[0].Width = (int)(_columnWidth * 0.25);
-                contentList.Columns[1].Width = (int)(_columnWidth * 0.25);
-                contentList.Columns[2].Width = (int)(_columnWidth * 0.50);
-            }
-        }
 
         private void DeleteContent(FileWorxEntity _selectedObject)
         {
@@ -277,9 +262,6 @@
 
                 if (_photoForm.DialogResult == DialogResult.OK)
                 {
-
-
-
                     Photo _photo = _photoForm.formPhoto;
 
                     _selectedItem.Text = _photo.Title;  // Update the first column

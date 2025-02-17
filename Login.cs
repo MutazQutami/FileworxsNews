@@ -12,7 +12,7 @@ using Newtonsoft.Json.Bson;
 
 namespace FileworxsNews
 {
-    public partial class LogInForm : Form
+    public partial class Login : Form
     {
         private void SignUp(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -52,7 +52,7 @@ namespace FileworxsNews
             }
             wrongCredentials.Show();
         }
-        public LogInForm()
+        public Login()
         {
             InitializeComponent();
             nullFieldWarning.Hide();
