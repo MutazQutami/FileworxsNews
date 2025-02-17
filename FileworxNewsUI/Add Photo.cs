@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
-using FileworxBusiness;
+using FileworxNewsBusiness;
 
 namespace FileworxsNewsUI
 {
@@ -67,6 +67,7 @@ namespace FileworxsNewsUI
         public PhotoForm()
         {
             InitializeComponent();
+
             nullFieldsWarnning.Hide();
             checkUploadPhotoWarning.Hide();
             _editForm = false;
@@ -74,6 +75,13 @@ namespace FileworxsNewsUI
         public PhotoForm(Photo _photo)
         {
             InitializeComponent();
+            InsitializeForm(_photo);
+
+
+        }
+
+        private void InsitializeForm(Photo _photo)
+        {
             txtTitleField.Text = _photo.Title;
             txtDescriptionField.Text = _photo.Description;
             txtBodyField.Text = _photo.Body;

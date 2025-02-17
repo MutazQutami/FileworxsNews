@@ -6,11 +6,15 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <StartupObject>FileworxsNews.Program</StartupObject>
+    <StartupObject>FileworxsNewsUI.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FileworxNewsBusiness\FileworxNewsBusiness.csproj" />
   </ItemGroup>
 
   <ItemGroup>

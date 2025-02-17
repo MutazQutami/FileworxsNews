@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FileworxBusiness")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+36618265840f430384c6786717124c04b510e84c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+193e8f9f3e3a54d17df85c4b9caf44378808b070")]
 [assembly: System.Reflection.AssemblyProductAttribute("FileworxBusiness")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FileworxBusiness")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

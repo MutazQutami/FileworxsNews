@@ -57,7 +57,7 @@
             userList.TabIndex = 0;
             userList.UseCompatibleStateImageBehavior = false;
             userList.View = View.Details;
-            userList.DoubleClick += userList_DoubleClick;
+            userList.DoubleClick += OnUserListDoublClick;
             userList.MouseClick += OnUserListMouseClick;
             // 
             // nameColumnHeader
@@ -127,7 +127,6 @@
             Name = "UsersListForm";
             Padding = new Padding(15);
             Text = "UsersForm";
-            Resize += UsersListResize;
             pnlTop.ResumeLayout(false);
             pnlBody.ResumeLayout(false);
             ResumeLayout(false);

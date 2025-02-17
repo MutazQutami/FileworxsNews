@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileworxsNewsUI", "FileworxsNewsUI.csproj", "{2836CC42-D295-4987-941F-ED0E292A055F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileworxBusiness", "..\FileworxNewsBusiness\FileworxBusiness.csproj", "{48814ED3-A155-4077-B78C-111C0D0E27EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileworxNewsBusiness", "..\FileworxNewsBusiness\FileworxNewsBusiness.csproj", "{48814ED3-A155-4077-B78C-111C0D0E27EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

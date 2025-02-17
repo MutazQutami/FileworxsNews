@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace FileworxBusiness
+namespace FileworxNewsBusiness
 {
     public static class FileHandler
     {
@@ -82,7 +82,7 @@ namespace FileworxBusiness
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error reading file {_file}: {ex.Message}");
+                    //MessageBox.Show($"Error reading file {_file}: {ex.Message}");
                 }
             }
 
@@ -101,7 +101,7 @@ namespace FileworxBusiness
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Error deleting the file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //MessageBox.Show("Error deleting the file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

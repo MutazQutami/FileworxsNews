@@ -61,9 +61,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mutaz\\Desktop\\GitHup\\FileworxNews\\FileworxNewsBusiness\\FileworxBusiness.csproj",
-      "projectName": "FileworxBusiness",
-      "projectPath": "C:\\Users\\mutaz\\Desktop\\GitHup\\FileworxNews\\FileworxNewsBusiness\\FileworxBusiness.csproj",
+      "projectUniqueName": "C:\\Users\\mutaz\\Desktop\\GitHup\\FileworxNews\\FileworxNewsBusiness\\FileworxNewsBusiness.csproj",
+      "projectName": "FileworxNewsBusiness",
+      "projectPath": "C:\\Users\\mutaz\\Desktop\\GitHup\\FileworxNews\\FileworxNewsBusiness\\FileworxNewsBusiness.csproj",
       "packagesPath": "C:\\Users\\mutaz\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\mutaz\\Desktop\\GitHup\\FileworxNews\\FileworxNewsBusiness\\obj\\",
       "projectStyle": "PackageReference",

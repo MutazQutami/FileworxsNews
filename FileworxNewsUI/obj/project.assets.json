@@ -14,6 +14,19 @@
             "related": ".xml"
           }
         }
+      },
+      "FileworxNewsBusiness/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "compile": {
+          "bin/placeholder/FileworxNewsBusiness.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FileworxNewsBusiness.dll": {}
+        }
       }
     }
   },
@@ -47,10 +60,16 @@
         "newtonsoft.json.nuspec",
         "packageIcon.png"
       ]
+    },
+    "FileworxNewsBusiness/1.0.0": {
+      "type": "project",
+      "path": "../FileworxNewsBusiness/FileworxNewsBusiness.csproj",
+      "msbuildProject": "../FileworxNewsBusiness/FileworxNewsBusiness.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0-windows7.0": [
+      "FileworxNewsBusiness >= 1.0.0",
       "Newtonsoft.Json >= 13.0.3"
     ]
   },
@@ -85,7 +104,11 @@
       "frameworks": {
         "net9.0-windows7.0": {
           "targetAlias": "net9.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\mutaz\\Desktop\\GitHup\\FileworxNews\\FileworxNewsBusiness\\FileworxNewsBusiness.csproj": {
+              "projectPath": "C:\\Users\\mutaz\\Desktop\\GitHup\\FileworxNews\\FileworxNewsBusiness\\FileworxNewsBusiness.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

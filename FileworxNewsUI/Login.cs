@@ -5,7 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using FileworxBusiness;
+using FileworxNewsBusiness;
+using Newtonsoft.Json;
 
 namespace FileworxsNewsUI
 {
@@ -17,6 +18,7 @@ namespace FileworxsNewsUI
             userForm.Size = this.Size;
             userForm.ShowDialog();
         }
+
         private void LogIn(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(userNameField.Text) || string.IsNullOrEmpty(passwordField.Text))

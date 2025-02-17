@@ -1,4 +1,4 @@
-﻿namespace FileworxBusiness
+﻿namespace FileworxNewsBusiness
 {
     public class FileWorxEntity
     {

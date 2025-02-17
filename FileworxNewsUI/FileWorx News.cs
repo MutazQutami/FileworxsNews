@@ -1,4 +1,4 @@
-﻿using FileworxBusiness;
+﻿using FileworxNewsBusiness;
 
 namespace FileworxsNewsUI
 {
@@ -37,11 +37,7 @@ namespace FileworxsNewsUI
 
         private void FileWorxLoad(object sender, EventArgs e)
         {
-            //this.WindowState = FormWindowState.Maximized;
-
             mainSplitContainer.SplitterDistance = this.Height * 2 / 3;
-
-            
         }
 
        
@@ -52,16 +48,7 @@ namespace FileworxsNewsUI
             if (photoForm.ShowDialog() == DialogResult.OK)
             {
                 Photo _photo = photoForm.formPhoto;
-                ListViewItem _listItem = new ListViewItem(_photo.Title);
-
-                _listItem.SubItems.Add(_photo.Date.ToString());
-                _listItem.SubItems.Add(_photo.Description);
-                _listItem.SubItems.Add(_photo.photoPath);
-                _listItem.SubItems.Add(_photo.GuidValue.ToString());
-                _listItem.SubItems.Add(_photo.Body);
-                _listItem.Tag = _photo;
-                contentList.Items.Add(_listItem);
-
+                AddListItem(_photo);
                 return;
             }
 
@@ -74,19 +61,8 @@ namespace FileworxsNewsUI
             if (_newsForm.ShowDialog() == DialogResult.OK)
             {
                 New _new = _newsForm._formNew;
-                ListViewItem _listItem = new ListViewItem(_new.Title);
-
-
-                _listItem.SubItems.Add(_new.Date.ToString());
-                _listItem.SubItems.Add(_new.Description);
-                _listItem.SubItems.Add(_new.Category);
-                _listItem.SubItems.Add(_new.GuidValue.ToString());
-                _listItem.SubItems.Add(_new.Category);
-                _listItem.Tag = _new;
-
-                contentList.Items.Insert(0, _listItem);
-
-                 return;
+                AddListItem(_new);
+                return;
             }
 
         }
@@ -101,6 +77,7 @@ namespace FileworxsNewsUI
         {
             // retrieving photos and news
             contentList.Items.Clear();
+
             if (pnltabPreview.TabPages.Contains(imageTabPage2))
             {
                 pnltabPreview.TabPages.Remove(imageTabPage2);
@@ -122,25 +99,8 @@ namespace FileworxsNewsUI
             // Add sorted items to contentList
             foreach (var item in _mergedList)
             {
-                ListViewItem _listItem = new ListViewItem(item.Title);
-                _listItem.SubItems.Add(item.Date.ToString());
-                _listItem.SubItems.Add(item.Description);
+               AddListItem(item);
 
-                if (item is Photo _photo)
-                {
-                    _listItem.SubItems.Add(_photo.photoPath);
-                    _listItem.SubItems.Add(_photo.GuidValue.ToString());
-                    _listItem.SubItems.Add(_photo.Body);
-                }
-                else if (item is New _newItem)
-                {
-                    _listItem.SubItems.Add(_newItem.Category);
-                    _listItem.SubItems.Add(_newItem.GuidValue.ToString());
-                    _listItem.SubItems.Add(_newItem.Category);
-                }
-
-                _listItem.Tag = item;
-                contentList.Items.Add(_listItem);
             }
         }
 
@@ -277,6 +237,31 @@ namespace FileworxsNewsUI
 
 
             }
+        }
+        
+        private void AddListItem(Content _content)
+        {
+            ListViewItem _listItem = new ListViewItem(_content.Title);
+            _listItem.SubItems.Add(_content.Date.ToString());
+            _listItem.SubItems.Add(_content.Description);
+
+
+            if (_content is Photo _photo)
+            {
+                _listItem.SubItems.Add(_photo.photoPath);
+                _listItem.SubItems.Add(_photo.GuidValue.ToString());
+                _listItem.SubItems.Add(_photo.Body);
+            }
+            else if (_content is New _newItem)
+            {
+                _listItem.SubItems.Add(_newItem.Category);
+                _listItem.SubItems.Add(_newItem.GuidValue.ToString());
+                _listItem.SubItems.Add(_newItem.Category);
+            }
+
+            _listItem.Tag = _content;
+            contentList.Items.Add(_listItem);
+
         }
     }
 }

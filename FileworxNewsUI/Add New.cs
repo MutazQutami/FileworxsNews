@@ -1,5 +1,5 @@
 ﻿using System.DirectoryServices.ActiveDirectory;
-using FileworxBusiness;
+using FileworxNewsBusiness;
 
 namespace FileworxsNewsUI
 {
@@ -55,12 +55,19 @@ namespace FileworxsNewsUI
         public NewsForm()
         {
             InitializeComponent();
+
             nullFieldsWarnning.Hide();
             _editForm = false;
         }
         public NewsForm(New _new)
         {
             InitializeComponent();
+            InsitializeForm(_new);
+
+
+        }
+        private void InsitializeForm(New _new)
+        {
             txtTitleField.Text = _new.Title;
             txtDescriptionField.Text = _new.Description;
             categoryList.Text = _new.Category;

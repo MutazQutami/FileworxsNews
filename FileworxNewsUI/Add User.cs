@@ -1,4 +1,4 @@
-using FileworxsNews;
+using FileworxNewsBusiness;
 
 namespace FileworxsNewsUI
 {
