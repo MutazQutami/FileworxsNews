@@ -8,12 +8,10 @@ namespace FileworxsNews
 {
     public partial class UsersListForm : Form
     {
-      
         private void UsersListResize(object sender, EventArgs e)
         {
             ResizeUsersTable();
         }
-
         private void userListDoubleClick(object sender, EventArgs e)
         {
             if (userList.SelectedItems.Count > 0)
@@ -39,7 +37,6 @@ namespace FileworxsNews
                 }
             }
         }
-
         private void OnAddUserButtonClick(object sender, EventArgs e)
         {
             UserForm newUserForm = new UserForm();
@@ -67,7 +64,8 @@ namespace FileworxsNews
             if (e.Button == MouseButtons.Right && userList.FocusedItem != null)
             {
                 FileWorxEntity selectedObject = (FileWorxEntity)userList.FocusedItem.Tag;
-                DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirm Deletion", 
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {
@@ -76,14 +74,12 @@ namespace FileworxsNews
                 }
             }
         }
-
         public UsersListForm()
         {
             InitializeComponent();
             ResizeUsersTable();
             RetrieveUsers();
         }
-
         private void ResizeUsersTable()
         {
             int columnWidth = userList.Width;
@@ -93,11 +89,11 @@ namespace FileworxsNews
                 userList.Columns[i].Width = (int)(columnWidth * 0.20);
             }
         }
-
         private void RetrieveUsers()
         {
             userList.Items.Clear();
-            List<User> users = FileHandler.JsonDeserializationObjects(new User()).Cast<User>().ToList();
+            List<User> users = FileHandler.JsonDeserializationObjects(new User())
+            .Cast<User>().ToList();
 
             foreach (User user in users)
             {

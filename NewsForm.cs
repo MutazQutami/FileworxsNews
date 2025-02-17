@@ -57,7 +57,6 @@ namespace FileworxsNews
             nullFieldsWarnning.Hide();
             _editForm = false;
         }
-
         public NewsForm(New _new)
         {
             InitializeComponent();

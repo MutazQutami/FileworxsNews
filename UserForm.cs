@@ -6,7 +6,6 @@ namespace FileworxsNews
         {
             this.Close();
         }
-
         private void OnSaveButtonClick(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtName.Text) ||
@@ -41,7 +40,6 @@ namespace FileworxsNews
 
         public User formUser;
         private bool Is_editForm;
-
         public UserForm(User user)
         {
             InitializeComponent();
@@ -52,7 +50,6 @@ namespace FileworxsNews
             lblNullWarnning.Hide();
             formUser = user;
         }
-
         public UserForm()
         {
             InitializeComponent();

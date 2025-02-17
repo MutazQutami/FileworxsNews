@@ -20,7 +20,6 @@ namespace FileworxsNews
             userForm.Size = this.Size;
             userForm.ShowDialog();
         }
-
         private void LogIn(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(userNameField.Text) || string.IsNullOrEmpty(passwordField.Text))
@@ -51,7 +50,6 @@ namespace FileworxsNews
                     return;
                 }
             }
-
             wrongCredentials.Show();
         }
         public LogInForm()

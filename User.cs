@@ -7,17 +7,11 @@ using System.Threading.Tasks;
 namespace FileworxsNews
 {
     public class User : Content
-
     {
-
         public string Name { get; set; }
-
         public string LogInName { get; set; }
-
         public string Password { get; set; }
-
         public string LastModifier { get; set; }
-
         public bool IsEqual(User? other)
         {
             if (other == null ||
@@ -27,9 +21,5 @@ namespace FileworxsNews
 
             return LogInName == other.LogInName && Password == other.Password;
         }
-
-
     }
-
-
 }

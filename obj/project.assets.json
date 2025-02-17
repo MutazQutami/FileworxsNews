@@ -55,23 +55,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\user\\.nuget\\packages\\": {},
+    "C:\\Users\\mutaz\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\FileworxsNews.csproj",
+      "projectUniqueName": "C:\\Users\\mutaz\\Desktop\\GitHup\\FileworxNews\\FileworxsNews.csproj",
       "projectName": "FileworxsNews",
-      "projectPath": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\FileworxsNews.csproj",
-      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Desktop\\GitHup\\FileworxNews\\obj\\",
+      "projectPath": "C:\\Users\\mutaz\\Desktop\\GitHup\\FileworxNews\\FileworxsNews.csproj",
+      "packagesPath": "C:\\Users\\mutaz\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mutaz\\Desktop\\GitHup\\FileworxNews\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mutaz\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

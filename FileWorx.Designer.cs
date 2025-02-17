@@ -65,22 +65,23 @@
             pnltabPreview.Controls.Add(imageTabPage2);
             pnltabPreview.Dock = DockStyle.Fill;
             pnltabPreview.Font = new Font("Segoe UI", 15F);
-            pnltabPreview.Location = new Point(10, 248);
+            pnltabPreview.Location = new Point(8, 177);
             pnltabPreview.Margin = new Padding(0);
             pnltabPreview.Name = "pnltabPreview";
             pnltabPreview.Padding = new Point(0, 0);
             pnltabPreview.SelectedIndex = 0;
-            pnltabPreview.Size = new Size(1838, 435);
+            pnltabPreview.Size = new Size(1428, 311);
             pnltabPreview.TabIndex = 0;
             // 
             // previewTabPage1
             // 
             previewTabPage1.BackColor = Color.Gray;
             previewTabPage1.Controls.Add(pnlPreviewContent);
-            previewTabPage1.Location = new Point(4, 44);
+            previewTabPage1.Location = new Point(4, 37);
+            previewTabPage1.Margin = new Padding(2);
             previewTabPage1.Name = "previewTabPage1";
-            previewTabPage1.Padding = new Padding(3);
-            previewTabPage1.Size = new Size(1830, 387);
+            previewTabPage1.Padding = new Padding(2);
+            previewTabPage1.Size = new Size(1420, 270);
             previewTabPage1.TabIndex = 0;
             previewTabPage1.Text = "Preview";
             // 
@@ -88,10 +89,11 @@
             // 
             pnlPreviewContent.BorderStyle = BorderStyle.None;
             pnlPreviewContent.Dock = DockStyle.Fill;
-            pnlPreviewContent.Location = new Point(3, 3);
+            pnlPreviewContent.Location = new Point(2, 2);
+            pnlPreviewContent.Margin = new Padding(2);
             pnlPreviewContent.Name = "pnlPreviewContent";
             pnlPreviewContent.ReadOnly = true;
-            pnlPreviewContent.Size = new Size(1824, 381);
+            pnlPreviewContent.Size = new Size(1416, 266);
             pnlPreviewContent.TabIndex = 0;
             pnlPreviewContent.Text = "";
             // 
@@ -99,10 +101,11 @@
             // 
             imageTabPage2.BackColor = Color.Black;
             imageTabPage2.Controls.Add(imagePreview);
-            imageTabPage2.Location = new Point(4, 44);
+            imageTabPage2.Location = new Point(4, 37);
+            imageTabPage2.Margin = new Padding(2);
             imageTabPage2.Name = "imageTabPage2";
-            imageTabPage2.Padding = new Padding(3);
-            imageTabPage2.Size = new Size(1830, 387);
+            imageTabPage2.Padding = new Padding(2);
+            imageTabPage2.Size = new Size(1420, 270);
             imageTabPage2.TabIndex = 1;
             imageTabPage2.Text = "image";
             // 
@@ -112,9 +115,10 @@
             imagePreview.Dock = DockStyle.Fill;
             imagePreview.ErrorImage = null;
             imagePreview.InitialImage = null;
-            imagePreview.Location = new Point(3, 3);
+            imagePreview.Location = new Point(2, 2);
+            imagePreview.Margin = new Padding(2);
             imagePreview.Name = "imagePreview";
-            imagePreview.Size = new Size(1824, 381);
+            imagePreview.Size = new Size(1416, 266);
             imagePreview.SizeMode = PictureBoxSizeMode.StretchImage;
             imagePreview.TabIndex = 4;
             imagePreview.TabStop = false;
@@ -133,11 +137,11 @@
             pnlContentDetail.Dock = DockStyle.Top;
             pnlContentDetail.Font = new Font("Segoe UI", 15F);
             pnlContentDetail.ForeColor = SystemColors.ControlDark;
-            pnlContentDetail.Location = new Point(10, 11);
-            pnlContentDetail.Margin = new Padding(6, 7, 6, 7);
+            pnlContentDetail.Location = new Point(8, 8);
+            pnlContentDetail.Margin = new Padding(5);
             pnlContentDetail.Name = "pnlContentDetail";
-            pnlContentDetail.Padding = new Padding(6, 7, 6, 7);
-            pnlContentDetail.Size = new Size(1838, 237);
+            pnlContentDetail.Padding = new Padding(5);
+            pnlContentDetail.Size = new Size(1428, 169);
             pnlContentDetail.TabIndex = 2;
             // 
             // btnAddPhoto
@@ -145,10 +149,9 @@
             btnAddPhoto.Anchor = AnchorStyles.Right;
             btnAddPhoto.Cursor = Cursors.Hand;
             btnAddPhoto.ForeColor = Color.Black;
-            btnAddPhoto.Location = new Point(1657, 3);
-            btnAddPhoto.Margin = new Padding(4);
+            btnAddPhoto.Location = new Point(1287, 2);
             btnAddPhoto.Name = "btnAddPhoto";
-            btnAddPhoto.Size = new Size(171, 70);
+            btnAddPhoto.Size = new Size(133, 50);
             btnAddPhoto.TabIndex = 7;
             btnAddPhoto.Text = "Add Photo";
             btnAddPhoto.UseVisualStyleBackColor = true;
@@ -159,10 +162,9 @@
             btnAddNew.Anchor = AnchorStyles.Right;
             btnAddNew.Cursor = Cursors.Hand;
             btnAddNew.ForeColor = Color.Black;
-            btnAddNew.Location = new Point(1660, 83);
-            btnAddNew.Margin = new Padding(4);
+            btnAddNew.Location = new Point(1289, 59);
             btnAddNew.Name = "btnAddNew";
-            btnAddNew.Size = new Size(168, 70);
+            btnAddNew.Size = new Size(131, 50);
             btnAddNew.TabIndex = 6;
             btnAddNew.Text = "Add New";
             btnAddNew.UseVisualStyleBackColor = true;
@@ -172,10 +174,9 @@
             // 
             lblCategory.AutoSize = true;
             lblCategory.ForeColor = Color.Black;
-            lblCategory.Location = new Point(51, 174);
-            lblCategory.Margin = new Padding(4, 0, 4, 0);
+            lblCategory.Location = new Point(40, 124);
             lblCategory.Name = "lblCategory";
-            lblCategory.Size = new Size(115, 35);
+            lblCategory.Size = new Size(92, 28);
             lblCategory.TabIndex = 5;
             lblCategory.Text = "Category";
             // 
@@ -183,10 +184,9 @@
             // 
             lblCreationDate.AutoSize = true;
             lblCreationDate.ForeColor = Color.Black;
-            lblCreationDate.Location = new Point(51, 112);
-            lblCreationDate.Margin = new Padding(4, 0, 4, 0);
+            lblCreationDate.Location = new Point(40, 80);
             lblCreationDate.Name = "lblCreationDate";
-            lblCreationDate.Size = new Size(167, 35);
+            lblCreationDate.Size = new Size(132, 28);
             lblCreationDate.TabIndex = 4;
             lblCreationDate.Text = "Creation Date";
             // 
@@ -194,10 +194,9 @@
             // 
             lblTitle.AutoSize = true;
             lblTitle.ForeColor = Color.Black;
-            lblTitle.Location = new Point(51, 52);
-            lblTitle.Margin = new Padding(4, 0, 4, 0);
+            lblTitle.Location = new Point(40, 37);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(61, 35);
+            lblTitle.Size = new Size(49, 28);
             lblTitle.TabIndex = 3;
             lblTitle.Text = "Title";
             // 
@@ -205,30 +204,33 @@
             // 
             txtCategoryField.BorderStyle = BorderStyle.FixedSingle;
             txtCategoryField.Font = new Font("Segoe UI", 12F);
-            txtCategoryField.Location = new Point(228, 172);
+            txtCategoryField.Location = new Point(177, 123);
+            txtCategoryField.Margin = new Padding(2);
             txtCategoryField.Name = "txtCategoryField";
             txtCategoryField.ReadOnly = true;
-            txtCategoryField.Size = new Size(444, 34);
+            txtCategoryField.Size = new Size(346, 29);
             txtCategoryField.TabIndex = 2;
             // 
             // txtCreationDateField
             // 
             txtCreationDateField.BorderStyle = BorderStyle.FixedSingle;
             txtCreationDateField.Font = new Font("Segoe UI", 12F);
-            txtCreationDateField.Location = new Point(228, 111);
+            txtCreationDateField.Location = new Point(177, 79);
+            txtCreationDateField.Margin = new Padding(2);
             txtCreationDateField.Name = "txtCreationDateField";
             txtCreationDateField.ReadOnly = true;
-            txtCreationDateField.Size = new Size(444, 34);
+            txtCreationDateField.Size = new Size(346, 29);
             txtCreationDateField.TabIndex = 1;
             // 
             // txtTitleField
             // 
             txtTitleField.BorderStyle = BorderStyle.FixedSingle;
             txtTitleField.Font = new Font("Segoe UI", 11F);
-            txtTitleField.Location = new Point(228, 52);
+            txtTitleField.Location = new Point(177, 37);
+            txtTitleField.Margin = new Padding(2);
             txtTitleField.Name = "txtTitleField";
             txtTitleField.ReadOnly = true;
-            txtTitleField.Size = new Size(444, 32);
+            txtTitleField.Size = new Size(346, 27);
             txtTitleField.TabIndex = 0;
             // 
             // titleLabel
@@ -237,10 +239,9 @@
             titleLabel.BackColor = Color.Transparent;
             titleLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             titleLabel.ForeColor = Color.FromArgb(0, 130, 200);
-            titleLabel.Location = new Point(734, 8);
-            titleLabel.Margin = new Padding(4, 0, 4, 0);
+            titleLabel.Location = new Point(571, 6);
             titleLabel.Name = "titleLabel";
-            titleLabel.Size = new Size(225, 41);
+            titleLabel.Size = new Size(180, 32);
             titleLabel.TabIndex = 3;
             titleLabel.Text = "Fileworx News";
             // 
@@ -259,11 +260,12 @@
             contentList.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             contentList.LabelEdit = true;
             contentList.Location = new Point(0, 0);
-            contentList.MaximumSize = new Size(0, 1260);
-            contentList.MinimumSize = new Size(771, 350);
+            contentList.Margin = new Padding(2);
+            contentList.MaximumSize = new Size(0, 900);
+            contentList.MinimumSize = new Size(600, 250);
             contentList.Name = "contentList";
             contentList.RightToLeft = RightToLeft.No;
-            contentList.Size = new Size(1858, 350);
+            contentList.Size = new Size(1444, 250);
             contentList.TabIndex = 0;
             contentList.TileSize = new Size(100, 100);
             contentList.UseCompatibleStateImageBehavior = false;
@@ -290,8 +292,7 @@
             // 
             mainSplitContainer.BorderStyle = BorderStyle.FixedSingle;
             mainSplitContainer.Dock = DockStyle.Fill;
-            mainSplitContainer.Location = new Point(32, 70);
-            mainSplitContainer.Margin = new Padding(4);
+            mainSplitContainer.Location = new Point(25, 50);
             mainSplitContainer.Name = "mainSplitContainer";
             mainSplitContainer.Orientation = Orientation.Horizontal;
             // 
@@ -304,23 +305,23 @@
             // 
             mainSplitContainer.Panel2.Controls.Add(pnltabPreview);
             mainSplitContainer.Panel2.Controls.Add(pnlContentDetail);
-            mainSplitContainer.Panel2.Padding = new Padding(10, 11, 10, 11);
-            mainSplitContainer.Size = new Size(1860, 957);
-            mainSplitContainer.SplitterDistance = 255;
-            mainSplitContainer.SplitterWidth = 6;
+            mainSplitContainer.Panel2.Padding = new Padding(8);
+            mainSplitContainer.Size = new Size(1446, 684);
+            mainSplitContainer.SplitterDistance = 182;
             mainSplitContainer.TabIndex = 4;
             // 
             // FileWorx
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.White;
-            ClientSize = new Size(1924, 1055);
+            ClientSize = new Size(1496, 754);
             Controls.Add(mainSplitContainer);
             Controls.Add(titleLabel);
+            Margin = new Padding(2);
             Name = "FileWorx";
-            Padding = new Padding(32, 70, 32, 28);
+            Padding = new Padding(25, 50, 25, 20);
             Text = "FileWorx News";
             Load += FileWorxLoad;
             pnltabPreview.ResumeLayout(false);

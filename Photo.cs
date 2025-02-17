@@ -10,7 +10,6 @@ namespace FileworxsNews
 
     {
         public string photoName;
-
         public string photoPath;
 
     }

@@ -9,8 +9,7 @@ namespace FileworxsNews
 {
     public static class FileHandler
     {
-        public static string FindPath(FileWorxEntity obj)
-        {
+        public static string FindPath(FileWorxEntity obj){
             string projectPath = AppDomain.CurrentDomain.BaseDirectory;
             string folderType = obj switch
             {
@@ -29,8 +28,7 @@ namespace FileworxsNews
             return targetFolder;
         }
 
-        public static void JsonSerialization(FileWorxEntity obj)
-        {
+        public static void JsonSerialization(FileWorxEntity obj){
             string folderPath = FindPath(obj);
             string finalPath = Path.Combine(folderPath, $"{obj.GuidValue}.json");
 
@@ -51,8 +49,7 @@ namespace FileworxsNews
             }
         }
 
-        public static List<FileWorxEntity> JsonDeserializationObjects(FileWorxEntity obj)
-        {
+        public static List<FileWorxEntity> JsonDeserializationObjects(FileWorxEntity obj){
             List<FileWorxEntity> objectList = new List<FileWorxEntity>();
             string objectsPath = FindPath(obj);
 
@@ -89,8 +86,7 @@ namespace FileworxsNews
             return objectList;
         }
 
-        public static void DeleteObject(FileWorxEntity obj)
-        {
+        public static void DeleteObject(FileWorxEntity obj){
             string path = Path.Combine(FindPath(obj), $"{obj.GuidValue}.json");
 
             if (File.Exists(path))

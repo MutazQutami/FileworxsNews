@@ -1,7 +1,5 @@
 ﻿namespace FileworxsNews
 {
-
-
     public partial class FileWorx : Form
     {
 
@@ -13,29 +11,18 @@
 
                 FileWorxEntity _selectedObject = (FileWorxEntity)_selectedItem.Tag;
 
-
                 if (e.Button == MouseButtons.Right) // right click
                 {
                     DeleteContent(_selectedObject);
                     return;
                 }
 
-
                 ShowPreviewContent(_selectedObject); // normal click , show preview
-
-
-
-
-
-
-
             }
         }
 
         private void ContentListMouseDoubleClick(object sender, MouseEventArgs e) // double click , edit object
         {
-
-
             if (contentList.SelectedItems.Count > 0)
             {
                 ListViewItem _selectedItem = contentList.SelectedItems[0];
@@ -43,21 +30,16 @@
                 FileWorxEntity _selectedObject = (FileWorxEntity)_selectedItem.Tag;
 
                 EditContent(_selectedObject, _selectedItem);
-
-
-
             }
         }
 
         private void FileWorxLoad(object sender, EventArgs e)
         {
-
             this.WindowState = FormWindowState.Maximized;
 
             mainSplitContainer.SplitterDistance = this.Height * 2 / 3;
 
             ContentFormat();
-
         }
 
         private void FileWorxResize(object sender, EventArgs e)
@@ -65,16 +47,13 @@
             ContentFormat();
         }
 
-        private void OnAddPhotoButtonClick(object sender, EventArgs e)
-        {
-
+        private void OnAddPhotoButtonClick(object sender, EventArgs e){
             PhotoForm photoForm = new PhotoForm();
 
             if (photoForm.ShowDialog() == DialogResult.OK)
             {
                 Photo ph1 = photoForm.formPhoto;
                 ListViewItem _listItem = new ListViewItem(ph1.Title);
-
 
                 _listItem.SubItems.Add(ph1.Date.ToString());
                 _listItem.SubItems.Add(ph1.Description);
@@ -87,12 +66,10 @@
                 return;
             }
 
-
         }
 
         private void OnAddNewButtonClick(object sender, EventArgs e)
         {
-
             NewsForm new1 = new NewsForm();
 
             if (new1.ShowDialog() == DialogResult.OK)
@@ -110,37 +87,30 @@
 
                 contentList.Items.Insert(0, _listItem);
 
-
-                return;
+                 return;
             }
 
         }
-
-
         public FileWorx()
         {
-
             InitializeComponent();
             InitializeContentList();
             ContentFormat();
-
         }
 
         private void InitializeContentList()
         {
-
             // retrieving photos and news
-
             contentList.Items.Clear();
             if (pnltabPreview.TabPages.Contains(imageTabPage2))
             {
                 pnltabPreview.TabPages.Remove(imageTabPage2);
             }
 
-            List<Photo> _photoList = FileHandler.JsonDeserializationObjects(new Photo()).Cast<Photo>().ToList();
-
-            List<New> _newsList = FileHandler.JsonDeserializationObjects(new New()).Cast<New>().ToList();
-
+            List<Photo> _photoList = FileHandler.JsonDeserializationObjects(new Photo())
+            .Cast<Photo>().ToList();
+            List<New> _newsList = FileHandler.JsonDeserializationObjects(new New())
+            .Cast<New>().ToList();
 
             List<Content> mergedList = new List<Content>();
             mergedList.AddRange(_photoList);
@@ -172,23 +142,14 @@
                 _listItem.Tag = item;
                 contentList.Items.Add(_listItem);
             }
-
-
-
-
         }
 
         private void ContentFormat()
         {
-
-
-
             titleLabel.Left = (this.ClientSize.Width - titleLabel.Width) / 2;  // center the title label
-
 
             if (contentList.Columns.Count == 3) // format column Titles
             {
-
                 int _columnWidth = contentList.Width;
 
                 contentList.Columns[0].Width = (int)(_columnWidth * 0.25);
@@ -225,18 +186,14 @@
             {
                 txtCategoryField.Hide();
 
-
                 txtTitleField.Text = _selectedPhoto.Title;
                 txtCreationDateField.Text = _selectedPhoto.Date.ToString();
                 txtCategoryField.Text = _selectedPhoto.photoPath;
-
-
 
                 lblCategory.Hide();
                 txtCategoryField.Hide();
 
                 pnlPreviewContent.Text = _selectedPhoto.Body;
-
 
                 if (!pnltabPreview.TabPages.Contains(imageTabPage2))
                 {
@@ -245,14 +202,9 @@
 
                 string _sourcePath = _selectedPhoto.photoPath;
 
-
                 if (!string.IsNullOrEmpty(_selectedPhoto.photoPath))
                 {
-
-
-
                     string _fileName = Path.GetFileName(_sourcePath);
-
 
                     if (!string.IsNullOrEmpty(_fileName))
                     {
@@ -262,7 +214,6 @@
                     {
                         imagePreview.ImageLocation = null;
                     }
-
 
                 }
                 else
@@ -288,21 +239,13 @@
                 {
                     pnltabPreview.TabPages.Remove(imageTabPage2);
                 }
-
-
-
-
-
             }
         }
         private void EditContent(FileWorxEntity _selectedObject, ListViewItem _selectedItem)
         {
             if (_selectedObject is New _selectedNews)
             {
-
                 NewsForm _newsForm = new NewsForm(_selectedNews);
-
-
 
                 _newsForm.Text = "Edit New";
                 _newsForm.ShowDialog();
@@ -321,14 +264,10 @@
 
                     _selectedItem.Tag = new1;
 
-
                 }
 
 
             }
-
-
-
             else if (_selectedObject is Photo _selectedPhoto)
             {
                 PhotoForm _photoForm = new PhotoForm(_selectedPhoto);

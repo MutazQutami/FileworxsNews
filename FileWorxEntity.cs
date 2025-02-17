@@ -10,9 +10,7 @@ namespace FileworxsNews
 
     {
         public Guid GuidValue { get; set; }
-
         public DateTime Date { get; set; }
-
         public FileWorxEntity()
         {
             GuidValue = Guid.NewGuid();

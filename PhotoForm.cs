@@ -6,7 +6,6 @@ namespace FileworxsNews
 {
     public partial class PhotoForm : Form
     {
-
         private void OnSaveButtonClick(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTitleField.Text) ||
@@ -39,7 +38,6 @@ namespace FileworxsNews
                 checkUploadPhotoWarning.Show();
             }
         }
-
         private void OnBrowsePhotoClick(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -57,7 +55,6 @@ namespace FileworxsNews
                 lblFilePath.Show();
             }
         }
-
         private void OnCancelButtonClick(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
@@ -66,7 +63,6 @@ namespace FileworxsNews
 
         private static bool _editForm;
         public Photo formPhoto;
-
         public PhotoForm()
         {
             InitializeComponent();
@@ -74,7 +70,6 @@ namespace FileworxsNews
             checkUploadPhotoWarning.Hide();
             _editForm = false;
         }
-
         public PhotoForm(Photo _photo)
         {
             InitializeComponent();
@@ -90,7 +85,5 @@ namespace FileworxsNews
             nullFieldsWarnning.Hide();
             checkUploadPhotoWarning.Hide();
         }
-
-       
     }
 }
