@@ -7,53 +7,33 @@ using System.Threading.Tasks;
 
 namespace FileworxNewsBusiness
 {
-    public class PhotoServices
+    public static class PhotoServices
     {
-        public bool AddPhoto(string title , string description, 
-                             string body , string photoName , string photoPath)
+        public static bool AddPhoto(Photo _photoItem)
         {
-            return BaseServices.Add(
-                new Photo
-                {
-                    Title = title,
-                    Description = description,
-                    Body = body,
-                    PhotoName = photoName,
-                    PhotoPath = photoPath
-                }
-            );
+            return BaseServices.Add(_photoItem);
         }
-        public bool UpdatePhoto(string title, string description, string body, 
-                                string photoName, string photoPath , Guid guidValue)
+        public static bool UpdatePhoto(Photo _photoItem)
         {
-            return BaseServices.Update(
-                 new Photo
-                 {
-                     Title = title,
-                     Description = description,
-                     Body = body,
-                     PhotoName = photoName,
-                     PhotoPath = photoPath,
-                     GuidValue = guidValue
-                 }
-             );
+            return BaseServices.Update(_photoItem);
         }
-        public bool DeletePhoto(Guid guidValue)
+        public static bool DeletePhoto(Guid _guidValue)
         {
             return BaseServices.Delete(
                 new Photo 
                 { 
-                    GuidValue = guidValue 
+                    GuidValue = _guidValue 
                 }
                 );
         }
-        public bool RetrievePhoto(Guid guidValue)
+        public static Photo RetrievePhoto(Guid _guidValue)
         {
-            return true;
+            Photo _photoItem = (Photo)BaseServices.Retrieve(new Photo { GuidValue = _guidValue } );    
+            return _photoItem;
         }
-        public bool RetrievePhotos()
+        public static  List<Photo> RetrievePhotos()
         {
-            return true;
+            return BaseServices.RetriveObjects(new Photo()).Cast<Photo>().ToList();
         }
     }
 }

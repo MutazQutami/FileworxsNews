@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FileworxsNewsUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d90fc1becb4e5be7106ed6828bfe7bf349f81e4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f716df1770a9411fb08c511c29e9d4dae030c35")]
 [assembly: System.Reflection.AssemblyProductAttribute("FileworxsNewsUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FileworxsNewsUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

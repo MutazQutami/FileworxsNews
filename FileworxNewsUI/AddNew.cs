@@ -20,8 +20,7 @@ namespace FileworxsNewsUI
 
             try
             {
-                MessageBox.Show(_relatedFormEntity.GuidValue.ToString());
-                FileHandler.JsonSerialization(_newItem);
+                NewServices.AddNew(_newItem);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -29,8 +28,7 @@ namespace FileworxsNewsUI
             {
                 MessageBox.Show($"An unexpected error occurred: {_ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.DialogResult = DialogResult.None;
-            }
-            
+            } 
         }
         private void OnCancelButtonClick(object sender, EventArgs e)
         {

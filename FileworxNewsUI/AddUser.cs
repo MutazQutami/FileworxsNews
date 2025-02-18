@@ -27,26 +27,31 @@ namespace FileworxsNewsUI
                 return;
             }
 
-            AppUser _appUserItem = FormUserInfo();
+            AppUser _appUserItem = UserFormData();
 
             try
             {
-                FileHandler.JsonSerialization(_appUserItem);
+                UserServices.AddUser(_appUserItem);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
-            catch (Exception _ex) 
+            catch (Exception _ex)
             {
                 MessageBox.Show($"An unexpected error occurred: {_ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.DialogResult = DialogResult.None;
             }
         }
-        private FileWorxEntity _relatedFormEntity;
-        public UserForm() : this(null) { }
-        public UserForm(AppUser _userItem)
+
+        public  Guid formGuidValue;
+        public UserForm() : this(Guid.NewGuid()) { }
+        public UserForm(Guid _guidValue)
         {
             InitializeComponent();
+
+            formGuidValue = _guidValue;
+
+            AppUser _userItem = UserServices.RetrieveUser(_guidValue);
 
             InitializeUserForm(_userItem);
 
@@ -61,23 +66,6 @@ namespace FileworxsNewsUI
             txtLoginName.Text = _userItem.LogInName;
             txtName.Text = _userItem.Name;
             txtConfirmPass.Text = _userItem.Password;
-            _relatedFormEntity = new FileWorxEntity {
-                Date=_userItem.Date,
-                GuidValue = _userItem.GuidValue,
-            };
-
-        }
-        public AppUser FormUserInfo()
-        {
-            return new AppUser()
-            {
-                Name = txtName.Text,
-                LogInName = txtLoginName.Text,
-                Password = txtPassword.Text,
-                GuidValue = _relatedFormEntity is null ? Guid.NewGuid()
-                :(_relatedFormEntity.GuidValue),
-                Date= _relatedFormEntity is null ? DateTime.Now : _relatedFormEntity.Date,
-            };
         }
         private bool AreFieldsValid()
         {
@@ -90,6 +78,16 @@ namespace FileworxsNewsUI
         {
             return AreFieldsValid() &&
             txtPassword.Text.Equals(txtConfirmPass.Text);
+        }
+        private AppUser UserFormData()
+        {
+            return new AppUser
+            {
+                LogInName = txtLoginName.Text,
+                Name = txtName.Text,
+                Password = txtPassword.Text,
+                GuidValue = formGuidValue
+            };
         }
     }
 }

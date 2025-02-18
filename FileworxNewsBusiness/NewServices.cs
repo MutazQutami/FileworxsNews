@@ -1,28 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FileworxNewsBusiness
 {
-    public static class NewServices
+    public static class NewServices 
     {
-        public static bool AddNew()
+        public static bool AddNew(New _newsItem)
         {
-            return true;
+            return BaseServices.Add(_newsItem);
         }
-        public static bool UpdateNew()
+        public static bool UpdateNew(New _newsItem)
         {
-            return true;
+            return BaseServices.Update(_newsItem);
         }
-        public static bool DeleteNew()
+        public static bool DeleteNew(Guid _guidValue)
         {
-            return true;
+            return BaseServices.Delete(new New { GuidValue = _guidValue });
         }
-        public static bool RetrieveNew()
+        public static New RetrieveNew(Guid _guidValue)
         {
-            return true;
+            return (New)BaseServices.Retrieve(new New { GuidValue = _guidValue });
         }
+        public static List<New> RetrieveNews()
+        {
+            return BaseServices.RetriveObjects(new New()).Cast<New>().ToList();
+        }
+
     }
 }

@@ -38,7 +38,7 @@ namespace FileworxNewsBusiness
 
             if (File.Exists(_finalPath))
             {
-                File.Delete(_finalPath);
+                UpdateObject(_obj );
             }
 
             string _jsonObject = JsonConvert.SerializeObject(_obj, Formatting.Indented);
@@ -133,7 +133,7 @@ namespace FileworxNewsBusiness
             }
             return null;
         }
-        private static FileWorxEntity ObjectGuidMapping(Guid _guidValue, string _type)
+        public static FileWorxEntity ObjectGuidMapping(Guid _guidValue, string _type)
         {
             if (_type == "User")
             {
@@ -152,12 +152,12 @@ namespace FileworxNewsBusiness
                 return new FileWorxEntity();
             }
         }
-        public static void UpdateObject(FileWorxEntity _obj)
+        public static void UpdateObject(FileWorxEntity _obj )
         {
-            string _objectPath = FindPath(_obj);
-            string _serObject = Path.Combine(_objectPath, $"{_obj.GuidValue}.json");
+            string _folderPath = FindPath(_obj);
+            string _finalPath = Path.Combine(_folderPath, $"{_obj.GuidValue}.json");
 
-            string _fileContent = File.ReadAllText(_serObject);
+            string _fileContent = File.ReadAllText(_finalPath);
             FileWorxEntity _deserializedObject = _obj switch
             {
                 Photo => JsonConvert.DeserializeObject<Photo>(_fileContent),
@@ -171,6 +171,8 @@ namespace FileworxNewsBusiness
                 _obj.Date = _deserializedObject.Date;
                 _obj.GuidValue = _deserializedObject.GuidValue;
             }
+
+            DeleteObject( _deserializedObject);
             JsonSerialization(_obj);
         }
     }

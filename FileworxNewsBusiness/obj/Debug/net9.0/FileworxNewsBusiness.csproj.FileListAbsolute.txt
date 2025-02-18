@@ -11,3 +11,16 @@ C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\obj\Debug\net9.0
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\obj\Debug\net9.0\refint\FileworxNewsBusiness.dll
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\obj\Debug\net9.0\FileworxNewsBusiness.pdb
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\obj\Debug\net9.0\ref\FileworxNewsBusiness.dll
+C:\Users\user\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\bin\Debug\net9.0\FileworxNewsBusiness.deps.json
+C:\Users\user\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\bin\Debug\net9.0\FileworxNewsBusiness.dll
+C:\Users\user\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\bin\Debug\net9.0\FileworxNewsBusiness.pdb
+C:\Users\user\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\obj\Debug\net9.0\FileworxNewsBusiness.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\obj\Debug\net9.0\FileworxNewsBusiness.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\obj\Debug\net9.0\FileworxNewsBusiness.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\obj\Debug\net9.0\FileworxNewsBusiness.AssemblyInfo.cs
+C:\Users\user\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\obj\Debug\net9.0\FileworxNewsBusiness.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\obj\Debug\net9.0\FileworxNewsBusiness.sourcelink.json
+C:\Users\user\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\obj\Debug\net9.0\FileworxNewsBusiness.dll
+C:\Users\user\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\obj\Debug\net9.0\refint\FileworxNewsBusiness.dll
+C:\Users\user\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\obj\Debug\net9.0\FileworxNewsBusiness.pdb
+C:\Users\user\Desktop\GitHup\FileworxNews\FileworxNewsBusiness\obj\Debug\net9.0\ref\FileworxNewsBusiness.dll

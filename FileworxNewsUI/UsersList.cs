@@ -13,7 +13,7 @@ namespace FileworxsNewsUI
 
             if (newUserForm.ShowDialog() == DialogResult.OK)
             {
-                AppUser newUser = newUserForm.FormUserInfo();
+                AppUser newUser = UserServices.RetrieveUser(newUserForm.formGuidValue);
                 ListHandler.AddLisItem(userList, newUser);
             }
         }
@@ -31,7 +31,7 @@ namespace FileworxsNewsUI
                     ListHandler.RemoveListItem(userList,_selectedListItem); // delete from list
 
                     var _object = _selectedListItem.Tag as AppUser;
-                    FileHandler.DeleteObject(_object); // delete from database
+                    UserServices.DeleteUser(_object.GuidValue); // delete from database
                 }
             }
         }
@@ -40,7 +40,7 @@ namespace FileworxsNewsUI
             if (userList.SelectedItems.Count > 0)
             {
                 ListViewItem _selectedListItem = userList.SelectedItems[0];
-                EditUserLIstItem(_selectedListItem); //
+                EditUserLIstItem(_selectedListItem); 
             }
         }
         public UsersListForm()
@@ -51,8 +51,7 @@ namespace FileworxsNewsUI
         private void RetrieveUsers()
         {
             userList.Items.Clear();
-            List<AppUser> users = FileHandler.JsonDeserializationObjects(new AppUser())
-            .Cast<AppUser>().ToList();
+            List<AppUser> users = UserServices.RetrieveUsers();
 
             foreach (AppUser user in users)
             {
@@ -61,23 +60,18 @@ namespace FileworxsNewsUI
         }
         private void EditUserLIstItem(ListViewItem _selectedListItem)
         {
-            var _selectedObject = _selectedListItem.Tag;
+            Guid _objectGuid = (Guid)_selectedListItem.Tag;
+            AppUser _user = UserServices.RetrieveUser(_objectGuid);
+                
+            UserForm _updateUserForm = new UserForm(_objectGuid);
+            _updateUserForm.ShowDialog();
 
-            if (_selectedObject is AppUser _selectedUser)
+            if (_updateUserForm.DialogResult == DialogResult.OK)
             {
-                UserForm _updateUserForm = new UserForm(_selectedUser);
-                _updateUserForm.ShowDialog();
-
-                if (_updateUserForm.DialogResult == DialogResult.OK)
-                {
-                    AppUser _updatedUser = _updateUserForm.FormUserInfo();
-
-                    _updatedUser.GuidValue = _selectedUser.GuidValue; 
-                    _updatedUser.Date = _selectedUser.Date;
-
-                    ListHandler.UpdateListItem(userList, _selectedListItem, _updatedUser);
-                }
+                AppUser _updatedUser = UserServices.RetrieveUser(_updateUserForm.formGuidValue);
+                ListHandler.UpdateListItem(userList, _selectedListItem, _updatedUser);
             }
+            
         }
     }
 }

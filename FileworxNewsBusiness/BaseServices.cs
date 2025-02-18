@@ -8,40 +8,54 @@ using Newtonsoft.Json;
 
 namespace FileworxNewsBusiness
 {
-    internal class BaseServices
+    internal static class BaseServices
     {
-         public static bool Add(FileWorxEntity _entity)
-         {
-            try {
+        public static bool Add(FileWorxEntity _entity)
+        {
+            try
+            {
                 FileHandler.JsonSerialization(_entity);
                 return true;
             }
-            catch (Exception ex) { 
+            catch (Exception ex)
+            {
 
                 return false;
             }
-         }
-         public static bool Update(FileWorxEntity _newEntity)
-         {
+        }
+        public static bool Update(FileWorxEntity _newEntity)
+        {
             try
             {
-                FileHandler.JsonSerialization(_newEntity);  
+                FileHandler.UpdateObject(_newEntity);
                 return true;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 return false;
             }
-         }
-         public static bool Delete(FileWorxEntity _entity)
-         {
-            try { 
+        }
+        public static bool Delete(FileWorxEntity _entity)
+        {
+            try
+            {
 
                 FileHandler.DeleteObject(_entity);
                 return true;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 return false;
             }
-         }
+        }
+        public static FileWorxEntity Retrieve(FileWorxEntity _obj)
+        {
+
+            return FileHandler.JsonDeserializationObject(_obj);
+        }
+        public static List<FileWorxEntity> RetriveObjects(FileWorxEntity _obj)
+        {
+            return FileHandler.JsonDeserializationObjects(_obj);
+        }
     }
 }

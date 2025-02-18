@@ -7,31 +7,62 @@ using System.Threading.Tasks;
 
 namespace FileworxNewsBusiness
 {
-        public  class UserServices
+    public static class UserServices
+    {
+        public static bool AddUser(AppUser _userItem)
         {
-            public static bool AddUser(string name , string loginName,string password)
-            {
-                return BaseServices.Add(new AppUser());
-            }
-            public static  bool UpdateUser(string name, string loginName, string password)
-            {
-                return BaseServices.Update(new AppUser());
-            }
-            public static  bool DeleteUser(string username , string Guid , string password)
-            {
-                return true;
-            }
-            public static bool AuthenticateUser()
-            {
-                return true;
-            }
-            public bool RetrieveUsers()
-            {
-                return true;
-            }
-            public bool SignUp()
-            {
-                 return true;
-            }
+            return BaseServices.Add(_userItem);
         }
+        public static bool UpdateUser(AppUser _userItem)
+        {
+            return BaseServices.Update(_userItem);
+        }
+        public static bool DeleteUser(Guid _guidValue)
+        {
+            return BaseServices.Delete(new AppUser { GuidValue = _guidValue });
+        }
+        public static AppUser RetrieveUser(Guid _guidValue)
+        {
+            return (AppUser)BaseServices.Retrieve(new AppUser { GuidValue = _guidValue });
+        }
+        public static List<AppUser> RetrieveUsers()
+        {
+            return BaseServices.RetriveObjects(new AppUser()).Cast<AppUser>().ToList();
+        }
+        public static bool SignUp(AppUser _user)
+        {
+            if (ValidUser(_user))
+            {
+                AddUser(_user);
+                return true;
+            }
+            return false;
+        }
+        public static bool AuthenticateUser(AppUser _newUser)
+        {
+            List<AppUser> _users = RetrieveUsers();
+            foreach (AppUser _user in _users)
+            {
+                if (_user.Equals(_newUser))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        private static bool ValidUser(AppUser _user)
+        {
+            List<AppUser> _users = RetrieveUsers();
+
+            foreach (var item in _users)
+            {
+                if (item.LogInName.Equals(_user.LogInName))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+    }
 }
