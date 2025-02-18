@@ -4,7 +4,6 @@ namespace FileworxsNewsUI
 {
     public partial class FileWorx : Form
     {
-
         private void ContentListMouseClick(object sender, MouseEventArgs e)
         {
             if (contentList.SelectedItems.Count > 0)
@@ -15,15 +14,15 @@ namespace FileworxsNewsUI
 
                 if (e.Button == MouseButtons.Right) // right click
                 {
-                    DeleteContent(_selectedObject);
+                    FileHandler.DeleteObject(_selectedObject);
+                    ListHandler.RemoveListItem(contentList, _selectedItem);
                     return;
                 }
 
                 ShowPreviewContent(_selectedObject); // normal click , show preview
             }
-        }
-
-        private void ContentListMouseDoubleClick(object sender, MouseEventArgs e) // double click , edit object
+        } // normal click 
+        private void ContentListMouseDoubleClick(object sender, MouseEventArgs e) 
         {
             if (contentList.SelectedItems.Count > 0)
             {
@@ -34,37 +33,32 @@ namespace FileworxsNewsUI
                 EditContent(_selectedObject, _selectedItem);
             }
         }
-
         private void FileWorxLoad(object sender, EventArgs e)
         {
             mainSplitContainer.SplitterDistance = this.Height * 2 / 3;
         }
-
-       
-
         private void OnAddPhotoButtonClick(object sender, EventArgs e){
             PhotoForm photoForm = new PhotoForm();
 
             if (photoForm.ShowDialog() == DialogResult.OK)
             {
-                Photo _photo = photoForm.formPhoto;
-                AddListItem(_photo);
+                Photo _photoItem = photoForm.FormPhotoInfo();
+                ListHandler.AddLisItem(contentList, _photoItem);
                 return;
             }
 
         }
-
         private void OnAddNewButtonClick(object sender, EventArgs e)
         {
             NewsForm _newsForm = new NewsForm();
 
             if (_newsForm.ShowDialog() == DialogResult.OK)
             {
-                New _new = _newsForm._formNew;
-                AddListItem(_new);
+                New _newItem = _newsForm.FormNewInfo();
+                //ListHandler.AddLisItem(contentList, _newItem);
+                ListHandler.AddLisItem(contentList, _newItem);
                 return;
             }
-
         }
         public FileWorx()
         {
@@ -72,7 +66,6 @@ namespace FileworxsNewsUI
             InitializeContentList();
       
         }
-
         private void InitializeContentList()
         {
             // retrieving photos and news
@@ -97,36 +90,12 @@ namespace FileworxsNewsUI
             _mergedList = _mergedList.OrderByDescending(item => item.Date).ToList();
 
             // Add sorted items to contentList
-            foreach (var item in _mergedList)
+            foreach (var _item in _mergedList)
             {
-               AddListItem(item);
+                ListHandler.AddLisItem(contentList, _item);
 
             }
         }
-
-
-        private void DeleteContent(FileWorxEntity _selectedObject)
-        {
-            if (contentList.FocusedItem != null)
-            {
-                // Get selected object (assuming it's stored in Tag property)
-                _selectedObject = (FileWorxEntity)contentList.FocusedItem.Tag;
-
-                // Confirm deletion
-                DialogResult result = MessageBox.Show("Are you sure you want to delete this item?",
-                    "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
-                {
-                    // Delete the object
-                    FileHandler.DeleteObject(_selectedObject);
-
-                    // Remove it from the ListView
-                    contentList.Items.Remove(contentList.FocusedItem);
-                }
-            }
-        }
-
         private void ShowPreviewContent(FileWorxEntity _selectedObject)
         {
             if (_selectedObject is Photo _selectedPhoto)
@@ -135,7 +104,7 @@ namespace FileworxsNewsUI
 
                 txtTitleField.Text = _selectedPhoto.Title;
                 txtCreationDateField.Text = _selectedPhoto.Date.ToString();
-                txtCategoryField.Text = _selectedPhoto.photoPath;
+                txtCategoryField.Text = _selectedPhoto.PhotoPath;
 
                 lblCategory.Hide();
                 txtCategoryField.Hide();
@@ -147,9 +116,9 @@ namespace FileworxsNewsUI
                     pnltabPreview.TabPages.Add(imageTabPage2);
                 }
 
-                string _sourcePath = _selectedPhoto.photoPath;
+                string _sourcePath = _selectedPhoto.PhotoPath;
 
-                if (!string.IsNullOrEmpty(_selectedPhoto.photoPath))
+                if (!string.IsNullOrEmpty(_selectedPhoto.PhotoPath))
                 {
                     string _fileName = Path.GetFileName(_sourcePath);
 
@@ -190,6 +159,7 @@ namespace FileworxsNewsUI
         }
         private void EditContent(FileWorxEntity _selectedObject, ListViewItem _selectedItem)
         {
+
             if (_selectedObject is New _selectedNews)
             {
                 NewsForm _newsForm = new NewsForm(_selectedNews);
@@ -197,23 +167,11 @@ namespace FileworxsNewsUI
                 _newsForm.Text = "Edit New";
                 _newsForm.ShowDialog();
 
-                if (_newsForm.DialogResult == DialogResult.OK)       // The Save button was clicked
+                if (_newsForm.DialogResult == DialogResult.OK)       
                 {
-                    New _new = new New();
-
-                    _new = _newsForm._formNew;
-
-                    _selectedItem.Text = _new.Title;  // Update the first column
-                    _selectedItem.SubItems[1].Text = _new.Date.ToString();
-                    _selectedItem.SubItems[2].Text = _new.Description;
-                    _selectedItem.SubItems[3].Text = _new.GuidValue.ToString();
-                    _selectedItem.SubItems[4].Text = _new.Body;
-
-                    _selectedItem.Tag = _new;
-
+                    New _newItem = _newsForm.FormNewInfo();
+                    ListHandler.UpdateListItem(contentList , _selectedItem ,_newItem);
                 }
-
-
             }
             else if (_selectedObject is Photo _selectedPhoto)
             {
@@ -224,44 +182,10 @@ namespace FileworxsNewsUI
 
                 if (_photoForm.DialogResult == DialogResult.OK)
                 {
-                    Photo _photo = _photoForm.formPhoto;
-
-                    _selectedItem.Text = _photo.Title;  // Update the first column
-                    _selectedItem.SubItems[1].Text = _photo.Date.ToString();
-                    _selectedItem.SubItems[2].Text = _photo.Description;
-                    _selectedItem.SubItems[3].Text = _photo.GuidValue.ToString();
-                    _selectedItem.SubItems[4].Text = _photo.Body;
-
-                    _selectedItem.Tag = _photo;
+                    Photo _photoItem = _photoForm.FormPhotoInfo();
+                    ListHandler.UpdateListItem(contentList, _selectedItem, _photoItem);
                 }
-
-
             }
-        }
-        
-        private void AddListItem(Content _content)
-        {
-            ListViewItem _listItem = new ListViewItem(_content.Title);
-            _listItem.SubItems.Add(_content.Date.ToString());
-            _listItem.SubItems.Add(_content.Description);
-
-
-            if (_content is Photo _photo)
-            {
-                _listItem.SubItems.Add(_photo.photoPath);
-                _listItem.SubItems.Add(_photo.GuidValue.ToString());
-                _listItem.SubItems.Add(_photo.Body);
-            }
-            else if (_content is New _newItem)
-            {
-                _listItem.SubItems.Add(_newItem.Category);
-                _listItem.SubItems.Add(_newItem.GuidValue.ToString());
-                _listItem.SubItems.Add(_newItem.Category);
-            }
-
-            _listItem.Tag = _content;
-            contentList.Items.Add(_listItem);
-
         }
     }
 }

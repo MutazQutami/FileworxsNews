@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 namespace FileworxNewsBusiness
 {
     public class Photo : Content
-
     {
-        public string photoName;
-        public string photoPath;
-
+        public string PhotoName { get; set; }
+        public string PhotoPath { get; set; }
     }
 }

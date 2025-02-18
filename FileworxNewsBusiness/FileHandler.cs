@@ -14,7 +14,7 @@ namespace FileworxNewsBusiness
             string _projectPath = AppDomain.CurrentDomain.BaseDirectory;
             string _folderType = obj switch
             {
-                User => "Users",
+                AppUser => "Users",
                 Photo => "Photos",
                 _ => "News"
             };
@@ -28,7 +28,6 @@ namespace FileworxNewsBusiness
 
             return _targetFolder;
         }
-
         public static void JsonSerialization(FileWorxEntity _obj)
         {
             string _folderPath = FindPath(_obj);
@@ -50,7 +49,6 @@ namespace FileworxNewsBusiness
                 //MessageBox.Show($"Can't store the file. Error: {_ex.Message}");
             }
         }
-
         public static List<FileWorxEntity> JsonDeserializationObjects(FileWorxEntity _obj)
         {
             List<FileWorxEntity> _objectList = new List<FileWorxEntity>();
@@ -71,7 +69,7 @@ namespace FileworxNewsBusiness
                     {
                         Photo => JsonConvert.DeserializeObject<Photo>(_fileContent),
                         New => JsonConvert.DeserializeObject<New>(_fileContent),
-                        User => JsonConvert.DeserializeObject<User>(_fileContent),
+                        AppUser => JsonConvert.DeserializeObject<AppUser>(_fileContent),
                         _ => null
                     };
 
@@ -88,7 +86,6 @@ namespace FileworxNewsBusiness
 
             return _objectList;
         }
-
         public static void DeleteObject(FileWorxEntity _obj)
         {
             string _path = Path.Combine(FindPath(_obj), $"{_obj.GuidValue}.json");

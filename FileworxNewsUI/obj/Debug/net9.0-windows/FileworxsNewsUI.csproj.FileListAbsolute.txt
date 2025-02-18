@@ -3,7 +3,6 @@ C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsUI\obj\Debug\net9.0-windo
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsUI\obj\Debug\net9.0-windows\FileworxsNewsUI.PhotoForm.resources
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsUI\obj\Debug\net9.0-windows\FileworxsNewsUI.UserForm.resources
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsUI\obj\Debug\net9.0-windows\FileworxsNewsUI.FileWorx.resources
-C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsUI\obj\Debug\net9.0-windows\FileworxsNewsUI.Login.resources
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsUI\obj\Debug\net9.0-windows\FileworxsNewsUI.Properties.Resources.resources
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsUI\obj\Debug\net9.0-windows\FileworxsNewsUI.UsersListForm.resources
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsUI\obj\Debug\net9.0-windows\FileworxsNewsUI.csproj.GenerateResource.cache
@@ -26,3 +25,4 @@ C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsUI\obj\Debug\net9.0-windo
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsUI\obj\Debug\net9.0-windows\FileworxsNewsUI.pdb
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsUI\obj\Debug\net9.0-windows\FileworxsNewsUI.genruntimeconfig.cache
 C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsUI\obj\Debug\net9.0-windows\ref\FileworxsNewsUI.dll
+C:\Users\mutaz\Desktop\GitHup\FileworxNews\FileworxNewsUI\obj\Debug\net9.0-windows\FileworxsNewsUI.LoginForm.resources

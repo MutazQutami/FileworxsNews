@@ -1,6 +1,6 @@
 ﻿namespace FileworxsNewsUI
 {
-    partial class Login
+    partial class LoginForm
     {
         /// <summary>
         /// Required designer variable.
@@ -119,7 +119,7 @@
             logInButton.TabIndex = 3;
             logInButton.Text = "LogIn";
             logInButton.UseVisualStyleBackColor = false;
-            logInButton.Click += LogIn;
+            logInButton.Click += LogInProcess;
             // 
             // userNameLabel
             // 
@@ -191,7 +191,7 @@
             lblSignUp.TabIndex = 9;
             lblSignUp.TabStop = true;
             lblSignUp.Text = "sign up";
-            lblSignUp.LinkClicked += SignUp;
+            lblSignUp.Click += SignUpProcess;
             // 
             // nullFieldWarning
             // 
@@ -215,7 +215,7 @@
             wrongCredentials.TabIndex = 11;
             wrongCredentials.Text = "Invalid Username or Password";
             // 
-            // Login
+            // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -233,7 +233,7 @@
             Controls.Add(passwordField);
             Controls.Add(userNameField);
             Controls.Add(pnlLeft);
-            Name = "Login";
+            Name = "LoginForm";
             Text = "LogIn";
             pnlLeft.ResumeLayout(false);
             pnlLeft.PerformLayout();

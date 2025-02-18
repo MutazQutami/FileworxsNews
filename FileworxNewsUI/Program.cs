@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace FileworxsNewsUI
 {
-
     internal static class Program
     {
         /// <summary>
@@ -17,14 +16,9 @@ namespace FileworxsNewsUI
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Login());
-
-
-
+            Application.Run(new LoginForm());
         }
     }
-
-
 }
 
 
