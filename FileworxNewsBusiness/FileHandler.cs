@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 
 namespace FileworxNewsBusiness
@@ -101,6 +104,74 @@ namespace FileworxNewsBusiness
                     //MessageBox.Show("Error deleting the file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+        public static FileWorxEntity JsonDeserializationObject(FileWorxEntity _obj)
+        {
+            FileWorxEntity _object = new FileWorxEntity();
+            string _folderPath = FindPath(_obj);
+            string _finalPath = Path.Combine(_folderPath, $"{_obj.GuidValue}.json");
+
+            if (!File.Exists(_finalPath))
+            {
+                return null;
+            }
+            else
+            {
+                string _fileContent = File.ReadAllText(_finalPath);
+
+                FileWorxEntity _deserializedObject = _obj switch
+                {
+                    Photo => JsonConvert.DeserializeObject<Photo>(_fileContent),
+                    New => JsonConvert.DeserializeObject<New>(_fileContent),
+                    AppUser => JsonConvert.DeserializeObject<AppUser>(_fileContent),
+                    _ => null
+                };
+                if (_deserializedObject != null)
+                {
+                    return _deserializedObject;
+                }
+            }
+            return null;
+        }
+        private static FileWorxEntity ObjectGuidMapping(Guid _guidValue, string _type)
+        {
+            if (_type == "User")
+            {
+                return new AppUser { GuidValue = _guidValue };
+            }
+            else if (_type == "New")
+            {
+                return new New { GuidValue = _guidValue };
+            }
+            else if (_type == "Photo")
+            {
+                return new AppUser { GuidValue = _guidValue };
+            }
+            else
+            {
+                return new FileWorxEntity();
+            }
+        }
+        public static void UpdateObject(FileWorxEntity _obj)
+        {
+            string _objectPath = FindPath(_obj);
+            string _serObject = Path.Combine(_objectPath, $"{_obj.GuidValue}.json");
+
+            string _fileContent = File.ReadAllText(_serObject);
+            FileWorxEntity _deserializedObject = _obj switch
+            {
+                Photo => JsonConvert.DeserializeObject<Photo>(_fileContent),
+                New => JsonConvert.DeserializeObject<New>(_fileContent),
+                AppUser => JsonConvert.DeserializeObject<AppUser>(_fileContent),
+                _ => null
+            };
+
+            if (_deserializedObject != null)
+            {
+                _obj.Date = _deserializedObject.Date;
+                _obj.GuidValue = _deserializedObject.GuidValue;
+            }
+            JsonSerialization(_obj);
         }
     }
 }
