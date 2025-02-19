@@ -30,8 +30,8 @@ namespace FileworxsNewsUI
                 {
                     ListHandler.RemoveListItem(userList,_selectedListItem); // delete from list
 
-                    var _object = _selectedListItem.Tag as AppUser;
-                    UserServices.DeleteUser(_object.GuidValue); // delete from database
+                    Guid _userGuidValue = (Guid)_selectedListItem.Tag ;
+                    UserServices.DeleteUser(_userGuidValue); // delete from database
                 }
             }
         }
