@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace FileworxNewsBusiness
 {
-    public static class UserServices
+    public static class UserServices 
     {
-        public static bool AddUser(AppUser _userItem)
+        public static void AddUser(AppUser _userItem)
         {
-            return BaseServices.Add(_userItem);
+             BaseServices.Add(_userItem);
         }
-        public static bool UpdateUser(AppUser _userItem)
+        public static void UpdateUser(AppUser _userItem)
         {
-            return BaseServices.Update(_userItem);
+             BaseServices.Update(_userItem);
         }
-        public static bool DeleteUser(Guid _guidValue)
+        public static void DeleteUser(Guid _guidValue)
         {
-            return BaseServices.Delete(new AppUser { GuidValue = _guidValue });
+             BaseServices.Delete(new AppUser { GuidValue = _guidValue });
         }
         public static AppUser RetrieveUser(Guid _guidValue)
         {
@@ -27,7 +27,7 @@ namespace FileworxNewsBusiness
         }
         public static List<AppUser> RetrieveUsers()
         {
-            return BaseServices.RetriveObjects(new AppUser()).Cast<AppUser>().ToList();
+            return BaseServices.RetrieveObjects(new AppUser()).Cast<AppUser>().ToList();
         }
         public static bool SignUp(AppUser _user)
         {
@@ -43,7 +43,7 @@ namespace FileworxNewsBusiness
             List<AppUser> _users = RetrieveUsers();
             foreach (AppUser _user in _users)
             {
-                if (_user.Equals(_newUser))
+                if (_user.IsEqual(_newUser))
                 {
                     return true;
                 }
@@ -53,16 +53,7 @@ namespace FileworxNewsBusiness
         private static bool ValidUser(AppUser _user)
         {
             List<AppUser> _users = RetrieveUsers();
-
-            foreach (var item in _users)
-            {
-                if (item.LogInName.Equals(_user.LogInName))
-                {
-                    return false;
-                }
-            }
-            return true;
+            return !_users.Any(item => item.LogInName.Equals(_user.LogInName));
         }
-        
     }
 }

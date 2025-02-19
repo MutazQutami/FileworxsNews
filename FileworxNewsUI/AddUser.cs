@@ -14,14 +14,14 @@ namespace FileworxsNewsUI
             if (!AreFieldsValid())
             {
                 passMatchWarning.Hide();
-                lblNullWarnning.Show();
+                lblNullwarning.Show();
 
                 return;
             }
             if (!ArePasswordsEqual())
             {
 
-                lblNullWarnning.Hide();
+                lblNullwarning.Hide();
                 passMatchWarning.Show();
 
                 return;
@@ -31,10 +31,16 @@ namespace FileworxsNewsUI
 
             try
             {
-                UserServices.AddUser(_appUserItem);
-
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                if(UserServices.SignUp(_appUserItem))
+                {
+                    UserServices.AddUser(_appUserItem);
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Please Choose Another Login name");
+                }
             }
             catch (Exception _ex)
             {
@@ -42,20 +48,19 @@ namespace FileworxsNewsUI
                 this.DialogResult = DialogResult.None;
             }
         }
-
-        public  Guid formGuidValue;
+        public  Guid FormGuidValue;
         public UserForm() : this(Guid.NewGuid()) { }
         public UserForm(Guid _guidValue)
         {
             InitializeComponent();
 
-            formGuidValue = _guidValue;
+            FormGuidValue = _guidValue;
 
             AppUser _userItem = UserServices.RetrieveUser(_guidValue);
 
             InitializeUserForm(_userItem);
 
-            lblNullWarnning.Hide();
+            lblNullwarning.Hide();
             passMatchWarning.Hide();
         }
         private void InitializeUserForm(AppUser _userItem)
@@ -69,10 +74,10 @@ namespace FileworxsNewsUI
         }
         private bool AreFieldsValid()
         {
-            return !string.IsNullOrEmpty(txtName.Text) &&
-            !string.IsNullOrEmpty(txtLoginName.Text) &&
-            !string.IsNullOrEmpty(txtPassword.Text) &&
-            !string.IsNullOrEmpty(txtConfirmPass.Text);
+            return !string.IsNullOrWhiteSpace(txtName.Text) &&
+            !string.IsNullOrWhiteSpace(txtLoginName.Text) &&
+            !string.IsNullOrWhiteSpace(txtPassword.Text) &&
+            !string.IsNullOrWhiteSpace(txtConfirmPass.Text);
         }
         private bool ArePasswordsEqual()
         {
@@ -86,7 +91,7 @@ namespace FileworxsNewsUI
                 LogInName = txtLoginName.Text,
                 Name = txtName.Text,
                 Password = txtPassword.Text,
-                GuidValue = formGuidValue
+                GuidValue = FormGuidValue
             };
         }
     }

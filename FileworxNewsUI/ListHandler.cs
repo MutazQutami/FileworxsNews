@@ -10,15 +10,15 @@ namespace FileworxsNewsUI
 {
     public static class ListHandler
     {
-        public static void AddLisItem(ListView _targetList , FileWorxEntity _entity , int _index=0)
+        public static void AddListItem(ListView _targetList , FileWorxEntity _entity , int _index=0)
         {
             ListViewItem _listItem = new ListViewItem();
             
-            if(_entity is AppUser)
+            if(_entity is AppUser)   // user item
             {
                 AddUserListItem( _listItem, _entity);
             }
-            else
+            else                   // photo , new items
             {
                 AddContentListItem( _listItem , _entity);
             }
@@ -35,8 +35,8 @@ namespace FileworxsNewsUI
             ListViewItem _newListItem = new ListViewItem();
 
             _selectedListItem.SubItems.Clear();
-            RemoveListItem(_targetList , _selectedListItem); // Romving the old one 
-            AddLisItem(_targetList, _entity , _index);// adding the new one
+            RemoveListItem(_targetList , _selectedListItem); // Removing the old one 
+            AddListItem(_targetList, _entity , _index);     //  Adding the new one
         }
         private static void AddUserListItem(ListViewItem _listItem , FileWorxEntity _entity)
         {
@@ -45,7 +45,7 @@ namespace FileworxsNewsUI
             _listItem.SubItems.Add(_userItem.LogInName.ToString());
             _listItem.SubItems.Add(_userItem.Date.ToString());
             _listItem.SubItems.Add(_userItem.Password);
-            _listItem.Tag = _entity.GuidValue;
+            _listItem.Tag = _entity.GuidValue;    // guid value tag to distinguish between users
         }
         private static void AddContentListItem(ListViewItem _listItem , FileWorxEntity _entity)
         {

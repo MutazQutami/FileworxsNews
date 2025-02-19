@@ -9,17 +9,17 @@ namespace FileworxNewsBusiness
 {
     public static class PhotoServices
     {
-        public static bool AddPhoto(Photo _photoItem)
+        public static void AddPhoto(Photo _photoItem)
         {
-            return BaseServices.Add(_photoItem);
+             BaseServices.Add(_photoItem);
         }
-        public static bool UpdatePhoto(Photo _photoItem)
+        public static void UpdatePhoto(Photo _photoItem)
         {
-            return BaseServices.Update(_photoItem);
+             BaseServices.Update(_photoItem);
         }
-        public static bool DeletePhoto(Guid _guidValue)
+        public static void DeletePhoto(Guid _guidValue)
         {
-            return BaseServices.Delete(
+             BaseServices.Delete(
                 new Photo 
                 { 
                     GuidValue = _guidValue 
@@ -33,7 +33,7 @@ namespace FileworxNewsBusiness
         }
         public static  List<Photo> RetrievePhotos()
         {
-            return BaseServices.RetriveObjects(new Photo()).Cast<Photo>().ToList();
+            return BaseServices.RetrieveObjects(new Photo()).Cast<Photo>().ToList();
         }
     }
 }

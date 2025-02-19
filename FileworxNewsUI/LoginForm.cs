@@ -16,7 +16,6 @@ namespace FileworxsNewsUI
         {
             UserForm userForm = new UserForm();
             userForm.ShowDialog();
-
         }
         private void LogInProcess(object sender, EventArgs e)
         {
@@ -30,9 +29,14 @@ namespace FileworxsNewsUI
 
             nullFieldWarning.Hide();
 
-            if (IsAuthenticatedUser())
+            AppUser _appUser = new AppUser
             {
+                LogInName = userNameField.Text,
+                Password = passwordField.Text
+            };
 
+            if (UserServices.AuthenticateUser(_appUser))
+            {
                 FileWorx fileWorx = new FileWorx();
                 fileWorx.Show();
                 return;
@@ -51,29 +55,6 @@ namespace FileworxsNewsUI
         {
             return string.IsNullOrEmpty(userNameField.Text) ||
                    string.IsNullOrEmpty(passwordField.Text);
-        }
-        private bool IsAuthenticatedUser()
-        {
-            AppUser loginUser = new AppUser
-            {
-                LogInName = userNameField.Text,
-                Password = passwordField.Text
-            };
-
-            string _usersFilePath = FileHandler.FindPath(loginUser);
-
-            foreach (var file in Directory.GetFiles(_usersFilePath, "*.json"))
-            {
-                string fileContent = File.ReadAllText(file);
-                AppUser deserializedUser = JsonConvert.DeserializeObject<AppUser>(fileContent);
-
-                if (loginUser.IsEqual(deserializedUser))
-                {
-                    return true;
-                }
-
-            }
-            return false;
         }
     }
 }

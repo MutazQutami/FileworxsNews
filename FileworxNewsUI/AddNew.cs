@@ -35,29 +35,26 @@ namespace FileworxsNewsUI
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
-        private FileWorxEntity _relatedFormEntity;
-        public NewsForm() : this(null) { }
-        public NewsForm(New _newItem)
+        public Guid FormGuidValue;
+        public NewsForm() : this(Guid.NewGuid()) { }
+        public NewsForm(Guid _guidValue)
         {
             InitializeComponent();
-
             nullFieldsWarning.Hide();
 
-            _newItem = _newItem ?? new New();
+            FormGuidValue = _guidValue;
+            New _newItem = NewServices.RetrieveNew(_guidValue);
             InitializeForm(_newItem);
         }
         private void InitializeForm(New _newItem)
         {
-            MessageBox.Show(_newItem.GuidValue.ToString());
+            _newItem = _newItem ?? new New();
+
             txtTitleField.Text = _newItem.Title;
             txtDescriptionField.Text = _newItem.Description;
             categoryList.Text = _newItem.Category;
             txtBodyField.Text = _newItem.Body;
-            _relatedFormEntity = new FileWorxEntity
-            {
-                Date = _newItem.Date,
-                GuidValue = _newItem.GuidValue
-            };
+            
             nullFieldsWarning.Hide();
         }
         public New FormNewInfo()
@@ -68,16 +65,15 @@ namespace FileworxsNewsUI
                 Description = txtDescriptionField.Text,
                 Category = categoryList.Text,
                 Body = txtBodyField.Text,
-                GuidValue = _relatedFormEntity is null ? Guid.NewGuid() : _relatedFormEntity.GuidValue,
-                Date = _relatedFormEntity is null ? DateTime.Now : _relatedFormEntity.Date
+                GuidValue = FormGuidValue,
            };
         }
         private bool AreFieldsValid()
         {
-           return !string.IsNullOrEmpty(txtTitleField.Text) &&
-           !string.IsNullOrEmpty(txtDescriptionField.Text) &&
-           !string.IsNullOrEmpty(categoryList.Text) &&
-           !string.IsNullOrEmpty(txtBodyField.Text);
+           return !string.IsNullOrWhiteSpace(txtTitleField.Text) &&
+           !string.IsNullOrWhiteSpace(txtDescriptionField.Text) &&
+           !string.IsNullOrWhiteSpace(categoryList.Text) &&
+           !string.IsNullOrWhiteSpace(txtBodyField.Text);
         }
     }
 }

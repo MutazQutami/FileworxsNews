@@ -10,12 +10,18 @@ namespace FileworxsNewsUI
             {
                 ListViewItem _selectedItem = contentList.SelectedItems[0];
 
-                FileWorxEntity _selectedObject = (FileWorxEntity)_selectedItem.Tag;
+                Content _selectedObject = (Content)_selectedItem.Tag;
 
                 if (e.Button == MouseButtons.Right) // right click
                 {
-                    FileHandler.DeleteObject(_selectedObject);
-                    ListHandler.RemoveListItem(contentList, _selectedItem);
+                    DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirm Deletion",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        Content.DeleteContent(_selectedObject);
+                        ListHandler.RemoveListItem(contentList, _selectedItem);
+                    }
                     return;
                 }
 
@@ -43,10 +49,9 @@ namespace FileworxsNewsUI
             if (photoForm.ShowDialog() == DialogResult.OK)
             {
                 Photo _photoItem = photoForm.FormPhotoInfo();
-                ListHandler.AddLisItem(contentList, _photoItem);
+                ListHandler.AddListItem(contentList, _photoItem);
                 return;
             }
-
         }
         private void OnAddNewButtonClick(object sender, EventArgs e)
         {
@@ -55,8 +60,7 @@ namespace FileworxsNewsUI
             if (_newsForm.ShowDialog() == DialogResult.OK)
             {
                 New _newItem = _newsForm.FormNewInfo();
-                //ListHandler.AddLisItem(contentList, _newItem);
-                ListHandler.AddLisItem(contentList, _newItem);
+                ListHandler.AddListItem(contentList, _newItem);
                 return;
             }
         }
@@ -76,12 +80,9 @@ namespace FileworxsNewsUI
                 pnltabPreview.TabPages.Remove(imageTabPage2);
             }
 
-            List<Photo> _photoList = FileHandler.JsonDeserializationObjects(new Photo())
-            .Cast<Photo>().ToList();
-            List<New> _newsList = FileHandler.JsonDeserializationObjects(new New())
-            .Cast<New>().ToList();
+            List<Photo> _photoList = PhotoServices.RetrievePhotos();
+            List<New> _newsList =NewServices.RetrieveNews();
 
-            //Merge the two lists together
             List<Content> _mergedList = new List<Content>();
             _mergedList.AddRange(_photoList);
             _mergedList.AddRange(_newsList);
@@ -92,69 +93,74 @@ namespace FileworxsNewsUI
             // Add sorted items to contentList
             foreach (var _item in _mergedList)
             {
-                ListHandler.AddLisItem(contentList, _item);
-
+                ListHandler.AddListItem(contentList, _item);
             }
         }
         private void ShowPreviewContent(FileWorxEntity _selectedObject)
         {
             if (_selectedObject is Photo _selectedPhoto)
             {
-                txtCategoryField.Hide();
-
-                txtTitleField.Text = _selectedPhoto.Title;
-                txtCreationDateField.Text = _selectedPhoto.Date.ToString();
-                txtCategoryField.Text = _selectedPhoto.PhotoPath;
-
-                lblCategory.Hide();
-                txtCategoryField.Hide();
-
-                pnlPreviewContent.Text = _selectedPhoto.Body;
-
-                if (!pnltabPreview.TabPages.Contains(imageTabPage2))
-                {
-                    pnltabPreview.TabPages.Add(imageTabPage2);
-                }
-
-                string _sourcePath = _selectedPhoto.PhotoPath;
-
-                if (!string.IsNullOrEmpty(_selectedPhoto.PhotoPath))
-                {
-                    string _fileName = Path.GetFileName(_sourcePath);
-
-                    if (!string.IsNullOrEmpty(_fileName))
-                    {
-                        imagePreview.ImageLocation = _sourcePath;
-                    }
-                    else
-                    {
-                        imagePreview.ImageLocation = null;
-                    }
-
-                }
-                else
-                {
-                    imagePreview.Image = imagePreview.InitialImage;
-                }
-
-
+                ShowPreviewPhoto(_selectedPhoto);
             }
             else if (_selectedObject is New _selectedNews)
             {
-                txtTitleField.Text = _selectedNews.Title;
-                txtCreationDateField.Text = _selectedNews.Date.ToString();
-                txtCategoryField.Text = _selectedNews.Category;
+                ShowPreviewNew(_selectedNews);
+            }
+        }
+        private void ShowPreviewPhoto(Photo _selectedPhoto)
+        {
+            txtCategoryField.Hide();
 
-                pnlPreviewContent.Text = _selectedNews.Body;
+            txtTitleField.Text = _selectedPhoto.Title;
+            txtCreationDateField.Text = _selectedPhoto.Date.ToString();
+            txtCategoryField.Text = _selectedPhoto.PhotoPath;
 
-                lblCategory.Show();
-                txtCategoryField.Show();
+            lblCategory.Hide();
+            txtCategoryField.Hide();
 
-                txtCategoryField.Text = _selectedNews.Category;
-                if (pnltabPreview.TabPages.Contains(imageTabPage2))
+            pnlPreviewContent.Text = _selectedPhoto.Body;
+
+            if (!pnltabPreview.TabPages.Contains(imageTabPage2))
+            {
+                pnltabPreview.TabPages.Add(imageTabPage2);
+            }
+
+            string _sourcePath = _selectedPhoto.PhotoPath;
+
+            if (!string.IsNullOrEmpty(_selectedPhoto.PhotoPath))
+            {
+                string _fileName = Path.GetFileName(_sourcePath);
+
+                if (!string.IsNullOrEmpty(_fileName))
                 {
-                    pnltabPreview.TabPages.Remove(imageTabPage2);
+                    imagePreview.ImageLocation = _sourcePath;
                 }
+                else
+                {
+                    imagePreview.ImageLocation = null;
+                }
+
+            }
+            else
+            {
+                imagePreview.Image = imagePreview.InitialImage;
+            }
+        }
+        private void ShowPreviewNew(New _selectedNews)
+        {
+            txtTitleField.Text = _selectedNews.Title;
+            txtCreationDateField.Text = _selectedNews.Date.ToString();
+            txtCategoryField.Text = _selectedNews.Category;
+
+            pnlPreviewContent.Text = _selectedNews.Body;
+
+            lblCategory.Show();
+            txtCategoryField.Show();
+
+            txtCategoryField.Text = _selectedNews.Category;
+            if (pnltabPreview.TabPages.Contains(imageTabPage2))
+            {
+                pnltabPreview.TabPages.Remove(imageTabPage2);
             }
         }
         private void EditContent(FileWorxEntity _selectedObject, ListViewItem _selectedItem)
@@ -162,7 +168,7 @@ namespace FileworxsNewsUI
 
             if (_selectedObject is New _selectedNews)
             {
-                NewsForm _newsForm = new NewsForm(_selectedNews);
+                NewsForm _newsForm = new NewsForm(_selectedNews.GuidValue);
 
                 _newsForm.Text = "Edit New";
                 _newsForm.ShowDialog();
@@ -175,7 +181,7 @@ namespace FileworxsNewsUI
             }
             else if (_selectedObject is Photo _selectedPhoto)
             {
-                PhotoForm _photoForm = new PhotoForm(_selectedPhoto);
+                PhotoForm _photoForm = new PhotoForm(_selectedPhoto.GuidValue);
 
                 _photoForm.Text = "Edit Photo";
                 _photoForm.ShowDialog();

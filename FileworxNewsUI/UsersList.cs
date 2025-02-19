@@ -13,8 +13,8 @@ namespace FileworxsNewsUI
 
             if (newUserForm.ShowDialog() == DialogResult.OK)
             {
-                AppUser newUser = UserServices.RetrieveUser(newUserForm.formGuidValue);
-                ListHandler.AddLisItem(userList, newUser);
+                AppUser newUser = UserServices.RetrieveUser(newUserForm.FormGuidValue);
+                ListHandler.AddListItem(userList, newUser);
             }
         }
         private void OnUserListMouseClick(object sender, MouseEventArgs e)
@@ -35,7 +35,7 @@ namespace FileworxsNewsUI
                 }
             }
         }
-        private void OnUserListDoublClick(object sender, EventArgs e)
+        private void OnUserListDoubleClick(object sender, EventArgs e)
         {
             if (userList.SelectedItems.Count > 0)
             {
@@ -55,12 +55,12 @@ namespace FileworxsNewsUI
 
             foreach (AppUser user in users)
             {
-                ListHandler.AddLisItem(userList , user);
+                ListHandler.AddListItem(userList , user);
             }
         }
         private void EditUserLIstItem(ListViewItem _selectedListItem)
         {
-            Guid _objectGuid = (Guid)_selectedListItem.Tag;
+            Guid _objectGuid = (Guid)_selectedListItem.Tag; 
             AppUser _user = UserServices.RetrieveUser(_objectGuid);
                 
             UserForm _updateUserForm = new UserForm(_objectGuid);
@@ -68,7 +68,7 @@ namespace FileworxsNewsUI
 
             if (_updateUserForm.DialogResult == DialogResult.OK)
             {
-                AppUser _updatedUser = UserServices.RetrieveUser(_updateUserForm.formGuidValue);
+                AppUser _updatedUser = UserServices.RetrieveUser(_updateUserForm.FormGuidValue);
                 ListHandler.UpdateListItem(userList, _selectedListItem, _updatedUser);
             }
             

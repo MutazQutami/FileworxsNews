@@ -13,16 +13,16 @@ namespace FileworxsNewsUI
             if (!AreFieldsValid())
             {
                 checkUploadPhotoWarning.Hide();
-                nullFieldsWarning .Show();
+                nullFieldsWarning.Show();
                 return;
             }
-            if (!string.IsNullOrEmpty(lblFilePathText.Text))
+            if (!string.IsNullOrEmpty(lblFilePath.Text))
             {
                 Photo _photoItem = FormPhotoInfo();
 
                 try
                 {
-                    FileHandler.JsonSerialization(_photoItem);
+                    PhotoServices.AddPhoto(_photoItem);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
@@ -36,7 +36,7 @@ namespace FileworxsNewsUI
             }
             else
             {
-                nullFieldsWarning .Hide();
+                nullFieldsWarning.Hide();
                 checkUploadPhotoWarning.Show();
             }
         }
@@ -62,13 +62,16 @@ namespace FileworxsNewsUI
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
-        private FileWorxEntity _relatedFormEntity;
-        public PhotoForm() : this(null) { }
-        public PhotoForm(Photo _photoItem)
+        public Guid FormGuidValue;
+        public PhotoForm() : this(Guid.NewGuid()) { }
+        public PhotoForm(Guid _guidValue)
         {
             InitializeComponent();
 
-            _photoItem = _photoItem ?? new Photo();
+            FormGuidValue = _guidValue;
+
+            Photo _photoItem = PhotoServices.RetrievePhoto(_guidValue);
+
             InitializeForm(_photoItem);
 
             nullFieldsWarning .Hide();
@@ -82,22 +85,18 @@ namespace FileworxsNewsUI
                 Description = txtDescriptionField.Text,
                 Body = txtBodyField.Text,
                 PhotoPath = lblFilePath.Text,
-                GuidValue = _relatedFormEntity is null ? Guid.NewGuid() : _relatedFormEntity.GuidValue,
-                Date = _relatedFormEntity is null ? DateTime.Now:_relatedFormEntity.Date
+                GuidValue = FormGuidValue,
             };
         }
         private void InitializeForm(Photo _photoItem)
         {
-            
+            _photoItem = _photoItem ?? new Photo();
+
             txtTitleField.Text = _photoItem.Title;
             txtDescriptionField.Text = _photoItem.Description;
             txtBodyField.Text = _photoItem.Body;
             pictureView.ImageLocation = _photoItem.PhotoPath;
             lblFilePath.Text = _photoItem.PhotoPath;
-            _relatedFormEntity= new FileWorxEntity 
-            { Date=_photoItem.Date,
-              GuidValue=_photoItem.GuidValue 
-            };
 
             if (lblFilePath.Text != string.Empty)
             {
@@ -106,9 +105,9 @@ namespace FileworxsNewsUI
         }
         private bool AreFieldsValid()
         {
-            return !string.IsNullOrEmpty(txtTitleField.Text) &&
-            !string.IsNullOrEmpty(txtDescriptionField.Text) &&
-            !string.IsNullOrEmpty(txtBodyField.Text);
+            return !string.IsNullOrWhiteSpace(txtTitleField.Text) &&
+            !string.IsNullOrWhiteSpace(txtDescriptionField.Text) &&
+            !string.IsNullOrWhiteSpace(txtBodyField.Text);
         }
     }
 }

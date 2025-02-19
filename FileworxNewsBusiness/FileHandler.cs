@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace FileworxNewsBusiness
 {
-    public static class FileHandler
+     internal static class FileHandler
     {
         public static string FindPath(FileWorxEntity obj)
         {

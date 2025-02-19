@@ -34,7 +34,7 @@
             btnSave = new Button();
             btnCancel = new Button();
             lblTitle = new Label();
-            lblNullWarnning = new Label();
+            lblNullwarning = new Label();
             pnlContainer = new Panel();
             lblConfPassword = new Label();
             txtConfirmPass = new TextBox();
@@ -132,24 +132,24 @@
             lblTitle.TabIndex = 11;
             lblTitle.Text = "Add User";
             // 
-            // lblNullWarnning
+            // lblNullwarning
             // 
-            lblNullWarnning.Anchor = AnchorStyles.None;
-            lblNullWarnning.AutoSize = true;
-            lblNullWarnning.Font = new Font("Segoe UI", 9F);
-            lblNullWarnning.ForeColor = Color.Red;
-            lblNullWarnning.Location = new Point(524, 288);
-            lblNullWarnning.Name = "lblNullWarnning";
-            lblNullWarnning.Size = new Size(155, 15);
-            lblNullWarnning.TabIndex = 12;
-            lblNullWarnning.Text = "All Fields Shoud Not Be Null";
+            lblNullwarning.Anchor = AnchorStyles.None;
+            lblNullwarning.AutoSize = true;
+            lblNullwarning.Font = new Font("Segoe UI", 9F);
+            lblNullwarning.ForeColor = Color.Red;
+            lblNullwarning.Location = new Point(524, 288);
+            lblNullwarning.Name = "lblNullwarning";
+            lblNullwarning.Size = new Size(155, 15);
+            lblNullwarning.TabIndex = 12;
+            lblNullwarning.Text = "All Fields Shoud Not Be Null";
             // 
             // pnlContainer
             // 
             pnlContainer.Controls.Add(lblConfPassword);
             pnlContainer.Controls.Add(txtConfirmPass);
             pnlContainer.Controls.Add(passMatchWarning);
-            pnlContainer.Controls.Add(lblNullWarnning);
+            pnlContainer.Controls.Add(lblNullwarning);
             pnlContainer.Controls.Add(lblTitle);
             pnlContainer.Controls.Add(btnCancel);
             pnlContainer.Controls.Add(btnSave);
@@ -263,7 +263,7 @@
         private Button btnSave;
         private Button btnCancel;
         private Label lblTitle;
-        private Label lblNullWarnning;
+        private Label lblNullwarning;
         private Panel pnlContainer;
         private TextBox txtPassword;
         private TextBox txtLoginName;

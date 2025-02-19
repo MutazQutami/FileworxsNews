@@ -57,7 +57,7 @@
             userList.TabIndex = 0;
             userList.UseCompatibleStateImageBehavior = false;
             userList.View = View.Details;
-            userList.DoubleClick += OnUserListDoublClick;
+            userList.DoubleClick += OnUserListDoubleClick;
             userList.MouseClick += OnUserListMouseClick;
             // 
             // nameColumnHeader
