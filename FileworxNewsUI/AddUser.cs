@@ -1,3 +1,5 @@
+using System.Security.Cryptography;
+using System.Windows.Forms;
 using FileworxNewsBusiness;
 using Microsoft.VisualBasic.ApplicationServices;
 
@@ -28,18 +30,31 @@ namespace FileworxsNewsUI
             }
 
             AppUser _appUserItem = UserFormData();
+            string _message=string.Empty;
 
             try
             {
-                if(UserServices.SignUp(_appUserItem))
+                AppUser _checkUser = UserServices.RetrieveUser(_appUserItem.GuidValue);
+
+                if(_checkUser != null) //Existing User , update
                 {
-                    UserServices.AddUser(_appUserItem);
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    if (UserServices.UpdateUser(_appUserItem, out _message))
+                    {
+                        CompletedRegistration(_message);
+                    }
+                    else
+                    {
+                        InCompleteRegistration(_message);   
+                    }
+                }
+                else if (UserServices.SignUp(_appUserItem , out _message)) // New user , Sign up
+                {
+                    CompletedRegistration(_message);
                 }
                 else
                 {
-                    MessageBox.Show("Please Choose Another Login name");
+                    InCompleteRegistration(_message);
+
                 }
             }
             catch (Exception _ex)
@@ -65,7 +80,14 @@ namespace FileworxsNewsUI
         }
         private void InitializeUserForm(AppUser _userItem)
         {
-            _userItem = _userItem ?? new AppUser();
+            if(_userItem is null)
+            {
+                _userItem =new AppUser(); // New User Form
+                return;
+            }
+
+            lblTitle.Text = "Edit User"; // Edit User Form
+            this.Text = "Edit User";
 
             txtPassword.Text = _userItem.Password;
             txtLoginName.Text = _userItem.LogInName;
@@ -93,6 +115,16 @@ namespace FileworxsNewsUI
                 Password = txtPassword.Text,
                 GuidValue = FormGuidValue
             };
+        }
+        private void CompletedRegistration(string _message)
+        {
+            MessageBox.Show(_message);
+            this.DialogResult = DialogResult.OK;
+            this.Close();
+        }
+        private void InCompleteRegistration(string _message)
+        {
+            MessageBox.Show(_message);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FileworxNewsBusiness;
+using Newtonsoft.Json.Bson;
 
 namespace FileworxsNewsUI
 {
@@ -21,6 +22,7 @@ namespace FileworxsNewsUI
                     {
                         Content.DeleteContent(_selectedObject);
                         ListHandler.RemoveListItem(contentList, _selectedItem);
+                        ClearPreviewContent();
                     }
                     return;
                 }
@@ -162,6 +164,15 @@ namespace FileworxsNewsUI
             {
                 pnltabPreview.TabPages.Remove(imageTabPage2);
             }
+        }
+        private void ClearPreviewContent()
+        {
+            txtTitleField.Clear();
+            txtCreationDateField.Clear();
+            txtCategoryField.Hide();
+            pnlPreviewContent.Clear();
+            imagePreview.Image=null;
+            pnltabPreview.TabPages.Remove(imageTabPage2);
         }
         private void EditContent(FileWorxEntity _selectedObject, ListViewItem _selectedItem)
         {

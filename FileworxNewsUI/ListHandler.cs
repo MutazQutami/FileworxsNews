@@ -23,7 +23,6 @@ namespace FileworxsNewsUI
                 AddContentListItem( _listItem , _entity);
             }
             _targetList.Items.Insert(_index, _listItem);
-            
         }
         public static void RemoveListItem(ListView _targetList , ListViewItem _selectedListItem)
         {

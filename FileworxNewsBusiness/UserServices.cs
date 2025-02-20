@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +14,34 @@ namespace FileworxNewsBusiness
         {
              BaseServices.Add(_userItem);
         }
-        public static void UpdateUser(AppUser _userItem)
+        public static bool UpdateUser(AppUser _userItem , out string _message)
         {
-             BaseServices.Update(_userItem);
+            AppUser _checkUser = RetrieveUser(_userItem.GuidValue);
+
+            if (_checkUser != null)  // Existing User
+            {
+                if (_userItem.LogInName == _checkUser.LogInName)  // No change in login name
+                {
+                    BaseServices.Update(_userItem);
+                    _message = "User updated successfully.";
+                    return true;
+                }
+                else if (ValidUser(_userItem)) // Login name changed, but valid
+                {
+                    BaseServices.Update(_userItem);
+                    _message = "User updated successfully.";
+                    return true;
+                }
+                else  
+                {
+                    _message = "Invalid login name.";
+                    return false;
+                }
+            }
+            _message = "User not found";
+            return false;
         }
+
         public static void DeleteUser(Guid _guidValue)
         {
              BaseServices.Delete(new AppUser { GuidValue = _guidValue });
@@ -29,13 +54,15 @@ namespace FileworxNewsBusiness
         {
             return BaseServices.RetrieveObjects(new AppUser()).Cast<AppUser>().ToList();
         }
-        public static bool SignUp(AppUser _user)
+        public static bool SignUp(AppUser _user , out string _message)
         {
             if (ValidUser(_user))
             {
                 AddUser(_user);
+                _message  = "User Created Successfully.";
                 return true;
             }
+            _message = "Invalid login name.";
             return false;
         }
         public static bool AuthenticateUser(AppUser _newUser)
