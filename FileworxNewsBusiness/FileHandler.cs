@@ -1,179 +1,133 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.VisualBasic;
-using Newtonsoft.Json;
-
-namespace FileworxNewsBusiness
-{
-     internal static class FileHandler
+﻿using Newtonsoft.Json;
+namespace FileworxNewsBusiness;
+internal static class FileHandler<T>  where T : FileWorxEntity , new()
+ {
+    public static string FindPath(T obj)
     {
-        public static string FindPath(FileWorxEntity obj)
+        string _projectPath = AppDomain.CurrentDomain.BaseDirectory; // Path of the currunt project
+        string _folderType = typeof(T) switch                       // Folder Type based on T
         {
-            string _projectPath = AppDomain.CurrentDomain.BaseDirectory;
-            string _folderType = obj switch
-            {
-                AppUser => "Users",
-                Photo => "Photos",
-                _ => "News"
-            };
+            Type t when t == typeof(AppUser) => "Users",
+            Type t when t == typeof(Photo) => "Photos",
+            _ => "News"
+        };
 
-            string _targetFolder = Path.Combine(_projectPath, _folderType);
+        string _targetFolder = Path.Combine(_projectPath, _folderType); 
 
-            if (!Directory.Exists(_targetFolder))
-            {
-                Directory.CreateDirectory(_targetFolder);
-            }
-
-            return _targetFolder;
+        if (!Directory.Exists(_targetFolder))
+        {
+            Directory.CreateDirectory(_targetFolder);
         }
-        public static void JsonSerialization(FileWorxEntity _obj)
+
+        return _targetFolder;
+    }
+    public static void AddObjectJsonFile(T _obj)
+    {
+        string _folderPath = FindPath(_obj);
+        string _finalPath = Path.Combine(_folderPath, $"{_obj.GuidValue}.json");
+
+        if (File.Exists(_finalPath))
         {
-            string _folderPath = FindPath(_obj);
-            string _finalPath = Path.Combine(_folderPath, $"{_obj.GuidValue}.json");
-
-            if (File.Exists(_finalPath))
-            {
-                UpdateObject(_obj );
-            }
-
-            string _jsonObject = JsonConvert.SerializeObject(_obj, Formatting.Indented);
-
-            try
-            {
-                File.WriteAllText(_finalPath, _jsonObject);
-            }
-            catch (Exception _ex)
-            {
-                //MessageBox.Show($"Can't store the file. Error: {_ex.Message}");
-            }
+            UpdateObjectJsonFile(_obj );
         }
-        public static List<FileWorxEntity> JsonDeserializationObjects(FileWorxEntity _obj)
+
+        string _jsonObject = JsonConvert.SerializeObject(_obj, Formatting.Indented);
+
+        try
         {
-            List<FileWorxEntity> _objectList = new List<FileWorxEntity>();
-            string _objectsPath = FindPath(_obj);
+            File.WriteAllText(_finalPath, _jsonObject);
+        }
+        catch (Exception _ex)
+        {
+            return;
+        }
+    }
+    public static List<T> RetrieveObjectsFromJson(T _obj)
+    {
+        List<T> _objectList = new List<T>();
+        string _objectsPath = FindPath(_obj);
 
-            if (!Directory.Exists(_objectsPath))
-            {
-                //MessageBox.Show("Error: Directory does not exist.");
-                return _objectList;
-            }
-
-            foreach (var _file in Directory.GetFiles(_objectsPath, "*.json"))
-            {
-                try
-                {
-                    string _fileContent = File.ReadAllText(_file);
-                    FileWorxEntity _deserializedObject = _obj switch
-                    {
-                        Photo => JsonConvert.DeserializeObject<Photo>(_fileContent),
-                        New => JsonConvert.DeserializeObject<New>(_fileContent),
-                        AppUser => JsonConvert.DeserializeObject<AppUser>(_fileContent),
-                        _ => null
-                    };
-
-                    if (_deserializedObject != null)
-                    {
-                        _objectList.Add(_deserializedObject);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    //MessageBox.Show($"Error reading file {_file}: {ex.Message}");
-                }
-            }
-
+        if (!Directory.Exists(_objectsPath))
+        {
+            //MessageBox.Show("Error: Directory does not exist.");
             return _objectList;
         }
-        public static void DeleteObject(FileWorxEntity _obj)
+
+        foreach (var _file in Directory.GetFiles(_objectsPath, "*.json"))
         {
-            string _path = Path.Combine(FindPath(_obj), $"{_obj.GuidValue}.json");
-
-            if (File.Exists(_path))
+            try
             {
-                try
-                {
-                    File.Delete(_path);
-                }
-                catch (Exception)
-                {
-                    //MessageBox.Show("Error deleting the file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-        public static FileWorxEntity JsonDeserializationObject(FileWorxEntity _obj)
-        {
-            FileWorxEntity _object = new FileWorxEntity();
-            string _folderPath = FindPath(_obj);
-            string _finalPath = Path.Combine(_folderPath, $"{_obj.GuidValue}.json");
+                string _fileContent = File.ReadAllText(_file);
+                var _deserializedObject = JsonConvert.DeserializeObject<T>(_fileContent);
 
-            if (!File.Exists(_finalPath))
-            {
-                return null;
-            }
-            else
-            {
-                string _fileContent = File.ReadAllText(_finalPath);
-
-                FileWorxEntity _deserializedObject = _obj switch
-                {
-                    Photo => JsonConvert.DeserializeObject<Photo>(_fileContent),
-                    New => JsonConvert.DeserializeObject<New>(_fileContent),
-                    AppUser => JsonConvert.DeserializeObject<AppUser>(_fileContent),
-                    _ => null
-                };
                 if (_deserializedObject != null)
                 {
-                    return _deserializedObject;
+                    _objectList.Add(_deserializedObject);
                 }
             }
+            catch (Exception ex)
+            {
+                return;
+            }
+        }
+
+        return _objectList;
+        }
+    public static void DeleteObjectJsonFile(T _obj)
+    {
+        string _path = Path.Combine(FindPath(_obj), $"{_obj.GuidValue}.json");
+
+        if (File.Exists(_path))
+        {
+            try
+            {
+                File.Delete(_path);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+        }
+    }
+    public static T RetrieveObjectFromJson(T _obj)
+    {
+        string _folderPath = FindPath(_obj);
+        string _finalPath = Path.Combine(_folderPath, $"{_obj.GuidValue}.json");
+
+        if (!File.Exists(_finalPath))
+        {
             return null;
         }
-        public static FileWorxEntity ObjectGuidMapping(Guid _guidValue, string _type)
+        else
         {
-            if (_type == "User")
+            string _fileContent = File.ReadAllText(_finalPath);
+
+            var _deserializedObject = JsonConvert.DeserializeObject<T>(_fileContent);
             {
-                return new AppUser { GuidValue = _guidValue };
-            }
-            else if (_type == "New")
-            {
-                return new New { GuidValue = _guidValue };
-            }
-            else if (_type == "Photo")
-            {
-                return new AppUser { GuidValue = _guidValue };
-            }
-            else
-            {
-                return new FileWorxEntity();
+                return _deserializedObject;
             }
         }
-        public static void UpdateObject(FileWorxEntity _obj )
-        {
-            string _folderPath = FindPath(_obj);
-            string _finalPath = Path.Combine(_folderPath, $"{_obj.GuidValue}.json");
+        return null;
+    }
+    public static void UpdateObjectJsonFile(T _obj )
+    {
+        string _folderPath = FindPath(_obj);
+        string _finalPath = Path.Combine(_folderPath, $"{_obj.GuidValue}.json");
 
+        if (File.Exists(_finalPath))
+        {
             string _fileContent = File.ReadAllText(_finalPath);
-            FileWorxEntity _deserializedObject = _obj switch
-            {
-                Photo => JsonConvert.DeserializeObject<Photo>(_fileContent),
-                New => JsonConvert.DeserializeObject<New>(_fileContent),
-                AppUser => JsonConvert.DeserializeObject<AppUser>(_fileContent),
-                _ => null
-            };
+            var _deserializedObject = JsonConvert.DeserializeObject<T>(_fileContent);
 
             if (_deserializedObject != null)
             {
                 _obj.Date = _deserializedObject.Date;
                 _obj.GuidValue = _deserializedObject.GuidValue;
-            }
 
-            DeleteObject( _deserializedObject);
-            JsonSerialization(_obj);
+                string updatedContent = JsonConvert.SerializeObject(_obj, Formatting.Indented);
+                File.WriteAllText(_finalPath, updatedContent);
+            }
         }
+
     }
 }

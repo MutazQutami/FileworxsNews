@@ -48,7 +48,7 @@
             lblTitle.Location = new Point(49, 50);
             lblTitle.Margin = new Padding(5, 0, 5, 0);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(49, 28);
+            lblTitle.Size = new Size(61, 35);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "Title";
             // 
@@ -59,7 +59,7 @@
             lblDescription.Location = new Point(49, 110);
             lblDescription.Margin = new Padding(5, 0, 5, 0);
             lblDescription.Name = "lblDescription";
-            lblDescription.Size = new Size(112, 28);
+            lblDescription.Size = new Size(142, 35);
             lblDescription.TabIndex = 1;
             lblDescription.Text = "Description";
             // 
@@ -70,7 +70,7 @@
             lblCategory.Location = new Point(49, 167);
             lblCategory.Margin = new Padding(5, 0, 5, 0);
             lblCategory.Name = "lblCategory";
-            lblCategory.Size = new Size(97, 28);
+            lblCategory.Size = new Size(122, 35);
             lblCategory.TabIndex = 2;
             lblCategory.Text = "Category ";
             // 
@@ -81,7 +81,7 @@
             lblBody.Location = new Point(49, 223);
             lblBody.Margin = new Padding(5, 0, 5, 0);
             lblBody.Name = "lblBody";
-            lblBody.Size = new Size(57, 28);
+            lblBody.Size = new Size(71, 35);
             lblBody.TabIndex = 3;
             lblBody.Text = "Body";
             // 
@@ -93,7 +93,7 @@
             txtTitleField.Margin = new Padding(5, 6, 5, 6);
             txtTitleField.MaxLength = 255;
             txtTitleField.Name = "txtTitleField";
-            txtTitleField.Size = new Size(467, 34);
+            txtTitleField.Size = new Size(467, 41);
             txtTitleField.TabIndex = 4;
             // 
             // txtDescriptionField
@@ -104,7 +104,7 @@
             txtDescriptionField.Margin = new Padding(5, 6, 5, 6);
             txtDescriptionField.MaxLength = 255;
             txtDescriptionField.Name = "txtDescriptionField";
-            txtDescriptionField.Size = new Size(467, 34);
+            txtDescriptionField.Size = new Size(467, 41);
             txtDescriptionField.TabIndex = 5;
             // 
             // categoryList
@@ -118,7 +118,7 @@
             categoryList.Location = new Point(194, 167);
             categoryList.Margin = new Padding(5, 6, 5, 6);
             categoryList.Name = "categoryList";
-            categoryList.Size = new Size(467, 36);
+            categoryList.Size = new Size(467, 43);
             categoryList.TabIndex = 6;
             // 
             // txtBodyField
@@ -174,13 +174,14 @@
             nullFieldsWarning.ForeColor = Color.Red;
             nullFieldsWarning.Location = new Point(690, 515);
             nullFieldsWarning.Name = "nullFieldsWarning";
-            nullFieldsWarning.Size = new Size(155, 15);
+            nullFieldsWarning.Size = new Size(196, 20);
             nullFieldsWarning.TabIndex = 10;
             nullFieldsWarning.Text = "All Fields Shoud Not Be Null";
+            nullFieldsWarning.Visible = false;
             // 
             // NewsForm
             // 
-            AutoScaleDimensions = new SizeF(11F, 28F);
+            AutoScaleDimensions = new SizeF(14F, 35F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1211, 649);

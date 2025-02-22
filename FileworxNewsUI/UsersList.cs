@@ -1,77 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using FileworxNewsBusiness;
-namespace FileworxsNewsUI
+﻿using FileworxNewsBusiness;
+namespace FileworxsNewsUI;
+public partial class UsersListForm : Form
 {
-    public partial class UsersListForm : Form
+    private void OnAddUserButtonClick(object sender, EventArgs e)
     {
-        private void OnAddUserButtonClick(object sender, EventArgs e)
+        UserForm newUserForm = new UserForm();
+
+        if (newUserForm.ShowDialog() == DialogResult.OK)
         {
-            UserForm newUserForm = new UserForm();
-
-            if (newUserForm.ShowDialog() == DialogResult.OK)
-            {
-                AppUser newUser = UserServices.RetrieveUser(newUserForm.FormGuidValue);
-                ListHandler.AddListItem(userList, newUser);
-            }
+            AppUser _newUser = newUserForm.RetrieveFormData();
+            ListHandler.AddListItem(userList, _newUser);
         }
-        private void OnUserListMouseClick(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right && userList.FocusedItem != null)
-            {
-                ListViewItem _selectedListItem = userList.FocusedItem;
-
-                DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirm Deletion",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
-                {
-                    ListHandler.RemoveListItem(userList,_selectedListItem); // delete from list
-
-                    Guid _userGuidValue = (Guid)_selectedListItem.Tag ;
-                    UserServices.DeleteUser(_userGuidValue); // delete from database
-                }
-            }
-        }
-        private void OnUserListDoubleClick(object sender, EventArgs e)
+    }
+    private void OnUserListMouseClick(object sender, MouseEventArgs e)
+    {
+        if (e.Button == MouseButtons.Right)
         {
             if (userList.SelectedItems.Count > 0)
             {
-                ListViewItem _selectedListItem = userList.SelectedItems[0];
-                EditUserLIstItem(_selectedListItem); 
+                ListViewItem _selectedListItem = userList.FocusedItem;
+                var _selectedObjectGuid = (Guid)_selectedListItem.Tag;
+                AppUser _selected_User = new AppUser()
+                {
+                    GuidValue = _selectedObjectGuid,
+                };
+                if (e.Button == MouseButtons.Right) // right click
+                {
+                    CommonActions.HandleDeleteOperation(_selected_User, _selectedListItem, userList);
+                }
             }
         }
-        public UsersListForm()
+    }
+    private void OnUserListDoubleClick(object sender, EventArgs e)
+    {
+        if (userList.SelectedItems.Count > 0)
         {
-            InitializeComponent();
-            RetrieveUsers();
+            ListViewItem _selectedListItem = userList.SelectedItems[0];
+            EditUserLIstItem(_selectedListItem); 
         }
-        private void RetrieveUsers()
-        {
-            userList.Items.Clear();
-            List<AppUser> users = UserServices.RetrieveUsers();
+    }
+    public UsersListForm()
+    {
+        InitializeComponent();
+        RetrieveUsers();
+    }
+    private void RetrieveUsers()
+    {
+        userList.Items.Clear();
+        var _users = BaseOperations<AppUser>.RetrieveAll();
 
-            foreach (AppUser user in users)
-            {
-                ListHandler.AddListItem(userList , user);
-            }
-        }
-        private void EditUserLIstItem(ListViewItem _selectedListItem)
+        foreach (AppUser _user in _users)
         {
-            Guid _objectGuid = (Guid)_selectedListItem.Tag; 
-            AppUser _user = UserServices.RetrieveUser(_objectGuid);
-                
-            UserForm _updateUserForm = new UserForm(_objectGuid);
-            _updateUserForm.ShowDialog();
+            ListHandler.AddListItem(userList , _user);
+        }
+    }
+    private void EditUserLIstItem(ListViewItem _selectedListItem)
+    {
+        var _objectGuid = (Guid)_selectedListItem.Tag; 
 
-            if (_updateUserForm.DialogResult == DialogResult.OK)
-            {
-                AppUser _updatedUser = UserServices.RetrieveUser(_updateUserForm.FormGuidValue);
-                ListHandler.UpdateListItem(userList, _selectedListItem, _updatedUser);
-            }
+        AppUser _updatedUser = BaseOperations<AppUser>.Retrieve(_objectGuid);
             
+        UserForm _updateUserForm = new UserForm(_updatedUser);
+        _updateUserForm.ShowDialog();
+
+        if (_updateUserForm.DialogResult == DialogResult.OK)
+        {
+            _updatedUser = _updateUserForm.RetrieveFormData();
+            ListHandler.UpdateListItem(userList, _selectedListItem, _updatedUser);
         }
+        
     }
 }

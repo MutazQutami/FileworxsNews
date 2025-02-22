@@ -116,7 +116,7 @@
             // 
             // UsersListForm
             // 
-            AutoScaleDimensions = new SizeF(11F, 28F);
+            AutoScaleDimensions = new SizeF(14F, 35F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(922, 585);
@@ -126,7 +126,7 @@
             Margin = new Padding(5, 6, 5, 6);
             Name = "UsersListForm";
             Padding = new Padding(15);
-            Text = "UsersForm";
+            Text = "Users List";
             pnlTop.ResumeLayout(false);
             pnlBody.ResumeLayout(false);
             ResumeLayout(false);

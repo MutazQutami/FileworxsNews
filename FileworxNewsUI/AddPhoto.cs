@@ -1,113 +1,85 @@
-﻿using System;
-using System.IO;
-using System.Windows.Forms;
-using FileworxNewsBusiness;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace FileworxsNewsUI
+﻿using FileworxNewsBusiness;
+namespace FileworxsNewsUI;
+public partial class PhotoForm :BaseFormOperations<Photo>
 {
-    public partial class PhotoForm : Form
+    private void OnBrowsePhotoClick(object sender, EventArgs e)
     {
-        private void OnSaveButtonClick(object sender, EventArgs e)
+        OpenFileDialog openFileDialog = new OpenFileDialog
         {
-            if (!AreFieldsValid())
-            {
-                checkUploadPhotoWarning.Hide();
-                nullFieldsWarning.Show();
-                return;
-            }
-            if (!string.IsNullOrEmpty(lblFilePath.Text))
-            {
-                Photo _photoItem = FormPhotoInfo();
+            Title = "Select an Image",
+            Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif",
+            Multiselect = false
+        };
 
-                try
+        if (openFileDialog.ShowDialog() == DialogResult.OK)
+        {
+            string _sourcePath = openFileDialog.FileName;
+            lblFilePath.Text = _sourcePath;
+            pictureView.ImageLocation = _sourcePath;
+            lblFilePathText.Show();
+        }
+    }
+    private void OnSaveButtonClick(object sender, EventArgs e)
+    {
+       if (!CommonActions.AreFieldsValid(txtTitleField, txtDescriptionField, txtBodyField))
+        {
+            CommonActions.Visibility(nullFieldsWarning, checkUploadPhotoWarning);
+            return;
+        }
+        if (!string.IsNullOrEmpty(lblFilePath.Text))
+        {
+            try
+            {
+                formObjectItem = RetrieveFormData();
+                if (isEditForm)
                 {
-                    PhotoServices.AddPhoto(_photoItem);
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    BaseOperations<Photo>.Update(formObjectItem);
                 }
-                catch (Exception _ex)
+                else
                 {
-                    MessageBox.Show($"An unexpected error occurred: {_ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    BaseOperations<Photo>.Add(formObjectItem);
 
-                    this.DialogResult = DialogResult.None;
                 }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-            else
+            catch (Exception _ex)
             {
-                nullFieldsWarning.Hide();
-                checkUploadPhotoWarning.Show();
-            }
-        }
-        private void OnBrowsePhotoClick(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Title = "Select an Image",
-                Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif",
-                Multiselect = false
-            };
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string _sourcePath = openFileDialog.FileName;
-                lblFilePath.Text =_sourcePath;
-                pictureView.ImageLocation =_sourcePath;
-                lblFilePathText.Show();
+                MessageBox.Show($"An unexpected error occurred: {_ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.DialogResult = DialogResult.None;
             }
         }
-        private void OnCancelButtonClick(object sender, EventArgs e)
+        else
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            CommonActions.Visibility(checkUploadPhotoWarning, nullFieldsWarning);
         }
-        public Guid FormGuidValue;
-        public PhotoForm() : this(Guid.NewGuid()) { }
-        public PhotoForm(Guid _guidValue)
+    }
+    public PhotoForm() : this(null) { }
+    public PhotoForm(Photo _photoItem)
+    {
+        InitializeComponent();
+        InitializeForm(_photoItem);
+    }
+    protected override void InitializeSpecificFormFields(Photo _photoItem)
+    {
+        txtTitleField.Text = _photoItem.Title;
+        txtDescriptionField.Text = _photoItem.Description;
+        txtBodyField.Text = _photoItem.Body;
+        pictureView.ImageLocation = _photoItem.PhotoPath;
+        lblFilePath.Text = _photoItem.PhotoPath;
+        lblFilePathText.Show();
+    }
+    public override Photo RetrieveFormData()
+    {
+        return new Photo
         {
-            InitializeComponent();
-
-            FormGuidValue = _guidValue;
-
-            Photo _photoItem = PhotoServices.RetrievePhoto(_guidValue);
-
-            InitializeForm(_photoItem);
-
-            nullFieldsWarning .Hide();
-            checkUploadPhotoWarning.Hide();
-        }
-        public Photo FormPhotoInfo()
-        {
-            return new Photo
-            {
-                Title = txtTitleField.Text,
-                Description = txtDescriptionField.Text,
-                Body = txtBodyField.Text,
-                PhotoPath = lblFilePath.Text,
-                GuidValue = FormGuidValue,
-            };
-        }
-        private void InitializeForm(Photo _photoItem)
-        {
-            _photoItem = _photoItem ?? new Photo();
-
-            txtTitleField.Text = _photoItem.Title;
-            txtDescriptionField.Text = _photoItem.Description;
-            txtBodyField.Text = _photoItem.Body;
-            pictureView.ImageLocation = _photoItem.PhotoPath;
-            lblFilePath.Text = _photoItem.PhotoPath;
-
-            if (lblFilePath.Text != string.Empty)
-            {
-                lblFilePathText.Show();
-            }
-        }
-        private bool AreFieldsValid()
-        {
-            return !string.IsNullOrWhiteSpace(txtTitleField.Text) &&
-            !string.IsNullOrWhiteSpace(txtDescriptionField.Text) &&
-            !string.IsNullOrWhiteSpace(txtBodyField.Text);
-        }
+            Title = txtTitleField.Text,
+            Description = txtDescriptionField.Text,
+            Body = txtBodyField.Text,
+            PhotoPath = lblFilePath.Text,
+            PhotoName = Path.GetFileName(lblFilePath.Text),
+            GuidValue = formObjectItem.GuidValue,
+            Date = formObjectItem.Date
+        };
     }
 }
