@@ -1,47 +1,48 @@
 ﻿namespace FileworxNewsBusiness;
 public static class UserServices 
 {
-    public static bool UpdateUser(AppUser _userItem , out string _message)
+    public static (bool,string) UpdateUser(AppUser _userItem )
     {
-        AppUser _checkUser = BaseOperations<AppUser>.Retrieve(_userItem.GuidValue);
-
+        string _message=string.Empty;
+        AppUser _checkUser =  BaseOperations<AppUser>.Retrieve(_userItem.GuidValue);
         if (_checkUser != null)  // Existing User
         {
             if (_userItem.LogInName == _checkUser.LogInName)  // No change in login name
             {
                 BaseOperations<AppUser>.Update(_userItem);
                 _message = "User updated successfully.";
-                return true;
+                return (true,_message);
             }
-            else if (ValidUser(_userItem)) // Login name changed, but valid
+            else if ( ValidUser(_userItem)) // Login name changed, but valid
             {
                 BaseOperations<AppUser>.Update(_userItem);
                 _message = "User updated successfully.";
-                return true;
+                return (true, _message);
             }
             else  
             {
                 _message = "Invalid login name.";
-                return false;
+                return (false, _message);
             }
         }
         _message = "User not found";
-        return false;
+        return (false,_message);
     }
-    public static bool SignUp(AppUser _user , out string _message)
+    public static  (bool,string) SignUp(AppUser _user )
     {
-        if (ValidUser(_user))
+        string _message=string.Empty;
+        if ( ValidUser(_user))
         {
             BaseOperations<AppUser>.Add(_user);
             _message  = "User Created Successfully.";
-            return true;
+            return (true,_message);
         }
         _message = "Invalid login name.";
-        return false;
+        return (false,_message);
     }
-    public static bool AuthenticateUser(AppUser _newUser)
+    public static  bool AuthenticateUser(AppUser _newUser)
     {
-        var _users =BaseOperations<AppUser>.RetrieveAll();
+        var _users =  BaseOperations<AppUser>.RetrieveAll();
         foreach (AppUser _user in _users)
         {
             if (_user.IsEqual(_newUser))
@@ -51,9 +52,9 @@ public static class UserServices
         }
         return false;
     }
-    private static bool ValidUser(AppUser _user)
+    private static  bool ValidUser(AppUser _user)
     {
-        List<AppUser> _users = BaseOperations<AppUser>.RetrieveAll();
+        List<AppUser> _users =  BaseOperations<AppUser>.RetrieveAll();
         return !_users.Any(item => item.LogInName.Equals(_user.LogInName));
     }
 }

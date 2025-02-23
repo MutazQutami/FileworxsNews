@@ -1,11 +1,12 @@
-﻿namespace FileworxNewsBusiness;
-public static class BaseOperations<T> where T : FileWorxEntity ,new()
+﻿using FilworxNewsDataAccess;
+namespace FileworxNewsBusiness;
+public static class BaseOperations<T> where T :FileWorxEntity, new()
 {
-    public static void Add(T _entity)
+    public static  void Add(T _entity)
     {
         try
         {
-            FileHandler<T>.AddObjectJsonFile(_entity);
+          DatabaseOperations<T>.AddElement(_entity);
             
         }
         catch (Exception ex)
@@ -14,22 +15,22 @@ public static class BaseOperations<T> where T : FileWorxEntity ,new()
             return;
         }
     }
-    public static void Update(T _newEntity)
+    public  static void Update(T _newEntity)
     {
         try
         {
-            FileHandler<T>.UpdateObjectJsonFile(_newEntity);
+            DatabaseOperations<T>.UpdateElement(_newEntity);
         }
         catch (Exception ex)
         {
             return ;
         }
     }
-    public static void Delete(T _entity)
+    public  static void Delete(T _entity)
     {
         try
         {
-            FileHandler<T>.DeleteObjectJsonFile(_entity);
+          DatabaseOperations<T>.DeleteElement(_entity);
         }
         catch (Exception ex)
         {
@@ -38,10 +39,10 @@ public static class BaseOperations<T> where T : FileWorxEntity ,new()
     }
     public static T Retrieve(Guid _guidValue)
     {
-        return (T)FileHandler<T>.RetrieveObjectFromJson(new T { GuidValue= _guidValue});
+        return DatabaseOperations<T>.GetElementById(_guidValue);
     }
     public static List<T> RetrieveAll()
     {
-        return FileHandler<T>.RetrieveObjectsFromJson(new T()).Cast<T>().ToList();
+        return DatabaseOperations<T>.GetElements();
     }
 }

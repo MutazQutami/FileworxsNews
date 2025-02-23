@@ -7,7 +7,7 @@ public partial class LoginForm : Form
         UserForm userForm = new UserForm();
         userForm.ShowDialog();
     }
-    private void LogInProcess(object sender, EventArgs e)
+    private  void LogInProcess(object sender, EventArgs e)
     {
         if (IsNullLoginFields())
         {

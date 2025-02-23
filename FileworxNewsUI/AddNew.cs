@@ -1,8 +1,13 @@
 ﻿using System.Windows.Forms;
 using FileworxNewsBusiness;
 namespace FileworxsNewsUI;
-public partial class NewsForm : BaseFormOperations<New>
+public partial class NewsForm :Form
 {
+    public virtual void OnCancelButtonClick(object sender, EventArgs e)
+    {
+        this.DialogResult = DialogResult.Cancel;
+        this.Close();
+    }
     private void OnSaveButtonClick(object sender, EventArgs e)
     {
         // Null Fields Input Validations
@@ -41,7 +46,21 @@ public partial class NewsForm : BaseFormOperations<New>
         InitializeComponent();
         InitializeForm(_editNew);
     }
-    protected override void InitializeSpecificFormFields(New _newItem)
+    public void InitializeForm(New item)
+    {
+        if (item == null)
+        {
+            formObjectItem = Activator.CreateInstance<New>();
+            isEditForm = false;
+            return;
+        }
+        formObjectItem = item;
+        isEditForm = true;
+        InitializeSpecificFormFields(item);
+    }
+    private bool isEditForm;
+    private New formObjectItem;
+    protected  void InitializeSpecificFormFields(New _newItem)
     {
         lblTitle.Text = "Edit New"; // Edit New Form
         this.Text = "Edit New";
@@ -51,7 +70,7 @@ public partial class NewsForm : BaseFormOperations<New>
         categoryList.Text = _newItem.Category;
         txtBodyField.Text = _newItem.Body;
     }
-    public override New RetrieveFormData()
+    public  New RetrieveFormData()
     {
         return new New
         {

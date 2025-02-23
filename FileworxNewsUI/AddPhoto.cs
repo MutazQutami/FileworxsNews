@@ -1,7 +1,12 @@
 ﻿using FileworxNewsBusiness;
 namespace FileworxsNewsUI;
-public partial class PhotoForm :BaseFormOperations<Photo>
+public partial class PhotoForm :Form
 {
+    public virtual void OnCancelButtonClick(object sender, EventArgs e)
+    {
+        this.DialogResult = DialogResult.Cancel;
+        this.Close();
+    }
     private void OnBrowsePhotoClick(object sender, EventArgs e)
     {
         OpenFileDialog openFileDialog = new OpenFileDialog
@@ -14,6 +19,7 @@ public partial class PhotoForm :BaseFormOperations<Photo>
         if (openFileDialog.ShowDialog() == DialogResult.OK)
         {
             string _sourcePath = openFileDialog.FileName;
+
             lblFilePath.Text = _sourcePath;
             pictureView.ImageLocation = _sourcePath;
             lblFilePathText.Show();
@@ -54,13 +60,27 @@ public partial class PhotoForm :BaseFormOperations<Photo>
             CommonActions.Visibility(checkUploadPhotoWarning, nullFieldsWarning);
         }
     }
+    private bool isEditForm;
+    private Photo formObjectItem;
+    public void InitializeForm(Photo item)
+    {
+        if (item == null)
+        {
+            formObjectItem = new Photo();
+            isEditForm = false;
+            return;
+        }
+        formObjectItem = item;
+        isEditForm = true;
+        InitializeSpecificFormFields(item);
+    }
     public PhotoForm() : this(null) { }
     public PhotoForm(Photo _photoItem)
     {
         InitializeComponent();
         InitializeForm(_photoItem);
     }
-    protected override void InitializeSpecificFormFields(Photo _photoItem)
+    private  void InitializeSpecificFormFields(Photo _photoItem)
     {
         txtTitleField.Text = _photoItem.Title;
         txtDescriptionField.Text = _photoItem.Description;
@@ -69,7 +89,7 @@ public partial class PhotoForm :BaseFormOperations<Photo>
         lblFilePath.Text = _photoItem.PhotoPath;
         lblFilePathText.Show();
     }
-    public override Photo RetrieveFormData()
+    public  Photo RetrieveFormData()
     {
         return new Photo
         {
@@ -78,6 +98,7 @@ public partial class PhotoForm :BaseFormOperations<Photo>
             Body = txtBodyField.Text,
             PhotoPath = lblFilePath.Text,
             PhotoName = Path.GetFileName(lblFilePath.Text),
+            //PhotoData =pictureView
             GuidValue = formObjectItem.GuidValue,
             Date = formObjectItem.Date
         };

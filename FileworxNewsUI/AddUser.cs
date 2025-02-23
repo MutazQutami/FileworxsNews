@@ -1,7 +1,12 @@
 using FileworxNewsBusiness;
 namespace FileworxsNewsUI;
-public partial class UserForm : BaseFormOperations<AppUser>
+public partial class UserForm : Form
 {
+    public virtual void OnCancelButtonClick(object sender, EventArgs e)
+    {
+        this.DialogResult = DialogResult.Cancel;
+        this.Close();
+    }
     private void OnSaveButtonClick(object sender, EventArgs e)
     {
         if (!CommonActions.AreFieldsValid
@@ -18,13 +23,15 @@ public partial class UserForm : BaseFormOperations<AppUser>
         }
 
         string _message = string.Empty;
-
+        bool _condition;
+        formObjectItem = RetrieveFormData();
         try
         {
-            formObjectItem = RetrieveFormData();
+            
             if (isEditForm)
             {
-                if (UserServices.UpdateUser(formObjectItem, out _message))
+                (_condition, _message) =  UserServices.UpdateUser(formObjectItem);
+                if (_condition)
                 {
                     CompletedRegistration(_message);
                 }
@@ -32,8 +39,11 @@ public partial class UserForm : BaseFormOperations<AppUser>
                 {
                     InCompleteRegistration(_message);
                 }
+                return;
             }
-            else if (UserServices.SignUp((AppUser)formObjectItem, out _message)) // New user , Sign up
+
+            (_condition, _message) =  UserServices.SignUp((AppUser)formObjectItem);
+            if (_condition) // New user , Sign up
             {
                 CompletedRegistration(_message);
             }
@@ -49,6 +59,8 @@ public partial class UserForm : BaseFormOperations<AppUser>
             this.DialogResult = DialogResult.None;
         }
     }
+    private bool isEditForm;
+    private AppUser formObjectItem;
     public UserForm() : this(null)
     {
     }
@@ -57,7 +69,19 @@ public partial class UserForm : BaseFormOperations<AppUser>
         InitializeComponent();
         InitializeForm(_editUser);
     }
-    protected override void InitializeSpecificFormFields(AppUser _userItem)
+    public void InitializeForm(AppUser item)
+    {
+        if (item == null)
+        {
+            formObjectItem = new AppUser();
+            isEditForm = false;
+            return;
+        }
+        formObjectItem = item;
+        isEditForm = true;
+        InitializeSpecificFormFields(item);
+    }
+    public  void InitializeSpecificFormFields(AppUser _userItem)
     {
         lblTitle.Text = "Edit User"; // Edit User Form
         this.Text = "Edit User";
@@ -67,13 +91,14 @@ public partial class UserForm : BaseFormOperations<AppUser>
         txtName.Text = _userItem.Name;
         txtConfirmPass.Text = _userItem.Password;
     }
-    public override AppUser RetrieveFormData()
+    public  AppUser RetrieveFormData()
     {
         return new AppUser
         {
             Name = txtName.Text,
             LogInName = txtLoginName.Text,
             Password = txtPassword.Text,
+            LastModifier = Name,
             GuidValue = formObjectItem.GuidValue,
             Date = formObjectItem.Date
         };
