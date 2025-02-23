@@ -36,9 +36,10 @@
 
             mainSplitContainer.SplitterDistance = this.Height * 2 / 3;
 
-            
+
         }
-        private void OnAddPhotoButtonClick(object sender, EventArgs e){
+        private void OnAddPhotoButtonClick(object sender, EventArgs e)
+        {
             PhotoForm photoForm = new PhotoForm();
 
             if (photoForm.ShowDialog() == DialogResult.OK)
@@ -77,7 +78,7 @@
 
                 contentList.Items.Insert(0, _listItem);
 
-                 return;
+                return;
             }
 
         }
@@ -85,7 +86,7 @@
         {
             InitializeComponent();
             InitializeContentList();
-      
+
         }
         private void InitializeContentList()
         {

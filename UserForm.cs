@@ -4,6 +4,7 @@ namespace FileworxsNews
     {
         private void OnCancelButtonClick(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
         private void OnSaveButtonClick(object sender, EventArgs e)

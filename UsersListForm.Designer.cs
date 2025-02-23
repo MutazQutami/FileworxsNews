@@ -32,7 +32,6 @@
             nameColumnHeader = new ColumnHeader();
             logInColumnHeader = new ColumnHeader();
             creationDateColumnHeader = new ColumnHeader();
-            LastModifierColumnHeader = new ColumnHeader();
             passwordColumnHeader4 = new ColumnHeader();
             btnAddUser = new Button();
             pnlTop = new Panel();
@@ -45,7 +44,7 @@
             // 
             userList.BackColor = Color.White;
             userList.BorderStyle = BorderStyle.FixedSingle;
-            userList.Columns.AddRange(new ColumnHeader[] { nameColumnHeader, logInColumnHeader, creationDateColumnHeader, LastModifierColumnHeader, passwordColumnHeader4 });
+            userList.Columns.AddRange(new ColumnHeader[] { nameColumnHeader, logInColumnHeader, creationDateColumnHeader, passwordColumnHeader4 });
             userList.Cursor = Cursors.Hand;
             userList.Dock = DockStyle.Fill;
             userList.FullRowSelect = true;
@@ -74,11 +73,6 @@
             // 
             creationDateColumnHeader.Text = "Creation Date";
             creationDateColumnHeader.Width = 200;
-            // 
-            // LastModifierColumnHeader
-            // 
-            LastModifierColumnHeader.Text = "Password";
-            LastModifierColumnHeader.Width = 160;
             // 
             // passwordColumnHeader4
             // 
@@ -116,7 +110,7 @@
             // 
             // UsersListForm
             // 
-            AutoScaleDimensions = new SizeF(11F, 28F);
+            AutoScaleDimensions = new SizeF(14F, 35F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(922, 585);
@@ -140,7 +134,6 @@
         private ColumnHeader logInColumnHeader;
         private ColumnHeader creationDateColumnHeader;
         private ColumnHeader passwordColumnHeader4;
-        private ColumnHeader LastModifierColumnHeader;
         private Button btnAddUser;
         private Panel pnlTop;
         private Panel pnlBody;

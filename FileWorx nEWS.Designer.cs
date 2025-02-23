@@ -65,27 +65,26 @@
             // 
             // pnltabPreview
             // 
+            pnltabPreview.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnltabPreview.Controls.Add(previewTabPage1);
             pnltabPreview.Controls.Add(imageTabPage2);
-            pnltabPreview.Dock = DockStyle.Fill;
             pnltabPreview.Font = new Font("Segoe UI", 15F);
-            pnltabPreview.Location = new Point(8, 148);
+            pnltabPreview.Location = new Point(6, 207);
             pnltabPreview.Margin = new Padding(0);
             pnltabPreview.Name = "pnltabPreview";
             pnltabPreview.Padding = new Point(0, 0);
             pnltabPreview.SelectedIndex = 0;
-            pnltabPreview.Size = new Size(1430, 204);
+            pnltabPreview.Size = new Size(1839, 308);
             pnltabPreview.TabIndex = 0;
             // 
             // previewTabPage1
             // 
             previewTabPage1.BackColor = Color.Gray;
             previewTabPage1.Controls.Add(pnlPreviewContent);
-            previewTabPage1.Location = new Point(4, 37);
-            previewTabPage1.Margin = new Padding(2);
+            previewTabPage1.Location = new Point(4, 44);
             previewTabPage1.Name = "previewTabPage1";
-            previewTabPage1.Padding = new Padding(2);
-            previewTabPage1.Size = new Size(1422, 163);
+            previewTabPage1.Padding = new Padding(3);
+            previewTabPage1.Size = new Size(1831, 260);
             previewTabPage1.TabIndex = 0;
             previewTabPage1.Text = "Preview";
             // 
@@ -94,11 +93,10 @@
             pnlPreviewContent.BackColor = Color.White;
             pnlPreviewContent.BorderStyle = BorderStyle.None;
             pnlPreviewContent.Dock = DockStyle.Fill;
-            pnlPreviewContent.Location = new Point(2, 2);
-            pnlPreviewContent.Margin = new Padding(2);
+            pnlPreviewContent.Location = new Point(3, 3);
             pnlPreviewContent.Name = "pnlPreviewContent";
             pnlPreviewContent.ReadOnly = true;
-            pnlPreviewContent.Size = new Size(1418, 159);
+            pnlPreviewContent.Size = new Size(1825, 254);
             pnlPreviewContent.TabIndex = 0;
             pnlPreviewContent.Text = "";
             // 
@@ -106,13 +104,12 @@
             // 
             imageTabPage2.BackColor = Color.Black;
             imageTabPage2.Controls.Add(imagePreview);
-            imageTabPage2.Location = new Point(4, 37);
-            imageTabPage2.Margin = new Padding(2);
+            imageTabPage2.Location = new Point(4, 44);
             imageTabPage2.Name = "imageTabPage2";
-            imageTabPage2.Padding = new Padding(2);
-            imageTabPage2.Size = new Size(1420, 161);
+            imageTabPage2.Padding = new Padding(3);
+            imageTabPage2.Size = new Size(1831, 260);
             imageTabPage2.TabIndex = 1;
-            imageTabPage2.Text = "image";
+            imageTabPage2.Text = "Image";
             // 
             // imagePreview
             // 
@@ -120,16 +117,17 @@
             imagePreview.Dock = DockStyle.Fill;
             imagePreview.ErrorImage = null;
             imagePreview.InitialImage = null;
-            imagePreview.Location = new Point(2, 2);
-            imagePreview.Margin = new Padding(2);
+            imagePreview.Location = new Point(3, 3);
             imagePreview.Name = "imagePreview";
-            imagePreview.Size = new Size(1416, 157);
-            imagePreview.SizeMode = PictureBoxSizeMode.StretchImage;
+            imagePreview.Size = new Size(1825, 254);
+            imagePreview.SizeMode = PictureBoxSizeMode.Zoom;
             imagePreview.TabIndex = 4;
             imagePreview.TabStop = false;
             // 
             // pnlContentDetail
             // 
+            pnlContentDetail.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            pnlContentDetail.AutoScroll = true;
             pnlContentDetail.BackColor = Color.White;
             pnlContentDetail.Controls.Add(lblCategory);
             pnlContentDetail.Controls.Add(lblCreationDate);
@@ -137,23 +135,23 @@
             pnlContentDetail.Controls.Add(txtCategoryField);
             pnlContentDetail.Controls.Add(txtCreationDateField);
             pnlContentDetail.Controls.Add(txtTitleField);
-            pnlContentDetail.Dock = DockStyle.Top;
             pnlContentDetail.Font = new Font("Segoe UI", 15F);
             pnlContentDetail.ForeColor = SystemColors.ControlDark;
-            pnlContentDetail.Location = new Point(8, 8);
-            pnlContentDetail.Margin = new Padding(5);
+            pnlContentDetail.Location = new Point(6, 4);
+            pnlContentDetail.Margin = new Padding(6, 7, 6, 7);
             pnlContentDetail.Name = "pnlContentDetail";
-            pnlContentDetail.Padding = new Padding(5);
-            pnlContentDetail.Size = new Size(1430, 140);
+            pnlContentDetail.Padding = new Padding(6, 7, 6, 7);
+            pnlContentDetail.Size = new Size(1849, 196);
             pnlContentDetail.TabIndex = 2;
             // 
             // lblCategory
             // 
             lblCategory.AutoSize = true;
             lblCategory.ForeColor = Color.Black;
-            lblCategory.Location = new Point(3, 96);
+            lblCategory.Location = new Point(4, 134);
+            lblCategory.Margin = new Padding(4, 0, 4, 0);
             lblCategory.Name = "lblCategory";
-            lblCategory.Size = new Size(92, 28);
+            lblCategory.Size = new Size(115, 35);
             lblCategory.TabIndex = 5;
             lblCategory.Text = "Category";
             // 
@@ -161,9 +159,10 @@
             // 
             lblCreationDate.AutoSize = true;
             lblCreationDate.ForeColor = Color.Black;
-            lblCreationDate.Location = new Point(3, 51);
+            lblCreationDate.Location = new Point(4, 71);
+            lblCreationDate.Margin = new Padding(4, 0, 4, 0);
             lblCreationDate.Name = "lblCreationDate";
-            lblCreationDate.Size = new Size(132, 28);
+            lblCreationDate.Size = new Size(167, 35);
             lblCreationDate.TabIndex = 4;
             lblCreationDate.Text = "Creation Date";
             // 
@@ -171,9 +170,10 @@
             // 
             lblTitle.AutoSize = true;
             lblTitle.ForeColor = Color.Black;
-            lblTitle.Location = new Point(3, 9);
+            lblTitle.Location = new Point(4, 13);
+            lblTitle.Margin = new Padding(4, 0, 4, 0);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(49, 28);
+            lblTitle.Size = new Size(61, 35);
             lblTitle.TabIndex = 3;
             lblTitle.Text = "Title";
             // 
@@ -182,11 +182,10 @@
             txtCategoryField.BackColor = Color.White;
             txtCategoryField.BorderStyle = BorderStyle.FixedSingle;
             txtCategoryField.Font = new Font("Segoe UI", 12F);
-            txtCategoryField.Location = new Point(140, 95);
-            txtCategoryField.Margin = new Padding(2);
+            txtCategoryField.Location = new Point(180, 133);
             txtCategoryField.Name = "txtCategoryField";
             txtCategoryField.ReadOnly = true;
-            txtCategoryField.Size = new Size(346, 29);
+            txtCategoryField.Size = new Size(444, 34);
             txtCategoryField.TabIndex = 2;
             // 
             // txtCreationDateField
@@ -194,11 +193,10 @@
             txtCreationDateField.BackColor = Color.White;
             txtCreationDateField.BorderStyle = BorderStyle.FixedSingle;
             txtCreationDateField.Font = new Font("Segoe UI", 12F);
-            txtCreationDateField.Location = new Point(140, 51);
-            txtCreationDateField.Margin = new Padding(2);
+            txtCreationDateField.Location = new Point(180, 71);
             txtCreationDateField.Name = "txtCreationDateField";
             txtCreationDateField.ReadOnly = true;
-            txtCreationDateField.Size = new Size(346, 29);
+            txtCreationDateField.Size = new Size(444, 34);
             txtCreationDateField.TabIndex = 1;
             // 
             // txtTitleField
@@ -206,11 +204,10 @@
             txtTitleField.BackColor = Color.White;
             txtTitleField.BorderStyle = BorderStyle.FixedSingle;
             txtTitleField.Font = new Font("Segoe UI", 11F);
-            txtTitleField.Location = new Point(140, 9);
-            txtTitleField.Margin = new Padding(2);
+            txtTitleField.Location = new Point(180, 13);
             txtTitleField.Name = "txtTitleField";
             txtTitleField.ReadOnly = true;
-            txtTitleField.Size = new Size(346, 27);
+            txtTitleField.Size = new Size(444, 32);
             txtTitleField.TabIndex = 0;
             // 
             // btnAddPhoto
@@ -219,9 +216,10 @@
             btnAddPhoto.BackColor = Color.FromArgb(0, 130, 200);
             btnAddPhoto.Cursor = Cursors.Hand;
             btnAddPhoto.ForeColor = Color.White;
-            btnAddPhoto.Location = new Point(138, 4);
+            btnAddPhoto.Location = new Point(177, 6);
+            btnAddPhoto.Margin = new Padding(4);
             btnAddPhoto.Name = "btnAddPhoto";
-            btnAddPhoto.Size = new Size(132, 38);
+            btnAddPhoto.Size = new Size(170, 53);
             btnAddPhoto.TabIndex = 7;
             btnAddPhoto.Text = "Add Photo";
             btnAddPhoto.UseVisualStyleBackColor = false;
@@ -233,9 +231,10 @@
             btnAddNew.BackColor = Color.FromArgb(224, 224, 224);
             btnAddNew.Cursor = Cursors.Hand;
             btnAddNew.ForeColor = Color.Black;
-            btnAddNew.Location = new Point(1, 3);
+            btnAddNew.Location = new Point(1, 4);
+            btnAddNew.Margin = new Padding(4);
             btnAddNew.Name = "btnAddNew";
-            btnAddNew.Size = new Size(131, 38);
+            btnAddNew.Size = new Size(168, 53);
             btnAddNew.TabIndex = 6;
             btnAddNew.Text = "Add New";
             btnAddNew.UseVisualStyleBackColor = false;
@@ -248,9 +247,10 @@
             titleLabel.BackColor = Color.White;
             titleLabel.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             titleLabel.ForeColor = Color.FromArgb(0, 130, 200);
-            titleLabel.Location = new Point(603, 3);
+            titleLabel.Location = new Point(775, 4);
+            titleLabel.Margin = new Padding(4, 0, 4, 0);
             titleLabel.Name = "titleLabel";
-            titleLabel.Size = new Size(180, 32);
+            titleLabel.Size = new Size(225, 41);
             titleLabel.TabIndex = 3;
             titleLabel.Text = "Fileworx News";
             // 
@@ -269,12 +269,9 @@
             contentList.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             contentList.LabelEdit = true;
             contentList.Location = new Point(0, 0);
-            contentList.Margin = new Padding(2);
-            contentList.MaximumSize = new Size(0, 900);
-            contentList.MinimumSize = new Size(100, 100);
             contentList.Name = "contentList";
             contentList.RightToLeft = RightToLeft.No;
-            contentList.Size = new Size(1446, 277);
+            contentList.Size = new Size(1859, 349);
             contentList.TabIndex = 0;
             contentList.TileSize = new Size(100, 100);
             contentList.UseCompatibleStateImageBehavior = false;
@@ -300,7 +297,8 @@
             // mainSplitContainer
             // 
             mainSplitContainer.Dock = DockStyle.Fill;
-            mainSplitContainer.Location = new Point(0, 20);
+            mainSplitContainer.Location = new Point(0, 28);
+            mainSplitContainer.Margin = new Padding(4);
             mainSplitContainer.Name = "mainSplitContainer";
             mainSplitContainer.Orientation = Orientation.Horizontal;
             // 
@@ -311,11 +309,13 @@
             // 
             // mainSplitContainer.Panel2
             // 
+            mainSplitContainer.Panel2.AutoScroll = true;
             mainSplitContainer.Panel2.Controls.Add(pnltabPreview);
             mainSplitContainer.Panel2.Controls.Add(pnlContentDetail);
-            mainSplitContainer.Panel2.Padding = new Padding(8);
-            mainSplitContainer.Size = new Size(1446, 641);
-            mainSplitContainer.SplitterDistance = 277;
+            mainSplitContainer.Panel2.Padding = new Padding(10, 11, 10, 11);
+            mainSplitContainer.Size = new Size(1859, 897);
+            mainSplitContainer.SplitterDistance = 349;
+            mainSplitContainer.SplitterWidth = 6;
             mainSplitContainer.TabIndex = 4;
             // 
             // pnlHead
@@ -324,33 +324,34 @@
             pnlHead.Controls.Add(btnAddPhoto);
             pnlHead.Controls.Add(btnAddNew);
             pnlHead.Dock = DockStyle.Top;
-            pnlHead.Location = new Point(25, 20);
+            pnlHead.Location = new Point(32, 28);
+            pnlHead.Margin = new Padding(4);
             pnlHead.Name = "pnlHead";
-            pnlHead.Size = new Size(1446, 53);
+            pnlHead.Size = new Size(1859, 74);
             pnlHead.TabIndex = 8;
             // 
             // pnlBody
             // 
             pnlBody.Controls.Add(mainSplitContainer);
             pnlBody.Dock = DockStyle.Fill;
-            pnlBody.Location = new Point(25, 73);
+            pnlBody.Location = new Point(32, 102);
+            pnlBody.Margin = new Padding(4);
             pnlBody.Name = "pnlBody";
-            pnlBody.Padding = new Padding(0, 20, 0, 0);
-            pnlBody.Size = new Size(1446, 661);
+            pnlBody.Padding = new Padding(0, 28, 0, 0);
+            pnlBody.Size = new Size(1859, 925);
             pnlBody.TabIndex = 9;
             // 
             // FileWorx
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.White;
-            ClientSize = new Size(1496, 754);
+            ClientSize = new Size(1923, 1055);
             Controls.Add(pnlBody);
             Controls.Add(pnlHead);
-            Margin = new Padding(2);
             Name = "FileWorx";
-            Padding = new Padding(25, 20, 25, 20);
+            Padding = new Padding(32, 28, 32, 28);
             Text = "FileWorx News";
             WindowState = FormWindowState.Maximized;
             Load += FileWorxLoad;
