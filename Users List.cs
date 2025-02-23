@@ -54,7 +54,6 @@ namespace FileworxsNews
            // ResizeUsersTable();
             RetrieveUsers();
         }
-       
         private void RetrieveUsers()
         {
             userList.Items.Clear();
@@ -76,7 +75,6 @@ namespace FileworxsNews
                 userList.Items.Add(listItem);
             }
         }
-
         private void userList_DoubleClick(object sender, EventArgs e)
         {
 

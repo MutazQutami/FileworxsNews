@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 namespace FileworxsNews
 {
     public class Photo : Content
-
     {
         public string photoName;
         public string photoPath;
-
     }
 }

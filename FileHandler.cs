@@ -27,7 +27,6 @@ namespace FileworxsNews
 
             return _targetFolder;
         }
-
         public static void JsonSerialization(FileWorxEntity _obj){
             string _folderPath = FindPath(_obj);
             string _finalPath = Path.Combine(_folderPath, $"{_obj.GuidValue}.json");
@@ -48,7 +47,6 @@ namespace FileworxsNews
                 MessageBox.Show($"Can't store the file. Error: {_ex.Message}");
             }
         }
-
         public static List<FileWorxEntity> JsonDeserializationObjects(FileWorxEntity _obj){
             List<FileWorxEntity> _objectList = new List<FileWorxEntity>();
             string _objectsPath = FindPath(_obj);
@@ -85,7 +83,6 @@ namespace FileworxsNews
 
             return _objectList;
         }
-
         public static void DeleteObject(FileWorxEntity _obj){
             string _path = Path.Combine(FindPath(_obj), $"{_obj.GuidValue}.json");
 

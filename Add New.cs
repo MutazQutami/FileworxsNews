@@ -1,5 +1,4 @@
 ﻿using System.DirectoryServices.ActiveDirectory;
-
 namespace FileworxsNews
 {
     public partial class NewsForm : Form
@@ -41,16 +40,13 @@ namespace FileworxsNews
                 this.Close();
             }
         }
-
         private void cancleButton_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
-
         public New _formNew;
         public static bool _editForm = false;
-
         public NewsForm()
         {
             InitializeComponent();

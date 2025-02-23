@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace FileworxsNews
 {
     public class FileWorxEntity
-
     {
         public Guid GuidValue { get; set; }
         public DateTime Date { get; set; }

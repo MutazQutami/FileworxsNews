@@ -58,6 +58,5 @@ namespace FileworxsNews
             nullFieldWarning.Hide();
             wrongCredentials.Hide();
         }
-
     }
 }

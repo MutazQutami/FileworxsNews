@@ -86,7 +86,7 @@
             userNameField.Anchor = AnchorStyles.None;
             userNameField.BorderStyle = BorderStyle.FixedSingle;
             userNameField.Font = new Font("Segoe UI", 16F);
-            userNameField.Location = new Point(530, 248);
+            userNameField.Location = new Point(536, 248);
             userNameField.MaxLength = 255;
             userNameField.Name = "userNameField";
             userNameField.Size = new Size(256, 36);
@@ -97,7 +97,7 @@
             passwordField.Anchor = AnchorStyles.None;
             passwordField.BorderStyle = BorderStyle.FixedSingle;
             passwordField.Font = new Font("Segoe UI", 16F);
-            passwordField.Location = new Point(530, 311);
+            passwordField.Location = new Point(536, 311);
             passwordField.MaxLength = 255;
             passwordField.Name = "passwordField";
             passwordField.PasswordChar = '*';
@@ -113,7 +113,7 @@
             logInButton.FlatStyle = FlatStyle.Flat;
             logInButton.Font = new Font("Segoe UI Emoji", 20F);
             logInButton.ForeColor = Color.White;
-            logInButton.Location = new Point(530, 374);
+            logInButton.Location = new Point(536, 374);
             logInButton.Name = "logInButton";
             logInButton.Size = new Size(256, 52);
             logInButton.TabIndex = 3;
@@ -126,7 +126,7 @@
             userNameLabel.Anchor = AnchorStyles.None;
             userNameLabel.AutoSize = true;
             userNameLabel.Font = new Font("Segoe UI", 15F);
-            userNameLabel.Location = new Point(404, 248);
+            userNameLabel.Location = new Point(410, 248);
             userNameLabel.Name = "userNameLabel";
             userNameLabel.Size = new Size(99, 28);
             userNameLabel.TabIndex = 4;
@@ -137,7 +137,7 @@
             lblPassword.Anchor = AnchorStyles.None;
             lblPassword.AutoSize = true;
             lblPassword.Font = new Font("Segoe UI", 15F);
-            lblPassword.Location = new Point(404, 311);
+            lblPassword.Location = new Point(410, 311);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(93, 28);
             lblPassword.TabIndex = 5;
@@ -149,7 +149,7 @@
             lblLogin.AutoSize = true;
             lblLogin.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
             lblLogin.ForeColor = Color.FromArgb(0, 130, 200);
-            lblLogin.Location = new Point(610, 110);
+            lblLogin.Location = new Point(616, 110);
             lblLogin.Name = "lblLogin";
             lblLogin.Size = new Size(80, 30);
             lblLogin.TabIndex = 6;
@@ -161,7 +161,7 @@
             lblLoginText.AutoSize = true;
             lblLoginText.Font = new Font("Segoe UI", 16F);
             lblLoginText.ForeColor = SystemColors.AppWorkspace;
-            lblLoginText.Location = new Point(474, 156);
+            lblLoginText.Location = new Point(480, 156);
             lblLoginText.Name = "lblLoginText";
             lblLoginText.Size = new Size(354, 30);
             lblLoginText.TabIndex = 7;
@@ -173,7 +173,7 @@
             lblOr.AutoSize = true;
             lblOr.Font = new Font("Segoe UI", 12F);
             lblOr.ForeColor = Color.Black;
-            lblOr.Location = new Point(646, 446);
+            lblOr.Location = new Point(652, 446);
             lblOr.Name = "lblOr";
             lblOr.Size = new Size(25, 21);
             lblOr.TabIndex = 8;
@@ -185,7 +185,7 @@
             lblSignUp.AutoSize = true;
             lblSignUp.Font = new Font("Segoe UI", 12F);
             lblSignUp.LinkColor = Color.FromArgb(0, 130, 200);
-            lblSignUp.Location = new Point(629, 481);
+            lblSignUp.Location = new Point(635, 481);
             lblSignUp.Name = "lblSignUp";
             lblSignUp.Size = new Size(61, 21);
             lblSignUp.TabIndex = 9;
@@ -198,7 +198,7 @@
             nullFieldWarning.Anchor = AnchorStyles.None;
             nullFieldWarning.AutoSize = true;
             nullFieldWarning.ForeColor = Color.Red;
-            nullFieldWarning.Location = new Point(814, 332);
+            nullFieldWarning.Location = new Point(820, 332);
             nullFieldWarning.Name = "nullFieldWarning";
             nullFieldWarning.Size = new Size(234, 15);
             nullFieldWarning.TabIndex = 10;
@@ -209,7 +209,7 @@
             wrongCredentials.Anchor = AnchorStyles.None;
             wrongCredentials.AutoSize = true;
             wrongCredentials.ForeColor = Color.Red;
-            wrongCredentials.Location = new Point(814, 362);
+            wrongCredentials.Location = new Point(820, 362);
             wrongCredentials.Name = "wrongCredentials";
             wrongCredentials.Size = new Size(165, 15);
             wrongCredentials.TabIndex = 11;
@@ -220,7 +220,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1082, 600);
+            ClientSize = new Size(1094, 600);
             Controls.Add(wrongCredentials);
             Controls.Add(nullFieldWarning);
             Controls.Add(lblSignUp);

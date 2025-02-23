@@ -60,7 +60,6 @@ namespace FileworxsNews
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
-
         private static bool _editForm;
         public Photo formPhoto;
         public PhotoForm()

@@ -43,7 +43,7 @@
             // 
             // userList
             // 
-            userList.BackColor = Color.FromArgb(224, 224, 224);
+            userList.BackColor = Color.White;
             userList.BorderStyle = BorderStyle.FixedSingle;
             userList.Columns.AddRange(new ColumnHeader[] { nameColumnHeader, logInColumnHeader, creationDateColumnHeader, LastModifierColumnHeader, passwordColumnHeader4 });
             userList.Cursor = Cursors.Hand;

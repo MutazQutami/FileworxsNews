@@ -2,7 +2,6 @@
 {
     public partial class FileWorx : Form
     {
-
         private void ContentListMouseClick(object sender, MouseEventArgs e)
         {
             if (contentList.SelectedItems.Count > 0)
@@ -20,7 +19,6 @@
                 ShowPreviewContent(_selectedObject); // normal click , show preview
             }
         }
-
         private void ContentListMouseDoubleClick(object sender, MouseEventArgs e) // double click , edit object
         {
             if (contentList.SelectedItems.Count > 0)
@@ -32,7 +30,6 @@
                 EditContent(_selectedObject, _selectedItem);
             }
         }
-
         private void FileWorxLoad(object sender, EventArgs e)
         {
             //this.WindowState = FormWindowState.Maximized;
@@ -41,9 +38,6 @@
 
             
         }
-
-       
-
         private void OnAddPhotoButtonClick(object sender, EventArgs e){
             PhotoForm photoForm = new PhotoForm();
 
@@ -64,7 +58,6 @@
             }
 
         }
-
         private void OnAddNewButtonClick(object sender, EventArgs e)
         {
             NewsForm _newsForm = new NewsForm();
@@ -94,7 +87,6 @@
             InitializeContentList();
       
         }
-
         private void InitializeContentList()
         {
             // retrieving photos and news
@@ -141,8 +133,6 @@
                 contentList.Items.Add(_listItem);
             }
         }
-
-
         private void DeleteContent(FileWorxEntity _selectedObject)
         {
             if (contentList.FocusedItem != null)
@@ -164,7 +154,6 @@
                 }
             }
         }
-
         private void ShowPreviewContent(FileWorxEntity _selectedObject)
         {
             if (_selectedObject is Photo _selectedPhoto)
