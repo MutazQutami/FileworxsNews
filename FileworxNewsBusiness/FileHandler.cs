@@ -67,7 +67,7 @@ internal static class FileHandler<T>  where T : FileWorxEntity , new()
             }
             catch (Exception ex)
             {
-                return;
+                return _objectList;
             }
         }
 
