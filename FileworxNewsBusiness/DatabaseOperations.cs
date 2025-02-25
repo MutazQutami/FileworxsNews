@@ -5,7 +5,7 @@ namespace FilworxNewsDataAccess
 {
     public static class DatabaseOperations<T> where T : FileWorxEntity, new()
     {
-        private static readonly FilworxContext Context = new FilworxContext();
+        private static readonly FileWorxContext Context = new FileWorxContext();
         public static void AddElement(T Object)
         {
             Context.Add(Object);
@@ -18,8 +18,18 @@ namespace FilworxNewsDataAccess
         }
         public static void UpdateElement(T Object)
         {
-            Context.Update(Object);
-             Context.SaveChanges();
+            var existingEntity = Context.Find<T>(Object.GuidValue);
+
+            if (existingEntity != null)
+            {
+                Context.Entry(existingEntity).CurrentValues.SetValues(Object); // Update values
+            }
+            else
+            {
+                Context.Add(Object);
+            }
+
+            Context.SaveChanges();
         }
         public static List<T> GetElements()
         {

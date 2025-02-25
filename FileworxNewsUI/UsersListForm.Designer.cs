@@ -32,28 +32,29 @@
             nameColumnHeader = new ColumnHeader();
             logInColumnHeader = new ColumnHeader();
             creationDateColumnHeader = new ColumnHeader();
-            LastModifierColumnHeader = new ColumnHeader();
             passwordColumnHeader4 = new ColumnHeader();
             btnAddUser = new Button();
             pnlTop = new Panel();
             pnlBody = new Panel();
+            panelBottom = new Panel();
+            btnCancel = new Button();
             pnlTop.SuspendLayout();
             pnlBody.SuspendLayout();
+            panelBottom.SuspendLayout();
             SuspendLayout();
             // 
             // userList
             // 
-            userList.BackColor = Color.FromArgb(224, 224, 224);
+            userList.BackColor = Color.White;
             userList.BorderStyle = BorderStyle.FixedSingle;
-            userList.Columns.AddRange(new ColumnHeader[] { nameColumnHeader, logInColumnHeader, creationDateColumnHeader, LastModifierColumnHeader, passwordColumnHeader4 });
+            userList.Columns.AddRange(new ColumnHeader[] { nameColumnHeader, logInColumnHeader, creationDateColumnHeader, passwordColumnHeader4 });
             userList.Cursor = Cursors.Hand;
             userList.Dock = DockStyle.Fill;
             userList.FullRowSelect = true;
             userList.GridLines = true;
             userList.Location = new Point(0, 0);
-            userList.MinimumSize = new Size(400, 0);
             userList.Name = "userList";
-            userList.Size = new Size(892, 478);
+            userList.Size = new Size(777, 418);
             userList.TabIndex = 0;
             userList.UseCompatibleStateImageBehavior = false;
             userList.View = View.Details;
@@ -74,11 +75,6 @@
             // 
             creationDateColumnHeader.Text = "Creation Date";
             creationDateColumnHeader.Width = 200;
-            // 
-            // LastModifierColumnHeader
-            // 
-            LastModifierColumnHeader.Text = "Password";
-            LastModifierColumnHeader.Width = 160;
             // 
             // passwordColumnHeader4
             // 
@@ -102,33 +98,63 @@
             pnlTop.Dock = DockStyle.Top;
             pnlTop.Location = new Point(15, 15);
             pnlTop.Name = "pnlTop";
-            pnlTop.Size = new Size(892, 77);
+            pnlTop.Size = new Size(777, 77);
             pnlTop.TabIndex = 2;
             // 
             // pnlBody
             // 
+            pnlBody.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pnlBody.AutoScroll = true;
             pnlBody.Controls.Add(userList);
-            pnlBody.Dock = DockStyle.Fill;
             pnlBody.Location = new Point(15, 92);
             pnlBody.Name = "pnlBody";
-            pnlBody.Size = new Size(892, 478);
+            pnlBody.Padding = new Padding(0, 0, 0, 5);
+            pnlBody.Size = new Size(777, 423);
             pnlBody.TabIndex = 3;
+            // 
+            // panelBottom
+            // 
+            panelBottom.Controls.Add(btnCancel);
+            panelBottom.Dock = DockStyle.Bottom;
+            panelBottom.Location = new Point(15, 515);
+            panelBottom.Name = "panelBottom";
+            panelBottom.Size = new Size(777, 125);
+            panelBottom.TabIndex = 4;
+            // 
+            // btnCancel
+            // 
+            btnCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnCancel.BackColor = Color.Brown;
+            btnCancel.FlatAppearance.BorderSize = 0;
+            btnCancel.FlatStyle = FlatStyle.Flat;
+            btnCancel.ForeColor = Color.White;
+            btnCancel.Location = new Point(636, 35);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new Size(138, 59);
+            btnCancel.TabIndex = 0;
+            btnCancel.Text = "Cancel";
+            btnCancel.UseVisualStyleBackColor = false;
+            btnCancel.Click += OnCancelButtonClick;
             // 
             // UsersListForm
             // 
             AutoScaleDimensions = new SizeF(14F, 35F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
             BackColor = Color.White;
-            ClientSize = new Size(922, 585);
+            ClientSize = new Size(807, 655);
+            Controls.Add(panelBottom);
             Controls.Add(pnlBody);
             Controls.Add(pnlTop);
             Font = new Font("Segoe UI", 15F);
             Margin = new Padding(5, 6, 5, 6);
+            MinimumSize = new Size(550, 650);
             Name = "UsersListForm";
             Padding = new Padding(15);
             Text = "Users List";
             pnlTop.ResumeLayout(false);
             pnlBody.ResumeLayout(false);
+            panelBottom.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -139,9 +165,10 @@
         private ColumnHeader logInColumnHeader;
         private ColumnHeader creationDateColumnHeader;
         private ColumnHeader passwordColumnHeader4;
-        private ColumnHeader LastModifierColumnHeader;
         private Button btnAddUser;
         private Panel pnlTop;
         private Panel pnlBody;
+        private Panel panelBottom;
+        private Button btnCancel;
     }
 }

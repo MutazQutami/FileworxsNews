@@ -1,6 +1,6 @@
 ﻿using FileworxNewsBusiness;
 namespace FileworxsNewsUI;
-public partial class FileWorx :Form
+public partial class FileWorx : Form
 {
     private void ContentListMouseClick(object sender, MouseEventArgs e)
     {
@@ -22,8 +22,8 @@ public partial class FileWorx :Form
                 ShowPreviewContent(_selectedObject); // normal click, show preview
             }
         }
-    } 
-    private void ContentListMouseDoubleClick(object sender, MouseEventArgs e) 
+    }
+    private void ContentListMouseDoubleClick(object sender, MouseEventArgs e)
     {
         if (contentList.SelectedItems.Count > 0)
         {
@@ -38,8 +38,9 @@ public partial class FileWorx :Form
     {
         mainSplitContainer.SplitterDistance = this.Height * 2 / 3;
     }
-    private void OnAddPhotoButtonClick(object sender, EventArgs e){
-        PhotoForm photoForm = new PhotoForm();
+    private void OnAddPhotoButtonClick(object sender, EventArgs e)
+    {
+        PhotoForm photoForm = new PhotoForm(CurrentUser);
 
         if (photoForm.ShowDialog() == DialogResult.OK)
         {
@@ -50,7 +51,7 @@ public partial class FileWorx :Form
     }
     private void OnAddNewButtonClick(object sender, EventArgs e)
     {
-        NewsForm _newsForm = new NewsForm();
+        NewsForm _newsForm = new NewsForm(CurrentUser);
 
         if (_newsForm.ShowDialog() == DialogResult.OK)
         {
@@ -59,11 +60,16 @@ public partial class FileWorx :Form
             return;
         }
     }
-    public FileWorx()
+    private Guid CurrentUser;
+    public FileWorx(Guid guidValue)
     {
+        CurrentUser = guidValue;
         InitializeComponent();
         InitializeContentList();
-  
+        if (IsAdmin())
+        {
+            usersListToolStripMenuItem.Visible = true;
+        }
     }
     private void InitializeContentList()
     {
@@ -76,7 +82,7 @@ public partial class FileWorx :Form
         }
 
         var _photoList = BaseOperations<Photo>.RetrieveAll();
-        List<New> _newsList =BaseOperations<New>.RetrieveAll();
+        List<New> _newsList = BaseOperations<New>.RetrieveAll();
 
         List<Content> _mergedList = new List<Content>();
         _mergedList.AddRange(_photoList);
@@ -95,20 +101,20 @@ public partial class FileWorx :Form
     {
         if (_selectedObject is New _selectedNews)
         {
-            NewsForm _newsForm = new NewsForm(_selectedNews);
+            NewsForm _newsForm = new NewsForm(_selectedNews, CurrentUser);
 
             _newsForm.Text = "Edit New";
             _newsForm.ShowDialog();
 
-            if (_newsForm.DialogResult == DialogResult.OK)       
+            if (_newsForm.DialogResult == DialogResult.OK)
             {
                 New _newItem = _newsForm.RetrieveFormData();
-                ListHandler.UpdateListItem(contentList , _selectedItem ,_newItem);
+                ListHandler.UpdateListItem(contentList, _selectedItem, _newItem);
             }
         }
         else if (_selectedObject is Photo _selectedPhoto)
         {
-            PhotoForm _photoForm = new PhotoForm(_selectedPhoto);
+            PhotoForm _photoForm = new PhotoForm(_selectedPhoto, CurrentUser);
 
             _photoForm.Text = "Edit Photo";
             _photoForm.ShowDialog();
@@ -172,7 +178,7 @@ public partial class FileWorx :Form
     {
         txtCategoryField.Hide();
         lblCategory.Hide();
-      
+
         txtCategoryField.Text = _selectedPhoto.PhotoPath;
 
         if (!pnltabPreview.TabPages.Contains(imageTabPage2))
@@ -188,13 +194,23 @@ public partial class FileWorx :Form
         txtCategoryField.Show();
 
         txtCategoryField.Text = _selectedNews.Category;
- 
+
         if (pnltabPreview.TabPages.Contains(imageTabPage2))
         {
             pnltabPreview.TabPages.Remove(imageTabPage2);
         }
     }
-  
+    private void OnUsersListMouseClick(object sender, EventArgs e)
+    {
+        var listForm = new UsersListForm();
+        listForm.ShowDialog();
+    }
+    private bool IsAdmin()
+    {
+        AppUser user = BaseOperations<AppUser>.Retrieve(CurrentUser);
+        return user.IsAdmin;
+
+    }
 }
 
-
+    

@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FileworxNewsBusiness\FileworxNewsBusiness.csproj" />
-    <ProjectReference Include="..\FilworxNewsDataAccess\FilworxNewsDataAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>

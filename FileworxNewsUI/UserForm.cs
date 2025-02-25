@@ -9,28 +9,27 @@ public partial class UserForm : Form
     }
     private void OnSaveButtonClick(object sender, EventArgs e)
     {
-        if (!CommonActions.AreFieldsValid
-             ([txtName, txtLoginName, txtPassword, txtConfirmPass])
-           )
+        if (!ValidateFields())
         {
-            CommonActions.Visibility(lblNullwarning, passMatchWarning);
             return;
         }
         if (!ArePasswordsEqual())
         {
-            CommonActions.Visibility(passMatchWarning, lblNullwarning);
+            lblPassMatchWarning.Show();
             return;
         }
+
+        lblPassMatchWarning.Hide();
 
         string _message = string.Empty;
         bool _condition;
         formObjectItem = RetrieveFormData();
         try
         {
-            
+
             if (isEditForm)
             {
-                (_condition, _message) =  UserServices.UpdateUser(formObjectItem);
+                (_condition, _message) = UserServices.UpdateUser(formObjectItem);
                 if (_condition)
                 {
                     CompletedRegistration(_message);
@@ -42,7 +41,7 @@ public partial class UserForm : Form
                 return;
             }
 
-            (_condition, _message) =  UserServices.SignUp((AppUser)formObjectItem);
+            (_condition, _message) = UserServices.SignUp((AppUser)formObjectItem);
             if (_condition) // New user , Sign up
             {
                 CompletedRegistration(_message);
@@ -83,7 +82,6 @@ public partial class UserForm : Form
     }
     public  void InitializeSpecificFormFields(AppUser _userItem)
     {
-        lblTitle.Text = "Edit User"; // Edit User Form
         this.Text = "Edit User";
 
         txtPassword.Text = _userItem.Password;
@@ -98,9 +96,8 @@ public partial class UserForm : Form
             Name = txtName.Text,
             LogInName = txtLoginName.Text,
             Password = txtPassword.Text,
-            LastModifier = Name,
             GuidValue = formObjectItem.GuidValue,
-            Date = formObjectItem.Date
+            Date = formObjectItem.Date,
         };
     }
     private bool ArePasswordsEqual()
@@ -117,5 +114,51 @@ public partial class UserForm : Form
     {
         MessageBox.Show(_message);
     }
- 
+    private bool ValidateFields()
+    {
+        bool isValid = true;
+
+        if (string.IsNullOrWhiteSpace(txtConfirmPass.Text))
+        {
+            lblNullConfirmPassword.Visible = true;
+            isValid = false;
+        }
+        else
+        {
+            lblNullConfirmPassword.Visible = false;
+        }
+
+        if (string.IsNullOrWhiteSpace(txtLoginName.Text))
+        {
+            lblNullLoginName.Visible = true;
+            isValid = false;
+        }
+        else
+        {
+            lblNullLoginName.Visible = false;
+        }
+
+        if (string.IsNullOrWhiteSpace(txtName.Text))
+        {
+            lblNullName.Visible = true;
+            isValid = false;
+        }
+        else
+        {
+            lblNullName.Visible = false;
+        }
+
+        if (string.IsNullOrWhiteSpace(txtPassword.Text))
+        {
+            lblPassMatchWarning.Visible = true;
+            isValid = false;
+        }
+        else
+        {
+            lblPassMatchWarning.Visible = false;
+        }
+
+        return isValid;
+    }
+
 }

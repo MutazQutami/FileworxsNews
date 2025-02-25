@@ -70,4 +70,9 @@ public partial class UsersListForm : Form
         }
         
     }
+    private void OnCancelButtonClick(object sender, EventArgs e)
+    {
+        this.Close();
+    }
+    
 }

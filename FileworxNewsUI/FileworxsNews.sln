@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileworxsNewsUI", "Fileworx
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileworxNewsBusiness", "..\FileworxNewsBusiness\FileworxNewsBusiness.csproj", "{48814ED3-A155-4077-B78C-111C0D0E27EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilworxNewsDataAccess", "..\FilworxNewsDataAccess\FilworxNewsDataAccess.csproj", "{6200F103-2706-496D-A498-F7B43DF7B0F2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{48814ED3-A155-4077-B78C-111C0D0E27EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48814ED3-A155-4077-B78C-111C0D0E27EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48814ED3-A155-4077-B78C-111C0D0E27EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6200F103-2706-496D-A498-F7B43DF7B0F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6200F103-2706-496D-A498-F7B43DF7B0F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6200F103-2706-496D-A498-F7B43DF7B0F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6200F103-2706-496D-A498-F7B43DF7B0F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

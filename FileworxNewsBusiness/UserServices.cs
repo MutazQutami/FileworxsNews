@@ -40,16 +40,18 @@ public static class UserServices
         _message = "Invalid login name.";
         return (false,_message);
     }
-    public static  bool AuthenticateUser(AppUser _newUser)
+    public static  bool AuthenticateUser(AppUser _newUser , out Guid guidValue)
     {
-        var _users =  BaseOperations<AppUser>.RetrieveAll();
+        var _users = BaseOperations<AppUser>.RetrieveAll();
         foreach (AppUser _user in _users)
         {
             if (_user.IsEqual(_newUser))
             {
+                guidValue = _user.GuidValue;
                 return true;
             }
         }
+        guidValue = Guid.Empty;
         return false;
     }
     private static  bool ValidUser(AppUser _user)

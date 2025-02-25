@@ -10,15 +10,11 @@ public partial class NewsForm :Form
     }
     private void OnSaveButtonClick(object sender, EventArgs e)
     {
-        // Null Fields Input Validations
-        if (!(CommonActions.AreFieldsValid(txtTitleField, txtDescriptionField, categoryList, txtBodyField)))
+        if (!ValidateFields())
         {
-            CommonActions.Visibility(nullFieldsWarning, new Label());
             return;
         }
 
-        CommonActions.Visibility(new Label(), nullFieldsWarning);
-        
         try
         {
             formObjectItem = RetrieveFormData();
@@ -38,13 +34,15 @@ public partial class NewsForm :Form
         {
             MessageBox.Show($"An unexpected error occurred: {_ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             this.DialogResult = DialogResult.None;
-        } 
+        }
+
     }
-    public NewsForm() : this(null) { }
-    public NewsForm(New _editNew)
+    public NewsForm(Guid guidValue) : this(null, guidValue) { }
+    public NewsForm(New _editNew, Guid guidValue)
     {
         InitializeComponent();
         InitializeForm(_editNew);
+        CurrentUser = guidValue;
     }
     public void InitializeForm(New item)
     {
@@ -60,6 +58,7 @@ public partial class NewsForm :Form
     }
     private bool isEditForm;
     private New formObjectItem;
+    private Guid CurrentUser;
     protected  void InitializeSpecificFormFields(New _newItem)
     {
         lblTitle.Text = "Edit New"; // Edit New Form
@@ -79,7 +78,56 @@ public partial class NewsForm :Form
             Category = categoryList.Text,
             Body = txtBodyField.Text,
             GuidValue = formObjectItem.GuidValue,
-            Date = formObjectItem.Date
+            Date = formObjectItem.Date,
+            LastmodificationDate = DateTime.Now,
+            LastModifierId = CurrentUser,
+            CreatorId = CurrentUser
         };
+    }
+    private bool ValidateFields()
+    {
+        bool isValid = true;
+
+        if (string.IsNullOrWhiteSpace(txtTitleField.Text))
+        {
+            lblNullTitle.Visible = true;
+            isValid = false;
+        }
+        else
+        {
+            lblNullTitle.Visible = false;
+        }
+
+        if (string.IsNullOrWhiteSpace(txtDescriptionField.Text))
+        {
+            lblNullDescription.Visible = true;
+            isValid = false;
+        }
+        else
+        {
+            lblNullDescription.Visible = false;
+        }
+
+        if (categoryList.SelectedItem == null)
+        {
+            lblNullCategory.Visible = true;
+            isValid = false;
+        }
+        else
+        {
+            lblNullCategory.Visible = false;
+        }
+
+        if (string.IsNullOrWhiteSpace(txtBodyField.Text))
+        {
+            lblNullBody.Visible = true;
+            isValid = false;
+        }
+        else
+        {
+            lblNullBody.Visible = false;
+        }
+
+        return isValid;
     }
 }
