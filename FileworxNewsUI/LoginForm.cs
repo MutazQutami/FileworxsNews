@@ -39,31 +39,24 @@ public partial class LoginForm : Form
             LogInName = userNameField.Text,
             Password = passwordField.Text
         };
-        Guid guidValue;
-        bool condition = UserServices.AuthenticateUser(_appUser, out guidValue);
 
-        if (condition)
+        AppUser currentUser;
+        try
         {
-            FileWorx fileWorx = new FileWorx(guidValue);
+            currentUser = UserServices.AuthenticateUser(_appUser);
+
+            FileWorx fileWorx = new FileWorx(currentUser);
             this.Hide();
             fileWorx.Show();
             return;
-
-            lblWrongCredentials.Show();
         }
-        else
-        {
+        catch (Exception ex) {
             lblWrongCredentials.Show();
         }
     }
     public LoginForm()
     {
         InitializeComponent();
-    }
-    private bool IsNullLoginFields()
-    {
-        return string.IsNullOrEmpty(userNameField.Text) ||
-               string.IsNullOrEmpty(passwordField.Text);
     }
     private void HideLables()
     {

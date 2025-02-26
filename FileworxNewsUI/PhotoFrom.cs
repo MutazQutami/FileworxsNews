@@ -19,7 +19,7 @@ public partial class PhotoForm :Form
         if (openFileDialog.ShowDialog() == DialogResult.OK)
         {
             string _sourcePath = openFileDialog.FileName;
-
+            lblNullPhoto.Hide();
             lblFilePath.Text = _sourcePath;
             pictureView.ImageLocation = _sourcePath;
             lblFilePathText.Show();
@@ -29,41 +29,34 @@ public partial class PhotoForm :Form
     {
         if (!ValidateFields())
         {
-            return; // Stop execution if validation fails
+            return; 
         }
 
         try
         {
-            formObjectItem = RetrieveFormData();
-            if (isEditForm)
-            {
-                BaseOperations<Photo>.Update(formObjectItem);
-            }
-            else
-            {
-                BaseOperations<Photo>.Add(formObjectItem);
+            SaveFormInfo();
+            formObjectItem.Update();
 
-            }
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
         catch (Exception _ex)
         {
-            MessageBox.Show($"An unexpected error occurred: {_ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(_ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             this.DialogResult = DialogResult.None;
         }
     }
     private bool isEditForm;
     private Photo formObjectItem;
-    private Guid CurrentUser;
-    public PhotoForm(Guid guidValue) : this(null, guidValue)
+    private AppUser CurrentUser;
+    public PhotoForm(AppUser _user) : this(null, _user)
     {
     }
-    public PhotoForm(Photo _photoItem, Guid guidValue)
+    public PhotoForm(Photo _photoItem, AppUser _user)
     {
         InitializeComponent();
         InitializeForm(_photoItem);
-        CurrentUser = guidValue;
+        CurrentUser = _user;
     }
     public void InitializeForm(Photo item)
     {
@@ -80,7 +73,7 @@ public partial class PhotoForm :Form
     }
     private  void InitializeSpecificFormFields(Photo _photoItem)
     {
-        txtTitleField.Text = _photoItem.Title;
+        txtTitleField.Text = _photoItem.Name;
         txtDescriptionField.Text = _photoItem.Description;
         txtBodyField.Text = _photoItem.Body;
         pictureView.ImageLocation = _photoItem.PhotoPath;
@@ -90,19 +83,8 @@ public partial class PhotoForm :Form
     }
     public Photo RetrieveFormData()
     {
-        return new Photo
-        {
-            Title = txtTitleField.Text,
-            Description = txtDescriptionField.Text,
-            Body = txtBodyField.Text,
-            PhotoPath = lblFilePath.Text,
-            PhotoName = Path.GetFileName(lblFilePath.Text),
-            GuidValue = formObjectItem.GuidValue,
-            Date = formObjectItem.Date,
-            LastmodificationDate = DateTime.Now,
-            LastModifierId = CurrentUser,
-            CreatorId = CurrentUser
-        };
+        SaveFormInfo();
+        return formObjectItem;
     }
     private bool ValidateFields()
     {
@@ -149,5 +131,15 @@ public partial class PhotoForm :Form
         }
 
         return isValid;
+    }
+    private void SaveFormInfo()
+    {
+        formObjectItem.Name = txtTitleField.Text;
+        formObjectItem.Description = txtDescriptionField.Text;
+        formObjectItem.Body = txtBodyField.Text;
+        formObjectItem.PhotoPath = lblFilePath.Text;
+        formObjectItem.LastModificationDate = DateTime.Now;
+        formObjectItem.CreatorId = CurrentUser.Id;
+        formObjectItem.LastModifierId = CurrentUser.Id;
     }
 }

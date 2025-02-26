@@ -15,46 +15,26 @@ public partial class UserForm : Form
         }
         if (!ArePasswordsEqual())
         {
-            lblPassMatchWarning.Show();
+            lblpassMatchWarning.Show();
             return;
         }
 
-        lblPassMatchWarning.Hide();
+        lblpassMatchWarning.Hide();
 
         string _message = string.Empty;
-        bool _condition;
-        formObjectItem = RetrieveFormData();
+        SaveFormInfo();
+
         try
         {
-
-            if (isEditForm)
-            {
-                (_condition, _message) = UserServices.UpdateUser(formObjectItem);
-                if (_condition)
-                {
-                    CompletedRegistration(_message);
-                }
-                else
-                {
-                    InCompleteRegistration(_message);
-                }
-                return;
-            }
-
-            (_condition, _message) = UserServices.SignUp((AppUser)formObjectItem);
-            if (_condition) // New user , Sign up
-            {
-                CompletedRegistration(_message);
-            }
-            else
-            {
-                InCompleteRegistration(_message);
-
-            }
+            formObjectItem.Update();
+            _message = "User Created Successfully";
+            CompletedRegistration(_message);
         }
         catch (Exception _ex)
         {
-            MessageBox.Show($"An unexpected error occurred: {_ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+           _message = _ex.Message;
+
+            InCompleteRegistration(_message);
             this.DialogResult = DialogResult.None;
         }
     }
@@ -63,12 +43,12 @@ public partial class UserForm : Form
     public UserForm() : this(null)
     {
     }
-    public UserForm(AppUser _editUser)
+    public UserForm(AppUser _editUser )
     {
         InitializeComponent();
         InitializeForm(_editUser);
     }
-    public void InitializeForm(AppUser item)
+    public void InitializeForm(AppUser item  )
     {
         if (item == null)
         {
@@ -91,14 +71,8 @@ public partial class UserForm : Form
     }
     public  AppUser RetrieveFormData()
     {
-        return new AppUser
-        {
-            Name = txtName.Text,
-            LogInName = txtLoginName.Text,
-            Password = txtPassword.Text,
-            GuidValue = formObjectItem.GuidValue,
-            Date = formObjectItem.Date,
-        };
+        SaveFormInfo();
+        return formObjectItem;
     }
     private bool ArePasswordsEqual()
     {
@@ -150,15 +124,22 @@ public partial class UserForm : Form
 
         if (string.IsNullOrWhiteSpace(txtPassword.Text))
         {
-            lblPassMatchWarning.Visible = true;
+            lblPass.Visible = true;
             isValid = false;
         }
         else
         {
-            lblPassMatchWarning.Visible = false;
+            lblPass.Visible = false;
         }
 
         return isValid;
     }
-
+    private void SaveFormInfo()
+    {
+        formObjectItem.Name = txtName.Text;
+        formObjectItem.LogInName = txtLoginName.Text;
+        formObjectItem.Password = txtPassword.Text;
+        formObjectItem.LastModifiedDate = DateTime.Now;
+        formObjectItem.LastModifier = formObjectItem.Id;
+    }
 }

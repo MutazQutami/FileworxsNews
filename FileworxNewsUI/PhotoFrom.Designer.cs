@@ -61,10 +61,11 @@
             tabsPreview.Controls.Add(FileDescriptionTab);
             tabsPreview.Controls.Add(imageTabPage);
             tabsPreview.Font = new Font("Segoe UI", 15F);
-            tabsPreview.Location = new Point(2, 3);
+            tabsPreview.Location = new Point(2, 2);
+            tabsPreview.Margin = new Padding(2, 2, 2, 2);
             tabsPreview.Name = "tabsPreview";
             tabsPreview.SelectedIndex = 0;
-            tabsPreview.Size = new Size(930, 600);
+            tabsPreview.Size = new Size(680, 535);
             tabsPreview.TabIndex = 0;
             // 
             // FileDescriptionTab
@@ -79,10 +80,11 @@
             FileDescriptionTab.Controls.Add(lblTitleField);
             FileDescriptionTab.Controls.Add(txtDescriptionField);
             FileDescriptionTab.Controls.Add(txtTitleField);
-            FileDescriptionTab.Location = new Point(4, 44);
+            FileDescriptionTab.Location = new Point(4, 37);
+            FileDescriptionTab.Margin = new Padding(2, 2, 2, 2);
             FileDescriptionTab.Name = "FileDescriptionTab";
-            FileDescriptionTab.Padding = new Padding(3);
-            FileDescriptionTab.Size = new Size(922, 552);
+            FileDescriptionTab.Padding = new Padding(2, 2, 2, 2);
+            FileDescriptionTab.Size = new Size(672, 494);
             FileDescriptionTab.TabIndex = 0;
             FileDescriptionTab.Text = "File Description ";
             // 
@@ -92,10 +94,9 @@
             lblNullBody.BackColor = Color.White;
             lblNullBody.Font = new Font("Segoe UI", 15F);
             lblNullBody.ForeColor = Color.Red;
-            lblNullBody.Location = new Point(190, 173);
-            lblNullBody.Margin = new Padding(4, 0, 4, 0);
+            lblNullBody.Location = new Point(148, 133);
             lblNullBody.Name = "lblNullBody";
-            lblNullBody.Size = new Size(196, 35);
+            lblNullBody.Size = new Size(154, 28);
             lblNullBody.TabIndex = 12;
             lblNullBody.Text = "Body is required";
             lblNullBody.Visible = false;
@@ -106,10 +107,9 @@
             lblNullDescription.BackColor = Color.White;
             lblNullDescription.Font = new Font("Segoe UI", 15F);
             lblNullDescription.ForeColor = Color.Red;
-            lblNullDescription.Location = new Point(190, 90);
-            lblNullDescription.Margin = new Padding(4, 0, 4, 0);
+            lblNullDescription.Location = new Point(148, 68);
             lblNullDescription.Name = "lblNullDescription";
-            lblNullDescription.Size = new Size(267, 35);
+            lblNullDescription.Size = new Size(209, 28);
             lblNullDescription.TabIndex = 11;
             lblNullDescription.Text = "Description is required";
             lblNullDescription.Visible = false;
@@ -120,10 +120,9 @@
             lblNullTitle.BackColor = Color.White;
             lblNullTitle.Font = new Font("Segoe UI", 15F);
             lblNullTitle.ForeColor = Color.Red;
-            lblNullTitle.Location = new Point(190, 8);
-            lblNullTitle.Margin = new Padding(4, 0, 4, 0);
+            lblNullTitle.Location = new Point(148, 4);
             lblNullTitle.Name = "lblNullTitle";
-            lblNullTitle.Size = new Size(186, 35);
+            lblNullTitle.Size = new Size(146, 28);
             lblNullTitle.TabIndex = 10;
             lblNullTitle.Text = "Title is required";
             lblNullTitle.Visible = false;
@@ -133,38 +132,42 @@
             txtBodyField.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtBodyField.BackColor = Color.White;
             txtBodyField.BorderStyle = BorderStyle.FixedSingle;
-            txtBodyField.Location = new Point(190, 212);
+            txtBodyField.Location = new Point(148, 164);
+            txtBodyField.Margin = new Padding(2, 2, 2, 2);
             txtBodyField.MaxLength = 10000;
-            txtBodyField.MinimumSize = new Size(250, 0);
+            txtBodyField.MinimumSize = new Size(195, 4);
             txtBodyField.Name = "txtBodyField";
-            txtBodyField.Size = new Size(382, 263);
+            txtBodyField.Size = new Size(255, 241);
             txtBodyField.TabIndex = 5;
             txtBodyField.Text = "";
             // 
             // lblBodyField
             // 
             lblBodyField.AutoSize = true;
-            lblBodyField.Location = new Point(31, 215);
+            lblBodyField.Location = new Point(24, 154);
+            lblBodyField.Margin = new Padding(2, 0, 2, 0);
             lblBodyField.Name = "lblBodyField";
-            lblBodyField.Size = new Size(71, 35);
+            lblBodyField.Size = new Size(57, 28);
             lblBodyField.TabIndex = 4;
             lblBodyField.Text = "Body";
             // 
             // lblDescriptionField
             // 
             lblDescriptionField.AutoSize = true;
-            lblDescriptionField.Location = new Point(31, 133);
+            lblDescriptionField.Location = new Point(24, 95);
+            lblDescriptionField.Margin = new Padding(2, 0, 2, 0);
             lblDescriptionField.Name = "lblDescriptionField";
-            lblDescriptionField.Size = new Size(149, 35);
+            lblDescriptionField.Size = new Size(117, 28);
             lblDescriptionField.TabIndex = 3;
             lblDescriptionField.Text = "Description ";
             // 
             // lblTitleField
             // 
             lblTitleField.AutoSize = true;
-            lblTitleField.Location = new Point(31, 50);
+            lblTitleField.Location = new Point(24, 36);
+            lblTitleField.Margin = new Padding(2, 0, 2, 0);
             lblTitleField.Name = "lblTitleField";
-            lblTitleField.Size = new Size(61, 35);
+            lblTitleField.Size = new Size(49, 28);
             lblTitleField.TabIndex = 2;
             lblTitleField.Text = "Title";
             // 
@@ -172,22 +175,24 @@
             // 
             txtDescriptionField.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtDescriptionField.BorderStyle = BorderStyle.FixedSingle;
-            txtDescriptionField.Location = new Point(190, 130);
+            txtDescriptionField.Location = new Point(148, 98);
+            txtDescriptionField.Margin = new Padding(2, 2, 2, 2);
             txtDescriptionField.MaxLength = 255;
-            txtDescriptionField.MinimumSize = new Size(250, 0);
+            txtDescriptionField.MinimumSize = new Size(195, 2);
             txtDescriptionField.Name = "txtDescriptionField";
-            txtDescriptionField.Size = new Size(382, 41);
+            txtDescriptionField.Size = new Size(255, 34);
             txtDescriptionField.TabIndex = 1;
             // 
             // txtTitleField
             // 
             txtTitleField.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtTitleField.BorderStyle = BorderStyle.FixedSingle;
-            txtTitleField.Location = new Point(190, 47);
+            txtTitleField.Location = new Point(148, 34);
+            txtTitleField.Margin = new Padding(2, 2, 2, 2);
             txtTitleField.MaxLength = 255;
-            txtTitleField.MinimumSize = new Size(250, 0);
+            txtTitleField.MinimumSize = new Size(195, 2);
             txtTitleField.Name = "txtTitleField";
-            txtTitleField.Size = new Size(382, 41);
+            txtTitleField.Size = new Size(255, 34);
             txtTitleField.TabIndex = 0;
             // 
             // imageTabPage
@@ -195,10 +200,11 @@
             imageTabPage.BackColor = Color.White;
             imageTabPage.Controls.Add(pnlMainContent);
             imageTabPage.Controls.Add(pictureView);
-            imageTabPage.Location = new Point(4, 44);
+            imageTabPage.Location = new Point(4, 37);
+            imageTabPage.Margin = new Padding(2, 2, 2, 2);
             imageTabPage.Name = "imageTabPage";
-            imageTabPage.Padding = new Padding(3);
-            imageTabPage.Size = new Size(922, 552);
+            imageTabPage.Padding = new Padding(2, 2, 2, 2);
+            imageTabPage.Size = new Size(672, 494);
             imageTabPage.TabIndex = 1;
             imageTabPage.Text = "Image";
             // 
@@ -211,9 +217,10 @@
             pnlMainContent.Controls.Add(lblFilePathText);
             pnlMainContent.Controls.Add(btnBrowsePhoto);
             pnlMainContent.Dock = DockStyle.Top;
-            pnlMainContent.Location = new Point(3, 3);
+            pnlMainContent.Location = new Point(2, 2);
+            pnlMainContent.Margin = new Padding(2, 2, 2, 2);
             pnlMainContent.Name = "pnlMainContent";
-            pnlMainContent.Size = new Size(916, 108);
+            pnlMainContent.Size = new Size(668, 77);
             pnlMainContent.TabIndex = 2;
             // 
             // lblNullPhoto
@@ -222,10 +229,9 @@
             lblNullPhoto.BackColor = Color.White;
             lblNullPhoto.Font = new Font("Segoe UI", 15F);
             lblNullPhoto.ForeColor = Color.Red;
-            lblNullPhoto.Location = new Point(285, 38);
-            lblNullPhoto.Margin = new Padding(4, 0, 4, 0);
+            lblNullPhoto.Location = new Point(222, 27);
             lblNullPhoto.Name = "lblNullPhoto";
-            lblNullPhoto.Size = new Size(315, 35);
+            lblNullPhoto.Size = new Size(248, 28);
             lblNullPhoto.TabIndex = 11;
             lblNullPhoto.Text = "A photo must be uploaded";
             lblNullPhoto.Visible = false;
@@ -233,17 +239,19 @@
             // lblFilePath
             // 
             lblFilePath.AutoSize = true;
-            lblFilePath.Location = new Point(514, 35);
+            lblFilePath.Location = new Point(400, 25);
+            lblFilePath.Margin = new Padding(2, 0, 2, 0);
             lblFilePath.Name = "lblFilePath";
-            lblFilePath.Size = new Size(0, 35);
+            lblFilePath.Size = new Size(0, 28);
             lblFilePath.TabIndex = 2;
             // 
             // lblFilePathText
             // 
             lblFilePathText.AutoSize = true;
-            lblFilePathText.Location = new Point(285, 35);
+            lblFilePathText.Location = new Point(222, 25);
+            lblFilePathText.Margin = new Padding(2, 0, 2, 0);
             lblFilePathText.Name = "lblFilePathText";
-            lblFilePathText.Size = new Size(243, 35);
+            lblFilePathText.Size = new Size(189, 28);
             lblFilePathText.TabIndex = 1;
             lblFilePathText.Text = "Picture Location is :  ";
             lblFilePathText.Visible = false;
@@ -255,9 +263,10 @@
             btnBrowsePhoto.FlatAppearance.BorderSize = 0;
             btnBrowsePhoto.FlatStyle = FlatStyle.Flat;
             btnBrowsePhoto.ForeColor = Color.White;
-            btnBrowsePhoto.Location = new Point(49, 22);
+            btnBrowsePhoto.Location = new Point(38, 16);
+            btnBrowsePhoto.Margin = new Padding(2, 2, 2, 2);
             btnBrowsePhoto.Name = "btnBrowsePhoto";
-            btnBrowsePhoto.Size = new Size(144, 66);
+            btnBrowsePhoto.Size = new Size(112, 47);
             btnBrowsePhoto.TabIndex = 0;
             btnBrowsePhoto.Text = "Browse";
             btnBrowsePhoto.UseVisualStyleBackColor = false;
@@ -267,9 +276,10 @@
             // 
             pictureView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureView.BackColor = Color.White;
-            pictureView.Location = new Point(3, 117);
+            pictureView.Location = new Point(2, 84);
+            pictureView.Margin = new Padding(2, 2, 2, 2);
             pictureView.Name = "pictureView";
-            pictureView.Size = new Size(916, 285);
+            pictureView.Size = new Size(669, 310);
             pictureView.SizeMode = PictureBoxSizeMode.Zoom;
             pictureView.TabIndex = 1;
             pictureView.TabStop = false;
@@ -283,9 +293,10 @@
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.Font = new Font("Segoe UI", 15F);
             btnCancel.ForeColor = Color.White;
-            btnCancel.Location = new Point(734, 530);
+            btnCancel.Location = new Point(528, 469);
+            btnCancel.Margin = new Padding(2, 2, 2, 2);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(132, 53);
+            btnCancel.Size = new Size(103, 38);
             btnCancel.TabIndex = 7;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = false;
@@ -300,9 +311,10 @@
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.Font = new Font("Segoe UI", 15F);
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(580, 530);
+            btnSave.Location = new Point(408, 469);
+            btnSave.Margin = new Padding(2, 2, 2, 2);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(132, 53);
+            btnSave.Size = new Size(103, 38);
             btnSave.TabIndex = 6;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = false;
@@ -310,14 +322,15 @@
             // 
             // PhotoForm
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(933, 603);
+            ClientSize = new Size(683, 521);
             Controls.Add(btnSave);
             Controls.Add(btnCancel);
             Controls.Add(tabsPreview);
-            MinimumSize = new Size(550, 550);
+            Margin = new Padding(2, 2, 2, 2);
+            MinimumSize = new Size(431, 404);
             Name = "PhotoForm";
             Text = "New Photo";
             tabsPreview.ResumeLayout(false);

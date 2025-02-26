@@ -49,21 +49,21 @@ public partial class FileWorx : Form
             return;
         }
     }
-    private void OnAddNewButtonClick(object sender, EventArgs e)
+    private void OnAddNewsButtonClick(object sender, EventArgs e)
     {
         NewsForm _newsForm = new NewsForm(CurrentUser);
 
         if (_newsForm.ShowDialog() == DialogResult.OK)
         {
-            New _newItem = _newsForm.RetrieveFormData();
+            News _newItem = _newsForm.RetrieveFormData();
             ListHandler.AddListItem(contentList, _newItem);
             return;
         }
     }
-    private Guid CurrentUser;
-    public FileWorx(Guid guidValue)
+    private AppUser CurrentUser;
+    public FileWorx(AppUser _user)
     {
-        CurrentUser = guidValue;
+        CurrentUser = _user;
         InitializeComponent();
         InitializeContentList();
         if (IsAdmin())
@@ -82,7 +82,7 @@ public partial class FileWorx : Form
         }
 
         var _photoList = BaseOperations<Photo>.RetrieveAll();
-        List<New> _newsList = BaseOperations<New>.RetrieveAll();
+        List<News> _newsList = BaseOperations<News>.RetrieveAll();
 
         List<Content> _mergedList = new List<Content>();
         _mergedList.AddRange(_photoList);
@@ -99,7 +99,7 @@ public partial class FileWorx : Form
     }
     private void EditContent(FileWorxEntity _selectedObject, ListViewItem _selectedItem)
     {
-        if (_selectedObject is New _selectedNews)
+        if (_selectedObject is News _selectedNews)
         {
             NewsForm _newsForm = new NewsForm(_selectedNews, CurrentUser);
 
@@ -108,7 +108,7 @@ public partial class FileWorx : Form
 
             if (_newsForm.DialogResult == DialogResult.OK)
             {
-                New _newItem = _newsForm.RetrieveFormData();
+                News _newItem = _newsForm.RetrieveFormData();
                 ListHandler.UpdateListItem(contentList, _selectedItem, _newItem);
             }
         }
@@ -129,7 +129,7 @@ public partial class FileWorx : Form
     private void ShowPreviewContent(Content _selectedObject)
     {
         //Common Fields
-        txtTitleField.Text = _selectedObject.Title;
+        txtTitleField.Text = _selectedObject.Name;
         txtCreationDateField.Text = _selectedObject.Date.ToString();
         pnlPreviewContent.Text = _selectedObject.Body;
 
@@ -137,7 +137,7 @@ public partial class FileWorx : Form
         {
             ShowPreviewPhoto(_selectedPhoto);
         }
-        else if (_selectedObject is New _selectedNews)
+        else if (_selectedObject is News _selectedNews)
         {
             ShowPreviewNew(_selectedNews);
         }
@@ -188,7 +188,7 @@ public partial class FileWorx : Form
 
         ShowPhoto(_selectedPhoto);
     }
-    private void ShowPreviewNew(New _selectedNews)
+    private void ShowPreviewNew(News _selectedNews)
     {
         lblCategory.Show();
         txtCategoryField.Show();
@@ -207,10 +207,9 @@ public partial class FileWorx : Form
     }
     private bool IsAdmin()
     {
-        AppUser user = BaseOperations<AppUser>.Retrieve(CurrentUser);
-        return user.IsAdmin;
-
+        return CurrentUser.IsAdmin;
     }
+
 }
 
     

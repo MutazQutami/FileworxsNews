@@ -19,14 +19,11 @@ public partial class UsersListForm : Form
             if (userList.SelectedItems.Count > 0)
             {
                 ListViewItem _selectedListItem = userList.FocusedItem;
-                var _selectedObjectGuid = (Guid)_selectedListItem.Tag;
-                AppUser _selected_User = new AppUser()
-                {
-                    GuidValue = _selectedObjectGuid,
-                };
+                var _selectedObject = (AppUser)_selectedListItem.Tag;
+
                 if (e.Button == MouseButtons.Right) // right click
                 {
-                    CommonActions.HandleDeleteOperation(_selected_User, _selectedListItem, userList);
+                    CommonActions.HandleDeleteOperation(_selectedObject, _selectedListItem, userList);
                 }
             }
         }
@@ -56,9 +53,9 @@ public partial class UsersListForm : Form
     }
     private void EditUserLIstItem(ListViewItem _selectedListItem)
     {
-        var _objectGuid = (Guid)_selectedListItem.Tag; 
+        var _objectGuid = (AppUser)_selectedListItem.Tag; 
 
-        AppUser _updatedUser = BaseOperations<AppUser>.Retrieve(_objectGuid);
+        AppUser _updatedUser = BaseOperations<AppUser>.Retrieve(_objectGuid.Id);
             
         UserForm _updateUserForm = new UserForm(_updatedUser);
         _updateUserForm.ShowDialog();

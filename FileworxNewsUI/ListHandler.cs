@@ -31,12 +31,13 @@ public static class ListHandler
     }
     private static void AddUserListItem(ListViewItem _listItem, AppUser _entity)
     {
-        var _userItem = BaseOperations<AppUser>.Retrieve(_entity.GuidValue);
+        var _userItem = BaseOperations<AppUser>.Retrieve(_entity.Id);
         _listItem.Text = _entity.Name;
         _listItem.SubItems.Add(_entity.LogInName.ToString());
         _listItem.SubItems.Add(_entity.Date.ToString());
-        _listItem.SubItems.Add(_entity.LastModifier.ToString());
-        _listItem.Tag = _entity.GuidValue;    // guid value tag to distinguish between users
+        AppUser lastModifier = BaseOperations<AppUser>.Retrieve(_entity.Id);
+        _listItem.SubItems.Add(lastModifier.LogInName);
+        _listItem.Tag = _entity;    // guid value tag to distinguish between users
     }
     private static void AddContentListItem(ListViewItem _listItem, FileWorxEntity _entity)
     {
@@ -46,13 +47,13 @@ public static class ListHandler
         {
             _contentItem = _photoItem;
         }
-        else if (_entity is New _newItem)
+        else if (_entity is News _newItem)
         {
             _contentItem = _newItem;
         }
 
         _listItem.Tag = _contentItem;
-        _listItem.Text = _contentItem.Title;
+        _listItem.Text = _contentItem.Name;
         _listItem.SubItems.Add(_contentItem.Date.ToString());
         _listItem.SubItems.Add(_contentItem.Description);
     }

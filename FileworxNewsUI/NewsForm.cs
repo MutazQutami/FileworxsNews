@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using FileworxNewsBusiness;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 namespace FileworxsNewsUI;
 public partial class NewsForm :Form
 {
@@ -18,15 +19,7 @@ public partial class NewsForm :Form
         try
         {
             formObjectItem = RetrieveFormData();
-            if (isEditForm)
-            {
-                BaseOperations<New>.Update(formObjectItem);
-            }
-            else
-            {
-                BaseOperations<New>.Add(formObjectItem);
-
-            }
+            formObjectItem.Update();
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -37,18 +30,18 @@ public partial class NewsForm :Form
         }
 
     }
-    public NewsForm(Guid guidValue) : this(null, guidValue) { }
-    public NewsForm(New _editNew, Guid guidValue)
+    public NewsForm(AppUser _user) : this(null, _user) { }
+    public NewsForm(News _editNew, AppUser _user)
     {
         InitializeComponent();
         InitializeForm(_editNew);
-        CurrentUser = guidValue;
+        CurrentUser = _user;
     }
-    public void InitializeForm(New item)
+    public void InitializeForm(News item)
     {
         if (item == null)
         {
-            formObjectItem = Activator.CreateInstance<New>();
+            formObjectItem =new News();
             isEditForm = false;
             return;
         }
@@ -57,32 +50,29 @@ public partial class NewsForm :Form
         InitializeSpecificFormFields(item);
     }
     private bool isEditForm;
-    private New formObjectItem;
-    private Guid CurrentUser;
-    protected  void InitializeSpecificFormFields(New _newItem)
+    private News formObjectItem;
+    private AppUser CurrentUser;
+    protected  void InitializeSpecificFormFields(News _newItem)
     {
         lblTitle.Text = "Edit New"; // Edit New Form
         this.Text = "Edit New";
 
-        txtTitleField.Text = _newItem.Title;
+        txtTitleField.Text = _newItem.Name;
         txtDescriptionField.Text = _newItem.Description;
         categoryList.Text = _newItem.Category;
         txtBodyField.Text = _newItem.Body;
     }
-    public  New RetrieveFormData()
+    public  News RetrieveFormData()
     {
-        return new New
-        {
-            Title = txtTitleField.Text,
-            Description = txtDescriptionField.Text,
-            Category = categoryList.Text,
-            Body = txtBodyField.Text,
-            GuidValue = formObjectItem.GuidValue,
-            Date = formObjectItem.Date,
-            LastmodificationDate = DateTime.Now,
-            LastModifierId = CurrentUser,
-            CreatorId = CurrentUser
-        };
+        formObjectItem.LastModificationDate = DateTime.Now;
+        formObjectItem.LastModifierId = CurrentUser.Id;
+        formObjectItem.Name = txtTitleField.Text;
+        formObjectItem.Description = txtDescriptionField.Text;
+        formObjectItem.Category = categoryList.Text;
+        formObjectItem.Body = txtBodyField.Text;
+        formObjectItem.CreatorId= CurrentUser.Id;
+        return formObjectItem;
+     
     }
     private bool ValidateFields()
     {
