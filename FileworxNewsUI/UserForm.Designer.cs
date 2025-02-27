@@ -34,6 +34,7 @@
             btnSave = new Button();
             btnCancel = new Button();
             pnlContainer = new Panel();
+            checkBoxIsAdmin = new CheckBox();
             lblNullConfirmPassword = new Label();
             lblPass = new Label();
             lblNullLoginName = new Label();
@@ -92,7 +93,7 @@
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.Font = new Font("Segoe UI", 15F);
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(521, 347);
+            btnSave.Location = new Point(564, 395);
             btnSave.Margin = new Padding(2);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(103, 44);
@@ -110,7 +111,7 @@
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.Font = new Font("Segoe UI", 15F);
             btnCancel.ForeColor = Color.White;
-            btnCancel.Location = new Point(640, 347);
+            btnCancel.Location = new Point(683, 395);
             btnCancel.Margin = new Padding(2);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(96, 44);
@@ -121,6 +122,7 @@
             // 
             // pnlContainer
             // 
+            pnlContainer.Controls.Add(checkBoxIsAdmin);
             pnlContainer.Controls.Add(lblNullConfirmPassword);
             pnlContainer.Controls.Add(lblPass);
             pnlContainer.Controls.Add(lblNullLoginName);
@@ -139,8 +141,21 @@
             pnlContainer.Dock = DockStyle.Fill;
             pnlContainer.Location = new Point(0, 0);
             pnlContainer.Name = "pnlContainer";
-            pnlContainer.Size = new Size(785, 417);
+            pnlContainer.Size = new Size(828, 465);
             pnlContainer.TabIndex = 14;
+            // 
+            // checkBoxIsAdmin
+            // 
+            checkBoxIsAdmin.AutoSize = true;
+            checkBoxIsAdmin.Font = new Font("Segoe UI", 15F);
+            checkBoxIsAdmin.ForeColor = SystemColors.ButtonShadow;
+            checkBoxIsAdmin.Location = new Point(244, 340);
+            checkBoxIsAdmin.Name = "checkBoxIsAdmin";
+            checkBoxIsAdmin.Size = new Size(132, 32);
+            checkBoxIsAdmin.TabIndex = 21;
+            checkBoxIsAdmin.Text = "Admin Role";
+            checkBoxIsAdmin.UseVisualStyleBackColor = true;
+            checkBoxIsAdmin.Visible = false;
             // 
             // lblNullConfirmPassword
             // 
@@ -272,7 +287,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.White;
-            ClientSize = new Size(785, 417);
+            ClientSize = new Size(828, 465);
             Controls.Add(pnlContainer);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Margin = new Padding(2);
@@ -301,5 +316,6 @@
         private Label lblPass;
         private Label lblNullLoginName;
         private Label lblNullName;
+        private CheckBox checkBoxIsAdmin;
     }
 }

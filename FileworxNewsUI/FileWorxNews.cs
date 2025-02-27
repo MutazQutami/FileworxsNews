@@ -23,6 +23,7 @@ public partial class FileWorx : Form
             }
         }
     }
+
     private void ContentListMouseDoubleClick(object sender, MouseEventArgs e)
     {
         if (contentList.SelectedItems.Count > 0)
@@ -34,10 +35,12 @@ public partial class FileWorx : Form
             EditContent(_selectedObject, _selectedItem);
         }
     }
+
     private void FileWorxLoad(object sender, EventArgs e)
     {
         mainSplitContainer.SplitterDistance = this.Height * 2 / 3;
     }
+
     private void OnAddPhotoButtonClick(object sender, EventArgs e)
     {
         PhotoForm photoForm = new PhotoForm(CurrentUser);
@@ -49,6 +52,7 @@ public partial class FileWorx : Form
             return;
         }
     }
+
     private void OnAddNewsButtonClick(object sender, EventArgs e)
     {
         NewsForm _newsForm = new NewsForm(CurrentUser);
@@ -60,7 +64,14 @@ public partial class FileWorx : Form
             return;
         }
     }
+    private void OnUsersListMouseClick(object sender, EventArgs e)
+    {
+        var listForm = new UsersListForm(CurrentUser);
+        listForm.ShowDialog();
+    }
+
     private AppUser CurrentUser;
+
     public FileWorx(AppUser _user)
     {
         CurrentUser = _user;
@@ -71,6 +82,7 @@ public partial class FileWorx : Form
             usersListToolStripMenuItem.Visible = true;
         }
     }
+
     private void InitializeContentList()
     {
         // retrieving photos and news
@@ -89,7 +101,7 @@ public partial class FileWorx : Form
         _mergedList.AddRange(_newsList);
 
         // Sort by Date in descending order
-        _mergedList = _mergedList.OrderByDescending(item => item.Date).ToList();
+        _mergedList = _mergedList.OrderByDescending(item => item.CreationDate).ToList();
 
         // Add sorted items to contentList
         foreach (var _item in _mergedList)
@@ -97,6 +109,7 @@ public partial class FileWorx : Form
             ListHandler.AddListItem(contentList, _item);
         }
     }
+
     private void EditContent(FileWorxEntity _selectedObject, ListViewItem _selectedItem)
     {
         if (_selectedObject is News _selectedNews)
@@ -126,11 +139,12 @@ public partial class FileWorx : Form
             }
         }
     }
+
     private void ShowPreviewContent(Content _selectedObject)
     {
         //Common Fields
         txtTitleField.Text = _selectedObject.Name;
-        txtCreationDateField.Text = _selectedObject.Date.ToString();
+        txtCreationDateField.Text = _selectedObject.CreationDate.ToString();
         pnlPreviewContent.Text = _selectedObject.Body;
 
         if (_selectedObject is Photo _selectedPhoto)
@@ -142,6 +156,7 @@ public partial class FileWorx : Form
             ShowPreviewNew(_selectedNews);
         }
     }
+
     private void ClearPreviewContent()
     {
         txtTitleField.Clear();
@@ -151,6 +166,7 @@ public partial class FileWorx : Form
         imagePreview.Image = null;
         pnltabPreview.TabPages.Remove(imageTabPage2);
     }
+
     private void ShowPhoto(Photo _selectedPhoto)
     {
         string _sourcePath = _selectedPhoto.PhotoPath;
@@ -174,6 +190,7 @@ public partial class FileWorx : Form
             imagePreview.Image = imagePreview.InitialImage;
         }
     }
+
     private void ShowPreviewPhoto(Photo _selectedPhoto)
     {
         txtCategoryField.Hide();
@@ -188,6 +205,7 @@ public partial class FileWorx : Form
 
         ShowPhoto(_selectedPhoto);
     }
+
     private void ShowPreviewNew(News _selectedNews)
     {
         lblCategory.Show();
@@ -200,11 +218,7 @@ public partial class FileWorx : Form
             pnltabPreview.TabPages.Remove(imageTabPage2);
         }
     }
-    private void OnUsersListMouseClick(object sender, EventArgs e)
-    {
-        var listForm = new UsersListForm();
-        listForm.ShowDialog();
-    }
+
     private bool IsAdmin()
     {
         return CurrentUser.IsAdmin;

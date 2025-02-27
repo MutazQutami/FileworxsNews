@@ -7,6 +7,7 @@ public partial class PhotoForm :Form
         this.DialogResult = DialogResult.Cancel;
         this.Close();
     }
+
     private void OnBrowsePhotoClick(object sender, EventArgs e)
     {
         OpenFileDialog openFileDialog = new OpenFileDialog
@@ -25,6 +26,7 @@ public partial class PhotoForm :Form
             lblFilePathText.Show();
         }
     }
+
     private void OnSaveButtonClick(object sender, EventArgs e)
     {
         if (!ValidateFields())
@@ -34,6 +36,10 @@ public partial class PhotoForm :Form
 
         try
         {
+            if (!isEditForm)
+            {
+                formObjectItem.CreatorId = CurrentUser.Id;
+            }
             SaveFormInfo();
             formObjectItem.Update();
 
@@ -46,18 +52,24 @@ public partial class PhotoForm :Form
             this.DialogResult = DialogResult.None;
         }
     }
+
     private bool isEditForm;
+
     private Photo formObjectItem;
+
     private AppUser CurrentUser;
+
     public PhotoForm(AppUser _user) : this(null, _user)
     {
     }
+
     public PhotoForm(Photo _photoItem, AppUser _user)
     {
         InitializeComponent();
         InitializeForm(_photoItem);
         CurrentUser = _user;
     }
+
     public void InitializeForm(Photo item)
     {
         if (item == null)
@@ -71,6 +83,7 @@ public partial class PhotoForm :Form
         isEditForm = true;
         InitializeSpecificFormFields(item);
     }
+
     private  void InitializeSpecificFormFields(Photo _photoItem)
     {
         txtTitleField.Text = _photoItem.Name;
@@ -81,11 +94,13 @@ public partial class PhotoForm :Form
         lblFilePathText.Show();
         lblFilePath.Show();
     }
+
     public Photo RetrieveFormData()
     {
         SaveFormInfo();
         return formObjectItem;
     }
+
     private bool ValidateFields()
     {
         bool isValid = true;
@@ -132,6 +147,7 @@ public partial class PhotoForm :Form
 
         return isValid;
     }
+
     private void SaveFormInfo()
     {
         formObjectItem.Name = txtTitleField.Text;
@@ -139,7 +155,6 @@ public partial class PhotoForm :Form
         formObjectItem.Body = txtBodyField.Text;
         formObjectItem.PhotoPath = lblFilePath.Text;
         formObjectItem.LastModificationDate = DateTime.Now;
-        formObjectItem.CreatorId = CurrentUser.Id;
         formObjectItem.LastModifierId = CurrentUser.Id;
     }
 }

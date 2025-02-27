@@ -2,13 +2,22 @@
 using System.Reflection.Metadata.Ecma335;
 
 namespace FileworxNewsBusiness;
-public class AppUser : FileWorxEntity
+public class AppUser: FileWorxEntity
 {
     public string LogInName { get; set; }
+
     public string Password { get; set; }
-    public Guid LastModifier { get; set; }
-    public DateTime LastModifiedDate { get; set; }
+
     public bool IsAdmin { get; set; }
+
+    public ICollection<FileWorxEntity> CreatedEntities { get; set; }
+    public ICollection<FileWorxEntity> ModifiedEntities { get; set; }
+
+    public AppUser()
+    {
+        IsAdmin = false;
+    }
+
     public bool IsEqual(AppUser? other)
     {
         if (other == null || string.IsNullOrEmpty(LogInName) || string.IsNullOrEmpty(Password))
@@ -16,37 +25,34 @@ public class AppUser : FileWorxEntity
 
         return LogInName == other.LogInName && Password == other.Password;
     }
-    public AppUser()
-    {
-        IsAdmin = false;
-        LastModifier = Id;
-        LastModifiedDate = Date;
-    }
-    public new void Update()
+
+    public override void Update()
     {
         Validate();
+
         using (var context = new Context())
         {
             try
-
             {
-
-               if (context.Users.Any(x => x.LogInName == LogInName && x.Id != Id))
-               {
-                    throw new Exception("Invalid login name");
-                    
-               }
-
-                var user = context.Users.FirstOrDefault(x => x.Id == this.Id);
-                if (user == null)
+                if (context.User.Any(x => x.LogInName == this.LogInName && x.Id != Id))// Duplicate Login name
                 {
-                    context.Users.Add(this);
+                    throw new Exception("Invalid Login Name");
+                }
+                if (Id == Guid.Empty)
+                {
+                
+                    Id = Guid.NewGuid();
+                    CreatorId = null;
+                    LastModifierId = null;
+                    context.User.Add(this);
+                    //context.SaveChanges();
+                    //this.Update();
                 }
                 else
                 {
-                    context.Entry(user).CurrentValues.SetValues(this);
-                }
 
+                    context.Entry(this).CurrentValues.SetValues(this);
+                }
                 context.SaveChanges();
             }
             catch (Exception ex)
@@ -55,39 +61,33 @@ public class AppUser : FileWorxEntity
             }
         }
     }
-    public new void Delete()
+
+    public override void Delete()
     {
-        using (var context = new Context())
-        {
-            try
+            using (var context = new Context())
             {
-                var user = context.Users.SingleOrDefault(x => x.Id == this.Id);
-                if (user != null)
+                try
                 {
-                    context.Users.Remove(user);
+                    context.User.Remove(this);
                     context.SaveChanges();
                 }
-                else
+                catch (Exception ex)
                 {
-                    throw new Exception("User not found for deletion.");
+                    throw new Exception("Error deleting photo.", ex);
                 }
             }
-            catch (Exception ex)
-            {
-                throw new Exception("Error deleting user.", ex);
-            }
-        }
     }
-    public new AppUser Read()
+
+    public override AppUser Read()
     {
         using (var context = new Context())
         {
-            return context.Users.SingleOrDefault(x => x.Id == this.Id);
+            return context.User.SingleOrDefault(x => x.Id == this.Id);
         }
     }
+
     private void Validate()
     {
-
         if (string.IsNullOrEmpty(Name))
             throw new ValidationException("Name cannot be empty.");
 

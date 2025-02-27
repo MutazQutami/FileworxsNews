@@ -34,10 +34,11 @@ public static class ListHandler
         var _userItem = BaseOperations<AppUser>.Retrieve(_entity.Id);
         _listItem.Text = _entity.Name;
         _listItem.SubItems.Add(_entity.LogInName.ToString());
-        _listItem.SubItems.Add(_entity.Date.ToString());
+        _listItem.SubItems.Add(_entity.CreationDate.ToString("yyyy-MM-dd HH:mm:ss"));
         AppUser lastModifier = BaseOperations<AppUser>.Retrieve(_entity.Id);
-        _listItem.SubItems.Add(lastModifier.LogInName);
         _listItem.Tag = _entity;    // guid value tag to distinguish between users
+
+        _listItem.SubItems.Add(lastModifier.LogInName);
     }
     private static void AddContentListItem(ListViewItem _listItem, FileWorxEntity _entity)
     {
@@ -54,7 +55,7 @@ public static class ListHandler
 
         _listItem.Tag = _contentItem;
         _listItem.Text = _contentItem.Name;
-        _listItem.SubItems.Add(_contentItem.Date.ToString());
+        _listItem.SubItems.Add(_contentItem.CreationDate.ToString());
         _listItem.SubItems.Add(_contentItem.Description);
     }
 }

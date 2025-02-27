@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace FileworxNewsBusiness;
+
 public class Photo : Content
 {
     public string PhotoPath { get; set; }
-    public new void Update()
+
+    public override void Update()
     {
         Validate();
 
@@ -12,59 +14,51 @@ public class Photo : Content
         {
             try
             {
-                var photo = context.Photos.FirstOrDefault(x => x.Id == this.Id);
-                if (photo == null)
+                if (Id==Guid.Empty)
                 {
-                    context.Photos.Add(this);
+                    Id = Guid.NewGuid();
+                    context.Photo.Add(this);
                 }
                 else
                 {
-                    context.Entry(photo).CurrentValues.SetValues(this);
+                    context.Entry(this).CurrentValues.SetValues(this);
                 }
 
                 context.SaveChanges();
             }
             catch (Exception ex)
             {
-                throw new Exception("Error updating photo.", ex);
+                throw new Exception(ex.Message);
             }
         }
     }
-    public new void Delete()
+
+    public override void Delete()
     {
         using (var context = new Context())
         {
             try
             {
-                var photo = context.Photos.FirstOrDefault(x => x.Id == this.Id);
-                if (photo != null)
-                {
-                    context.Photos.Remove(photo);
-                    context.Contents.Remove(photo);
-                    context.Entities.Remove(photo);
-
-                    context.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("Photo not found for deletion.");
-                }
+                context.Photo.Remove(this);
+                context.SaveChanges();
             }
             catch (Exception ex)
             {
-                throw new Exception("Error deleting photo.", ex); // Rethrow the exception
+                throw new Exception("Error deleting photo.", ex);
             }
         }
     }
-    public new Photo Read()
+
+    public override Photo Read()
     {
         using (var context = new Context())
         {
-            return context.Photos.FirstOrDefault(x => x.Id == this.Id);
+            return context.Photo.SingleOrDefault(x => x.Id == this.Id);
         }
     }
-    protected void Validate()
-    {
+
+    private void Validate()
+    { 
         if (string.IsNullOrEmpty(PhotoPath))
             throw new ValidationException("PhotoPath cannot be empty.");
     }

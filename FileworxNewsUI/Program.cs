@@ -12,8 +12,20 @@ internal static class Program
     static void Main()
     {
         ApplicationConfiguration.Initialize();
+
+        // create admin user for the first time
+
+            //AppUser user1 = new AppUser()
+            //{
+            //    LogInName = "admin",
+            //    Password = "123",
+            //    Name = "admin",
+            //    IsAdmin = true,
+            //};
+            //user1.Update();
+
         Application.Run(new LoginForm());
     }
 }
-
+// last program
 

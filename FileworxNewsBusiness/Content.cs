@@ -3,10 +3,11 @@
 namespace FileworxNewsBusiness;
 public class Content : FileWorxEntity
 {
-    public string Name { get; set; }
     public string Description { get; set; }
+
     public string Body { get; set; }
-    public new void Update()
+
+    public override void Update()
     {
         Validate();
 
@@ -14,58 +15,49 @@ public class Content : FileWorxEntity
         {
             try
             {
-                var content = context.Contents.SingleOrDefault(x => x.Id == this.Id);
-
-                if (content == null)
+                if (Id.Equals(null))
                 {
-                    context.Contents.Add(this);
+                    Id = Guid.NewGuid();
+                    context.Content.Add(this);
                 }
                 else
                 {
-                    context.Entry(content).CurrentValues.SetValues(this);
+                    context.Entry(this).CurrentValues.SetValues(this);
                 }
 
                 context.SaveChanges();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error updating content: {ex.Message}");
-                throw new Exception("Error updating content.", ex); // Rethrow the exception
+                throw new Exception("Error updating entity.", ex);
             }
         }
     }
-    public new void Delete()
+
+    public override void Delete()
     {
         using (var context = new Context())
         {
             try
             {
-                var content = context.Contents.SingleOrDefault(x => x.Id == this.Id);
-                if (content != null)
-                {
-                    context.Contents.Remove(content);
-                    context.Entities.Remove(content);
-                    context.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("Content not found for deletion.");
-                }
+                context.Content.Remove(this);
+                context.SaveChanges();
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error deleting content: {ex.Message}");
-                throw new Exception("Error deleting content.", ex); // Rethrow the exception
+                throw new Exception("Error deleting entity.", ex);
             }
         }
     }
-    public new Content Read()
+
+    public override Content Read()
     {
         using (var context = new Context())
         {
-            return context.Contents.SingleOrDefault(x => x.Id == this.Id);
+            return context.Content.SingleOrDefault(x => x.Id == this.Id);
         }
     }
+
     private void Validate()
     {
         if (string.IsNullOrEmpty(Name))
@@ -77,4 +69,6 @@ public class Content : FileWorxEntity
         if (string.IsNullOrEmpty(Body))
             throw new ValidationException("Body cannot be empty.");
     }
+
 }
+

@@ -14,6 +14,7 @@ public partial class LoginForm : Form
             this.Show();
         }
     }
+
     private  void LogInProcess(object sender, EventArgs e)
     {
         HideLables();
@@ -44,7 +45,6 @@ public partial class LoginForm : Form
         try
         {
             currentUser = UserServices.AuthenticateUser(_appUser);
-
             FileWorx fileWorx = new FileWorx(currentUser);
             this.Hide();
             fileWorx.Show();
@@ -54,10 +54,12 @@ public partial class LoginForm : Form
             lblWrongCredentials.Show();
         }
     }
+
     public LoginForm()
     {
         InitializeComponent();
     }
+
     private void HideLables()
     {
         lblNullUsername.Hide();

@@ -9,6 +9,7 @@ public partial class NewsForm :Form
         this.DialogResult = DialogResult.Cancel;
         this.Close();
     }
+
     private void OnSaveButtonClick(object sender, EventArgs e)
     {
         if (!ValidateFields())
@@ -18,6 +19,11 @@ public partial class NewsForm :Form
 
         try
         {
+            if (!isEditForm)
+            {
+                formObjectItem.CreatorId = CurrentUser.Id;
+            }
+
             formObjectItem = RetrieveFormData();
             formObjectItem.Update();
             this.DialogResult = DialogResult.OK;
@@ -30,13 +36,16 @@ public partial class NewsForm :Form
         }
 
     }
+
     public NewsForm(AppUser _user) : this(null, _user) { }
+
     public NewsForm(News _editNew, AppUser _user)
     {
         InitializeComponent();
         InitializeForm(_editNew);
         CurrentUser = _user;
     }
+
     public void InitializeForm(News item)
     {
         if (item == null)
@@ -49,9 +58,13 @@ public partial class NewsForm :Form
         isEditForm = true;
         InitializeSpecificFormFields(item);
     }
+
     private bool isEditForm;
+
     private News formObjectItem;
+
     private AppUser CurrentUser;
+
     protected  void InitializeSpecificFormFields(News _newItem)
     {
         lblTitle.Text = "Edit New"; // Edit New Form
@@ -62,6 +75,7 @@ public partial class NewsForm :Form
         categoryList.Text = _newItem.Category;
         txtBodyField.Text = _newItem.Body;
     }
+
     public  News RetrieveFormData()
     {
         formObjectItem.LastModificationDate = DateTime.Now;
@@ -74,6 +88,7 @@ public partial class NewsForm :Form
         return formObjectItem;
      
     }
+
     private bool ValidateFields()
     {
         bool isValid = true;

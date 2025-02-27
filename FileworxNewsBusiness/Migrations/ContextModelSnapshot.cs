@@ -24,16 +24,37 @@ namespace FileworxNewsBusiness.Migrations
 
             modelBuilder.Entity("FileworxNewsBusiness.FileWorxEntity", b =>
                 {
-                    b.Property<Guid>("GuidValue")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime>("CreationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("DATETIME2")
+                        .HasDefaultValueSql("SYSDATETIME()");
 
-                    b.HasKey("GuidValue");
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.ToTable("Entities");
+                    b.Property<DateTime>("LastModificationDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("DATETIME2(3)")
+                        .HasDefaultValueSql("SYSDATETIME()");
+
+                    b.Property<Guid?>("LastModifierId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("LastModifierId");
+
+                    b.ToTable("Entity");
 
                     b.UseTptMappingStrategy();
                 });
@@ -43,33 +64,25 @@ namespace FileworxNewsBusiness.Migrations
                     b.HasBaseType("FileworxNewsBusiness.FileWorxEntity");
 
                     b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("LastModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("LastModifier")
-                        .HasColumnType("uniqueidentifier");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("LogInName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("LastModifier");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasIndex("LogInName")
                         .IsUnique()
                         .HasFilter("[LogInName] IS NOT NULL");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("FileworxNewsBusiness.Content", b =>
@@ -78,30 +91,14 @@ namespace FileworxNewsBusiness.Migrations
 
                     b.Property<string>("Body")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("CreatorId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("nvarchar(Max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar");
 
-                    b.Property<DateTime>("LastModificationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("LastModifierId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("CreatorId");
-
-                    b.HasIndex("LastModifierId");
-
-                    b.ToTable("Contents");
+                    b.ToTable("Content");
                 });
 
             modelBuilder.Entity("FileworxNewsBusiness.News", b =>
@@ -110,7 +107,8 @@ namespace FileworxNewsBusiness.Migrations
 
                     b.Property<string>("Category")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.ToTable("News");
                 });
@@ -119,22 +117,35 @@ namespace FileworxNewsBusiness.Migrations
                 {
                     b.HasBaseType("FileworxNewsBusiness.Content");
 
-                    b.Property<string>("PhotoName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PhotoPath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Photos");
+                    b.ToTable("Photo");
+                });
+
+            modelBuilder.Entity("FileworxNewsBusiness.FileWorxEntity", b =>
+                {
+                    b.HasOne("FileworxNewsBusiness.AppUser", "Creator")
+                        .WithMany("CreatedEntities")
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("FileworxNewsBusiness.AppUser", "LastModifier")
+                        .WithMany("ModifiedEntities")
+                        .HasForeignKey("LastModifierId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Creator");
+
+                    b.Navigation("LastModifier");
                 });
 
             modelBuilder.Entity("FileworxNewsBusiness.AppUser", b =>
                 {
                     b.HasOne("FileworxNewsBusiness.FileWorxEntity", null)
                         .WithOne()
-                        .HasForeignKey("FileworxNewsBusiness.AppUser", "GuidValue")
+                        .HasForeignKey("FileworxNewsBusiness.AppUser", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -143,7 +154,7 @@ namespace FileworxNewsBusiness.Migrations
                 {
                     b.HasOne("FileworxNewsBusiness.FileWorxEntity", null)
                         .WithOne()
-                        .HasForeignKey("FileworxNewsBusiness.Content", "GuidValue")
+                        .HasForeignKey("FileworxNewsBusiness.Content", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -152,7 +163,7 @@ namespace FileworxNewsBusiness.Migrations
                 {
                     b.HasOne("FileworxNewsBusiness.Content", null)
                         .WithOne()
-                        .HasForeignKey("FileworxNewsBusiness.News", "GuidValue")
+                        .HasForeignKey("FileworxNewsBusiness.News", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -161,9 +172,16 @@ namespace FileworxNewsBusiness.Migrations
                 {
                     b.HasOne("FileworxNewsBusiness.Content", null)
                         .WithOne()
-                        .HasForeignKey("FileworxNewsBusiness.Photo", "GuidValue")
+                        .HasForeignKey("FileworxNewsBusiness.Photo", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FileworxNewsBusiness.AppUser", b =>
+                {
+                    b.Navigation("CreatedEntities");
+
+                    b.Navigation("ModifiedEntities");
                 });
 #pragma warning restore 612, 618
         }

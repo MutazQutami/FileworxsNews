@@ -7,6 +7,7 @@ public partial class UserForm : Form
         this.DialogResult = DialogResult.Cancel;
         this.Close();
     }
+
     private void OnSaveButtonClick(object sender, EventArgs e)
     {
         if (!ValidateFields())
@@ -21,46 +22,78 @@ public partial class UserForm : Form
 
         lblpassMatchWarning.Hide();
 
+        if (!isEditForm)
+        {
+            formObjectItem.CreatorId = formObjectItem.CreatorId ?? Guid.Empty;
+            formObjectItem.LastModifierId = formObjectItem.LastModifierId ?? Guid.Empty;
+
+        }
+
         string _message = string.Empty;
         SaveFormInfo();
 
         try
         {
+            
             formObjectItem.Update();
-            _message = "User Created Successfully";
+            if (isEditForm)
+            {
+                _message = "User Updated Successfully";
+            }
+            else
+            {
+                _message = "User Created Successfully";
+
+            }
             CompletedRegistration(_message);
         }
         catch (Exception _ex)
         {
-           _message = _ex.Message;
+            _message = _ex.Message;
 
             InCompleteRegistration(_message);
             this.DialogResult = DialogResult.None;
         }
     }
-    private bool isEditForm;
+
+    private static bool isEditForm;
     private AppUser formObjectItem;
-    public UserForm() : this(null)
+    private AppUser CurrentUser;
+
+    public UserForm() : this(null) { }
+
+    public UserForm(AppUser CurrentUser) : this(null, CurrentUser)
     {
+       
     }
-    public UserForm(AppUser _editUser )
+    public UserForm(AppUser _editUser, AppUser CurrentUser)
     {
         InitializeComponent();
+        this.CurrentUser = CurrentUser;
         InitializeForm(_editUser);
     }
-    public void InitializeForm(AppUser item  )
+
+    public void InitializeForm(AppUser item)
     {
+        if (CurrentUser.IsAdmin)
+        {
+            checkBoxIsAdmin.Visible = true;
+        }
         if (item == null)
         {
             formObjectItem = new AppUser();
             isEditForm = false;
             return;
         }
+        if (item.IsAdmin) {
+            checkBoxIsAdmin.Checked = true;
+        }
         formObjectItem = item;
         isEditForm = true;
         InitializeSpecificFormFields(item);
     }
-    public  void InitializeSpecificFormFields(AppUser _userItem)
+
+    public void InitializeSpecificFormFields(AppUser _userItem)
     {
         this.Text = "Edit User";
 
@@ -69,25 +102,30 @@ public partial class UserForm : Form
         txtName.Text = _userItem.Name;
         txtConfirmPass.Text = _userItem.Password;
     }
+
     public  AppUser RetrieveFormData()
     {
         SaveFormInfo();
         return formObjectItem;
     }
+
     private bool ArePasswordsEqual()
     {
         return txtPassword.Text.Equals(txtConfirmPass.Text);
     }
+
     private void CompletedRegistration(string _message)
     {
         MessageBox.Show(_message);
         this.DialogResult = DialogResult.OK;
         this.Close();
     }
+
     private void InCompleteRegistration(string _message)
     {
         MessageBox.Show(_message);
     }
+
     private bool ValidateFields()
     {
         bool isValid = true;
@@ -134,12 +172,12 @@ public partial class UserForm : Form
 
         return isValid;
     }
+
     private void SaveFormInfo()
     {
         formObjectItem.Name = txtName.Text;
         formObjectItem.LogInName = txtLoginName.Text;
         formObjectItem.Password = txtPassword.Text;
-        formObjectItem.LastModifiedDate = DateTime.Now;
-        formObjectItem.LastModifier = formObjectItem.Id;
+        formObjectItem.IsAdmin=checkBoxIsAdmin.Checked;
     }
 }

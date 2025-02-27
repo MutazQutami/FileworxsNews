@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Xml.Linq;
 
 namespace FileworxNewsBusiness;
 public class News : Content
 {
     public string Category { get; set; }
-    public new void Update()
+
+    public override void Update()
     {
         Validate();
 
@@ -12,42 +14,33 @@ public class News : Content
         {
             try
             {
-                var news = context.News.SingleOrDefault(x => x.Id == this.Id);
-                if (news == null)
+                if (Id==Guid.Empty)
                 {
+                    Id = Guid.NewGuid();
                     context.News.Add(this);
                 }
                 else
                 {
-                    context.Entry(news).CurrentValues.SetValues(this);
+                    context.Entry(this).CurrentValues.SetValues(this);
                 }
 
                 context.SaveChanges();
             }
             catch (Exception ex)
             {
-                throw new Exception("Error updating news.", ex); // Rethrow the exception
+                throw new Exception("Error updating news.", ex);
             }
         }
     }
-    public new void Delete()
+    
+    public override void Delete()
     {
         using (var context = new Context())
         {
             try
             {
-                var news = context.News.SingleOrDefault(x => x.Id == this.Id);
-                if (news != null)
-                {
-                    context.News.Remove(news);
-                    context.Contents.Remove(news);
-                    context.Entities.Remove(news);
-                    context.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("News not found for deletion.");
-                }
+                context.News.Remove(this);
+                context.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -55,16 +48,17 @@ public class News : Content
             }
         }
     }
-    public new News Read()
+
+    public override News Read()
     {
         using (var context = new Context())
         {
             return context.News.SingleOrDefault(x => x.Id == this.Id);
         }
     }
+
     private void Validate()
     {
-
         if (string.IsNullOrEmpty(Category))
             throw new ValidationException("Category cannot be empty.");
     }

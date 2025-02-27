@@ -88,6 +88,7 @@
             btnAddUser.Name = "btnAddUser";
             btnAddUser.Size = new Size(126, 53);
             btnAddUser.TabIndex = 1;
+            btnAddUser.TabStop = false;
             btnAddUser.Text = "Add User";
             btnAddUser.UseVisualStyleBackColor = true;
             btnAddUser.Click += OnAddUserButtonClick;
@@ -138,7 +139,7 @@
             // 
             // UsersListForm
             // 
-            AutoScaleDimensions = new SizeF(14F, 35F);
+            AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.White;

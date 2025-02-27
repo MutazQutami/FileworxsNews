@@ -2,9 +2,10 @@
 namespace FileworxsNewsUI;
 public partial class UsersListForm : Form
 {
+    private AppUser currentUser;
     private void OnAddUserButtonClick(object sender, EventArgs e)
     {
-        UserForm newUserForm = new UserForm();
+        UserForm newUserForm = new UserForm(currentUser);
 
         if (newUserForm.ShowDialog() == DialogResult.OK)
         {
@@ -33,11 +34,12 @@ public partial class UsersListForm : Form
         if (userList.SelectedItems.Count > 0)
         {
             ListViewItem _selectedListItem = userList.SelectedItems[0];
-            EditUserLIstItem(_selectedListItem); 
+            EditUserLIstItem(_selectedListItem);
         }
     }
-    public UsersListForm()
+    public UsersListForm(AppUser currentUser)
     {
+        this.currentUser = currentUser;
         InitializeComponent();
         RetrieveUsers();
     }
@@ -57,7 +59,7 @@ public partial class UsersListForm : Form
 
         AppUser _updatedUser = BaseOperations<AppUser>.Retrieve(_objectGuid.Id);
             
-        UserForm _updateUserForm = new UserForm(_updatedUser);
+        UserForm _updateUserForm = new UserForm(_updatedUser , currentUser);
         _updateUserForm.ShowDialog();
 
         if (_updateUserForm.DialogResult == DialogResult.OK)
