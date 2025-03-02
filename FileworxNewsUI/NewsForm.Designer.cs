@@ -48,10 +48,10 @@
             // 
             lblTitle.AutoSize = true;
             lblTitle.ForeColor = SystemColors.AppWorkspace;
-            lblTitle.Location = new Point(59, 40);
+            lblTitle.Location = new Point(59, 54);
             lblTitle.Margin = new Padding(5, 0, 5, 0);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(49, 28);
+            lblTitle.Size = new Size(61, 35);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "Title";
             // 
@@ -59,10 +59,10 @@
             // 
             lblDescription.AutoSize = true;
             lblDescription.ForeColor = SystemColors.AppWorkspace;
-            lblDescription.Location = new Point(49, 104);
+            lblDescription.Location = new Point(49, 134);
             lblDescription.Margin = new Padding(5, 0, 5, 0);
             lblDescription.Name = "lblDescription";
-            lblDescription.Size = new Size(112, 28);
+            lblDescription.Size = new Size(142, 35);
             lblDescription.TabIndex = 1;
             lblDescription.Text = "Description";
             // 
@@ -70,10 +70,10 @@
             // 
             lblCategory.AutoSize = true;
             lblCategory.ForeColor = SystemColors.AppWorkspace;
-            lblCategory.Location = new Point(49, 167);
+            lblCategory.Location = new Point(49, 230);
             lblCategory.Margin = new Padding(5, 0, 5, 0);
             lblCategory.Name = "lblCategory";
-            lblCategory.Size = new Size(97, 28);
+            lblCategory.Size = new Size(122, 35);
             lblCategory.TabIndex = 2;
             lblCategory.Text = "Category ";
             // 
@@ -81,10 +81,10 @@
             // 
             lblBody.AutoSize = true;
             lblBody.ForeColor = SystemColors.AppWorkspace;
-            lblBody.Location = new Point(53, 249);
+            lblBody.Location = new Point(53, 315);
             lblBody.Margin = new Padding(5, 0, 5, 0);
             lblBody.Name = "lblBody";
-            lblBody.Size = new Size(57, 28);
+            lblBody.Size = new Size(71, 35);
             lblBody.TabIndex = 3;
             lblBody.Text = "Body";
             // 
@@ -97,7 +97,7 @@
             txtTitleField.MaxLength = 255;
             txtTitleField.MinimumSize = new Size(250, 0);
             txtTitleField.Name = "txtTitleField";
-            txtTitleField.Size = new Size(393, 34);
+            txtTitleField.Size = new Size(393, 41);
             txtTitleField.TabIndex = 4;
             // 
             // txtDescriptionField
@@ -109,7 +109,7 @@
             txtDescriptionField.MaxLength = 255;
             txtDescriptionField.MinimumSize = new Size(250, 0);
             txtDescriptionField.Name = "txtDescriptionField";
-            txtDescriptionField.Size = new Size(393, 34);
+            txtDescriptionField.Size = new Size(393, 41);
             txtDescriptionField.TabIndex = 5;
             // 
             // categoryList
@@ -124,7 +124,7 @@
             categoryList.Margin = new Padding(5, 6, 5, 6);
             categoryList.MinimumSize = new Size(250, 0);
             categoryList.Name = "categoryList";
-            categoryList.Size = new Size(393, 36);
+            categoryList.Size = new Size(393, 43);
             categoryList.TabIndex = 6;
             // 
             // txtBodyField
@@ -148,7 +148,7 @@
             btnSave.FlatAppearance.BorderSize = 0;
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(621, 573);
+            btnSave.Location = new Point(629, 584);
             btnSave.Margin = new Padding(5, 6, 5, 6);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(109, 47);
@@ -165,7 +165,7 @@
             btnCancel.FlatAppearance.BorderSize = 0;
             btnCancel.FlatStyle = FlatStyle.Flat;
             btnCancel.ForeColor = Color.White;
-            btnCancel.Location = new Point(750, 573);
+            btnCancel.Location = new Point(758, 584);
             btnCancel.Margin = new Padding(5, 6, 5, 6);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(118, 47);
@@ -181,7 +181,7 @@
             lblNullTitle.ForeColor = Color.Red;
             lblNullTitle.Location = new Point(230, 9);
             lblNullTitle.Name = "lblNullTitle";
-            lblNullTitle.Size = new Size(146, 28);
+            lblNullTitle.Size = new Size(186, 35);
             lblNullTitle.TabIndex = 11;
             lblNullTitle.Text = "Title is required";
             lblNullTitle.Visible = false;
@@ -193,7 +193,7 @@
             lblNullDescription.ForeColor = Color.Red;
             lblNullDescription.Location = new Point(230, 97);
             lblNullDescription.Name = "lblNullDescription";
-            lblNullDescription.Size = new Size(209, 28);
+            lblNullDescription.Size = new Size(267, 35);
             lblNullDescription.TabIndex = 12;
             lblNullDescription.Text = "Description is required";
             lblNullDescription.Visible = false;
@@ -205,7 +205,7 @@
             lblNullCategory.ForeColor = Color.Red;
             lblNullCategory.Location = new Point(230, 179);
             lblNullCategory.Name = "lblNullCategory";
-            lblNullCategory.Size = new Size(189, 28);
+            lblNullCategory.Size = new Size(240, 35);
             lblNullCategory.TabIndex = 13;
             lblNullCategory.Text = "Category is required";
             lblNullCategory.Visible = false;
@@ -217,14 +217,14 @@
             lblNullBody.ForeColor = Color.Red;
             lblNullBody.Location = new Point(236, 271);
             lblNullBody.Name = "lblNullBody";
-            lblNullBody.Size = new Size(154, 28);
+            lblNullBody.Size = new Size(196, 35);
             lblNullBody.TabIndex = 14;
             lblNullBody.Text = "Body is required";
             lblNullBody.Visible = false;
             // 
             // NewsForm
             // 
-            AutoScaleDimensions = new SizeF(11F, 28F);
+            AutoScaleDimensions = new SizeF(14F, 35F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(914, 682);
@@ -244,7 +244,7 @@
             Controls.Add(lblTitle);
             Font = new Font("Segoe UI", 15F);
             Margin = new Padding(5, 6, 5, 6);
-            MinimumSize = new Size(550, 670);
+            MinimumSize = new Size(550, 690);
             Name = "NewsForm";
             Text = "Add News";
             ResumeLayout(false);

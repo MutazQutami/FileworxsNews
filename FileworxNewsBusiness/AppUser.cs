@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.EntityFrameworkCore;
 
 namespace FileworxNewsBusiness;
-public class AppUser: FileWorxEntity
+public class AppUser : FileWorxEntity
 {
     public string LogInName { get; set; }
 
@@ -40,20 +41,26 @@ public class AppUser: FileWorxEntity
                 }
                 if (Id == Guid.Empty)
                 {
-                
                     Id = Guid.NewGuid();
                     CreatorId = null;
                     LastModifierId = null;
                     context.User.Add(this);
-                    //context.SaveChanges();
-                    //this.Update();
+                    
                 }
                 else
                 {
-
+                    context.Entry(this).State = EntityState.Modified;
                     context.Entry(this).CurrentValues.SetValues(this);
                 }
                 context.SaveChanges();
+
+                //if(CreatorId == null) 
+                //{
+                //    InitializeUserIds();
+                //    this.Update();
+                //}
+
+
             }
             catch (Exception ex)
             {
@@ -64,18 +71,18 @@ public class AppUser: FileWorxEntity
 
     public override void Delete()
     {
-            using (var context = new Context())
+        using (var context = new Context())
+        {
+            try
             {
-                try
-                {
-                    context.User.Remove(this);
-                    context.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Error deleting photo.", ex);
-                }
+                context.User.Remove(this);
+                context.SaveChanges();
             }
+            catch (Exception ex)
+            {
+                throw new Exception("Error deleting User.", ex);
+            }
+        }
     }
 
     public override AppUser Read()
@@ -97,4 +104,11 @@ public class AppUser: FileWorxEntity
         if (string.IsNullOrEmpty(Password))
             throw new ValidationException("Password cannot be empty.");
     }
+
+    //private void InitializeUserIds()
+    //{
+    //    CreatorId = Id;
+    //    LastModifierId = Id;
+
+    //}
 }

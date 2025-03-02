@@ -1,7 +1,7 @@
 namespace FileworxsNewsUI;
 
 using FileworxNewsBusiness;
-using FilworxNewsDataAccess;
+
 internal static class Program
 {
     /// <summary>

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace FileworxNewsBusiness;
 public class Content : FileWorxEntity
@@ -22,6 +23,7 @@ public class Content : FileWorxEntity
                 }
                 else
                 {
+                    context.Entry(this).State = EntityState.Modified;
                     context.Entry(this).CurrentValues.SetValues(this);
                 }
 

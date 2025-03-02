@@ -2,60 +2,61 @@
 namespace FileworxsNewsUI;
 public static class ListHandler
 {
-    public static void AddListItem(ListView _targetList, FileWorxEntity _entity, int _index = 0)
+    public static void AddListItem(ListView targetList, FileWorxEntity entity, int index = 0)
     {
-        ListViewItem _listItem = new ListViewItem();
+        ListViewItem listItem = new ListViewItem();
 
-        if (_entity is AppUser _entityUppUser)   // user item
+        if (entity is AppUser entityUppUser)   //Users List 
         {
-            AddUserListItem(_listItem, _entityUppUser);
+            AddUserListItem(listItem, entityUppUser);
         }
-        else                   // photo , new items
+        else if (entity is Content contentEntity) // Content List
         {
-            AddContentListItem(_listItem, _entity);
+            AddContentListItem(listItem, contentEntity);
         }
-        _targetList.Items.Insert(_index, _listItem);
+
+        targetList.Items.Insert(index, listItem);
     }
-    public static void RemoveListItem(ListView _targetList, ListViewItem _selectedListItem)
+    public static void RemoveListItem(ListView targetList, ListViewItem selectedListItem)
     {
-        _targetList.Items.Remove(_selectedListItem);
+        targetList.Items.Remove(selectedListItem);
     }
-    public static void UpdateListItem(ListView _targetList, ListViewItem _selectedListItem, FileWorxEntity _entity)
+    public static void UpdateListItem(ListView targetList, ListViewItem selectedListItem, FileWorxEntity entity)
     {
-        int _index = _selectedListItem.Index;
+        int index = selectedListItem.Index;
         ListViewItem _newListItem = new ListViewItem();
 
-        _selectedListItem.SubItems.Clear();
-        RemoveListItem(_targetList, _selectedListItem); // Removing the old one 
-        AddListItem(_targetList, _entity, _index);     //  Adding the new one with the same index
+        selectedListItem.SubItems.Clear();
+        RemoveListItem(targetList, selectedListItem); // Removing the old one form list 
+        AddListItem(targetList, entity, index);     //  Adding the new one with the same index
     }
-    private static void AddUserListItem(ListViewItem _listItem, AppUser _entity)
+    private static void AddUserListItem(ListViewItem listItem, AppUser entity)
     {
-        var _userItem = BaseOperations<AppUser>.Retrieve(_entity.Id);
-        _listItem.Text = _entity.Name;
-        _listItem.SubItems.Add(_entity.LogInName.ToString());
-        _listItem.SubItems.Add(_entity.CreationDate.ToString("yyyy-MM-dd HH:mm:ss"));
-        AppUser lastModifier = BaseOperations<AppUser>.Retrieve(_entity.Id);
-        _listItem.Tag = _entity;    // guid value tag to distinguish between users
+        try
+        {
+            var userQuery = new AppUserQuery();
+            userQuery.QId = entity.LastModifierId;         // the last modifier name
+            var result = userQuery.Run().FirstOrDefault();
 
-        _listItem.SubItems.Add(lastModifier.LogInName);
+            var lastModifier = result.Name;
+            listItem.Text = entity.Name;
+            listItem.SubItems.Add(entity.LogInName.ToString());
+            listItem.SubItems.Add(entity.CreationDate.ToString("yyyy-MM-dd HH:mm:ss"));
+            listItem.SubItems.Add(lastModifier);
+            listItem.Tag = entity;   
+        }
+        catch (Exception)
+        {
+
+            return;
+        }
     }
-    private static void AddContentListItem(ListViewItem _listItem, FileWorxEntity _entity)
+    private static void AddContentListItem(ListViewItem listItem, Content contentEntity)
     {
-        Content _contentItem = new Content();
-
-        if (_entity is Photo _photoItem)
-        {
-            _contentItem = _photoItem;
-        }
-        else if (_entity is News _newItem)
-        {
-            _contentItem = _newItem;
-        }
-
-        _listItem.Tag = _contentItem;
-        _listItem.Text = _contentItem.Name;
-        _listItem.SubItems.Add(_contentItem.CreationDate.ToString());
-        _listItem.SubItems.Add(_contentItem.Description);
+  
+        listItem.Text = contentEntity.Name;
+        listItem.SubItems.Add(contentEntity.CreationDate.ToString());
+        listItem.SubItems.Add(contentEntity.Description);
+        listItem.Tag = contentEntity;
     }
 }

@@ -11,7 +11,7 @@ namespace FileworxNewsBusiness
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=MUTAZ-Q;Initial Catalog=FileworxNews;Integrated Security=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Data Source=MUTAZ-QUTAMI;Initial Catalog=FileworxNews;Integrated Security=True;TrustServerCertificate=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -149,7 +149,7 @@ namespace FileworxNewsBusiness
             // Category Column
             modelBuilder.Entity<News>()
                 .Property(u => u.Category)
-                .HasMaxLength(255)
+                .HasConversion<int>()
                 .IsRequired();
         }
 

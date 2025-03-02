@@ -22,16 +22,8 @@ public partial class UserForm : Form
 
         lblpassMatchWarning.Hide();
 
-        if (!isEditForm)
-        {
-            formObjectItem.CreatorId = formObjectItem.CreatorId ?? Guid.Empty;
-            formObjectItem.LastModifierId = formObjectItem.LastModifierId ?? Guid.Empty;
-
-        }
-
         string _message = string.Empty;
         SaveFormInfo();
-
         try
         {
             
@@ -58,57 +50,38 @@ public partial class UserForm : Form
 
     private static bool isEditForm;
     private AppUser formObjectItem;
-    private AppUser CurrentUser;
 
     public UserForm() : this(null) { }
-
-    public UserForm(AppUser CurrentUser) : this(null, CurrentUser)
-    {
-       
-    }
-    public UserForm(AppUser _editUser, AppUser CurrentUser)
+    public UserForm(AppUser _editUser)
     {
         InitializeComponent();
-        this.CurrentUser = CurrentUser;
         InitializeForm(_editUser);
     }
 
     public void InitializeForm(AppUser item)
     {
-        if (CurrentUser.IsAdmin)
+        if (SharedClass.CurrentUser != null && SharedClass.CurrentUser.IsAdmin)
         {
             checkBoxIsAdmin.Visible = true;
         }
+
         if (item == null)
         {
             formObjectItem = new AppUser();
             isEditForm = false;
             return;
         }
-        if (item.IsAdmin) {
+
+        if (item.IsAdmin)
+        {
             checkBoxIsAdmin.Checked = true;
         }
+
         formObjectItem = item;
         isEditForm = true;
         InitializeSpecificFormFields(item);
+        
     }
-
-    public void InitializeSpecificFormFields(AppUser _userItem)
-    {
-        this.Text = "Edit User";
-
-        txtPassword.Text = _userItem.Password;
-        txtLoginName.Text = _userItem.LogInName;
-        txtName.Text = _userItem.Name;
-        txtConfirmPass.Text = _userItem.Password;
-    }
-
-    public  AppUser RetrieveFormData()
-    {
-        SaveFormInfo();
-        return formObjectItem;
-    }
-
     private bool ArePasswordsEqual()
     {
         return txtPassword.Text.Equals(txtConfirmPass.Text);
@@ -178,6 +151,23 @@ public partial class UserForm : Form
         formObjectItem.Name = txtName.Text;
         formObjectItem.LogInName = txtLoginName.Text;
         formObjectItem.Password = txtPassword.Text;
-        formObjectItem.IsAdmin=checkBoxIsAdmin.Checked;
+        formObjectItem.IsAdmin = checkBoxIsAdmin.Checked;
     }
+
+    public void InitializeSpecificFormFields(AppUser _userItem)
+    {
+        this.Text = "Edit User";
+
+        txtPassword.Text = _userItem.Password;
+        txtLoginName.Text = _userItem.LogInName;
+        txtName.Text = _userItem.Name;
+        txtConfirmPass.Text = _userItem.Password;
+    }
+
+    public  AppUser RetrieveFormData()
+    {
+        SaveFormInfo();
+        return formObjectItem;
+    }
+
 }

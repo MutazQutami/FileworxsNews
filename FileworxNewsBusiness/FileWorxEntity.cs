@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace FileworxNewsBusiness
 {
     public class FileWorxEntity
     {
-        // 
+        
         public Guid Id { get; protected set; }
 
         public DateTime CreationDate { get; protected set; }
@@ -39,12 +40,14 @@ namespace FileworxNewsBusiness
                     try
                     {
                         if (Id==Guid.Empty)
-                        {
-                            Id = new Guid();
-                            context.Entity.Add(this);
+                    {
+                        Id = Guid.NewGuid() ;
+                        CreationDate = DateTime.Now;
+                        context.Entity.Add(this);
                         }
                         else
                         {
+                            context.Entry(this).State =EntityState.Modified;
                             context.Entry(this).CurrentValues.SetValues(this);
                         }
 

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FileworxNewsBusiness.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20250227134212_init")]
+    [Migration("20250302164224_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -108,10 +108,8 @@ namespace FileworxNewsBusiness.Migrations
                 {
                     b.HasBaseType("FileworxNewsBusiness.Content");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
 
                     b.ToTable("News");
                 });

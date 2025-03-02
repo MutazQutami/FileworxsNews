@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using FileworxNewsBusiness;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
+using static FileworxNewsBusiness.News;
 namespace FileworxsNewsUI;
 public partial class NewsForm :Form
 {
@@ -21,7 +22,7 @@ public partial class NewsForm :Form
         {
             if (!isEditForm)
             {
-                formObjectItem.CreatorId = CurrentUser.Id;
+                formObjectItem.CreatorId = SharedClass.CurrentUser.Id;
             }
 
             formObjectItem = RetrieveFormData();
@@ -37,16 +38,22 @@ public partial class NewsForm :Form
 
     }
 
-    public NewsForm(AppUser _user) : this(null, _user) { }
+    private bool isEditForm;
 
-    public NewsForm(News _editNew, AppUser _user)
+    private News formObjectItem;
+   
+    public NewsForm() : this(null)
+    {
+
+    }
+   
+    public NewsForm(News _editNews)
     {
         InitializeComponent();
-        InitializeForm(_editNew);
-        CurrentUser = _user;
+        InitializeForm(_editNews);
     }
 
-    public void InitializeForm(News item)
+    private void InitializeForm(News item)
     {
         if (item == null)
         {
@@ -59,32 +66,25 @@ public partial class NewsForm :Form
         InitializeSpecificFormFields(item);
     }
 
-    private bool isEditForm;
-
-    private News formObjectItem;
-
-    private AppUser CurrentUser;
-
-    protected  void InitializeSpecificFormFields(News _newItem)
+    private  void InitializeSpecificFormFields(News _newItem)
     {
-        lblTitle.Text = "Edit New"; // Edit New Form
-        this.Text = "Edit New";
+        this.Text = "Edit News";
 
         txtTitleField.Text = _newItem.Name;
         txtDescriptionField.Text = _newItem.Description;
-        categoryList.Text = _newItem.Category;
+        categoryList.Text = _newItem.Category.ToString();
         txtBodyField.Text = _newItem.Body;
     }
 
     public  News RetrieveFormData()
     {
         formObjectItem.LastModificationDate = DateTime.Now;
-        formObjectItem.LastModifierId = CurrentUser.Id;
+        formObjectItem.LastModifierId = SharedClass.CurrentUser.Id;
         formObjectItem.Name = txtTitleField.Text;
         formObjectItem.Description = txtDescriptionField.Text;
-        formObjectItem.Category = categoryList.Text;
+        formObjectItem.Category = (CategoryTypes)categoryList.SelectedIndex;
         formObjectItem.Body = txtBodyField.Text;
-        formObjectItem.CreatorId= CurrentUser.Id;
+        formObjectItem.CreatorId= SharedClass.CurrentUser.Id;
         return formObjectItem;
      
     }

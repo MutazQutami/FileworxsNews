@@ -1,10 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace FileworxNewsBusiness;
 public class News : Content
 {
-    public string Category { get; set; }
+    public enum CategoryTypes
+    {
+        General,
+        Sports,
+        Health,
+        Politics
+    }
+    public CategoryTypes Category  { get; set; }  
 
     public override void Update()
     {
@@ -21,6 +29,7 @@ public class News : Content
                 }
                 else
                 {
+                    context.Entry(this).State = EntityState.Modified;
                     context.Entry(this).CurrentValues.SetValues(this);
                 }
 
@@ -31,7 +40,7 @@ public class News : Content
                 throw new Exception("Error updating news.", ex);
             }
         }
-    }
+    }   
     
     public override void Delete()
     {
@@ -59,7 +68,7 @@ public class News : Content
 
     private void Validate()
     {
-        if (string.IsNullOrEmpty(Category))
+        if (Category.Equals(null))
             throw new ValidationException("Category cannot be empty.");
     }
 }

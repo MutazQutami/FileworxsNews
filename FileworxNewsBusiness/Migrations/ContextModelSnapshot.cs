@@ -105,10 +105,8 @@ namespace FileworxNewsBusiness.Migrations
                 {
                     b.HasBaseType("FileworxNewsBusiness.Content");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
 
                     b.ToTable("News");
                 });

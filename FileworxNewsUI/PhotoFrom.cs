@@ -2,7 +2,7 @@
 namespace FileworxsNewsUI;
 public partial class PhotoForm :Form
 {
-    public virtual void OnCancelButtonClick(object sender, EventArgs e)
+    private void OnCancelButtonClick(object sender, EventArgs e)
     {
         this.DialogResult = DialogResult.Cancel;
         this.Close();
@@ -38,7 +38,8 @@ public partial class PhotoForm :Form
         {
             if (!isEditForm)
             {
-                formObjectItem.CreatorId = CurrentUser.Id;
+                formObjectItem.CreatorId = SharedClass.CurrentUser.Id;
+
             }
             SaveFormInfo();
             formObjectItem.Update();
@@ -57,48 +58,14 @@ public partial class PhotoForm :Form
 
     private Photo formObjectItem;
 
-    private AppUser CurrentUser;
-
-    public PhotoForm(AppUser _user) : this(null, _user)
+    public PhotoForm() : this(null)
     {
-    }
 
-    public PhotoForm(Photo _photoItem, AppUser _user)
+    }
+    public PhotoForm(Photo _photoItem)
     {
         InitializeComponent();
         InitializeForm(_photoItem);
-        CurrentUser = _user;
-    }
-
-    public void InitializeForm(Photo item)
-    {
-        if (item == null)
-        {
-            formObjectItem = new Photo();
-            isEditForm = false;
-            lblFilePathText.Hide();
-            return;
-        }
-        formObjectItem = item;
-        isEditForm = true;
-        InitializeSpecificFormFields(item);
-    }
-
-    private  void InitializeSpecificFormFields(Photo _photoItem)
-    {
-        txtTitleField.Text = _photoItem.Name;
-        txtDescriptionField.Text = _photoItem.Description;
-        txtBodyField.Text = _photoItem.Body;
-        pictureView.ImageLocation = _photoItem.PhotoPath;
-        lblFilePath.Text = _photoItem.PhotoPath;
-        lblFilePathText.Show();
-        lblFilePath.Show();
-    }
-
-    public Photo RetrieveFormData()
-    {
-        SaveFormInfo();
-        return formObjectItem;
     }
 
     private bool ValidateFields()
@@ -155,6 +122,37 @@ public partial class PhotoForm :Form
         formObjectItem.Body = txtBodyField.Text;
         formObjectItem.PhotoPath = lblFilePath.Text;
         formObjectItem.LastModificationDate = DateTime.Now;
-        formObjectItem.LastModifierId = CurrentUser.Id;
+        formObjectItem.LastModifierId = SharedClass.CurrentUser.Id;
     }
+
+    private  void InitializeSpecificFormFields(Photo _photoItem)
+    {
+        txtTitleField.Text = _photoItem.Name;
+        txtDescriptionField.Text = _photoItem.Description;
+        txtBodyField.Text = _photoItem.Body;
+        pictureView.ImageLocation = _photoItem.PhotoPath;
+        lblFilePath.Text = _photoItem.PhotoPath;
+        lblFilePathText.Show();
+        lblFilePath.Show();
+    }
+
+    public Photo RetrieveFormData()
+    {
+        SaveFormInfo();
+        return formObjectItem;
+    }
+    public void InitializeForm(Photo item)
+    {
+        if (item == null)
+        {
+            formObjectItem = new Photo();
+            isEditForm = false;
+            lblFilePathText.Hide();
+            return;
+        }
+        formObjectItem = item;
+        isEditForm = true;
+        InitializeSpecificFormFields(item);
+    }
+  
 }

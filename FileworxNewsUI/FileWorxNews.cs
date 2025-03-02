@@ -2,24 +2,25 @@
 namespace FileworxsNewsUI;
 public partial class FileWorx : Form
 {
+
     private void ContentListMouseClick(object sender, MouseEventArgs e)
     {
         if (contentList.SelectedItems.Count > 0)
         {
-            ListViewItem _selectedItem = contentList.FocusedItem;
-            Content _selectedObject = (Content)_selectedItem.Tag;
+            ListViewItem selectedItem = contentList.SelectedItems[0];
+            var selectedObject = (Content)selectedItem.Tag;
 
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)// right click , Delete Object
             {
-                if (e.Button == MouseButtons.Right) // right click , delte
+                if (e.Button == MouseButtons.Right) 
                 {
-                    CommonActions.HandleDeleteOperation(_selectedObject, _selectedItem, contentList);
+                    SharedClass.HandleDeleteOperation(selectedObject, selectedItem, contentList);
                     ClearPreviewContent();
                 }
             }
             else
             {
-                ShowPreviewContent(_selectedObject); // normal click, show preview
+                ShowPreviewContent(selectedObject); // normal click, show preview
             }
         }
     }
@@ -28,11 +29,11 @@ public partial class FileWorx : Form
     {
         if (contentList.SelectedItems.Count > 0)
         {
-            ListViewItem _selectedItem = contentList.SelectedItems[0];
+            ListViewItem selectedItem = contentList.SelectedItems[0];
 
-            Content _selectedObject = (Content)_selectedItem.Tag;
+            Content selectedObject = (Content)selectedItem.Tag;
 
-            EditContent(_selectedObject, _selectedItem);
+            EditContent(selectedObject, selectedItem);
         }
     }
 
@@ -43,7 +44,7 @@ public partial class FileWorx : Form
 
     private void OnAddPhotoButtonClick(object sender, EventArgs e)
     {
-        PhotoForm photoForm = new PhotoForm(CurrentUser);
+        PhotoForm photoForm = new PhotoForm();
 
         if (photoForm.ShowDialog() == DialogResult.OK)
         {
@@ -55,7 +56,7 @@ public partial class FileWorx : Form
 
     private void OnAddNewsButtonClick(object sender, EventArgs e)
     {
-        NewsForm _newsForm = new NewsForm(CurrentUser);
+        NewsForm _newsForm = new NewsForm();
 
         if (_newsForm.ShowDialog() == DialogResult.OK)
         {
@@ -64,20 +65,19 @@ public partial class FileWorx : Form
             return;
         }
     }
+   
     private void OnUsersListMouseClick(object sender, EventArgs e)
     {
-        var listForm = new UsersListForm(CurrentUser);
+        var listForm = new UsersListForm();
         listForm.ShowDialog();
     }
 
-    private AppUser CurrentUser;
-
-    public FileWorx(AppUser _user)
+    public FileWorx()
     {
-        CurrentUser = _user;
+        
         InitializeComponent();
         InitializeContentList();
-        if (IsAdmin())
+        if (SharedClass.CurrentUser.IsAdmin)
         {
             usersListToolStripMenuItem.Visible = true;
         }
@@ -85,7 +85,6 @@ public partial class FileWorx : Form
 
     private void InitializeContentList()
     {
-        // retrieving photos and news
         contentList.Items.Clear();
 
         if (pnltabPreview.TabPages.Contains(imageTabPage2))
@@ -93,41 +92,35 @@ public partial class FileWorx : Form
             pnltabPreview.TabPages.Remove(imageTabPage2);
         }
 
-        var _photoList = BaseOperations<Photo>.RetrieveAll();
-        List<News> _newsList = BaseOperations<News>.RetrieveAll();
+        var contentQuery = new ContentQuery();
+        var listItems = contentQuery.Run();
 
-        List<Content> _mergedList = new List<Content>();
-        _mergedList.AddRange(_photoList);
-        _mergedList.AddRange(_newsList);
+        listItems=listItems.OrderByDescending(item => item.CreationDate).ToList();
 
-        // Sort by Date in descending order
-        _mergedList = _mergedList.OrderByDescending(item => item.CreationDate).ToList();
-
-        // Add sorted items to contentList
-        foreach (var _item in _mergedList)
+        foreach (var _item in listItems)
         {
             ListHandler.AddListItem(contentList, _item);
         }
     }
 
-    private void EditContent(FileWorxEntity _selectedObject, ListViewItem _selectedItem)
+    private void EditContent(FileWorxEntity selectedObject, ListViewItem selectedItem)
     {
-        if (_selectedObject is News _selectedNews)
+        if (selectedObject is News _selectedNews)
         {
-            NewsForm _newsForm = new NewsForm(_selectedNews, CurrentUser);
+            NewsForm _newsForm = new NewsForm(_selectedNews);
 
-            _newsForm.Text = "Edit New";
+            _newsForm.Text = "Edit News";
             _newsForm.ShowDialog();
 
             if (_newsForm.DialogResult == DialogResult.OK)
             {
                 News _newItem = _newsForm.RetrieveFormData();
-                ListHandler.UpdateListItem(contentList, _selectedItem, _newItem);
+                ListHandler.UpdateListItem(contentList, selectedItem, _newItem);
             }
         }
-        else if (_selectedObject is Photo _selectedPhoto)
+        else if (selectedObject is Photo _selectedPhoto)
         {
-            PhotoForm _photoForm = new PhotoForm(_selectedPhoto, CurrentUser);
+            PhotoForm _photoForm = new PhotoForm(_selectedPhoto);
 
             _photoForm.Text = "Edit Photo";
             _photoForm.ShowDialog();
@@ -135,23 +128,23 @@ public partial class FileWorx : Form
             if (_photoForm.DialogResult == DialogResult.OK)
             {
                 Photo _photoItem = _photoForm.RetrieveFormData();
-                ListHandler.UpdateListItem(contentList, _selectedItem, _photoItem);
+                ListHandler.UpdateListItem(contentList, selectedItem, _photoItem);
             }
         }
     }
 
-    private void ShowPreviewContent(Content _selectedObject)
+    private void ShowPreviewContent(Content selectedObject)
     {
         //Common Fields
-        txtTitleField.Text = _selectedObject.Name;
-        txtCreationDateField.Text = _selectedObject.CreationDate.ToString();
-        pnlPreviewContent.Text = _selectedObject.Body;
+        txtTitleField.Text = selectedObject.Name;
+        txtCreationDateField.Text = selectedObject.CreationDate.ToString();
+        pnlPreviewContent.Text = selectedObject.Body;
 
-        if (_selectedObject is Photo _selectedPhoto)
+        if (selectedObject is Photo _selectedPhoto)
         {
             ShowPreviewPhoto(_selectedPhoto);
         }
-        else if (_selectedObject is News _selectedNews)
+        else if (selectedObject is News _selectedNews)
         {
             ShowPreviewNew(_selectedNews);
         }
@@ -165,6 +158,21 @@ public partial class FileWorx : Form
         pnlPreviewContent.Clear();
         imagePreview.Image = null;
         pnltabPreview.TabPages.Remove(imageTabPage2);
+    }
+
+    private void ShowPreviewPhoto(Photo _selectedPhoto)
+    {
+        txtCategoryField.Hide();
+        lblCategory.Hide();
+
+        txtCategoryField.Text = _selectedPhoto.PhotoPath;
+
+        if (!pnltabPreview.TabPages.Contains(imageTabPage2))
+        {
+            pnltabPreview.TabPages.Add(imageTabPage2);
+        }
+
+        ShowPhoto(_selectedPhoto);
     }
 
     private void ShowPhoto(Photo _selectedPhoto)
@@ -191,39 +199,18 @@ public partial class FileWorx : Form
         }
     }
 
-    private void ShowPreviewPhoto(Photo _selectedPhoto)
-    {
-        txtCategoryField.Hide();
-        lblCategory.Hide();
-
-        txtCategoryField.Text = _selectedPhoto.PhotoPath;
-
-        if (!pnltabPreview.TabPages.Contains(imageTabPage2))
-        {
-            pnltabPreview.TabPages.Add(imageTabPage2);
-        }
-
-        ShowPhoto(_selectedPhoto);
-    }
-
     private void ShowPreviewNew(News _selectedNews)
     {
         lblCategory.Show();
         txtCategoryField.Show();
 
-        txtCategoryField.Text = _selectedNews.Category;
+        txtCategoryField.Text = _selectedNews.Category.ToString();
 
         if (pnltabPreview.TabPages.Contains(imageTabPage2))
         {
             pnltabPreview.TabPages.Remove(imageTabPage2);
         }
     }
-
-    private bool IsAdmin()
-    {
-        return CurrentUser.IsAdmin;
-    }
-
 }
 
     

@@ -1,4 +1,5 @@
-﻿using FileworxNewsBusiness;
+﻿using System.Diagnostics.Eventing.Reader;
+using FileworxNewsBusiness;
 using Microsoft.VisualBasic.ApplicationServices;
 namespace FileworxsNewsUI;
 public partial class LoginForm : Form
@@ -6,10 +7,10 @@ public partial class LoginForm : Form
     private void SignUpProcess(object sender, EventArgs e)
     {
         UserForm userForm = new UserForm();
-        this.Hide();
-        DialogResult result = userForm.ShowDialog();
 
-        if (result == DialogResult.OK || result == DialogResult.Cancel)
+        this.Hide();
+
+        if (userForm.ShowDialog() == DialogResult.OK || userForm.ShowDialog() == DialogResult.Cancel)
         {
             this.Show();
         }
@@ -35,19 +36,22 @@ public partial class LoginForm : Form
 
         HideLables();
 
-        AppUser _appUser = new AppUser
+        AppUser checkUser = new AppUser
         {
             LogInName = userNameField.Text,
             Password = passwordField.Text
         };
 
-        AppUser currentUser;
         try
         {
-            currentUser = UserServices.AuthenticateUser(_appUser);
-            FileWorx fileWorx = new FileWorx(currentUser);
+            SharedClass.CurrentUser = UserServices.AuthenticateUser(checkUser);
+
+            var fileWorx = new FileWorx();
+
             this.Hide();
+
             fileWorx.Show();
+
             return;
         }
         catch (Exception ex) {
