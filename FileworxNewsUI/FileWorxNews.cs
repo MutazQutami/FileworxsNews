@@ -12,7 +12,7 @@ public partial class FileWorx : Form
 
             if (e.Button == MouseButtons.Right)// right click , Delete Object
             {
-                if (e.Button == MouseButtons.Right) 
+                if (e.Button == MouseButtons.Right)
                 {
                     SharedClass.HandleDeleteOperation(selectedObject, selectedItem, contentList);
                     ClearPreviewContent();
@@ -65,7 +65,7 @@ public partial class FileWorx : Form
             return;
         }
     }
-   
+
     private void OnUsersListMouseClick(object sender, EventArgs e)
     {
         var listForm = new UsersListForm();
@@ -74,7 +74,7 @@ public partial class FileWorx : Form
 
     public FileWorx()
     {
-        
+
         InitializeComponent();
         InitializeContentList();
         if (SharedClass.CurrentUser.IsAdmin)
@@ -95,7 +95,7 @@ public partial class FileWorx : Form
         var contentQuery = new ContentQuery();
         var listItems = contentQuery.Run();
 
-        listItems=listItems.OrderByDescending(item => item.CreationDate).ToList();
+        listItems = listItems.OrderByDescending(item => item.CreationDate).ToList();
 
         foreach (var _item in listItems)
         {
@@ -211,6 +211,40 @@ public partial class FileWorx : Form
             pnltabPreview.TabPages.Remove(imageTabPage2);
         }
     }
+    private void OnAddFiltersButtonClick(object sender, EventArgs e)
+    {
+        var filterForm = new FilterForm();
+
+        if (filterForm.ShowDialog() == DialogResult.OK)
+        {
+            var contentQuery = filterForm.CheckFilters();
+            ApplyFilter(contentQuery);
+        }
+    }
+    private void ApplyFilter(ContentQuery contentQuery)
+    {
+        contentList.Items.Clear();
+
+        if (pnltabPreview.TabPages.Contains(imageTabPage2))
+        {
+            pnltabPreview.TabPages.Remove(imageTabPage2);
+        }
+
+        var listItems = contentQuery.Run();
+
+        listItems = listItems.OrderByDescending(item => item.CreationDate).ToList();
+
+        foreach (var _item in listItems)
+        {
+            ListHandler.AddListItem(contentList, _item);
+        }
+    }
+
+    private void OnClearFiltersButtonClick(object sender, EventArgs e)
+    {
+        InitializeContentList();
+
+    }
 }
 
-    
+

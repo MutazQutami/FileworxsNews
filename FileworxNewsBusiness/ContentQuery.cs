@@ -5,9 +5,9 @@ namespace FileworxNewsBusiness
 {
     public class ContentQuery : FileworxEntityQuery
     {
-        StringFilter QDescription = new StringFilter();
+        public StringFilter QDescription = new StringFilter();
 
-        StringFilter QBody = new StringFilter();
+        public StringFilter QBody = new StringFilter();
 
         protected IQueryable<Content> QueryBuilder(Context context)
         {

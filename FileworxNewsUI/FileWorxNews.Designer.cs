@@ -41,6 +41,7 @@
             creationDateColumn = new ColumnHeader();
             descriptionColumn = new ColumnHeader();
             mainSplitContainer = new SplitContainer();
+            btnClearFilters = new Button();
             pnltabPreview = new TabControl();
             previewTabPage1 = new TabPage();
             pnlPreviewContent = new RichTextBox();
@@ -51,6 +52,7 @@
             addPhotoToolStripMenuItem = new ToolStripMenuItem();
             addNewsToolStripMenuItem = new ToolStripMenuItem();
             usersListToolStripMenuItem = new ToolStripMenuItem();
+            addFiltersToolStripMenuItem = new ToolStripMenuItem();
             pnlTop = new Panel();
             pnlBodyContent = new Panel();
             pnlContentDetail.SuspendLayout();
@@ -83,7 +85,7 @@
             pnlContentDetail.Margin = new Padding(6, 7, 6, 7);
             pnlContentDetail.Name = "pnlContentDetail";
             pnlContentDetail.Padding = new Padding(6, 7, 6, 7);
-            pnlContentDetail.Size = new Size(1364, 190);
+            pnlContentDetail.Size = new Size(1175, 190);
             pnlContentDetail.TabIndex = 2;
             // 
             // lblCategory
@@ -164,13 +166,12 @@
             contentList.ForeColor = Color.Black;
             contentList.FullRowSelect = true;
             contentList.GridLines = true;
-            contentList.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             contentList.LabelEdit = true;
             contentList.Location = new Point(0, 0);
             contentList.MinimumSize = new Size(129, 141);
             contentList.Name = "contentList";
             contentList.RightToLeft = RightToLeft.No;
-            contentList.Size = new Size(1893, 445);
+            contentList.Size = new Size(1893, 568);
             contentList.TabIndex = 0;
             contentList.TileSize = new Size(100, 100);
             contentList.UseCompatibleStateImageBehavior = false;
@@ -197,12 +198,13 @@
             // 
             mainSplitContainer.Dock = DockStyle.Fill;
             mainSplitContainer.Location = new Point(15, 6);
-            mainSplitContainer.Margin = new Padding(4, 4, 4, 4);
+            mainSplitContainer.Margin = new Padding(4);
             mainSplitContainer.Name = "mainSplitContainer";
             mainSplitContainer.Orientation = Orientation.Horizontal;
             // 
             // mainSplitContainer.Panel1
             // 
+            mainSplitContainer.Panel1.Controls.Add(btnClearFilters);
             mainSplitContainer.Panel1.Controls.Add(contentList);
             mainSplitContainer.Panel1MinSize = 100;
             // 
@@ -213,9 +215,24 @@
             mainSplitContainer.Panel2.Controls.Add(pnlContentDetail);
             mainSplitContainer.Panel2.Padding = new Padding(10, 11, 10, 11);
             mainSplitContainer.Size = new Size(1893, 952);
-            mainSplitContainer.SplitterDistance = 445;
+            mainSplitContainer.SplitterDistance = 568;
             mainSplitContainer.SplitterWidth = 6;
             mainSplitContainer.TabIndex = 4;
+            // 
+            // btnClearFilters
+            // 
+            btnClearFilters.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnClearFilters.BackColor = Color.FromArgb(0, 130, 200);
+            btnClearFilters.Cursor = Cursors.Hand;
+            btnClearFilters.Font = new Font("Segoe UI", 15F);
+            btnClearFilters.ForeColor = Color.White;
+            btnClearFilters.Location = new Point(1705, 3);
+            btnClearFilters.Name = "btnClearFilters";
+            btnClearFilters.Size = new Size(176, 66);
+            btnClearFilters.TabIndex = 13;
+            btnClearFilters.Text = "Clear Filters";
+            btnClearFilters.UseVisualStyleBackColor = false;
+            btnClearFilters.Click += OnClearFiltersButtonClick;
             // 
             // pnltabPreview
             // 
@@ -229,7 +246,7 @@
             pnltabPreview.Name = "pnltabPreview";
             pnltabPreview.Padding = new Point(0, 0);
             pnltabPreview.SelectedIndex = 0;
-            pnltabPreview.Size = new Size(1364, 400);
+            pnltabPreview.Size = new Size(1175, 400);
             pnltabPreview.TabIndex = 0;
             // 
             // previewTabPage1
@@ -239,8 +256,8 @@
             previewTabPage1.Controls.Add(pnlPreviewContent);
             previewTabPage1.Location = new Point(4, 44);
             previewTabPage1.Name = "previewTabPage1";
-            previewTabPage1.Padding = new Padding(3, 3, 3, 3);
-            previewTabPage1.Size = new Size(1356, 352);
+            previewTabPage1.Padding = new Padding(3);
+            previewTabPage1.Size = new Size(1167, 352);
             previewTabPage1.TabIndex = 0;
             previewTabPage1.Text = "Preview";
             // 
@@ -252,7 +269,7 @@
             pnlPreviewContent.Location = new Point(3, 3);
             pnlPreviewContent.Name = "pnlPreviewContent";
             pnlPreviewContent.ReadOnly = true;
-            pnlPreviewContent.Size = new Size(1350, 346);
+            pnlPreviewContent.Size = new Size(1161, 346);
             pnlPreviewContent.TabIndex = 0;
             pnlPreviewContent.Text = "";
             // 
@@ -262,8 +279,8 @@
             imageTabPage2.Controls.Add(imagePreview);
             imageTabPage2.Location = new Point(4, 44);
             imageTabPage2.Name = "imageTabPage2";
-            imageTabPage2.Padding = new Padding(3, 3, 3, 3);
-            imageTabPage2.Size = new Size(1085, 352);
+            imageTabPage2.Padding = new Padding(3);
+            imageTabPage2.Size = new Size(1167, 352);
             imageTabPage2.TabIndex = 1;
             imageTabPage2.Text = "Image";
             // 
@@ -275,7 +292,7 @@
             imagePreview.InitialImage = null;
             imagePreview.Location = new Point(3, 3);
             imagePreview.Name = "imagePreview";
-            imagePreview.Size = new Size(1079, 346);
+            imagePreview.Size = new Size(1161, 346);
             imagePreview.SizeMode = PictureBoxSizeMode.StretchImage;
             imagePreview.TabIndex = 4;
             imagePreview.TabStop = false;
@@ -291,7 +308,7 @@
             menuStripActions.Dock = DockStyle.Fill;
             menuStripActions.Font = new Font("Segoe UI", 15F);
             menuStripActions.ImageScalingSize = new Size(20, 20);
-            menuStripActions.Items.AddRange(new ToolStripItem[] { addPhotoToolStripMenuItem, addNewsToolStripMenuItem, usersListToolStripMenuItem });
+            menuStripActions.Items.AddRange(new ToolStripItem[] { addPhotoToolStripMenuItem, addNewsToolStripMenuItem, usersListToolStripMenuItem, addFiltersToolStripMenuItem });
             menuStripActions.Location = new Point(0, 0);
             menuStripActions.MinimumSize = new Size(0, 64);
             menuStripActions.Name = "menuStripActions";
@@ -321,6 +338,13 @@
             usersListToolStripMenuItem.Text = "Users List";
             usersListToolStripMenuItem.Visible = false;
             usersListToolStripMenuItem.Click += OnUsersListMouseClick;
+            // 
+            // addFiltersToolStripMenuItem
+            // 
+            addFiltersToolStripMenuItem.Name = "addFiltersToolStripMenuItem";
+            addFiltersToolStripMenuItem.Size = new Size(147, 62);
+            addFiltersToolStripMenuItem.Text = "Add Filters";
+            addFiltersToolStripMenuItem.Click += OnAddFiltersButtonClick;
             // 
             // pnlTop
             // 
@@ -404,5 +428,8 @@
         private TabPage imageTabPage2;
         private PictureBox imagePreview;
         private Panel panel1;
+        private DateTimePicker dateTimePicker1;
+        private ToolStripMenuItem addFiltersToolStripMenuItem;
+        private Button btnClearFilters;
     }
 }
