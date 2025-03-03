@@ -20,12 +20,13 @@ public partial class NewsForm :Form
 
         try
         {
+            formObjectItem = RetrieveFormData();
             if (!isEditForm)
             {
                 formObjectItem.CreatorId = SharedClass.CurrentUser.Id;
             }
+          
 
-            formObjectItem = RetrieveFormData();
             formObjectItem.Update();
             this.DialogResult = DialogResult.OK;
             this.Close();
@@ -79,12 +80,11 @@ public partial class NewsForm :Form
     public  News RetrieveFormData()
     {
         formObjectItem.LastModificationDate = DateTime.Now;
-        formObjectItem.LastModifierId = SharedClass.CurrentUser.Id;
         formObjectItem.Name = txtTitleField.Text;
         formObjectItem.Description = txtDescriptionField.Text;
         formObjectItem.Category = (CategoryTypes)categoryList.SelectedIndex;
         formObjectItem.Body = txtBodyField.Text;
-        formObjectItem.CreatorId= SharedClass.CurrentUser.Id;
+        formObjectItem.LastModifierId = SharedClass.CurrentUser.Id;
         return formObjectItem;
      
     }

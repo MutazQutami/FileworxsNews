@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FileworxNewsBusiness.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20250302164224_init")]
+    [Migration("20250303075354_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -129,13 +129,11 @@ namespace FileworxNewsBusiness.Migrations
                 {
                     b.HasOne("FileworxNewsBusiness.AppUser", "Creator")
                         .WithMany("CreatedEntities")
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("CreatorId");
 
                     b.HasOne("FileworxNewsBusiness.AppUser", "LastModifier")
                         .WithMany("ModifiedEntities")
-                        .HasForeignKey("LastModifierId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .HasForeignKey("LastModifierId");
 
                     b.Navigation("Creator");
 

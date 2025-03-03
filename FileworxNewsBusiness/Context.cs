@@ -11,7 +11,7 @@ namespace FileworxNewsBusiness
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=MUTAZ-QUTAMI;Initial Catalog=FileworxNews;Integrated Security=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Data Source=MUTAZ-Q;Initial Catalog=FileworxNews;Integrated Security=True;TrustServerCertificate=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -70,19 +70,19 @@ namespace FileworxNewsBusiness
                 .HasColumnType("uniqueidentifier")
                 .IsRequired(false);
 
-            // Creator Id Foreign key
+           // Creator Id Foreign key
             modelBuilder.Entity<FileWorxEntity>()
                 .HasOne(u => u.Creator)
                 .WithMany()
                 .HasForeignKey(f => f.CreatorId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
 
-            // Modifier Id Foreign key
+          //  Modifier Id Foreign key
             modelBuilder.Entity<FileWorxEntity>()
                 .HasOne(f => f.LastModifier)
                 .WithMany()
                 .HasForeignKey(f => f.LastModifierId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
         }
 
         private void ContentTable(ModelBuilder modelBuilder)
@@ -101,7 +101,6 @@ namespace FileworxNewsBusiness
 
         private void AppUserTable(ModelBuilder modelBuilder)
         {
-          
             // Inheriting FileWorxEntity's Id
             modelBuilder.Entity<AppUser>()
                 .HasBaseType<FileWorxEntity>();
@@ -110,15 +109,15 @@ namespace FileworxNewsBusiness
             modelBuilder.Entity<AppUser>()
                 .HasMany(u => u.CreatedEntities)
                 .WithOne(f => f.Creator)
-                .HasForeignKey(f => f.CreatorId);
-                //.OnDelete(DeleteBehavior.SetNull);
+                .HasForeignKey(f => f.CreatorId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             // Foreign key for modified entities
             modelBuilder.Entity<AppUser>()
                 .HasMany(u => u.ModifiedEntities)
                 .WithOne(f => f.LastModifier)
-                .HasForeignKey(f => f.LastModifierId);
-                //.OnDelete(DeleteBehavior.SetNull);
+                .HasForeignKey(f => f.LastModifierId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             // Login Name column
             modelBuilder.Entity<AppUser>()
@@ -142,7 +141,7 @@ namespace FileworxNewsBusiness
                 .Property(u => u.IsAdmin)
                 .HasDefaultValue(false);
         }
-        
+
         private void NewsTable(ModelBuilder modelBuilder)
         {
 

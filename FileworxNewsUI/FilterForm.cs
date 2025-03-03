@@ -18,7 +18,6 @@ namespace FileworxsNewsUI
             InitializeComponent();
             InitializeUsersList();
         }
-
         private void OnClickDateFilterChBox(object sender, EventArgs e)
         {
             if (checkBoxDate.Checked == true)
@@ -31,7 +30,6 @@ namespace FileworxsNewsUI
                 HideDateFilterComponents();
             }
         }
-
         private void OnClickTitleFilterChBox(object sender, EventArgs e)
         {
             if (checkBoxTitle.Checked == true)
@@ -45,7 +43,6 @@ namespace FileworxsNewsUI
                 comBoxTitle.Visible = false;
             }
         }
-
         private void OnClickDescFilterChBox(object sender, EventArgs e)
         {
             if (checkBoxDescription.Checked == true)
@@ -59,7 +56,6 @@ namespace FileworxsNewsUI
                 comBoxDescription.Visible = false;
             }
         }
-
         private void OnClickCreatorFilterChBox(object sender, EventArgs e)
         {
             if (checkBoxCreator.Checked == true)
@@ -72,7 +68,6 @@ namespace FileworxsNewsUI
                 comboxCreator.Visible = false;
             }
         }
-
         private void OnClickLastModFilterChBox(object sender, EventArgs e)
         {
             if (checkBoxlastMod.Checked == true)
@@ -85,7 +80,6 @@ namespace FileworxsNewsUI
                 comboxLastMod.Visible = false;
             }
         }
-        
         private void ComBoxDateSelect(object sender, EventArgs e)
         {
             if (comBoxDate.SelectedItem != null
@@ -108,7 +102,6 @@ namespace FileworxsNewsUI
                 }
             }
         }
-       
         private void ComBoxTitleSelect(object sender, EventArgs e)
         {
             if (comBoxTitle.SelectedItem != null)
@@ -121,7 +114,6 @@ namespace FileworxsNewsUI
                 txtTitle.Visible = false;
             }
         }
-
         private void ComBoxDescSelect(object sender, EventArgs e)
         {
             if (comBoxDescription.SelectedItem != null)
@@ -134,7 +126,6 @@ namespace FileworxsNewsUI
                 txtDescription.Visible = false;
             }
         }
-
         private void InitializeUsersList()
         {
             var userQuery = new AppUserQuery();
@@ -148,7 +139,6 @@ namespace FileworxsNewsUI
             comboxLastMod.DisplayMember = "Name";
             comboxLastMod.ValueMember = "Id";
         }
-
         private void HideDateFilterComponents()
         {
             comBoxDate.Visible = false;
@@ -158,18 +148,15 @@ namespace FileworxsNewsUI
             lblToDate.Visible = false;
             datePickerToValue.Visible = false;
         }
-
         private void OnApplyButtonClick(object sender, EventArgs e)
         {
             
             DialogResult = DialogResult.OK;
         }
-
         private void OnCancelButtonClick(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
         }
-
         public ContentQuery CheckFilters()
         {
             var ContentQuery = new ContentQuery();
@@ -207,7 +194,7 @@ namespace FileworxsNewsUI
                && comBoxDescription.SelectedItem != null
                && !string.IsNullOrEmpty(txtDescription.Text))
             {
-                var type = (StringFilter.StringFilterType)comBoxTitle.SelectedIndex;
+                var type = (StringFilter.StringFilterType)comBoxDescription.SelectedIndex;
 
                 ContentQuery.QDescription = new StringFilter()
                 {

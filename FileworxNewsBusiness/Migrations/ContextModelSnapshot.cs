@@ -127,12 +127,12 @@ namespace FileworxNewsBusiness.Migrations
                     b.HasOne("FileworxNewsBusiness.AppUser", "Creator")
                         .WithMany("CreatedEntities")
                         .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("FileworxNewsBusiness.AppUser", "LastModifier")
                         .WithMany("ModifiedEntities")
                         .HasForeignKey("LastModifierId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Creator");
 

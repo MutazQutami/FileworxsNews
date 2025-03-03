@@ -22,6 +22,5 @@ namespace FileworxNewsBusiness
         public DateTime Value { get; set; }
 
         public DateTime EndDate { get; set; }
-
     }
 }

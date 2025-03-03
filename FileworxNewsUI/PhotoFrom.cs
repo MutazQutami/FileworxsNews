@@ -36,12 +36,12 @@ public partial class PhotoForm :Form
 
         try
         {
+            formObjectItem = RetrieveFormData();
             if (!isEditForm)
             {
                 formObjectItem.CreatorId = SharedClass.CurrentUser.Id;
-
             }
-            SaveFormInfo();
+
             formObjectItem.Update();
 
             this.DialogResult = DialogResult.OK;

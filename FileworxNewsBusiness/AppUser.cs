@@ -45,7 +45,12 @@ public class AppUser : FileWorxEntity
                     CreatorId = null;
                     LastModifierId = null;
                     context.User.Add(this);
-                    
+
+                    if (CreatorId == null)
+                    {
+                        InitializeUserIds();
+                        this.Update();
+                    }
                 }
                 else
                 {
@@ -54,13 +59,7 @@ public class AppUser : FileWorxEntity
                 }
                 context.SaveChanges();
 
-                //if(CreatorId == null) 
-                //{
-                //    InitializeUserIds();
-                //    this.Update();
-                //}
-
-
+              
             }
             catch (Exception ex)
             {
@@ -73,6 +72,13 @@ public class AppUser : FileWorxEntity
     {
         using (var context = new Context())
         {
+            if(LastModifierId!= null)
+            {
+                this.LastModifierId = null;
+                this.CreatorId = null;
+                this.Update();
+            }
+
             try
             {
                 context.User.Remove(this);
@@ -84,7 +90,6 @@ public class AppUser : FileWorxEntity
             }
         }
     }
-
     public override AppUser Read()
     {
         using (var context = new Context())
@@ -105,10 +110,9 @@ public class AppUser : FileWorxEntity
             throw new ValidationException("Password cannot be empty.");
     }
 
-    //private void InitializeUserIds()
-    //{
-    //    CreatorId = Id;
-    //    LastModifierId = Id;
-
-    //}
+    private void InitializeUserIds()
+    {
+        CreatorId = Id;
+        LastModifierId = Id;
+    }
 }
