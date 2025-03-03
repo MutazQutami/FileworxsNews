@@ -38,9 +38,38 @@
             txtTitleField = new TextBox();
             contentList = new ListView();
             titleColumn = new ColumnHeader();
-            creationDateColumn = new ColumnHeader();
             descriptionColumn = new ColumnHeader();
+            creatorNameColumn = new ColumnHeader();
+            creationDateColumn = new ColumnHeader();
+            lastModifierNameColumn = new ColumnHeader();
+            lastModificationDateColumn = new ColumnHeader();
             mainSplitContainer = new SplitContainer();
+            pnlContentList = new Panel();
+            pnlTopSpliter = new Panel();
+            pnlFilters = new Panel();
+            lblToLMDate = new Label();
+            lblLMDate = new Label();
+            lblCToDateText = new Label();
+            lblCDateText = new Label();
+            dateTimePicker5 = new DateTimePicker();
+            dateTimePicker4 = new DateTimePicker();
+            dateTimePicker3 = new DateTimePicker();
+            dateTimePicker2 = new DateTimePicker();
+            btnApply = new Button();
+            lblLMDateText = new Label();
+            lblCreationDateText = new Label();
+            lblCreatorText = new Label();
+            lbllasModText = new Label();
+            lblDescriptionText = new Label();
+            lblTitleText = new Label();
+            comboxLastMod = new ComboBox();
+            comboxCreator = new ComboBox();
+            comBoxDescription = new ComboBox();
+            comBoxTitle = new ComboBox();
+            comBoxDate = new ComboBox();
+            comBoxLastModDate = new ComboBox();
+            txtDescription = new TextBox();
+            txtTitle = new TextBox();
             btnClearFilters = new Button();
             pnltabPreview = new TabControl();
             previewTabPage1 = new TabPage();
@@ -60,6 +89,9 @@
             mainSplitContainer.Panel1.SuspendLayout();
             mainSplitContainer.Panel2.SuspendLayout();
             mainSplitContainer.SuspendLayout();
+            pnlContentList.SuspendLayout();
+            pnlTopSpliter.SuspendLayout();
+            pnlFilters.SuspendLayout();
             pnltabPreview.SuspendLayout();
             previewTabPage1.SuspendLayout();
             imageTabPage2.SuspendLayout();
@@ -71,7 +103,6 @@
             // 
             // pnlContentDetail
             // 
-            pnlContentDetail.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             pnlContentDetail.BackColor = Color.White;
             pnlContentDetail.Controls.Add(lblCategory);
             pnlContentDetail.Controls.Add(lblCreationDate);
@@ -81,11 +112,12 @@
             pnlContentDetail.Controls.Add(txtTitleField);
             pnlContentDetail.Font = new Font("Segoe UI", 15F);
             pnlContentDetail.ForeColor = SystemColors.ControlDark;
-            pnlContentDetail.Location = new Point(10, 13);
+            pnlContentDetail.Location = new Point(8, 8);
             pnlContentDetail.Margin = new Padding(5);
+            pnlContentDetail.MinimumSize = new Size(650, 0);
             pnlContentDetail.Name = "pnlContentDetail";
             pnlContentDetail.Padding = new Padding(5);
-            pnlContentDetail.Size = new Size(915, 136);
+            pnlContentDetail.Size = new Size(1753, 153);
             pnlContentDetail.TabIndex = 2;
             // 
             // lblCategory
@@ -158,8 +190,7 @@
             // 
             contentList.Alignment = ListViewAlignment.SnapToGrid;
             contentList.BackColor = Color.White;
-            contentList.BorderStyle = BorderStyle.FixedSingle;
-            contentList.Columns.AddRange(new ColumnHeader[] { titleColumn, creationDateColumn, descriptionColumn });
+            contentList.Columns.AddRange(new ColumnHeader[] { titleColumn, descriptionColumn, creatorNameColumn, creationDateColumn, lastModifierNameColumn, lastModificationDateColumn });
             contentList.Cursor = Cursors.Hand;
             contentList.Dock = DockStyle.Fill;
             contentList.Font = new Font("Segoe UI", 15F);
@@ -169,10 +200,10 @@
             contentList.LabelEdit = true;
             contentList.Location = new Point(0, 0);
             contentList.Margin = new Padding(2);
-            contentList.MinimumSize = new Size(101, 101);
+            contentList.MinimumSize = new Size(101, 0);
             contentList.Name = "contentList";
             contentList.RightToLeft = RightToLeft.No;
-            contentList.Size = new Size(1472, 406);
+            contentList.Size = new Size(1823, 182);
             contentList.TabIndex = 0;
             contentList.TileSize = new Size(100, 100);
             contentList.UseCompatibleStateImageBehavior = false;
@@ -183,52 +214,359 @@
             // titleColumn
             // 
             titleColumn.Text = "Title";
-            titleColumn.Width = 400;
-            // 
-            // creationDateColumn
-            // 
-            creationDateColumn.Text = "Creation Date";
-            creationDateColumn.Width = 400;
+            titleColumn.Width = 230;
             // 
             // descriptionColumn
             // 
             descriptionColumn.Text = "Description";
-            descriptionColumn.Width = 600;
+            descriptionColumn.Width = 250;
+            // 
+            // creatorNameColumn
+            // 
+            creatorNameColumn.Text = "Creator ";
+            creatorNameColumn.Width = 220;
+            // 
+            // creationDateColumn
+            // 
+            creationDateColumn.Text = "Creation Date";
+            creationDateColumn.Width = 230;
+            // 
+            // lastModifierNameColumn
+            // 
+            lastModifierNameColumn.Text = "Last Modifier";
+            lastModifierNameColumn.Width = 230;
+            // 
+            // lastModificationDateColumn
+            // 
+            lastModificationDateColumn.Text = "Last Modification Date";
+            lastModificationDateColumn.Width = 220;
             // 
             // mainSplitContainer
             // 
             mainSplitContainer.Dock = DockStyle.Fill;
-            mainSplitContainer.Location = new Point(12, 4);
+            mainSplitContainer.Location = new Point(10, 10);
             mainSplitContainer.Name = "mainSplitContainer";
             mainSplitContainer.Orientation = Orientation.Horizontal;
             // 
             // mainSplitContainer.Panel1
             // 
-            mainSplitContainer.Panel1.Controls.Add(btnClearFilters);
-            mainSplitContainer.Panel1.Controls.Add(contentList);
-            mainSplitContainer.Panel1MinSize = 100;
+            mainSplitContainer.Panel1.AutoScroll = true;
+            mainSplitContainer.Panel1.Controls.Add(pnlContentList);
+            mainSplitContainer.Panel1.Controls.Add(pnlTopSpliter);
+            mainSplitContainer.Panel1MinSize = 350;
             // 
             // mainSplitContainer.Panel2
             // 
             mainSplitContainer.Panel2.AutoScroll = true;
+            mainSplitContainer.Panel2.AutoScrollMargin = new Size(2, 2);
             mainSplitContainer.Panel2.Controls.Add(pnltabPreview);
             mainSplitContainer.Panel2.Controls.Add(pnlContentDetail);
             mainSplitContainer.Panel2.Padding = new Padding(8);
-            mainSplitContainer.Size = new Size(1472, 681);
-            mainSplitContainer.SplitterDistance = 406;
+            mainSplitContainer.Panel2MinSize = 100;
+            mainSplitContainer.Size = new Size(1823, 669);
+            mainSplitContainer.SplitterDistance = 350;
             mainSplitContainer.TabIndex = 4;
+            // 
+            // pnlContentList
+            // 
+            pnlContentList.Controls.Add(contentList);
+            pnlContentList.Dock = DockStyle.Fill;
+            pnlContentList.Location = new Point(0, 168);
+            pnlContentList.Name = "pnlContentList";
+            pnlContentList.Size = new Size(1823, 182);
+            pnlContentList.TabIndex = 16;
+            // 
+            // pnlTopSpliter
+            // 
+            pnlTopSpliter.Controls.Add(pnlFilters);
+            pnlTopSpliter.Dock = DockStyle.Top;
+            pnlTopSpliter.Location = new Point(0, 0);
+            pnlTopSpliter.Name = "pnlTopSpliter";
+            pnlTopSpliter.Size = new Size(1823, 168);
+            pnlTopSpliter.TabIndex = 15;
+            // 
+            // pnlFilters
+            // 
+            pnlFilters.AutoScroll = true;
+            pnlFilters.Controls.Add(lblToLMDate);
+            pnlFilters.Controls.Add(lblLMDate);
+            pnlFilters.Controls.Add(lblCToDateText);
+            pnlFilters.Controls.Add(lblCDateText);
+            pnlFilters.Controls.Add(dateTimePicker5);
+            pnlFilters.Controls.Add(dateTimePicker4);
+            pnlFilters.Controls.Add(dateTimePicker3);
+            pnlFilters.Controls.Add(dateTimePicker2);
+            pnlFilters.Controls.Add(btnApply);
+            pnlFilters.Controls.Add(lblLMDateText);
+            pnlFilters.Controls.Add(lblCreationDateText);
+            pnlFilters.Controls.Add(lblCreatorText);
+            pnlFilters.Controls.Add(lbllasModText);
+            pnlFilters.Controls.Add(lblDescriptionText);
+            pnlFilters.Controls.Add(lblTitleText);
+            pnlFilters.Controls.Add(comboxLastMod);
+            pnlFilters.Controls.Add(comboxCreator);
+            pnlFilters.Controls.Add(comBoxDescription);
+            pnlFilters.Controls.Add(comBoxTitle);
+            pnlFilters.Controls.Add(comBoxDate);
+            pnlFilters.Controls.Add(comBoxLastModDate);
+            pnlFilters.Controls.Add(txtDescription);
+            pnlFilters.Controls.Add(txtTitle);
+            pnlFilters.Controls.Add(btnClearFilters);
+            pnlFilters.Dock = DockStyle.Fill;
+            pnlFilters.Location = new Point(0, 0);
+            pnlFilters.Name = "pnlFilters";
+            pnlFilters.Size = new Size(1823, 168);
+            pnlFilters.TabIndex = 14;
+            // 
+            // lblToLMDate
+            // 
+            lblToLMDate.AutoSize = true;
+            lblToLMDate.Font = new Font("Segoe UI", 13F);
+            lblToLMDate.ForeColor = Color.Black;
+            lblToLMDate.Location = new Point(1365, 135);
+            lblToLMDate.Name = "lblToLMDate";
+            lblToLMDate.Size = new Size(30, 25);
+            lblToLMDate.TabIndex = 47;
+            lblToLMDate.Text = "To";
+            lblToLMDate.Visible = false;
+            // 
+            // lblLMDate
+            // 
+            lblLMDate.AutoSize = true;
+            lblLMDate.Font = new Font("Segoe UI", 13F);
+            lblLMDate.ForeColor = Color.Black;
+            lblLMDate.Location = new Point(1365, 105);
+            lblLMDate.Name = "lblLMDate";
+            lblLMDate.Size = new Size(49, 25);
+            lblLMDate.TabIndex = 46;
+            lblLMDate.Text = "Date";
+            lblLMDate.Visible = false;
+            // 
+            // lblCToDateText
+            // 
+            lblCToDateText.AutoSize = true;
+            lblCToDateText.Font = new Font("Segoe UI", 13F);
+            lblCToDateText.ForeColor = Color.Black;
+            lblCToDateText.Location = new Point(427, 135);
+            lblCToDateText.Name = "lblCToDateText";
+            lblCToDateText.Size = new Size(30, 25);
+            lblCToDateText.TabIndex = 45;
+            lblCToDateText.Text = "To";
+            lblCToDateText.Visible = false;
+            // 
+            // lblCDateText
+            // 
+            lblCDateText.AutoSize = true;
+            lblCDateText.Font = new Font("Segoe UI", 13F);
+            lblCDateText.ForeColor = Color.Black;
+            lblCDateText.Location = new Point(427, 106);
+            lblCDateText.Name = "lblCDateText";
+            lblCDateText.Size = new Size(49, 25);
+            lblCDateText.TabIndex = 44;
+            lblCDateText.Text = "Date";
+            lblCDateText.Visible = false;
+            // 
+            // dateTimePicker5
+            // 
+            dateTimePicker5.Location = new Point(1438, 137);
+            dateTimePicker5.Name = "dateTimePicker5";
+            dateTimePicker5.Size = new Size(200, 23);
+            dateTimePicker5.TabIndex = 43;
+            dateTimePicker5.Visible = false;
+            // 
+            // dateTimePicker4
+            // 
+            dateTimePicker4.Location = new Point(489, 105);
+            dateTimePicker4.Name = "dateTimePicker4";
+            dateTimePicker4.Size = new Size(244, 23);
+            dateTimePicker4.TabIndex = 42;
+            dateTimePicker4.Visible = false;
+            // 
+            // dateTimePicker3
+            // 
+            dateTimePicker3.Location = new Point(1438, 107);
+            dateTimePicker3.Name = "dateTimePicker3";
+            dateTimePicker3.Size = new Size(200, 23);
+            dateTimePicker3.TabIndex = 41;
+            dateTimePicker3.Visible = false;
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Location = new Point(489, 135);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(244, 23);
+            dateTimePicker2.TabIndex = 40;
+            dateTimePicker2.Visible = false;
+            // 
+            // btnApply
+            // 
+            btnApply.Anchor = AnchorStyles.Top;
+            btnApply.Font = new Font("Segoe UI", 12F);
+            btnApply.ForeColor = Color.Black;
+            btnApply.Location = new Point(1672, 80);
+            btnApply.Name = "btnApply";
+            btnApply.Size = new Size(131, 48);
+            btnApply.TabIndex = 39;
+            btnApply.Text = "Apply";
+            btnApply.UseVisualStyleBackColor = true;
+            // 
+            // lblLMDateText
+            // 
+            lblLMDateText.AutoSize = true;
+            lblLMDateText.Font = new Font("Segoe UI", 13F);
+            lblLMDateText.ForeColor = Color.Black;
+            lblLMDateText.Location = new Point(904, 103);
+            lblLMDateText.Name = "lblLMDateText";
+            lblLMDateText.Size = new Size(190, 25);
+            lblLMDateText.TabIndex = 38;
+            lblLMDateText.Text = "Last Modification Date";
+            // 
+            // lblCreationDateText
+            // 
+            lblCreationDateText.AutoSize = true;
+            lblCreationDateText.Font = new Font("Segoe UI", 13F);
+            lblCreationDateText.ForeColor = Color.Black;
+            lblCreationDateText.Location = new Point(19, 105);
+            lblCreationDateText.Name = "lblCreationDateText";
+            lblCreationDateText.Size = new Size(120, 25);
+            lblCreationDateText.TabIndex = 37;
+            lblCreationDateText.Text = "Creation Date";
+            // 
+            // lblCreatorText
+            // 
+            lblCreatorText.AutoSize = true;
+            lblCreatorText.Font = new Font("Segoe UI", 13F);
+            lblCreatorText.ForeColor = Color.Black;
+            lblCreatorText.Location = new Point(904, 58);
+            lblCreatorText.Name = "lblCreatorText";
+            lblCreatorText.Size = new Size(122, 25);
+            lblCreatorText.TabIndex = 36;
+            lblCreatorText.Text = "Creator Name";
+            // 
+            // lbllasModText
+            // 
+            lbllasModText.AutoSize = true;
+            lbllasModText.Font = new Font("Segoe UI", 13F);
+            lbllasModText.ForeColor = Color.Black;
+            lbllasModText.Location = new Point(904, 13);
+            lbllasModText.Name = "lbllasModText";
+            lbllasModText.Size = new Size(115, 25);
+            lbllasModText.TabIndex = 35;
+            lbllasModText.Text = "Last Modifier";
+            // 
+            // lblDescriptionText
+            // 
+            lblDescriptionText.AutoSize = true;
+            lblDescriptionText.Font = new Font("Segoe UI", 13F);
+            lblDescriptionText.ForeColor = Color.Black;
+            lblDescriptionText.Location = new Point(19, 59);
+            lblDescriptionText.Name = "lblDescriptionText";
+            lblDescriptionText.Size = new Size(102, 25);
+            lblDescriptionText.TabIndex = 34;
+            lblDescriptionText.Text = "Description";
+            // 
+            // lblTitleText
+            // 
+            lblTitleText.AutoSize = true;
+            lblTitleText.Font = new Font("Segoe UI", 13F);
+            lblTitleText.ForeColor = Color.Black;
+            lblTitleText.Location = new Point(19, 13);
+            lblTitleText.Name = "lblTitleText";
+            lblTitleText.Size = new Size(44, 25);
+            lblTitleText.TabIndex = 33;
+            lblTitleText.Text = "Title";
+            // 
+            // comboxLastMod
+            // 
+            comboxLastMod.Font = new Font("Segoe UI", 12F);
+            comboxLastMod.FormattingEnabled = true;
+            comboxLastMod.Location = new Point(1100, 13);
+            comboxLastMod.Name = "comboxLastMod";
+            comboxLastMod.Size = new Size(235, 29);
+            comboxLastMod.TabIndex = 32;
+            comboxLastMod.Text = " --Select--";
+            // 
+            // comboxCreator
+            // 
+            comboxCreator.Font = new Font("Segoe UI", 12F);
+            comboxCreator.FormattingEnabled = true;
+            comboxCreator.Location = new Point(1100, 58);
+            comboxCreator.Name = "comboxCreator";
+            comboxCreator.Size = new Size(235, 29);
+            comboxCreator.TabIndex = 31;
+            comboxCreator.Text = " --Select--";
+            // 
+            // comBoxDescription
+            // 
+            comBoxDescription.Font = new Font("Segoe UI", 12F);
+            comBoxDescription.FormattingEnabled = true;
+            comBoxDescription.Location = new Point(163, 58);
+            comBoxDescription.Name = "comBoxDescription";
+            comBoxDescription.Size = new Size(235, 29);
+            comBoxDescription.TabIndex = 30;
+            comBoxDescription.Text = " --Select--";
+            // 
+            // comBoxTitle
+            // 
+            comBoxTitle.Font = new Font("Segoe UI", 12F);
+            comBoxTitle.FormattingEnabled = true;
+            comBoxTitle.Location = new Point(163, 12);
+            comBoxTitle.Name = "comBoxTitle";
+            comBoxTitle.Size = new Size(235, 29);
+            comBoxTitle.TabIndex = 29;
+            comBoxTitle.Text = " --Select--";
+            // 
+            // comBoxDate
+            // 
+            comBoxDate.Font = new Font("Segoe UI", 12F);
+            comBoxDate.FormattingEnabled = true;
+            comBoxDate.Location = new Point(163, 105);
+            comBoxDate.Name = "comBoxDate";
+            comBoxDate.Size = new Size(235, 29);
+            comBoxDate.TabIndex = 28;
+            comBoxDate.Text = " --Select--";
+            // 
+            // comBoxLastModDate
+            // 
+            comBoxLastModDate.Font = new Font("Segoe UI", 12F);
+            comBoxLastModDate.FormattingEnabled = true;
+            comBoxLastModDate.Location = new Point(1100, 106);
+            comBoxLastModDate.Name = "comBoxLastModDate";
+            comBoxLastModDate.Size = new Size(235, 29);
+            comBoxLastModDate.TabIndex = 26;
+            comBoxLastModDate.Text = " --Select--";
+            // 
+            // txtDescription
+            // 
+            txtDescription.BorderStyle = BorderStyle.FixedSingle;
+            txtDescription.Font = new Font("Segoe UI", 12F);
+            txtDescription.Location = new Point(455, 59);
+            txtDescription.Margin = new Padding(2);
+            txtDescription.Name = "txtDescription";
+            txtDescription.Size = new Size(278, 29);
+            txtDescription.TabIndex = 25;
+            // 
+            // txtTitle
+            // 
+            txtTitle.BorderStyle = BorderStyle.FixedSingle;
+            txtTitle.Font = new Font("Segoe UI", 12F);
+            txtTitle.Location = new Point(455, 13);
+            txtTitle.Margin = new Padding(2);
+            txtTitle.Name = "txtTitle";
+            txtTitle.Size = new Size(278, 29);
+            txtTitle.TabIndex = 24;
             // 
             // btnClearFilters
             // 
-            btnClearFilters.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnClearFilters.Anchor = AnchorStyles.Top;
             btnClearFilters.BackColor = Color.FromArgb(0, 130, 200);
             btnClearFilters.Cursor = Cursors.Hand;
-            btnClearFilters.Font = new Font("Segoe UI", 15F);
+            btnClearFilters.Font = new Font("Segoe UI", 12F);
             btnClearFilters.ForeColor = Color.White;
-            btnClearFilters.Location = new Point(1326, 6);
+            btnClearFilters.Location = new Point(1672, 24);
             btnClearFilters.Margin = new Padding(2);
             btnClearFilters.Name = "btnClearFilters";
-            btnClearFilters.Size = new Size(137, 47);
+            btnClearFilters.Size = new Size(131, 51);
             btnClearFilters.TabIndex = 13;
             btnClearFilters.Text = "Clear Filters";
             btnClearFilters.UseVisualStyleBackColor = false;
@@ -240,13 +578,13 @@
             pnltabPreview.Controls.Add(previewTabPage1);
             pnltabPreview.Controls.Add(imageTabPage2);
             pnltabPreview.Font = new Font("Segoe UI", 15F);
-            pnltabPreview.Location = new Point(10, 154);
+            pnltabPreview.Location = new Point(8, 166);
             pnltabPreview.Margin = new Padding(0);
-            pnltabPreview.MinimumSize = new Size(0, 286);
+            pnltabPreview.MinimumSize = new Size(650, 0);
             pnltabPreview.Name = "pnltabPreview";
             pnltabPreview.Padding = new Point(0, 0);
             pnltabPreview.SelectedIndex = 0;
-            pnltabPreview.Size = new Size(921, 286);
+            pnltabPreview.Size = new Size(1547, 450);
             pnltabPreview.TabIndex = 0;
             // 
             // previewTabPage1
@@ -258,7 +596,7 @@
             previewTabPage1.Margin = new Padding(2);
             previewTabPage1.Name = "previewTabPage1";
             previewTabPage1.Padding = new Padding(2);
-            previewTabPage1.Size = new Size(913, 245);
+            previewTabPage1.Size = new Size(1539, 409);
             previewTabPage1.TabIndex = 0;
             previewTabPage1.Text = "Preview";
             // 
@@ -271,7 +609,7 @@
             pnlPreviewContent.Margin = new Padding(2);
             pnlPreviewContent.Name = "pnlPreviewContent";
             pnlPreviewContent.ReadOnly = true;
-            pnlPreviewContent.Size = new Size(909, 241);
+            pnlPreviewContent.Size = new Size(1535, 405);
             pnlPreviewContent.TabIndex = 0;
             pnlPreviewContent.Text = "";
             // 
@@ -283,7 +621,7 @@
             imageTabPage2.Margin = new Padding(2);
             imageTabPage2.Name = "imageTabPage2";
             imageTabPage2.Padding = new Padding(2);
-            imageTabPage2.Size = new Size(913, 245);
+            imageTabPage2.Size = new Size(1539, 409);
             imageTabPage2.TabIndex = 1;
             imageTabPage2.Text = "Image";
             // 
@@ -296,7 +634,7 @@
             imagePreview.Location = new Point(2, 2);
             imagePreview.Margin = new Padding(2);
             imagePreview.Name = "imagePreview";
-            imagePreview.Size = new Size(909, 241);
+            imagePreview.Size = new Size(1535, 405);
             imagePreview.SizeMode = PictureBoxSizeMode.StretchImage;
             imagePreview.TabIndex = 4;
             imagePreview.TabStop = false;
@@ -317,12 +655,13 @@
             menuStripActions.MinimumSize = new Size(0, 46);
             menuStripActions.Name = "menuStripActions";
             menuStripActions.Padding = new Padding(5, 1, 0, 1);
-            menuStripActions.Size = new Size(1496, 46);
+            menuStripActions.Size = new Size(1843, 46);
             menuStripActions.TabIndex = 10;
             menuStripActions.Text = "menuStrip1";
             // 
             // addPhotoToolStripMenuItem
             // 
+            addPhotoToolStripMenuItem.ForeColor = Color.Black;
             addPhotoToolStripMenuItem.Name = "addPhotoToolStripMenuItem";
             addPhotoToolStripMenuItem.Size = new Size(119, 44);
             addPhotoToolStripMenuItem.Text = "Add Photo";
@@ -330,6 +669,7 @@
             // 
             // addNewsToolStripMenuItem
             // 
+            addNewsToolStripMenuItem.ForeColor = Color.Black;
             addNewsToolStripMenuItem.Name = "addNewsToolStripMenuItem";
             addNewsToolStripMenuItem.Size = new Size(113, 44);
             addNewsToolStripMenuItem.Text = "Add News";
@@ -345,6 +685,7 @@
             // 
             // addFiltersToolStripMenuItem
             // 
+            addFiltersToolStripMenuItem.ForeColor = Color.Black;
             addFiltersToolStripMenuItem.Name = "addFiltersToolStripMenuItem";
             addFiltersToolStripMenuItem.Size = new Size(118, 44);
             addFiltersToolStripMenuItem.Text = "Add Filters";
@@ -356,20 +697,22 @@
             pnlTop.Dock = DockStyle.Top;
             pnlTop.Location = new Point(0, 0);
             pnlTop.Margin = new Padding(2);
+            pnlTop.MinimumSize = new Size(600, 0);
             pnlTop.Name = "pnlTop";
-            pnlTop.Size = new Size(1496, 45);
+            pnlTop.Size = new Size(1843, 45);
             pnlTop.TabIndex = 11;
             // 
             // pnlBodyContent
             // 
             pnlBodyContent.AutoScroll = true;
+            pnlBodyContent.AutoScrollMargin = new Size(20, 0);
             pnlBodyContent.Controls.Add(mainSplitContainer);
             pnlBodyContent.Dock = DockStyle.Fill;
             pnlBodyContent.Location = new Point(0, 45);
             pnlBodyContent.Margin = new Padding(2);
             pnlBodyContent.Name = "pnlBodyContent";
-            pnlBodyContent.Padding = new Padding(12, 4, 12, 4);
-            pnlBodyContent.Size = new Size(1496, 689);
+            pnlBodyContent.Padding = new Padding(10);
+            pnlBodyContent.Size = new Size(1843, 689);
             pnlBodyContent.TabIndex = 12;
             // 
             // FileWorx
@@ -378,9 +721,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.White;
-            ClientSize = new Size(1496, 754);
+            ClientSize = new Size(1843, 754);
             Controls.Add(pnlBodyContent);
             Controls.Add(pnlTop);
+            ForeColor = Color.Black;
             MainMenuStrip = menuStripActions;
             Margin = new Padding(2);
             Name = "FileWorx";
@@ -394,6 +738,10 @@
             mainSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)mainSplitContainer).EndInit();
             mainSplitContainer.ResumeLayout(false);
+            pnlContentList.ResumeLayout(false);
+            pnlTopSpliter.ResumeLayout(false);
+            pnlFilters.ResumeLayout(false);
+            pnlFilters.PerformLayout();
             pnltabPreview.ResumeLayout(false);
             previewTabPage1.ResumeLayout(false);
             imageTabPage2.ResumeLayout(false);
@@ -419,7 +767,7 @@
         private Label label5;
         private ListView contentList;
         internal ColumnHeader titleColumn;
-        private ColumnHeader creationDateColumn;
+        private ColumnHeader creatorNameColumn;
         private ColumnHeader descriptionColumn;
         private SplitContainer mainSplitContainer;
         private ContextMenuStrip contextMenuStrip1;
@@ -434,9 +782,37 @@
         private RichTextBox pnlPreviewContent;
         private TabPage imageTabPage2;
         private PictureBox imagePreview;
-        private Panel panel1;
         private DateTimePicker dateTimePicker1;
         private ToolStripMenuItem addFiltersToolStripMenuItem;
+        private ColumnHeader lastModificationDateColumn;
+        private ColumnHeader creationDateColumn;
+        private ColumnHeader lastModifierNameColumn;
+        private Panel pnlTopSpliter;
+        private Panel pnlFilters;
+        private DateTimePicker dateTimePicker5;
+        private DateTimePicker dateTimePicker4;
+        private DateTimePicker dateTimePicker3;
+        private DateTimePicker dateTimePicker2;
+        private Button btnApply;
+        private Label lblLMDateText;
+        private Label lblCreationDateText;
+        private Label lblCreatorText;
+        private Label lbllasModText;
+        private Label lblDescriptionText;
+        private Label lblTitleText;
+        private ComboBox comboxLastMod;
+        private ComboBox comboxCreator;
+        private ComboBox comBoxDescription;
+        private ComboBox comBoxTitle;
+        private ComboBox comBoxDate;
+        private ComboBox comBoxLastModDate;
+        private TextBox txtDescription;
+        private TextBox txtTitle;
         private Button btnClearFilters;
+        private Panel pnlContentList;
+        private Label lblToLMDate;
+        private Label lblLMDate;
+        private Label lblCToDateText;
+        private Label lblCDateText;
     }
 }
