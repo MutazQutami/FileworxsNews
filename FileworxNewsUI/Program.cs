@@ -24,7 +24,7 @@ internal static class Program
             //};
             //user1.Update();
 
-        Application.Run(new LoginForm());
+        Application.Run(new FileWorx());
     }
 }
 // last program

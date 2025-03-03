@@ -1,4 +1,5 @@
-﻿using FileworxNewsBusiness;
+﻿using System.Windows.Forms.VisualStyles;
+using FileworxNewsBusiness;
 namespace FileworxsNewsUI;
 public partial class FileWorx : Form
 {
@@ -244,6 +245,72 @@ public partial class FileWorx : Form
     {
         InitializeContentList();
 
+    }
+
+    private void OnApplyButtonClick(object sender, EventArgs e)
+    {
+
+    }
+    public ContentQuery CheckFilters()
+    {
+        var ContentQuery = new ContentQuery();
+
+        //if (comBoxDate.SelectedItem != null && )
+        //{
+        //    var type = (DateFilter.DateFilterType)comBoxDate.SelectedIndex;
+
+        //    ContentQuery.QCreationDate = new DateFilter()
+        //    {
+        //        FilterType = type,
+        //        Value = datePickerValue.Value.Date,
+        //        EndDate = datePickerToValue.Value.Date
+        //    };
+
+        //}
+
+        if (comBoxTitle.SelectedItem != null
+            && !string.IsNullOrEmpty(txtTitle.Text))
+        {
+            var type = (StringFilter.StringFilterType)comBoxTitle.SelectedIndex;
+
+            ContentQuery.QName = new StringFilter()
+            {
+                FilterType = type,
+                Value = txtTitle.Text,
+            };
+
+        }
+
+        if (comBoxDescription.SelectedItem != null
+           && !string.IsNullOrEmpty(txtDescription.Text))
+        {
+            var type = (StringFilter.StringFilterType)comBoxDescription.SelectedIndex;
+
+            ContentQuery.QDescription = new StringFilter()
+            {
+                FilterType = type,
+                Value = txtDescription.Text,
+            };
+
+        }
+
+        if (comboxCreator.SelectedItem != null)
+        {
+            if (Guid.TryParse(comboxCreator.SelectedValue.ToString(), out Guid creatorId))
+            {
+                ContentQuery.QCreatorId = creatorId;
+            }
+        }
+
+        if (comboxLastMod.SelectedItem != null)
+        {
+            if (Guid.TryParse(comboxLastMod.SelectedValue.ToString(), out Guid creatorId))
+            {
+                ContentQuery.QLastModifierId = creatorId;
+            }
+        }
+
+        return ContentQuery;
     }
 }
 
