@@ -40,6 +40,7 @@ public partial class PhotoForm :Form
             if (!isEditForm)
             {
                 formObjectItem.CreatorId = SharedClass.CurrentUser.Id;
+                //formObjectItem.LastModifier = SharedClass.CurrentUser;
             }
 
             formObjectItem.Update();
@@ -123,6 +124,7 @@ public partial class PhotoForm :Form
         formObjectItem.PhotoPath = lblFilePath.Text;
         formObjectItem.LastModificationDate = DateTime.Now;
         formObjectItem.LastModifierId = SharedClass.CurrentUser.Id;
+        //formObjectItem.LastModifier = SharedClass.CurrentUser;
     }
 
     private  void InitializeSpecificFormFields(Photo _photoItem)

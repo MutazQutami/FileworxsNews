@@ -1,9 +1,11 @@
 ﻿using System.Windows.Forms.VisualStyles;
 using FileworxNewsBusiness;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 namespace FileworxsNewsUI;
 public partial class FileWorx : Form
 {
 
+    // Content List Panel
     private void ContentListMouseClick(object sender, MouseEventArgs e)
     {
         if (contentList.SelectedItems.Count > 0)
@@ -78,6 +80,7 @@ public partial class FileWorx : Form
 
         InitializeComponent();
         InitializeContentList();
+        InitializeUsersList();
         if (SharedClass.CurrentUser.IsAdmin)
         {
             usersListToolStripMenuItem.Visible = true;
@@ -104,6 +107,7 @@ public partial class FileWorx : Form
         }
     }
 
+    //Preview Panel
     private void EditContent(FileWorxEntity selectedObject, ListViewItem selectedItem)
     {
         if (selectedObject is News _selectedNews)
@@ -212,68 +216,101 @@ public partial class FileWorx : Form
             pnltabPreview.TabPages.Remove(imageTabPage2);
         }
     }
-    private void OnAddFiltersButtonClick(object sender, EventArgs e)
+
+    //Filters Panel
+    private void OnApplyButtonClick(object sender, EventArgs e)
     {
-        var filterForm = new FilterForm();
-
-        if (filterForm.ShowDialog() == DialogResult.OK)
-        {
-            var contentQuery = filterForm.CheckFilters();
-            ApplyFilter(contentQuery);
-        }
-    }
-    private void ApplyFilter(ContentQuery contentQuery)
-    {
-        contentList.Items.Clear();
-
-        if (pnltabPreview.TabPages.Contains(imageTabPage2))
-        {
-            pnltabPreview.TabPages.Remove(imageTabPage2);
-        }
-
-        var listItems = contentQuery.Run();
-
-        listItems = listItems.OrderByDescending(item => item.CreationDate).ToList();
-
-        foreach (var _item in listItems)
-        {
-            ListHandler.AddListItem(contentList, _item);
-        }
+        ContentQuery contentQuery = CheckFilters();
+        ApplyFilter(contentQuery);
     }
 
     private void OnClearFiltersButtonClick(object sender, EventArgs e)
     {
+        ClearFilters();
+        ClearPreviewContent();
         InitializeContentList();
-
     }
-
-    private void OnApplyButtonClick(object sender, EventArgs e)
+   
+    private void ApplyFilter(ContentQuery contentQuery)
     {
+        var listItems = contentQuery.Run();
 
+        listItems = listItems.OrderByDescending(item => item.CreationDate).ToList();
+        UpdateContentList(listItems);
     }
+
     public ContentQuery CheckFilters()
     {
-        var ContentQuery = new ContentQuery();
+        var contentQuery = new ContentQuery();
 
-        //if (comBoxDate.SelectedItem != null && )
-        //{
-        //    var type = (DateFilter.DateFilterType)comBoxDate.SelectedIndex;
+        CheckDateFilters(contentQuery);
 
-        //    ContentQuery.QCreationDate = new DateFilter()
-        //    {
-        //        FilterType = type,
-        //        Value = datePickerValue.Value.Date,
-        //        EndDate = datePickerToValue.Value.Date
-        //    };
+        CheckStringFilters(contentQuery);
 
-        //}
+        CheckUsersFiters(contentQuery);
 
-        if (comBoxTitle.SelectedItem != null
-            && !string.IsNullOrEmpty(txtTitle.Text))
+        return contentQuery;
+    }
+
+    private void ClearFilters()
+    {
+        comBoxDate.SelectedItem = null;
+        comBoxLastModDate.SelectedItem = null;
+        comboxLastMod.SelectedItem = null;
+        comboxCreator.SelectedItem = null;
+        comBoxTitle.SelectedItem = null;
+        comBoxDescription.SelectedItem = null;
+
+        lblLMDate.Hide();
+        lblToLMDate.Hide();
+        datePickerLMFromDate.Hide();
+        datePickerLMToDate.Hide();
+
+        lblCToDateText.Hide();
+        lblCDateText.Hide();
+        datePickerCFromDate.Hide();
+        datePickerCToDate.Hide();
+
+        txtTitle.Clear();
+        txtDescription.Clear();
+    }
+
+    private void CheckDateFilters( ContentQuery contentQuery)
+    {
+        if (comBoxDate.SelectedItem != null)
         {
-            var type = (StringFilter.StringFilterType)comBoxTitle.SelectedIndex;
+            var type = (DateFilter.DateFilterType)comBoxDate.SelectedIndex - 1;
 
-            ContentQuery.QName = new StringFilter()
+            contentQuery.QCreationDate = new DateFilter()
+            {
+                FilterType = type,
+                Value = datePickerCFromDate.Value.Date,
+                EndDate = datePickerCToDate.Value.Date
+            };
+
+        }
+
+        if (comBoxLastModDate.SelectedItem != null)
+        {
+            var type = (DateFilter.DateFilterType)comBoxLastModDate.SelectedIndex - 1;
+
+            contentQuery.QLastModificationDate = new DateFilter()
+            {
+                FilterType = type,
+                Value = datePickerLMFromDate.Value.Date,
+                EndDate = datePickerLMToDate.Value.Date
+            };
+        }
+    }
+
+    private void CheckStringFilters(ContentQuery contentQuery)
+    {
+        if (comBoxTitle.SelectedItem != null
+           && !string.IsNullOrEmpty(txtTitle.Text))
+        {
+            var type = (StringFilter.StringFilterType)comBoxTitle.SelectedIndex - 1;
+
+            contentQuery.QName = new StringFilter()
             {
                 FilterType = type,
                 Value = txtTitle.Text,
@@ -284,33 +321,135 @@ public partial class FileWorx : Form
         if (comBoxDescription.SelectedItem != null
            && !string.IsNullOrEmpty(txtDescription.Text))
         {
-            var type = (StringFilter.StringFilterType)comBoxDescription.SelectedIndex;
+            var type = (StringFilter.StringFilterType)comBoxDescription.SelectedIndex - 1;
 
-            ContentQuery.QDescription = new StringFilter()
+            contentQuery.QDescription = new StringFilter()
             {
                 FilterType = type,
                 Value = txtDescription.Text,
             };
 
         }
+    }
 
-        if (comboxCreator.SelectedItem != null)
+    private void CheckUsersFiters(ContentQuery contentQuery)
+    {
+
+        if (comboxCreator.SelectedIndex != 0 && comboxCreator.SelectedItem != null)
         {
             if (Guid.TryParse(comboxCreator.SelectedValue.ToString(), out Guid creatorId))
             {
-                ContentQuery.QCreatorId = creatorId;
+                contentQuery.QCreatorId = creatorId;
             }
         }
 
-        if (comboxLastMod.SelectedItem != null)
+        if (comboxLastMod.SelectedIndex != 0 && comboxLastMod.SelectedItem != null)
         {
             if (Guid.TryParse(comboxLastMod.SelectedValue.ToString(), out Guid creatorId))
             {
-                ContentQuery.QLastModifierId = creatorId;
+                contentQuery.QLastModifierId = creatorId;
             }
         }
+    }
+   
+    private void InitializeUsersList()
+    {
+        var userQuery = new AppUserQuery();
+        var usresListCreator = userQuery.Run();
+        var userListLastMod = userQuery.Run();
 
-        return ContentQuery;
+        var def = new AppUser()
+        {
+            Name = "All Users"
+        };
+
+        usresListCreator.Insert(0, def);
+        userListLastMod.Insert(0, def);
+
+        comboxCreator.DataSource = usresListCreator;
+        comboxCreator.DisplayMember = "Name";
+        comboxCreator.ValueMember = "Id";
+        comboxCreator.SelectedItem = null;
+
+        comboxLastMod.DataSource = userListLastMod;
+        comboxLastMod.DisplayMember = "Name";
+        comboxLastMod.ValueMember = "Id";
+        comboxLastMod.SelectedItem = null;
+    }
+
+    private void ComBoxDateSelect(object sender, EventArgs e)
+    {
+        if (comBoxDate.SelectedItem != null)
+        {
+            if (comBoxDate.SelectedItem.ToString() == "Today" || comBoxDate.SelectedIndex == 0)
+            {
+                lblCDateText.Hide();
+                datePickerCFromDate.Hide();
+                lblCToDateText.Visible = false;
+                datePickerCToDate.Visible = false;
+                return;
+            }
+
+            lblCDateText.Show();
+            datePickerCFromDate.Show();
+
+            if (comBoxDate.SelectedItem.ToString() == "Date Range")
+            {
+                lblCDateText.Text = "From";
+                lblCToDateText.Visible = true;
+                datePickerCToDate.Visible = true;
+            }
+            else
+            {
+                lblCDateText.Text = "Date";
+                lblCToDateText.Visible = false;
+                datePickerCToDate.Visible = false;
+            }
+
+        }
+
+        if (comBoxLastModDate.SelectedItem != null)
+        {
+            if (comBoxLastModDate.SelectedItem.ToString() == "Today" || comBoxLastModDate.SelectedIndex == 0)
+            {
+                lblToLMDate.Hide();
+                datePickerLMToDate.Visible = false;
+                lblLMDate.Hide();
+                datePickerLMFromDate.Hide();
+                return;
+            }
+
+            lblLMDate.Show();
+            datePickerLMFromDate.Show();
+
+            if (comBoxLastModDate.SelectedItem.ToString() == "Date Range")
+            {
+                lblLMDate.Text = "From";
+                lblToLMDate.Visible = true;
+                datePickerLMToDate.Visible = true;
+            }
+            else
+            {
+                lblLMDate.Text = "Date";
+                lblToLMDate.Visible = false;
+                datePickerLMToDate.Visible = false;
+            }
+        }
+    }
+
+    private void UpdateContentList( List <Content> listItems)
+    {
+        contentList.Items.Clear();
+
+        if (pnltabPreview.TabPages.Contains(imageTabPage2))
+        {
+            pnltabPreview.TabPages.Remove(imageTabPage2);
+        }
+
+        foreach (var _item in listItems)
+        {
+            ListHandler.AddListItem(contentList, _item);
+        }
     }
 }
 

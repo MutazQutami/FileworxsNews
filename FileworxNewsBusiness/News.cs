@@ -37,7 +37,7 @@ public class News : Content
             }
             catch (Exception ex)
             {
-                throw new Exception("Error updating news.", ex);
+                throw new Exception(ex.Message);
             }
         }
     }   

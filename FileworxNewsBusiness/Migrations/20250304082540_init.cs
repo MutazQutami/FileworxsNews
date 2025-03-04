@@ -126,14 +126,16 @@ namespace FileworxNewsBusiness.Migrations
                 table: "Entity",
                 column: "CreatorId",
                 principalTable: "User",
-                principalColumn: "Id");
+                principalColumn: "Id",
+                onDelete: ReferentialAction.SetNull);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Entity_User_LastModifierId",
                 table: "Entity",
                 column: "LastModifierId",
                 principalTable: "User",
-                principalColumn: "Id");
+                principalColumn: "Id",
+                onDelete: ReferentialAction.SetNull);
         }
 
         /// <inheritdoc />

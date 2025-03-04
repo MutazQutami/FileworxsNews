@@ -90,22 +90,23 @@ public class FileworxEntityQuery
             {
                 case DateFilterType.Exact:
                     if (!QLastModificationDate.Value.Equals(null))
-                        query = query.Where(x => x.LastModificationDate == QLastModificationDate.Value);
+                        query = query.Where(x => x.LastModificationDate.Date == QLastModificationDate.Value.Date);
                     break;
 
                 case DateFilterType.Before:
                     if (!QLastModificationDate.Value.Equals(null))
-                        query = query.Where(x => x.LastModificationDate < QLastModificationDate.EndDate);
+                        query = query.Where(x => x.LastModificationDate.Date < QLastModificationDate.EndDate.Date);
                     break;
 
                 case DateFilterType.After:
                     if (!QLastModificationDate.Value.Equals(null))
-                        query = query.Where(x => x.LastModificationDate > QLastModificationDate.EndDate);
+                        query = query.Where(x => x.LastModificationDate.Date > QLastModificationDate.EndDate.Date);
                     break;
 
                 case DateFilterType.Range:
                     if (!QLastModificationDate.Value.Equals(null) && !QLastModificationDate.EndDate.Equals(null))
-                        query = query.Where(x => x.LastModificationDate >= QLastModificationDate.Value && x.LastModificationDate <= QLastModificationDate.EndDate);
+                        query = query.Where(x => x.LastModificationDate.Date >= QLastModificationDate.Value.Date 
+                        && x.LastModificationDate.Date <= QLastModificationDate.EndDate.Date);
                     break;
 
                 case DateFilterType.Today:

@@ -21,11 +21,12 @@ public partial class NewsForm :Form
         try
         {
             formObjectItem = RetrieveFormData();
+            MessageBox.Show(formObjectItem.LastModificationDate.ToString());
             if (!isEditForm)
             {
                 formObjectItem.CreatorId = SharedClass.CurrentUser.Id;
             }
-          
+
 
             formObjectItem.Update();
             this.DialogResult = DialogResult.OK;
@@ -81,12 +82,13 @@ public partial class NewsForm :Form
     {
         formObjectItem.LastModificationDate = DateTime.Now;
         formObjectItem.Name = txtTitleField.Text;
+        MessageBox.Show(formObjectItem.Name);
         formObjectItem.Description = txtDescriptionField.Text;
         formObjectItem.Category = (CategoryTypes)categoryList.SelectedIndex;
         formObjectItem.Body = txtBodyField.Text;
         formObjectItem.LastModifierId = SharedClass.CurrentUser.Id;
+        //formObjectItem.LastModifier = SharedClass.CurrentUser;
         return formObjectItem;
-     
     }
 
     private bool ValidateFields()

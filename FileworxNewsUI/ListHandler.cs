@@ -34,16 +34,12 @@ public static class ListHandler
     {
         try
         {
-            var userQuery = new AppUserQuery();
-            userQuery.QId = entity.LastModifierId;         // the last modifier name
-            var result = userQuery.Run().FirstOrDefault();
-
-            var lastModifier = result.Name;
+            var lastModifier = entity.LastModifier.Name;
             listItem.Text = entity.Name;
             listItem.SubItems.Add(entity.LogInName.ToString());
             listItem.SubItems.Add(entity.CreationDate.ToString("yyyy-MM-dd HH:mm:ss"));
             listItem.SubItems.Add(lastModifier);
-            listItem.Tag = entity;   
+            listItem.Tag = entity;
         }
         catch (Exception)
         {
@@ -53,10 +49,32 @@ public static class ListHandler
     }
     private static void AddContentListItem(ListViewItem listItem, Content contentEntity)
     {
-  
+        var creatorName = GetUsername(contentEntity.CreatorId);
+        var lastModifierName= GetLastModifier(contentEntity.LastModifierId);
+
         listItem.Text = contentEntity.Name;
-        listItem.SubItems.Add(contentEntity.CreationDate.ToString());
         listItem.SubItems.Add(contentEntity.Description);
+        listItem.SubItems.Add(creatorName);
+        listItem.SubItems.Add(contentEntity.CreationDate.ToString());
+        listItem.SubItems.Add(lastModifierName);
+        listItem.SubItems.Add(contentEntity.LastModificationDate.ToString());
         listItem.Tag = contentEntity;
+    }
+
+     private static string GetUsername(Guid? id)
+     {
+        var UserQuery = new AppUserQuery();
+        UserQuery.QCreatorId = id;
+        var username = UserQuery.Run().FirstOrDefault().Name;
+        return username;
+
+     }
+
+    private static string GetLastModifier (Guid? id)
+    {
+        var UserQuery = new AppUserQuery();
+        UserQuery.QLastModifierId = id;
+        var username = UserQuery.Run().FirstOrDefault().Name;
+        return username;
     }
 }
