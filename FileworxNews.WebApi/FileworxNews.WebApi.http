@@ -1,0 +1,25 @@
+@FileworxNews.WebApi_HostAddress = http://localhost:5265
+
+GET {{FileworxNews.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+POST https://localhost:7186/api/User
+Content-Type: application/json
+
+### POST Request to Create User
+### POST Request to Create User
+### POST Request to Create or Update User
+POST https://localhost:7186/api/User
+Content-Type: application/json
+
+{
+  "Id": "4f5b73d0-033e-4322-9950-8996c7ab2443",
+  "Name": "Sample Fileworx Entity new new new",
+  "CreationDate": "2025-03-09T12:34:56Z",
+  "LastModificationDate": "2025-03-09T12:34:56Z",
+  "LastModifierId": "01175F83-7D23-4D21-B090-32D2E1257F4E",
+  "CreatorId": "01175F83-7D23-4D21-B090-32D2E1257F4E",
+  "Password": "123" ,
+  "LogInName":"Mohammad"
+}

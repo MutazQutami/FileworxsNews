@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.Eventing.Reader;
-using FileworxNewsBusiness;
+using FileworxNews.Busniess.Models;
 namespace FileworxsNewsUI;
 public partial class UsersListForm : Form
 {
@@ -9,7 +9,7 @@ public partial class UsersListForm : Form
 
         if (newUserForm.ShowDialog() == DialogResult.OK)
         {
-            AppUser newUser = newUserForm.RetrieveFormData();
+            User newUser = newUserForm.RetrieveFormData();
             ListHandler.AddListItem(userList, newUser);
         }
     }
@@ -20,7 +20,7 @@ public partial class UsersListForm : Form
             if (userList.SelectedItems.Count > 0)
             {
                 ListViewItem selectedListItem = userList.SelectedItems[0];
-                var selectedObject = (AppUser)selectedListItem.Tag;
+                var selectedObject = (User)selectedListItem.Tag;
 
                     SharedClass.HandleDeleteOperation(selectedObject, selectedListItem, userList);
             }
@@ -45,14 +45,14 @@ public partial class UsersListForm : Form
         var userQuery = new AppUserQuery();
         var users = userQuery.Run();
 
-        foreach (AppUser user in users)
+        foreach (User user in users)
         {
             ListHandler.AddListItem(userList , user);
         }
     }
     private void EditUserLIstItem(ListViewItem selectedListItem)
     {
-        var selectedUser = (AppUser)selectedListItem.Tag;
+        var selectedUser = (User)selectedListItem.Tag;
 
         UserForm updateUserForm = new UserForm(selectedUser);
         updateUserForm.ShowDialog();

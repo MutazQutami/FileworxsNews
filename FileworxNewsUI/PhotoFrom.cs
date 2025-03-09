@@ -1,4 +1,4 @@
-﻿using FileworxNewsBusiness;
+﻿using FileworxNews.Busniess.Models;
 namespace FileworxsNewsUI;
 public partial class PhotoForm :Form
 {

@@ -1,4 +1,4 @@
-﻿using FileworxNewsBusiness;
+﻿using FileworxNews.Busniess.Models;
 namespace FileworxsNewsUI;
 public static class ListHandler
 {
@@ -6,7 +6,7 @@ public static class ListHandler
     {
         ListViewItem listItem = new ListViewItem();
 
-        if (entity is AppUser entityUppUser)   //Users List 
+        if (entity is User entityUppUser)   //Users List 
         {
             AddUserListItem(listItem, entityUppUser);
         }
@@ -30,7 +30,7 @@ public static class ListHandler
         RemoveListItem(targetList, selectedListItem); // Removing the old one form list 
         AddListItem(targetList, entity, index);     //  Adding the new one with the same index
     }
-    private static void AddUserListItem(ListViewItem listItem, AppUser entity)
+    private static void AddUserListItem(ListViewItem listItem, User entity)
     {
         try
         {
@@ -61,16 +61,16 @@ public static class ListHandler
         listItem.Tag = contentEntity;
     }
 
-     private static string GetUsername(Guid? id)
-     {
+    private static string GetUsername(Guid? id)
+    {
         var UserQuery = new AppUserQuery();
         UserQuery.QCreatorId = id;
         var username = UserQuery.Run().FirstOrDefault().Name;
         return username;
 
-     }
+    }
 
-    private static string GetLastModifier (Guid? id)
+    private static string GetLastModifier(Guid? id)
     {
         var UserQuery = new AppUserQuery();
         UserQuery.QLastModifierId = id;

@@ -1,4 +1,4 @@
-using FileworxNewsBusiness;
+using FileworxNews.Busniess.Models;
 namespace FileworxsNewsUI;
 public partial class UserForm : Form
 {
@@ -49,16 +49,16 @@ public partial class UserForm : Form
     }
 
     private static bool isEditForm;
-    private AppUser formObjectItem;
+    private User formObjectItem;
 
     public UserForm() : this(null) { }
-    public UserForm(AppUser _editUser)
+    public UserForm(User _editUser)
     {
         InitializeComponent();
         InitializeForm(_editUser);
     }
 
-    public void InitializeForm(AppUser item)
+    public void InitializeForm(User item)
     {
         if (SharedClass.CurrentUser != null && SharedClass.CurrentUser.IsAdmin)
         {
@@ -67,7 +67,7 @@ public partial class UserForm : Form
 
         if (item == null)
         {
-            formObjectItem = new AppUser();
+            formObjectItem = new User();
             isEditForm = false;
             return;
         }
@@ -154,7 +154,7 @@ public partial class UserForm : Form
         formObjectItem.IsAdmin = checkBoxIsAdmin.Checked;
     }
 
-    public void InitializeSpecificFormFields(AppUser _userItem)
+    public void InitializeSpecificFormFields(User _userItem)
     {
         this.Text = "Edit User";
 
@@ -164,7 +164,7 @@ public partial class UserForm : Form
         txtConfirmPass.Text = _userItem.Password;
     }
 
-    public  AppUser RetrieveFormData()
+    public  User RetrieveFormData()
     {
         SaveFormInfo();
         return formObjectItem;

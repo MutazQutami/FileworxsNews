@@ -3,9 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35707.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileworxsNewsUI", "FileworxsNewsUI.csproj", "{2836CC42-D295-4987-941F-ED0E292A055F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileworxNews.Client", "FileworxNews.Client.csproj", "{2836CC42-D295-4987-941F-ED0E292A055F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileworxNewsBusiness", "..\FileworxNewsBusiness\FileworxNewsBusiness.csproj", "{48814ED3-A155-4077-B78C-111C0D0E27EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileworxNews.Business", "..\FileworxNewsBusiness\FileworxNews.Business.csproj", "{48814ED3-A155-4077-B78C-111C0D0E27EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{D9A2259C-B27F-45BF-8CFB-ED5C35A7D072}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{4F9A2DBC-3CA3-48AE-BCE0-0E662C90D38A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{548E410B-FF12-41E8-9472-9A01B8D1DF55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{258FC868-9202-4C81-B3E6-5FC3E388593D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{C5E7FF20-8CED-4202-B675-6BC4BD892982}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileworxNews.DataAccess", "..\DataAccess\FileworxNews.DataAccess.csproj", "{72956646-4A28-4EF1-9A3A-A8A93E3CF1B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileworxNews.Shared", "..\Classes\FileworxNews.Shared.csproj", "{06E2365C-B7CC-43C7-93F9-772D5380AC99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileworxNews.WebApi", "..\FileworxNews.WebApi\FileworxNews.WebApi.csproj", "{B905B795-9069-4347-96A9-4370EE0D37C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +37,27 @@ Global
 		{48814ED3-A155-4077-B78C-111C0D0E27EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48814ED3-A155-4077-B78C-111C0D0E27EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48814ED3-A155-4077-B78C-111C0D0E27EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72956646-4A28-4EF1-9A3A-A8A93E3CF1B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72956646-4A28-4EF1-9A3A-A8A93E3CF1B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72956646-4A28-4EF1-9A3A-A8A93E3CF1B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72956646-4A28-4EF1-9A3A-A8A93E3CF1B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06E2365C-B7CC-43C7-93F9-772D5380AC99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06E2365C-B7CC-43C7-93F9-772D5380AC99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06E2365C-B7CC-43C7-93F9-772D5380AC99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06E2365C-B7CC-43C7-93F9-772D5380AC99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B905B795-9069-4347-96A9-4370EE0D37C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B905B795-9069-4347-96A9-4370EE0D37C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B905B795-9069-4347-96A9-4370EE0D37C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B905B795-9069-4347-96A9-4370EE0D37C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2836CC42-D295-4987-941F-ED0E292A055F} = {D9A2259C-B27F-45BF-8CFB-ED5C35A7D072}
+		{48814ED3-A155-4077-B78C-111C0D0E27EF} = {548E410B-FF12-41E8-9472-9A01B8D1DF55}
+		{72956646-4A28-4EF1-9A3A-A8A93E3CF1B7} = {258FC868-9202-4C81-B3E6-5FC3E388593D}
+		{06E2365C-B7CC-43C7-93F9-772D5380AC99} = {C5E7FF20-8CED-4202-B675-6BC4BD892982}
+		{B905B795-9069-4347-96A9-4370EE0D37C5} = {4F9A2DBC-3CA3-48AE-BCE0-0E662C90D38A}
 	EndGlobalSection
 EndGlobal

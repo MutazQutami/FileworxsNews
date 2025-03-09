@@ -1,11 +1,11 @@
-﻿using FileworxNewsBusiness;
+﻿using FileworxNews.Busniess.Models;
 
 namespace FileworxsNewsUI
 {
     public static class SharedClass
     {
      
-        public static AppUser CurrentUser= new AppUser();
+        public static User CurrentUser= new User();
         public static void HandleDeleteOperation(FileWorxEntity selectedObject, ListViewItem selectedItem, ListView listView)
         {
             DialogResult result = MessageBox.Show("Are you sure you want to delete?", "Confirm Deletion",

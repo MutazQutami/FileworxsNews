@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
-using FileworxNewsBusiness;
+using FileworxNews.Busniess.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
-using static FileworxNewsBusiness.News;
+using static FileworxNews.Busniess.Models.News;
 namespace FileworxsNewsUI;
 public partial class NewsForm :Form
 {

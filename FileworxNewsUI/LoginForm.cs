@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.Eventing.Reader;
-using FileworxNewsBusiness;
+using FileworxNews.Busniess.Models;
 using Microsoft.VisualBasic.ApplicationServices;
 namespace FileworxsNewsUI;
 public partial class LoginForm : Form
@@ -36,7 +36,7 @@ public partial class LoginForm : Form
 
         HideLables();
 
-        AppUser checkUser = new AppUser
+        FileworxNews.Busniess.Models.User checkUser = new FileworxNews.Busniess.Models.User
         {
             LogInName = userNameField.Text,
             Password = passwordField.Text

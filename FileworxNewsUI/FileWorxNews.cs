@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms.VisualStyles;
-using FileworxNewsBusiness;
+using FileworxNews.Busniess.Models;
+using FileworxNews.Busniess.Queries;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 namespace FileworxsNewsUI;
 public partial class FileWorx : Form
@@ -358,7 +359,7 @@ public partial class FileWorx : Form
         var usresListCreator = userQuery.Run();
         var userListLastMod = userQuery.Run();
 
-        var def = new AppUser()
+        var def = new User()
         {
             Name = "All Users"
         };

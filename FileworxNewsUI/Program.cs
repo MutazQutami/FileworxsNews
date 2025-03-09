@@ -1,6 +1,6 @@
 namespace FileworxsNewsUI;
 
-using FileworxNewsBusiness;
+using FileworxNews.Busniess;
 
 internal static class Program
 {
