@@ -1,8 +1,8 @@
-﻿using FileworxNews.Business.Models;
+﻿using BusinessCls = FileworxNews.Business.Models;
 using FileworxNews.Business.Repos;
 using FileworxNews.DataAccess.Context;
+using FileworxNews.DataAccess.Mapping;
 using Microsoft.EntityFrameworkCore;
-
 namespace FileworxNews.DataAccess.Repos
 {
     public class ContentRepo : IContentRepo
@@ -14,11 +14,12 @@ namespace FileworxNews.DataAccess.Repos
             _context = context;
         }
 
-        public async Task Delete(Content content)
+        public async Task Delete(BusinessCls.Content content)
         {
             try
             {
-                _context.Content.Remove(content);
+                var contentEntity = ContentMapper.ToEntity(content);
+                _context.Content.Remove(contentEntity);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -27,11 +28,16 @@ namespace FileworxNews.DataAccess.Repos
             }
         }
 
-        public async Task<Content> Read(Content content)
+        public async Task<BusinessCls.Content> Read(BusinessCls.Content content)
         {
             try
             {
-                return await _context.Content.FindAsync(content.Id);
+                var contentEntity = await _context.Content.FindAsync(content.Id);
+                if (contentEntity == null)
+                {
+                    throw new Exception("Content not found.");
+                }
+                return ContentMapper.ToBusiness(contentEntity);
             }
             catch (Exception ex)
             {
@@ -39,11 +45,12 @@ namespace FileworxNews.DataAccess.Repos
             }
         }
 
-        public async Task<List<Content>> ReadAll()
+        public async Task<List<BusinessCls.Content>> ReadAll()
         {
             try
             {
-                return await _context.Content.ToListAsync();
+                var contentEntities = await _context.Content.ToListAsync();
+                return ContentMapper.ToBusinessList(contentEntities);
             }
             catch (Exception ex)
             {
@@ -51,19 +58,22 @@ namespace FileworxNews.DataAccess.Repos
             }
         }
 
-        public async Task Update(Content content)
+        public async Task Update(BusinessCls.Content content)
         {
             try
             {
+                var contentEntity = ContentMapper.ToEntity(content);
+
                 if (content.Id == Guid.Empty)
                 {
-                    content.Id = Guid.NewGuid();
-                    await _context.Content.AddAsync(content);
+                    contentEntity.Id = Guid.NewGuid();
+                    await _context.Content.AddAsync(contentEntity);
                 }
                 else
                 {
-                    _context.Entry(content).State = EntityState.Modified;
-                    _context.Entry(content).CurrentValues.SetValues(content);
+                    contentEntity.LastModificationDate = DateTime.Now;
+                    _context.Entry(contentEntity).State = EntityState.Modified;
+                    _context.Entry(contentEntity).CurrentValues.SetValues(contentEntity);
                 }
 
                 await _context.SaveChangesAsync();
@@ -74,5 +84,4 @@ namespace FileworxNews.DataAccess.Repos
             }
         }
     }
-
 }

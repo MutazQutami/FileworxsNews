@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FileworxNews.Business.Models;
 
 namespace FileworxNews.Business.Repos
 {
-    internal interface IPhotoQueryRepo
+    public interface IPhotoQueryRepo
     {
+        public List<Photo> Run(PhotoQuery queryObject);
     }
 }

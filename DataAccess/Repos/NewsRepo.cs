@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FileworxNews.Business.Models;
+﻿using BusinessCls =FileworxNews.Business.Models;
 using FileworxNews.Business.Repos;
 using FileworxNews.DataAccess.Context;
+using FileworxNews.DataAccess.Mapping;
 using Microsoft.EntityFrameworkCore;
+using FileworxNews.DataAccess.Entities;
 
 namespace FileworxNews.DataAccess.Repos
 {
@@ -19,13 +16,13 @@ namespace FileworxNews.DataAccess.Repos
             _context = context;
         }
 
-        public async Task Delete(News news)
+        public async Task Delete(BusinessCls.News news)
         {
             try
             {
-           
-                _context.News.Remove(news);
-                await _context.SaveChangesAsync(); 
+                var newsEntity = NewsMapper.ToEntity(news);
+                _context.News.Remove(newsEntity);
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -33,11 +30,18 @@ namespace FileworxNews.DataAccess.Repos
             }
         }
 
-        public async Task<News> Read(News news)
+        public async Task<BusinessCls.News> Read(BusinessCls.News news)
         {
             try
             {
-                return await _context.News.FindAsync(news.Id);
+                var newsEntity = await _context.News.FindAsync(news.Id);
+
+                if (newsEntity == null)
+                {
+                    throw new Exception("News not found.");
+                }
+
+                return NewsMapper.ToBusiness(newsEntity);
             }
             catch (Exception ex)
             {
@@ -45,12 +49,12 @@ namespace FileworxNews.DataAccess.Repos
             }
         }
 
-        public async Task<List<News>> ReadAll()
+        public async Task<List<BusinessCls.News>> ReadAll()
         {
             try
             {
-               
-                return await _context.News.ToListAsync();
+                var entityNewsList = await _context.News.ToListAsync();
+                return NewsMapper.ToBusinessList(entityNewsList);
             }
             catch (Exception ex)
             {
@@ -58,20 +62,20 @@ namespace FileworxNews.DataAccess.Repos
             }
         }
 
-        public async Task Update(News news)
+        public async Task Update(BusinessCls.News news)
         {
             try
             {
-            
+                var newsEntity = NewsMapper.ToEntity(news);
+
                 if (news.Id == Guid.Empty)
                 {
-                    news.Id = Guid.NewGuid(); 
-                    await _context.News.AddAsync(news); 
+                    news.Id = Guid.NewGuid();
+                    await _context.News.AddAsync(newsEntity);
                 }
                 else
                 {
-                    _context.Entry(news).State = EntityState.Modified;
-                    _context.Entry(news).CurrentValues.SetValues(news); 
+                    _context.Entry(newsEntity).State = EntityState.Modified;
                 }
 
                 await _context.SaveChangesAsync();

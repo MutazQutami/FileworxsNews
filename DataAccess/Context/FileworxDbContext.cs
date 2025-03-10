@@ -1,20 +1,25 @@
-﻿using FileworxNews.Business.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using FileworxNews.DataAccess.Entities;
 namespace FileworxNews.DataAccess.Context
 {
     public class FileworxDbContext :DbContext
     {
         public FileworxDbContext(DbContextOptions<FileworxDbContext> options) : base(options) { }
-        public DbSet<FileWorxEntity> Entity { get; set; }
+
+        public DbSet<FileworxEntity> Entity { get; set; }
+
         public DbSet<Content> Content { get; set; }
+
         public DbSet<Photo> Photo { get; set; }
+
         public DbSet<News> News { get; set; }
+
         public DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // TPT mapping
-            modelBuilder.Entity<FileWorxEntity>().UseTptMappingStrategy();
+            modelBuilder.Entity<FileworxEntity>().UseTptMappingStrategy();
 
             // Business Table
             FileWorxEntityTable(modelBuilder);
@@ -35,43 +40,43 @@ namespace FileworxNews.DataAccess.Context
         private void FileWorxEntityTable(ModelBuilder modelBuilder)
         {
             // Id Primary key column
-            modelBuilder.Entity<FileWorxEntity>()
+            modelBuilder.Entity<FileworxEntity>()
                 .HasKey(u => u.Id);
 
             // Creation date column
-            modelBuilder.Entity<FileWorxEntity>()
+            modelBuilder.Entity<FileworxEntity>()
                 .Property(u => u.CreationDate)
                 .HasColumnType("DATETIME2")
                 .HasDefaultValueSql("SYSDATETIME()");
 
             // LastModification Date column
-            modelBuilder.Entity<FileWorxEntity>()
+            modelBuilder.Entity<FileworxEntity>()
                 .Property(u => u.LastModificationDate)
                 .HasColumnType("DATETIME2")
                 .HasDefaultValueSql("SYSDATETIME()");
 
             // Creator id column 
-            modelBuilder.Entity<FileWorxEntity>()
+            modelBuilder.Entity<FileworxEntity>()
                 .Property(u => u.CreatorId)
                 .HasColumnType("uniqueidentifier")
                 .IsRequired(false);
                 
 
             // Last Modifier Id column
-            modelBuilder.Entity<FileWorxEntity>()
+            modelBuilder.Entity<FileworxEntity>()
                 .Property(u => u.LastModifierId)
                 .HasColumnType("uniqueidentifier")
                 .IsRequired(false);
 
             // Creator Id Foreign key
-            modelBuilder.Entity<FileWorxEntity>()
+            modelBuilder.Entity<FileworxEntity>()
                 .HasOne(u => u.Creator)
                 .WithMany()
                 .HasForeignKey(f => f.CreatorId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             //  Modifier Id Foreign key
-            modelBuilder.Entity<FileWorxEntity>()
+            modelBuilder.Entity<FileworxEntity>()
                 .HasOne(f => f.LastModifier)
                 .WithMany()
                 .HasForeignKey(f => f.LastModifierId)
@@ -96,7 +101,7 @@ namespace FileworxNews.DataAccess.Context
         {
             // Inheriting FileWorxEntity's Id
             modelBuilder.Entity<User>()
-                .HasBaseType<FileWorxEntity>();
+                .HasBaseType<FileworxEntity>();
 
             // Foreign key for created entities
             modelBuilder.Entity<User>()
@@ -155,8 +160,6 @@ namespace FileworxNews.DataAccess.Context
                 .IsRequired();
         }
     }
-
-
 }
 
 

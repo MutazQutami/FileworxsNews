@@ -5,6 +5,7 @@ namespace FileworxNews.Business.Models
     public class FileWorxEntity
     {
         private readonly IFileworxEntityRepo _repository;
+
         public Guid Id { get; set; }
 
         public DateTime CreationDate { get; set; }
@@ -17,10 +18,6 @@ namespace FileworxNews.Business.Models
 
         public string Name { get; set; }
      
-        public User? LastModifier { get; set; }
-        
-        public User? Creator { get; set; }
-
         public FileWorxEntity()
         {
 

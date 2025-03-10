@@ -14,7 +14,7 @@ POST https://localhost:7186/api/User
 Content-Type: application/json
 
 {
-  "Id": "4f5b73d0-033e-4322-9950-8996c7ab2443",
+  "Id": "64EA4A06-05D1-41E1-B842-604A49A45654",
   "Name": "Sample Fileworx Entity new new new",
   "CreationDate": "2025-03-09T12:34:56Z",
   "LastModificationDate": "2025-03-09T12:34:56Z",
@@ -23,3 +23,15 @@ Content-Type: application/json
   "Password": "123" ,
   "LogInName":"Mohammad"
 }
+###
+POST https://localhost:7186/api/Controller
+Content-Type: application/json
+
+{
+  "Name": "Sample Content",
+  "Description": "This is a sample content description.",
+  "Body": "This is the body of the content.",
+  "CreatorId": "f8a88b55-51b8-47f8-9e22-c8fba726f327",
+  "LastModifierId": "f8a88b55-51b8-47f8-9e22-c8fba726f327"
+}
+

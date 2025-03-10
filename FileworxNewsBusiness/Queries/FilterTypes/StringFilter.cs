@@ -9,7 +9,6 @@ public enum StringFilterType
 }
 public class StringFilter
     {
-       
         public string Value { get; set; }
         public StringFilterType? FilterType { get; set; }
     }

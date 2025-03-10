@@ -1,24 +1,24 @@
-﻿using FileworxNews.Business.Queries;
-using FileworxNews.Business.Models;
+﻿using BusinessCls = FileworxNews.Business.Models;
+using FileworxNews.Business.Queries;
 using FileworxNews.Business.Repos;
 using FileworxNews.DataAccess.Context;
-
-
+using FileworxNews.DataAccess.Mapping;
+using FileworxNews.DataAccess.Entities;
 
 namespace FileworxNews.DataAccess.Repos
 {
-    public class FileworxEntityQReop : IfileworxEntityQueryRepo
+    public class FileworxEntityQRepo : IFileworxEntityQueryRepo
     {
         private readonly FileworxDbContext _context;
 
         private FileworxEntityQuery _queryObj;
 
-        public FileworxEntityQReop(FileworxDbContext context)
+        public FileworxEntityQRepo(FileworxDbContext context)
         {
             _context = context;
         }
 
-        protected virtual void DateFilterHandling(ref IQueryable<FileWorxEntity> query, DateFilter TargetProperty)
+        protected virtual void DateFilterHandling(ref IQueryable<FileworxEntity> query, DateFilter TargetProperty)
         {
             if (TargetProperty == _queryObj.QCreationDate)
             {
@@ -80,7 +80,7 @@ namespace FileworxNews.DataAccess.Repos
             }
         }
 
-        protected virtual void StringFilterHandling(ref IQueryable<FileWorxEntity> query)
+        protected virtual void StringFilterHandling(ref IQueryable<FileworxEntity> query)
         {
             string targetString = _queryObj.QName.Value.Trim();
             switch (_queryObj.QName.FilterType)
@@ -101,8 +101,10 @@ namespace FileworxNews.DataAccess.Repos
 
         }
 
-        protected virtual IQueryable<FileWorxEntity> QueryBuilder(IQueryable<FileWorxEntity> query)
+        protected virtual IQueryable<FileworxEntity> QueryBuilder(IQueryable<FileworxEntity> query 
+            , FileworxEntityQuery queryObj)
         {
+            _queryObj = queryObj;
             if (_queryObj.QCreationDate.FilterType.HasValue)
             {
                 DateFilterHandling(ref query, _queryObj.QCreationDate);
@@ -136,161 +138,12 @@ namespace FileworxNews.DataAccess.Repos
 
         }
 
-        public List<FileWorxEntity> Run(FileworxEntityQuery queryObj)
+        public List<BusinessCls.FileWorxEntity> Run(FileworxEntityQuery queryObj)
         {
             _queryObj = queryObj;
             var query = _context.Entity;
-
-            return QueryBuilder(query).ToList();
+            var result = QueryBuilder(query, queryObj).ToList();
+            return FileworxEntityMapper.ToBusinessList(result);
         }
     }
 }
-
-//public class test
-//{
-
-//    public DateFilter QCreationDate = new DateFilter();
-
-//    public DateFilter QLastModificationDate = new DateFilter();
-
-//    public StringFilter QName = new StringFilter();
-
-//    public Guid? QId { get; set; }
-
-//    public Guid? QLastModifierId { get; set; }
-
-//    public Guid? QCreatorId { get; set; }
-
-//    protected virtual IQueryable<FileWorxEntity> QueryBuilder(Context context)
-//    {
-//        IQueryable<FileWorxEntity> query = context.Entity;
-
-//        if (QCreationDate.FilterType.HasValue)
-//        {
-//            DateFilterHandling(ref query, QCreationDate);
-//        }
-
-//        if (QLastModificationDate.FilterType.HasValue)
-//        {
-//            DateFilterHandling(ref query, QLastModificationDate);
-//        }
-
-//        if (QName.FilterType.HasValue)
-//        {
-//            StringFilterHandling(ref query);
-//        }
-
-//        if (QLastModifierId.HasValue)
-//        {
-//            query = query.Where(x => x.LastModifierId == QLastModifierId.Value);
-//        }
-
-//        if (QCreatorId.HasValue)
-//        {
-//            query = query.Where(x => x.CreatorId == QCreatorId.Value);
-
-//        }
-
-//        if (QId.HasValue)
-//        {
-//            query = query.Where(x => x.Id == QId.Value);
-//        }
-
-//        return query;
-//    }
-
-//    protected virtual void DateFilterHandling(ref IQueryable<FileWorxEntity> query, DateFilter TargetProperty)
-//    {
-//        if (TargetProperty == QCreationDate)
-//        {
-//            switch (QCreationDate.FilterType)
-//            {
-//                case DateFilterType.Exact:
-//                    query = query.Where(x => x.CreationDate.Date == QCreationDate.Value.Date);
-//                    break;
-//                case DateFilterType.Before:
-//                    query = query.Where(x => x.CreationDate.Date < QCreationDate.Value.Date);
-//                    break;
-//                case DateFilterType.After:
-//                    query = query.Where(x => x.CreationDate.Date > QCreationDate.Value.Date);
-//                    break;
-//                case DateFilterType.Range:
-//                    if (!QCreationDate.Value.Equals(null) && !QCreationDate.EndDate.Equals(null))
-//                    {
-
-//                        query = query.Where(x => x.CreationDate.Date >= QCreationDate.Value.Date && x.CreationDate.Date <= QCreationDate.EndDate.Date);
-//                    }
-//                    break;
-//                case DateFilterType.Today:
-//                    var today = DateTime.Today.Date;
-//                    query = query.Where(x => x.CreationDate.Date == today);
-//                    break;
-//            }
-
-//        }
-//        else if (TargetProperty == QLastModificationDate)
-//        {
-//            switch (QLastModificationDate.FilterType)
-//            {
-//                case DateFilterType.Exact:
-//                    if (!QLastModificationDate.Value.Equals(null))
-//                        query = query.Where(x => x.LastModificationDate.Date == QLastModificationDate.Value.Date);
-//                    break;
-
-//                case DateFilterType.Before:
-//                    if (!QLastModificationDate.Value.Equals(null))
-//                        query = query.Where(x => x.LastModificationDate.Date < QLastModificationDate.EndDate.Date);
-//                    break;
-
-//                case DateFilterType.After:
-//                    if (!QLastModificationDate.Value.Equals(null))
-//                        query = query.Where(x => x.LastModificationDate.Date > QLastModificationDate.EndDate.Date);
-//                    break;
-
-//                case DateFilterType.Range:
-//                    if (!QLastModificationDate.Value.Equals(null) && !QLastModificationDate.EndDate.Equals(null))
-//                        query = query.Where(x => x.LastModificationDate.Date >= QLastModificationDate.Value.Date
-//                        && x.LastModificationDate.Date <= QLastModificationDate.EndDate.Date);
-//                    break;
-
-//                case DateFilterType.Today:
-//                    var today = DateTime.Today;
-//                    query = query.Where(x => x.LastModificationDate.Date == today);
-//                    break;
-//            }
-//        }
-//    }
-
-//    protected virtual void StringFilterHandling(ref IQueryable<FileWorxEntity> query)
-//    {
-//        string targetString = QName.Value.Trim();
-//        switch (QName.FilterType)
-//        {
-//            case StringFilterType.Exact:
-//                query = query.Where(x => x.Name == targetString);
-//                break;
-//            case StringFilterType.Contains:
-//                query = query.Where(x => x.Name.Contains(targetString));
-//                break;
-//            case StringFilterType.StartsWith:
-//                query = query.Where(x => x.Name.StartsWith(targetString));
-//                break;
-//            case StringFilterType.EndsWith:
-//                query = query.Where(x => x.Name.EndsWith(targetString));
-//                break;
-//        }
-
-//    }
-
-//    public List<FileWorxEntity> Run()
-//    {
-//        using (var context = new Context())
-//        {
-//            return QueryBuilder(context).ToList();
-//        }
-//    }
-//}
-
-
-
-

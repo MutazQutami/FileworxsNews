@@ -1,7 +1,8 @@
 ﻿using FileworxNews.Business.Repos;
-using FileworxNews.Business.Models;
 using FileworxNews.DataAccess.Context;
+using FileworxNews.DataAccess.Mapping;
 using Microsoft.EntityFrameworkCore;
+using BusinessCls = FileworxNews.Business.Models;
 
 namespace FileworxNews.DataAccess.Repos
 {
@@ -14,64 +15,79 @@ namespace FileworxNews.DataAccess.Repos
             _context = context;
         }
 
-        public async Task Update(FileWorxEntity entity)
+        public async Task Update(BusinessCls.FileWorxEntity entity)
         {
             try
             {
                 entity.LastModificationDate = DateTime.UtcNow;
 
-                if (entity.Id == Guid.Empty)
+                var entityToUpdate = FileworxEntityMapper.ToEntity(entity);
+
+                if (entityToUpdate.Id == Guid.Empty)
                 {
-                    entity.Id = Guid.NewGuid();
-                    entity.CreationDate = DateTime.Now;
-                    await _context.Entity.AddAsync(entity);
+                    entityToUpdate.Id = Guid.NewGuid();
+                    entityToUpdate.CreationDate = DateTime.UtcNow;
+                    await _context.Entity.AddAsync(entityToUpdate);
                 }
                 else
                 {
-                    _context.Entry(entity).State = EntityState.Modified;
-                    _context.Entry(entity).CurrentValues.SetValues(entity);
+                    _context.Entry(entityToUpdate).State = EntityState.Modified;
+                    _context.Entry(entityToUpdate).CurrentValues.SetValues(entityToUpdate);
                 }
 
-                  await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
                 throw new Exception("Error updating entity.", ex);
             }
-
         }
 
-        public async Task Delete(FileWorxEntity entity)
+        public async Task Delete(BusinessCls.FileWorxEntity entity)
         {
             try
             {
-                _context.Entity.Remove(entity);
+                var entityToDelete = FileworxEntityMapper.ToEntity(entity);
+                _context.Entity.Remove(entityToDelete);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                throw new Exception("Error deleting photo.", ex);
+                throw new Exception("Error deleting entity.", ex);
             }
         }
 
-        public async Task<FileWorxEntity> Read(FileWorxEntity entity)
+        public async Task<BusinessCls.FileWorxEntity> Read(BusinessCls.FileWorxEntity entity)
         {
-
-            var foundEntity = await _context.Entity.FindAsync(entity.Id);
-            if (foundEntity != null)
+            try
             {
-                return foundEntity;
+                var foundEntity = await _context.Entity.FindAsync(entity.Id);
+                if (foundEntity != null)
+                {
+                    return FileworxEntityMapper.ToBusiness(foundEntity);
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return null;
+                throw new Exception("Error reading entity.", ex);
             }
-
         }
 
-        public IQueryable<FileWorxEntity> ReadAll()
+        public IQueryable<BusinessCls.FileWorxEntity> ReadAll()
         {
-            return _context.Entity;
+            try
+            {
+                var entities = _context.Entity.AsQueryable();
+                return entities.Select(e => FileworxEntityMapper.ToBusiness(e));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error reading all entities.", ex);
+            }
         }
     }
 }

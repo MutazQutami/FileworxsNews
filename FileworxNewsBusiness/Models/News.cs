@@ -9,17 +9,12 @@ public class News : Content
     private INewsRepo _repo;
 
     public News(INewsRepo repo) => _repo = repo;
+    
     public News()
     {
         _repo = null;
     }
-    public enum CategoryTypes
-    {
-        General,
-        Sports,
-        Health,
-        Politics
-    }
+   
     public CategoryTypes Category { get; set; }
 
     public override async Task Update()

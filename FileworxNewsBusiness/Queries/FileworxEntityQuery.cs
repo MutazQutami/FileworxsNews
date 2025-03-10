@@ -5,9 +5,8 @@ using FileworxNews.Business.Repos;
 namespace FileworxNews.Business.Queries;
 
 public class FileworxEntityQuery
-
 {
-    private IfileworxEntityQueryRepo _repository;
+    private IFileworxEntityQueryRepo _repository;
 
     public DateFilter QCreationDate = new DateFilter();
 
@@ -22,7 +21,9 @@ public class FileworxEntityQuery
 
     public Guid? QCreatorId { get; set; }
 
-    public FileworxEntityQuery(IfileworxEntityQueryRepo repository)
+    public FileworxEntityQuery() { }
+
+    public FileworxEntityQuery(IFileworxEntityQueryRepo repository)
     {
         _repository=repository;
     }
@@ -30,7 +31,6 @@ public class FileworxEntityQuery
     public List<FileWorxEntity> Run()
     {
        return _repository.Run(this);
-        
     }
 }
 

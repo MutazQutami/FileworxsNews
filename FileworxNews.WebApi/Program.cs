@@ -1,9 +1,12 @@
 
 
+using FileworxNews.Business.Models;
 using FileworxNews.Business.Queries;
 using FileworxNews.Business.Repos;
 using FileworxNews.DataAccess.Context;
 using FileworxNews.DataAccess.Repos;
+using FileworxNews.WebApi.Controllers;
+using FileworxNews.WebApi.Registration;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -13,28 +16,18 @@ namespace FileworxNews.WebApi
     {
         public static void Main(string[] args)
         {
+
+
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
-            builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
-
-            //DbContext Configuration
-          
-
-            builder.Services.AddScoped<IFileworxEntityRepo ,FileworxEntityRepo>();
-            builder.Services.AddScoped<IfileworxEntityQueryRepo , FileworxEntityQReop>();
-            builder.Services.AddScoped<IUserRepo , UserRepo>();
-            builder.Services.AddDbContext<FileworxDbContext>(Options =>
-            {
-                Options.UseSqlServer(builder.Configuration.GetConnectionString("AppConnectionString"));
-            });
+            builder.Services.RegisterServices();
+            builder.Services.RegisterRepositories();
+            builder.Services.ConfigureDatabase(builder.Configuration);
+            builder.Services.AddScoped<IContentRepo, ContentRepo>();
+            builder.Services.AddScoped<IContentQueryRepo, ContentQueryRepo>();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
@@ -44,10 +37,10 @@ namespace FileworxNews.WebApi
 
             app.UseAuthorization();
 
-
             app.MapControllers();
 
             app.Run();
         }
+      
     }
 }

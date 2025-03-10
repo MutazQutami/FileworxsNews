@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FileworxNews.Business.Models;
+using FileworxNews.Business.Repos;
 
 namespace FileworxNews.Business.Queries
 {
-    public class NewsQuery
+    public class NewsQuery : ContentQuery
     {
+        private readonly INewsQueryRepo _repo;
+       
+        public NewsQuery(INewsQueryRepo repo) => _repo = repo;
+        
+        //public  List<News> Run()
+        //{
+        //    _repo.Run(this);
+        //} 
 
     }
 }

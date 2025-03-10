@@ -1,20 +1,22 @@
-﻿using FileworxNews.Business.Models;
+﻿using BusinessCls = FileworxNews.Business.Models;
 using FileworxNews.Business.Repos;
 using FileworxNews.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
+using FileworxNews.DataAccess.Mapping;
+using FileworxNews.DataAccess.Entities;
 
 namespace FileworxNews.DataAccess.Repos
 {
     public class UserRepo : IUserRepo
     {
         private FileworxDbContext _context;
-    
+
         public UserRepo(FileworxDbContext context)
         {
             _context = context;
         }
-      
-        public async Task Delete(User user)
+
+        public async Task Delete(BusinessCls.User user)
         {
             if (user.LastModifierId != null)
             {
@@ -25,21 +27,26 @@ namespace FileworxNews.DataAccess.Repos
 
             try
             {
-                _context.User.Remove(user);
+                var userEntity = UserMapper.ToEntity(user);
+                _context.User.Remove(userEntity);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
                 throw new Exception("Error deleting User.", ex);
             }
-        
         }
 
-        public async Task<User> Read(User user)
+        public async Task<BusinessCls.User> Read(BusinessCls.User user)
         {
             try
             {
-                return await _context.User.FindAsync(user.Id);
+                var userEntity = await _context.User.FindAsync(user.Id);
+                if (userEntity == null)
+                {
+                    throw new Exception("User not found.");
+                }
+                return UserMapper.ToBusiness(userEntity);
             }
             catch (Exception ex)
             {
@@ -47,11 +54,12 @@ namespace FileworxNews.DataAccess.Repos
             }
         }
 
-        public async Task<List<User>> ReadAll()
+        public async Task<List<BusinessCls.User>> ReadAll()
         {
             try
             {
-                return await _context.User.ToListAsync();
+                var userEntities = await _context.User.ToListAsync();
+                return UserMapper.ToBusinessList(userEntities);
             }
             catch (Exception ex)
             {
@@ -59,7 +67,7 @@ namespace FileworxNews.DataAccess.Repos
             }
         }
 
-        public async Task Update(User user)
+        public async Task Update(BusinessCls.User user)
         {
             try
             {
@@ -67,26 +75,27 @@ namespace FileworxNews.DataAccess.Repos
                 {
                     throw new Exception("Invalid Login Name");
                 }
+
+                var userEntity = UserMapper.ToEntity(user);
+
                 if (user.Id == Guid.Empty)
                 {
-                    InitializeNewUser(user);
+                    InitializeNewUser(userEntity);
+                    await _context.User.AddAsync(userEntity);
+                    await _context.SaveChangesAsync(); // to avoid circular reference
 
-                    await _context.User.AddAsync(user);
-                    await _context.SaveChangesAsync(); // to avoid circular  reference 
-
-                    user.LastModifierId = user.Id;
-                    user.CreatorId=user.Id;
-                    _context.User.Update(user);
+                    userEntity.LastModifierId = userEntity.Id;
+                    userEntity.CreatorId = userEntity.Id;
+                    _context.User.Update(userEntity);
                 }
                 else
                 {
-                    user.LastModificationDate = DateTime.Now;
-                    _context.Entry(user).State = EntityState.Modified;
-                    _context.Entry(user).CurrentValues.SetValues(user);
-
+                    userEntity.LastModificationDate = DateTime.Now;
+                    _context.Entry(userEntity).State = EntityState.Modified;
+                    _context.Entry(userEntity).CurrentValues.SetValues(userEntity);
                 }
-                await _context.SaveChangesAsync();
 
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -102,6 +111,7 @@ namespace FileworxNews.DataAccess.Repos
             user.CreationDate = DateTime.Now;
             user.LastModificationDate = DateTime.Now;
         }
-     
     }
 }
+
+

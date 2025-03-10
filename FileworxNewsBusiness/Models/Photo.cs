@@ -9,10 +9,12 @@ public class Photo : Content
     private IPhotoRepo _repo;
    
     public string PhotoPath { get; set; }
+
     public Photo(IPhotoRepo repo)
     {
         _repo = repo;
     }
+
     public Photo() => _repo = null;
 
     public override async Task Update()

@@ -5,15 +5,15 @@ namespace FileworxNews.Business.Models;
 public class User : FileWorxEntity
 {
     private IUserRepo _repo;
+    
     public string LogInName { get; set; }
 
     public string Password { get; set; }
 
     public bool IsAdmin { get; set; }
-    public ICollection<FileWorxEntity> CreatedEntities { get; set; }
-    public ICollection<FileWorxEntity> ModifiedEntities { get; set; }
-
+    
     public User() => IsAdmin = false;
+
     public User(IUserRepo repo) => _repo = repo;
 
     public bool IsEqual(User? other)
@@ -46,6 +46,4 @@ public class User : FileWorxEntity
         if (string.IsNullOrEmpty(Password))
             throw new ValidationException("Password cannot be empty.");
     }
-
-   
 }
