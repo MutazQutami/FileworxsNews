@@ -31,7 +31,8 @@ namespace FileworxNews.WebApi.Mapping
                 CreationDate = contentDto.CreationDate,
                 Name = contentDto.Name,
                 Description = contentDto.Description,
-                Body = contentDto.Body
+                Body = contentDto.Body,
+                
             };
         }
     }

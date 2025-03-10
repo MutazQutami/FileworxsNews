@@ -24,14 +24,30 @@ Content-Type: application/json
   "LogInName":"Mohammad"
 }
 ###
-POST https://localhost:7186/api/Controller
+POST https://localhost:7186/FileworxNews/Controller
 Content-Type: application/json
 
 {
-  "Name": "Sample Content",
+  "Name": "Sample cc",
   "Description": "This is a sample content description.",
-  "Body": "This is the body of the content.",
-  "CreatorId": "f8a88b55-51b8-47f8-9e22-c8fba726f327",
-  "LastModifierId": "f8a88b55-51b8-47f8-9e22-c8fba726f327"
+  "Body": "This is the body of the content."
+ 
 }
+### 
+GET https://localhost:7186/FileworxNews/Controller/CEF100EA-3546-4AE3-9825-1BC7D75457D0
 
+###
+GET https://localhost:7186/FileworxNews/Controller
+### 
+DELETE https://localhost:7186/FileworxNews/Controller/a166237a-a541-494c-8fd1-c70cf5fa22cb
+###
+
+PUT https://localhost:7186/FileworxNews/Controller/cef100ea-3546-4ae3-9825-1bc7d75457d0
+Content-Type: application/json
+
+{
+  "Name": "uPDATED BY PUT",
+  "Description": "UPDATED BY pUT.",
+  "Body": "This is the body of the content."
+ 
+}

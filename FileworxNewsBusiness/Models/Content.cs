@@ -4,25 +4,28 @@ using FileworxNews.Business.Repos;
 namespace FileworxNews.Business.Models;
 public class Content : FileWorxEntity
 {
-    private IContentRepo _repo;
+    public IContentRepo Repo { get; set; }
 
     public string Description { get; set; }
 
     public string Body { get; set; }
 
-    public Content(IContentRepo repo) => _repo = repo;
+    public Content(IContentRepo repo) {
+       
+        repo = repo;
+    }
 
     public Content() { }
 
     public override async Task Update()
     {
         Validate();
-        await _repo.Update(this);
+        await Repo.Update(this);
     }
 
-    public override async Task Delete() => await _repo.Delete(this);
+    public override async Task Delete() => await Repo.Delete(this);
 
-    public async Task<Content> Read() => await _repo.Read(this);
+    public async Task<Content> Read() => await Repo.Read(this);
 
     private void Validate()
     {

@@ -1,14 +1,13 @@
-﻿using FileworxNews.Business.Models;
-using FileworxNews.Business.Queries;
+﻿using FileworxNews.Business.Queries;
 using FileworxNews.Business.Repos;
+using FileworxNews.DataAccess.Repos;
 using FileworxNews.Shared.Dtos;
 using FileworxNews.WebApi.Mapping;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FileworxNews.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("FileworxNews/[controller]")]
     [ApiController]
     public class ControllerController : ControllerBase
     {
@@ -21,7 +20,7 @@ namespace FileworxNews.WebApi.Controllers
             _contentRepo = contentRepo;
         }
 
-            // POST: FileworxNews/Content
+        // POST: FileworxNews/Content
             [HttpPost]
             [Route("")]
             public async Task<ActionResult> Post([FromBody] ContentDto contentDto)
@@ -31,18 +30,14 @@ namespace FileworxNews.WebApi.Controllers
                     return BadRequest("Content cannot be null");
                 }
 
-                try
-                {
+            try
+            {
 
-                if (_contentRepo == null)
-                {
-                    throw new Exception("sfd");
-                }
-                    var createdContent = new Content(_contentRepo);
-                    createdContent = ContentMapper.ToEntity(contentDto);
-                    Console.WriteLine(createdContent.Name);
-                    await createdContent.Update();
-                    return CreatedAtAction(nameof(GetById), new { id = Guid.NewGuid() }, createdContent);
+                var createdContent = ContentMapper.ToEntity(contentDto);
+                createdContent.Repo = _contentRepo;
+
+                await createdContent.Update();
+                    return CreatedAtAction(nameof(GetById), new { id = Guid.NewGuid() }, contentDto);
                 }
                 catch (Exception ex)
                 {
@@ -55,17 +50,20 @@ namespace FileworxNews.WebApi.Controllers
             [Route("{id}")]
             public async Task<ActionResult<ContentDto>> GetById(Guid id)
             {
-                var content = new ContentQuery();
+                var content = new ContentQuery(_contentQueryRepo);
                 content.QId = id;
 
-                var result = content.Run();
+                var result = content.Run().FirstOrDefault();
+              
 
-                if (result == null || !result.Any())
+                if (result == null )
                 {
-                    return NotFound("Content not found");
+               
+                return NotFound("Content not found");
                 }
+            var contentDto = ContentMapper.ToDto(result);
 
-                return Ok(result);
+            return Ok(contentDto);
             }
 
             // GET: FileworxNews/Content
@@ -73,26 +71,35 @@ namespace FileworxNews.WebApi.Controllers
             [Route("")]
             public async Task<ActionResult<IEnumerable<ContentDto>>> GetAll()
             {
-                var content = new ContentQuery();
+                var content = new ContentQuery(_contentQueryRepo);
                 var result = content.Run();
-                return Ok(result);
+                var DtoResult = result.Select(e => ContentMapper.ToDto(e)).ToList();
+          
+                return Ok(DtoResult);
             }
 
-            // PUT: api/Content/
-            [HttpPut]
+        // PUT: FileworxNews/Content/
+        [HttpPut]
             [Route("{Id}")]
-            public async Task<ActionResult> Put(int Id, [FromBody] ContentDto contentDto)
+            public async Task<ActionResult> Put(Guid Id, [FromBody] ContentDto contentDto)
             {
                 if (contentDto == null)
                 {
                     return BadRequest("Content data cannot be null");
                 }
 
-                try
-                {
-                    var content = ContentMapper.ToEntity(contentDto);
-                    await content.Update();
+            var ContentQuery = new ContentQuery(_contentQueryRepo);
+            ContentQuery.QId = Id;
+            var result = ContentQuery.Run().FirstOrDefault();
+            if(result == null)
+            {
+                return NotFound("Content to update not found");
+            }
 
+            try
+            {
+                    var content = ContentMapper.ToEntity(contentDto);
+                    content.Repo=_contentRepo;
                     await content.Update();
 
                     return Ok(content);
@@ -103,14 +110,14 @@ namespace FileworxNews.WebApi.Controllers
                 }
             }
 
-            // DELETE: api/Content/{id}
-            [HttpDelete]
+        // DELETE: FileworxNews/Content/{id}
+        [HttpDelete]
             [Route("{id}")]
             public async Task<ActionResult> Delete(Guid id)
             {
                 try
                 {
-                    var content = new ContentQuery();
+                    var content = new ContentQuery(_contentQueryRepo);
                     content.QId = id;
                     var result = content.Run().FirstOrDefault();
 
@@ -118,6 +125,7 @@ namespace FileworxNews.WebApi.Controllers
                     {
                         return NotFound("Content to delete not found");
                     }
+                    result.Repo = _contentRepo;
 
                     await result.Delete();
 

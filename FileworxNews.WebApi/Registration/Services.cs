@@ -2,6 +2,7 @@
 using FileworxNews.DataAccess.Context;
 using FileworxNews.DataAccess.Repos;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace FileworxNews.WebApi.Registration
 {
@@ -34,7 +35,12 @@ namespace FileworxNews.WebApi.Registration
         public static void ConfigureDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<FileworxDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("AppConnectionString")));
+            {
+                options.UseSqlServer(configuration.GetConnectionString("AppConnectionString"));
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
+            }
+            );
         }
     }
 
